@@ -26,30 +26,7 @@ import root.entidades.Registro;
  */
 public class ManejadorUsuarios 
 {
-    //Get la lista de usuarios
-//    public static List<DtUsuario> getDatos()
-//    {
-//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
-//        EntityManager em = emf.createEntityManager();
-//        List<Espectador> listaEspectadores = em.createNamedQuery("Espectador.findAll").getResultList();
-//        List<Artista> listaArtistas = em.createNamedQuery("Artista.findAll").getResultList();
-//        List<DtUsuario> lista = new ArrayList<DtUsuario>();
-//        
-//        for(int i=0; i<listaEspectadores.size(); i++)
-//        {
-//            Espectador hasCurrent = listaEspectadores.get(i);
-//            lista.add(hasCurrent.getMyDt());
-//        }
-//        
-//        for(int i=0; i<listaArtistas.size(); i++)
-//        {
-//            Artista hasCurrent = listaArtistas.get(i);
-//            lista.add(hasCurrent.getMyDt());
-//        }
-//        
-//        
-//        return lista; 
-//    }
+
 //           
     public ManejadorUsuarios(){}
     public static List<DtEspectador> getEspectadores()
@@ -89,37 +66,6 @@ public class ManejadorUsuarios
     }
         
     
-//    
-//    public static Usuario getUsuario(String nickname)
-//    {
-//        Usuario us=null;
-//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
-//        EntityManager em = emf.createEntityManager();
-//        
-//        List<Espectador> listaEspectadores = em.createNamedQuery("Espectador.findAll").getResultList();
-//        Espectador vp = null;
-//        for(int i=0; i<listaEspectadores.size(); i++)
-//        {
-//            vp=listaEspectadores.get(i);
-//            if(vp.getNickname()==nickname)
-//            {
-//                us=vp;
-//            }
-//        }
-//        List<Artista> listaArtistas = em.createNamedQuery("Artista.findAll").getResultList();
-//        Artista ar = null;
-//        for(int i=0; i<listaArtistas.size(); i++)
-//        {
-//            ar=listaArtistas.get(i);
-//            if(ar.getNickname()==nickname)
-//            {
-//                us=ar;
-//            }
-//        }
-//        
-//        
-//        return us;
-//    }
     
     public static List<DtEspectador> getNoRegistrados(String nombreFuncion){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
@@ -486,6 +432,32 @@ public class ManejadorUsuarios
         em.close();
         emf.close();
         
+    }
+    
+    public static List<DtFuncion> getFuncionesNoRegistradas(String nickname){
+    List<DtFuncion> resultado = new ArrayList<DtFuncion>();
+    
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+    EntityManager em = emf.createEntityManager();
+    TypedQuery<Espectador> consulta = em.createNamedQuery("EspectadorporNick",Espectador.class);
+    consulta.setParameter("nickname", nickname);
+    Espectador estemen = consulta.getSingleResult();
+    List<Registro> registros = estemen.getRegistros();
+    TypedQuery<Funcion> consulta2 = em.createNamedQuery("Funcion.findAll",Funcion.class);
+    List<Funcion> todasLasFunciones = consulta2.getResultList();
+    for(Registro i: registros){
+        for(Funcion j: todasLasFunciones){
+            if(j.getNombre().equals(i.getFuncion().getNombre())==false){
+                if(resultado.contains(j.getMyDt())==false){
+                resultado.add(j.getMyDt());
+                }
+            }
+        }
+    }
+    em.close();
+    emf.close();
+    
+    return resultado;
     }
     
    //    

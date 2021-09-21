@@ -146,4 +146,8 @@ public class crlUsuarios implements iUsuarios
    public  void actualizarRegistros(){
        ManejadorUsuarios.actualizarRegistros();
    }
+   
+   public List<DtFuncion> getFuncionesNoRegistradas(String nickname){
+       return ManejadorUsuarios.getFuncionesNoRegistradas(nickname);
+   }
 }
