@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 /**
@@ -54,7 +55,7 @@ public class Categoria implements Serializable {
         this.nombre = nombre;
     }
     
-    @OneToMany(mappedBy = "categoria")
+    @ManyToMany(mappedBy = "categoria")
     List<Espectaculo> espectaculos;
     
     

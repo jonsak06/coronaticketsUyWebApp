@@ -317,14 +317,30 @@ public class DatosDePruebaCtrl implements iDatosDePrueba {
         em.persist(e6);
         em.persist(e7);
         em.persist(e8);
-        e1.setCategoria(c3);
-        e2.setCategoria(c3);
-        e3.setCategoria(c2);
-        e4.setCategoria(c3);
-        e5.setCategoria(c1);
-        e6.setCategoria(c4);
-        e7.setCategoria(c2);
-        e8.setCategoria(c1);
+        List<Categoria> le1 = new ArrayList<Categoria>();
+        List<Categoria> le2 = new ArrayList<Categoria>();
+        List<Categoria> le3 = new ArrayList<Categoria>();
+        List<Categoria> le4 = new ArrayList<Categoria>();
+        List<Categoria> le5 = new ArrayList<Categoria>();
+        List<Categoria> le6 = new ArrayList<Categoria>();
+        List<Categoria> le7 = new ArrayList<Categoria>();
+        List<Categoria> le8 = new ArrayList<Categoria>();
+        le1.add(c3);
+        le2.add(c3);
+        le3.add(c2);
+        le4.add(c3);
+        le5.add(c1);
+        le6.add(c4);
+        le7.add(c2);
+        le8.add(c1);
+        e1.setCategoria(le1);
+        e2.setCategoria(le2);
+        e3.setCategoria(le3);
+        e4.setCategoria(le4);
+        e5.setCategoria(le5);
+        e6.setCategoria(le6);
+        e7.setCategoria(le7);
+        e8.setCategoria(le8);
         em.getTransaction().commit();
         
         //////////////////////////////////////////////////////////////////////
