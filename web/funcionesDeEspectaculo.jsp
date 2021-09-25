@@ -19,6 +19,12 @@
         <title>Seleccione una Funcion</title>
     </head>
     <body>
+    <div class="container">
+    <link rel="stylesheet" href="./miestilo.css" type="text/css"><!-- comment -->
+    <div class="row">
+    <div class="col-md-12">
+    <div class="card">
+        <form action = "listarCanjeables" name="listarCanjeables" method="POST" class="box">
         <h1>Funciones del espectaculo: <% out.print(request.getParameter("espectaculos")); %></h1>
         <select name="funcion">
             <%
@@ -42,6 +48,10 @@
                 out.println("<option>"+f.getNombre()+" "+f.getHoraInicio()+"</option>");
                 }
             %>
-        </select>
+        </select><input type="submit" value="Seleccionar" />
+        </form>
+    </div>
+    </div>
+    </div>
     </body>
 </html>

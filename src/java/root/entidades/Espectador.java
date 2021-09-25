@@ -54,7 +54,7 @@ public class Espectador extends Usuario {
         canjeables = 0;
 //        this.actualizarRegistros();
         for (Registro i :this.registros){
-            if(i.getEstado()!=EstadoRegistro.USADO){
+            if(i.getEstado()!=EstadoRegistro.USADO && i.getCosto()!=0){
             canjeables = canjeables + 1;
             }
         }

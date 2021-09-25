@@ -21,7 +21,7 @@
         <div class="col-md-12">
             <div class="card">
                 <form action = "listarEspectaculos" name="listarEspectaculos" method="POST" class = "box">
-                    <h1>Registrarse a una Funcion</h1>
+                    <h1>Búsqueda de Espectáculos</h1>
                     <input type="text" name="plataforma" value="" placeholder="Buscar por Plataforma"/><input type="submit" value="Listar" />
                 </form>
             </div>

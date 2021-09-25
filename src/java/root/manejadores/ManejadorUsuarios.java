@@ -267,7 +267,7 @@ public class ManejadorUsuarios
         List<Registro> registros = esteMen.getRegistros();
         List<Registro> canjeables = new ArrayList<Registro>();
         for(Registro i:registros){
-            if(i.getEstado()!=EstadoRegistro.USADO){
+            if(i.getEstado()!=EstadoRegistro.USADO && i.getCosto()!=0){
                 canjeables.add(i);
             }
         }
