@@ -13,11 +13,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Seleccione un espectaculo</title>
     </head>
-    <body>
-        <h1>Espectaculos en la plataforma: <% out.print(request.getParameter("plataforma")); %></h1>
-        <form action = "listarFuncionesDeEspectaculo" name="listarFuncionesDeEspectaculo" method="POST">
+    <div class="container">
+    <link rel="stylesheet" href="./miestilo.css" type="text/css"><!-- comment -->
+        <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+      <form action = "listarFuncionesDeEspectaculo" name="listarFuncionesDeEspectaculo" method="POST" class="box">
+            <h1>Espectaculos en la plataforma: <% out.print(request.getParameter("plataforma")); %></h1>
             <select name="espectaculos">
                 <%
                     IEspectaculos ie = Fabrica.getCtrlEspectaculos();
@@ -29,5 +32,8 @@
             </select>
                 <input type="submit" value="Seleccionar" />
         </form>
-    </body>
+            </div>
+        </div>    
+        </div>      
+    </div>
 </html>

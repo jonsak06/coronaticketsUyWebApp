@@ -28,7 +28,7 @@
             <div class="card">
                 <form action="pasajeaLogin" name="pasajeaLogin" method="POST" class="box">
                     <h1>Login</h1>
-                    <p class="text-muted">Ingresa tu nickname y tu contraseña!</p> <input type="text" name="nick" placeholder="Nickname"> <input type="password" name="" placeholder="Contrase;a"> <a class="forgot text-muted" href="index.jsp">Olvidaste tu contraseña?</a> <input type="submit" name="" value="Login">
+                    <p class="text-muted">Ingresa tu nickname y tu contraseña!</p> <input type="text" name="nick" placeholder="Nickname"> <input type="password" name="pass" placeholder="Contraseña"> <a class="forgot text-muted" href="index.jsp">Olvidaste tu contraseña?</a> <input type="submit" name="" value="Login">
                 </form>
             </div>
         </div>

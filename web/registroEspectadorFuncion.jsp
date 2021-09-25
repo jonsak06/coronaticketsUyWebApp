@@ -9,15 +9,23 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Registrarse a una Funcion</title>
     </head>
-    <body>
         <%
             ServletContext contexto = getServletContext();
             out.print("<li>"+contexto.getAttribute("nickname")+"<li>");
         %>
-        <form action = "listarEspectaculos" name="listarEspectaculos" method="POST">
-            <input type="text" name="plataforma" value="" /><input type="submit" value="Listar" />
-        </form>
-    </body>
+
+    <div class="container">
+    <link rel="stylesheet" href="./miestilo.css" type="text/css"><!-- comment -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <form action = "listarEspectaculos" name="listarEspectaculos" method="POST" class = "box">
+                    <h1>Registrarse a una Funcion</h1>
+                    <input type="text" name="plataforma" value="" placeholder="Buscar por Plataforma"/><input type="submit" value="Listar" />
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
 </html>
