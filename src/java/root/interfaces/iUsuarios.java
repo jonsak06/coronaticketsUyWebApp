@@ -46,4 +46,6 @@ public interface iUsuarios {
     public boolean existeCorreo(String correo);
     public void actualizarRegistros();
     public List<DtFuncion> getFuncionesNoRegistradas(String nickname);
+    public boolean existeArtista(String nickname);
+    public boolean existeEspectador(String nickname);
 }

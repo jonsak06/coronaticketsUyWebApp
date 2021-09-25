@@ -64,6 +64,13 @@ public class crlUsuarios implements iUsuarios
         }
         
     }
+    public boolean existeArtista(String nickname){
+        return ManejadorUsuarios.existeArtista(nickname);
+    }
+    
+    public boolean existeEspectador(String nickname){
+        return ManejadorUsuarios.existeEspectador(nickname);
+    }
     
     public void altaArtista(DtArtista ar)
     { 

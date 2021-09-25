@@ -4,6 +4,9 @@
     Author     : julio
 --%>
 
+<%@page import="root.fabrica.Fabrica"%>
+<%@page import="root.interfaces.iUsuarios"%>
+<%@page import="javax.servlet.ServletContext"%>
 <%@page import="java.util.List"%>
 <%@page import="root.entidades.Espectador"%>
 <%@page import="javax.persistence.*"%>
@@ -14,7 +17,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Menu Desplegable</title>
+<title>CoronaTicketsUy</title>
 		<style type="text/css">
 			
 			* {
@@ -70,13 +73,27 @@
 		</style>
 	</head>
 	<body>
+            <%ServletContext contexto = getServletContext();%>
 		<div id="header">
 			<ul class="nav">
-				<li><a href="/coronaticketsUyWebApp/login.jsp">Iniciar Sesion</a></li>
+                            <li><a href="/coronaticketsUyWebApp/login.jsp"<%contexto.setAttribute("vaHacia", "/index.jsp");%>>Iniciar Sesion</a></li>
+                                <li><a href=""><%
+                                        if(contexto.getAttribute("tipoUsuario")!=null){
+            out.println(contexto.getAttribute("nickname"));
+        }else{out.print("Registrate");}%></a></li>
 				<li><a href="">Servicios</a>
 					<ul>
-						<li><a href="">Submenu1</a></li>
-						<li><a href="">Submenu2</a></li>
+                                            
+                                                <% 
+                                                    if(contexto.getAttribute("tipoUsuario")==null){
+                                                        contexto.setAttribute("vaHacia", "/registroEspectadorFuncion.jsp");
+                                                out.print("<li><a href=\"/coronaticketsUyWebApp/login.jsp\">Registrarse a una función de un espectáculo</a></li>");
+                                                }else if(contexto.getAttribute("tipoUsuario").equals("Espectador")){
+                                                out.print("<li><a href=\"/coronaticketsUyWebApp/registroEspectadorFuncion.jsp\">Registrarse a una función de un espectáculo</a></li>");
+                                                }else{
+                                                out.print("<li><a href=\"/coronaticketsUyWebApp/artistaError.jsp\">Registrarse a una función de un espectáculo</a></li>");
+                                                }
+                                                %>
 						<li><a href="">Submenu3</a></li>
 						<li><a href="">Submenu4</a>
 							<ul>
@@ -97,6 +114,7 @@
 					</ul>
 				</li>
 				<li><a href="">Contacto</a></li>
+                                <li><a href="/coronaticketsUyWebApp/cerrarSesion.jsp">Cerrar Sesion</a></li>
 			</ul>
 		</div>
     </body>
