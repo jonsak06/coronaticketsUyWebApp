@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <form action = "" name="" method="POST" class = "box">
+                <form action = "canjeyRegistro" name="canjeyRegistro" method="POST" class = "box">
                     <% 
                     ServletContext contexto = getServletContext();
                     String nick = contexto.getAttribute("nickname").toString();
@@ -27,11 +27,13 @@
                     out.println("<input  type = \"submit\" value = \"continuar\" / >");
                     }else{
                     out.println("<h1>Listado de Canjeables</h1>");
+                    int j=1;
                     for(Registro i: iu.listarCanjeables(nick)){
-                        out.println("<p><input type=\"checkbox\" name="+i.getFuncion().getNombre()+" "+i.getFuncion().getFecha()+"  value=\"ON\"/ id="+i.getFuncion().getNombre()+"><label for "+i.getFuncion().getNombre()+">"+i.getFuncion().getNombre()+"</label></p>");
+                        out.println("<p><input type=\"checkbox\" name="+j+"  value=\"ON\"/ id="+j+"><label for "+i.getFuncion().getNombre()+">"+i.getFuncion().getNombre()+" "+i.getFuncion().getFecha()+"</label></p>");
+                        j++;
                     }
-                    
-//                    out.println("<input type=\"checkbox\" name=\"\" value=\"ON\"/>");
+                    out.println("<p>Realizar Canje?</p>");
+                    out.println("<input style=\"float: right\" type=\"submit\" name=\"realizarCanje\" value=\"Si\" /><input type=\"submit\" style=\"float: left\" name=\"norealizarCanje\" value=\"No\" />");
                     }
                     %>
 <!--                    <h1>Listado de Canjeables</h1>
