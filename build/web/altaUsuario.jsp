@@ -133,6 +133,25 @@
                 height: 5em;
             }
         </style>
+        <script>
+            function sart() {
+                document.getElementById("tBiografia").style.display = "block";
+                document.getElementById("tfBiografia").style.display = "block";
+                document.getElementById("tfLink").style.display = "block";
+                document.getElementById("tLink").style.display = "block";
+                document.getElementById("tDescripcion").style.display = "block";
+                document.getElementById("tfDescripcion").style.display = "block";
+            }
+            function sesp() {
+                document.getElementById("tBiografia").style.display = "none";
+                document.getElementById("tfBiografia").style.display = "none";
+                document.getElementById("tfLink").style.display = "none";
+                document.getElementById("tLink").style.display = "none";
+                document.getElementById("tDescripcion").style.display = "none";
+                document.getElementById("tfDescripcion").style.display = "none";
+            }
+
+        </script>
     </head>
     <body>
         <img class="logo" src="/coronaticketsUyWebApp/img/logo.jpeg"/>
@@ -161,8 +180,8 @@
 </div>
 <form action="UsuariosBackEnd"  name="fAltaUsuario" id="fAltaUsuario" method="POST">
     <p>Tipo Usuario:
-        <input type="radio" name="hm" value="e" id="TipoUsuario"> Espectador
-        <input type="radio" name="hm" value="a" id="TipoUsuario"> Artista
+        <input type="radio" name="hm" value="e" id="TipoUsuario" onclick="sesp()"> Espectador
+        <input type="radio" name="hm" value="a" id="TipoUsuario" onclick="sart()"> Artista
     </p>
 
     <p>Nombre:<input type="text" name="nombre" value="" id="nombre" size="30" /></p>
@@ -179,14 +198,14 @@
 
     <p>Fecha: <input type="date" name="fecha" id="fecha"></p>
 
-    <p>Link web:<input type="password" name="link" value="" size="30" /></p>
+    <p style="display:none;" id="tLink">Link web:<input type="link" name="link" value="" id="tfLink" size="30" style="display:none;" /></p>
 
-    <p>Biografia:</p>
-    <textarea name="biografia" rows="4" cols="30">
+    <p style="display:none;" id="tBiografia">Biografia:</p>
+    <textarea name="biografia" id="tfBiografia" rows="4" cols="30" style="display:none;">
     </textarea>
-
-    <p>Descripcion:</p>
-    <textarea name="descripcion" rows="4" cols="30">
+ 
+    <p style="display:none;" id="tDescripcion">Descripcion:</p>
+    <textarea name="descripcion" id="tfDescripcion" style="display:none;" rows="4" cols="30">
     </textarea>
 
     <input type="file" name="Imagen" size="150"/>
