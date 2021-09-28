@@ -142,7 +142,7 @@
                 document.getElementById("tDescripcion").style.display = "block";
                 document.getElementById("tfDescripcion").style.display = "block";
             }
-            function sesp() {
+            function sesp() { 
                 document.getElementById("tBiografia").style.display = "none";
                 document.getElementById("tfBiografia").style.display = "none";
                 document.getElementById("tfLink").style.display = "none";
