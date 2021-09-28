@@ -16,28 +16,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <script>
-
-            var getData = function () {
-                var nombre = document.getElementById("nombre").value;
-                var apellido = document.getElementById("apellido").value;
-                var nickname = document.getElementById("nickname").value;
-                var correo = document.getElementById("correo").value;
-                var contrasenia = document.getElementById("contrasenia").value;
-                var fecha = document.getElementById("fecha").value;
-                var imagen = "";
-                var id = 0;
-                var canjeables = 0;
-
-                DtEspectador es = new DtEspectador(canjeables, id, nombre, apellido, correo, nickname, imagen, fecha, contrasenia);
-
-                Fabrica.getCrlUsuarios().altaEspectador(es);
-
-
-            }
-
-
-        </script>  
         <style type="text/css">
 
             * {
@@ -181,7 +159,7 @@
         <li><a href="">Contacto</a></li>
     </ul>
 </div>
-<form name="Form" id="form">
+<form action="UsuariosBackEnd"  name="fAltaUsuario" id="fAltaUsuario" method="POST">
     <p>Tipo Usuario:
         <input type="radio" name="hm" value="e" id="TipoUsuario"> Espectador
         <input type="radio" name="hm" value="a" id="TipoUsuario"> Artista
@@ -213,7 +191,7 @@
 
     <input type="file" name="Imagen" size="150"/>
 
-    <button type="button" onclick="getData()"> Enviar </button>
+    <input type="submit" name="" value="crear">
 
 
 </form>
