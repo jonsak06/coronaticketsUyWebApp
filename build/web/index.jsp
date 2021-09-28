@@ -94,7 +94,7 @@
                                                 out.print("<li><a href=\"/coronaticketsUyWebApp/artistaError.jsp\">Registrarse a una función de un espectáculo</a></li>");
                                                 }
                                                 %>
-						<li><a href="">Submenu3</a></li>
+						<li><a href="/coronaticketsUyWebApp/altaUsuario.jsp">alta usuario</a></li>
 						<li><a href="">Submenu4</a>
 							<ul>
 								<li><a href="">Submenu1</a></li>
