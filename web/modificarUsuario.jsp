@@ -133,26 +133,8 @@
                 height: 5em;
             }
         </style>
-        <script>
-            function sart() {
-                document.getElementById("tBiografia").style.display = "block";
-                document.getElementById("tfBiografia").style.display = "block";
-                document.getElementById("tfLink").style.display = "block";
-                document.getElementById("tLink").style.display = "block";
-                document.getElementById("tDescripcion").style.display = "block";
-                document.getElementById("tfDescripcion").style.display = "block";
-            }
-            function sesp() { 
-                document.getElementById("tBiografia").style.display = "none";
-                document.getElementById("tfBiografia").style.display = "none";
-                document.getElementById("tfLink").style.display = "none";
-                document.getElementById("tLink").style.display = "none";
-                document.getElementById("tDescripcion").style.display = "none";
-                document.getElementById("tfDescripcion").style.display = "none";
-            }
-
-        </script>
     </head>
+    
     <body>
         <img class="logo" src="/coronaticketsUyWebApp/img/logo.jpeg"/>
         <div id="header">
@@ -178,37 +160,46 @@
         <li><a href="">Contacto</a></li>
     </ul>
 </div>
+
+
+<%
+        ServletContext contexto = getServletContext();
+        if (contexto.getAttribute("tipoUsuario") != null) 
+        {
+            
+            if(contexto.getAttribute("tipoUsuario").equals("Espectador") )
+            {
+                    out.print("<p>pene</p>");
+                DtEspectador es = Fabrica.getCrlUsuarios().getDatosEspectador(contexto.getAttribute("nickname").toString());
+             
+             out.print( "<form action=\"/UsuariosBackEnd\"/  name=\"/fAltaUsuario\"/ id=\"/fAltaUsuario\"/ method=\"/POST\"/>"  );
+             out.print( "<p>Nombre:<input type=\"/text\"/ name=\"/nombre\"/ value=\"/"+ es.getNombre() +"\"/ id=\"/nombre\"/ size=\"/30\"/  /></p>"  );
+             out.print( "<p>Apellido:<input type=\"/text\"/ name=\"/apellido\"/ value=\"/"+ es.getApellido() +"\"/ id=\"/apellido\"/ size=\"/30\"/ /></p>"  );
+             out.print( "<p>Nickname:<input type=\"/text\"/ name=\"/nickname\"/ value=\"/"+ es.getNickname() +"\"/ id=\"/nickname\"/ size=\"/30\"/ disabled /></p>"  );
+             out.print( "<p>Correo:<input type=\"/text\"/ name=\"/correo\"/ value=\"/"+ es.getCorreo() +"\"/ id=\"/correo\"/ size=\"/30\"/ disabled /></p>"  );
+             out.print( "<p>Contraseña:<input type=\"/password\"/ name=\"/contrasenia\"/ id=\"/contrasenia\"/ value=\"/"+ es.getPass() +"\"/ size=\"/30\"/ /></p>"  );
+             out.print( "<p>Fecha: <input type=\"/date\"/ name=\"/fecha\"/ value=\"/"+ es.getFechaNacimiento().toString() +"\"/ id=\"/fecha\"/></p>"  );
+             out.print( "</form>"  );
+             
+            }
+        }
+%>
+    
 <form action="UsuariosBackEnd"  name="fAltaUsuario" id="fAltaUsuario" method="POST">
-    <p>Tipo Usuario:
-        <input type="radio" name="us" value="e" id="us" onclick="sesp()"> Espectador
-        <input type="radio" name="us" value="a" id="us" onclick="sart()"> Artista
-    </p>
+    
+     <form action="UsuariosBackEnd"  name="fAltaUsuario" id="fAltaUsuario" method="POST"> 
+   
+    <p>Link web:<input type="password" name="link" value="" size="30" /></p>
 
-    <p>Nombre:<input type="text" name="nombre" value="" id="nombre" size="30" /></p>
-
-    <p>Apellido:<input type="text" name="apellido" value="" id="apellido" size="30" /></p>
-
-    <p>Nickname:<input type="text" name="nickname" value="" id="nickname" size="30" /></p>
-
-    <p>Correo:<input type="text" name="correo" value="" id="correo" size="30" /></p>
-
-    <p>Contraseña:<input type="password" name="contrasenia" id="contrasenia" value="" size="30" /></p>
-
-    <p>Confirmar contraseña:<input type="password" name="contraseniaC" id="cContraseña" value="" size="30" /></p>
-
-    <p>Fecha: <input type="date" name="fecha" id="fecha"></p>
-
-    <p style="display:none;" id="tLink">Link web:<input type="link" name="link" value="" id="tfLink" size="30" style="display:none;" /></p>
-
-    <p style="display:none;" id="tBiografia">Biografia:</p>
-    <textarea name="biografia" id="tfBiografia" rows="4" cols="30" style="display:none;">
-    </textarea>
- 
-    <p style="display:none;" id="tDescripcion">Descripcion:</p>
-    <textarea name="descripcion" id="tfDescripcion" style="display:none;" rows="4" cols="30">
+    <p>Biografia:</p>
+    <textarea name="biografia" rows="4" cols="30">
     </textarea>
 
-    <input type="file" name="Imagen" size="150"/>
+    <p>Descripcion:</p>
+    <textarea name="descripcion" rows="4" cols="30">
+    </textarea>
+
+    <input type="file" accept="image/*" name="Imagen" size="150"/>
 
     <input type="submit" name="" value="crear">
 
@@ -216,4 +207,3 @@
 </form>
 </body>
 </html>
-

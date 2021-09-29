@@ -180,8 +180,8 @@
 </div>
 <form action="UsuariosBackEnd"  name="fAltaUsuario" id="fAltaUsuario" method="POST">
     <p>Tipo Usuario:
-        <input type="radio" name="hm" value="e" id="TipoUsuario" onclick="sesp()"> Espectador
-        <input type="radio" name="hm" value="a" id="TipoUsuario" onclick="sart()"> Artista
+        <input type="radio" name="us" value="e" id="us" onclick="sesp()"> Espectador
+        <input type="radio" name="us" value="a" id="us" onclick="sart()"> Artista
     </p>
 
     <p>Nombre:<input type="text" name="nombre" value="" id="nombre" size="30" /></p>
