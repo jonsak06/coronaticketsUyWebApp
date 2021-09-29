@@ -36,23 +36,38 @@ public class pasajeaLogin extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         iUsuarios iu = Fabrica.getCrlUsuarios();
-        if(iu.existeUsuario(request.getParameter("nick"))==false){
+        if (iu.existeUsuario(request.getParameter("nick")) == false) {
             ServletContext contexto = getServletContext();
             RequestDispatcher dispatcher = contexto.getRequestDispatcher("/WEB-INF/errorDeLogin.jsp");
             dispatcher.forward(request, response);
-        }else if(iu.getDatosEspectador(request.getParameter("nick")).getPass().equals(request.getParameter("pass"))){
-            if(iu.existeArtista(request.getParameter("nick"))){
-            ServletContext contexto = getServletContext();
-            contexto.setAttribute("tipoUsuario", "Artista");
-            RequestDispatcher dispatcher = contexto.getRequestDispatcher("/index.jsp");
-            dispatcher.forward(request, response);
-            }else{
-            ServletContext contexto = getServletContext();
-            contexto.setAttribute("tipoUsuario", "Espectador");
-            contexto.setAttribute("nickname", iu.getDatosEspectador(request.getParameter("nick")).getNickname());
-            RequestDispatcher dispatcher = contexto.getRequestDispatcher("/index.jsp");
-            dispatcher.forward(request, response);}
-        }else{
+        } else if (iu.existeEspectador(request.getParameter("nick"))) {
+            if (iu.getDatosEspectador(request.getParameter("nick")).getPass().equals(request.getParameter("pass"))) {
+
+                ServletContext contexto = getServletContext();
+                contexto.setAttribute("tipoUsuario", "Espectador");
+                contexto.setAttribute("nickname", iu.getDatosEspectador(request.getParameter("nick")).getNickname());
+                RequestDispatcher dispatcher = contexto.getRequestDispatcher("/index.jsp");
+                dispatcher.forward(request, response);
+
+            } else {
+                ServletContext contexto = getServletContext();
+                RequestDispatcher dispatcher = contexto.getRequestDispatcher("/WEB-INF/errorDeLogin.jsp");
+                dispatcher.forward(request, response);
+            }
+        } else if (iu.existeArtista(request.getParameter("nick"))) {
+            if (iu.getDatosArtista(request.getParameter("nick")).getPass().equals(request.getParameter("pass"))) {
+
+                ServletContext contexto = getServletContext();
+                contexto.setAttribute("tipoUsuario", "Artista");
+                contexto.setAttribute("nickname", iu.getDatosArtista(request.getParameter("nick")).getNickname());
+                RequestDispatcher dispatcher = contexto.getRequestDispatcher("/index.jsp");
+                dispatcher.forward(request, response);
+            } else {
+                ServletContext contexto = getServletContext();
+                RequestDispatcher dispatcher = contexto.getRequestDispatcher("/WEB-INF/errorDeLogin.jsp");
+                dispatcher.forward(request, response);
+            }
+        } else {
             ServletContext contexto = getServletContext();
             RequestDispatcher dispatcher = contexto.getRequestDispatcher("/WEB-INF/errorDeLogin.jsp");
             dispatcher.forward(request, response);

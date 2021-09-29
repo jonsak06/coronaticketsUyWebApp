@@ -355,6 +355,18 @@ public class ManejadorUsuarios
         return esteMen.getMyDt();
     }
     
+    public static DtArtista getDatosArtista(String nickname){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<Artista> consulta = em.createNamedQuery("ArtistaporNick",Artista.class);
+        consulta.setParameter("nickname", nickname);
+        Artista esteMen = consulta.getSingleResult();
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+        return esteMen.getMyDt();
+    }
     
     public static List<DtRegistro> getRegistros(String nickname){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");

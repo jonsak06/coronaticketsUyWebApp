@@ -117,6 +117,10 @@ public class crlUsuarios implements iUsuarios
        return ManejadorUsuarios.getDatosEspectador(nickname);
    }
    
+   public DtArtista getDatosArtista(String nickname){
+       return ManejadorUsuarios.getDatosArtista(nickname);
+   }
+   
    public List<DtRegistro> getRegistros(String nickname)
    {
        return ManejadorUsuarios.getRegistros(nickname);

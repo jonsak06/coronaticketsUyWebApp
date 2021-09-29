@@ -37,6 +37,7 @@ public interface iUsuarios {
     public void canjearRegistros(List<String> canjeables, String nickname, float costo, String nombreFuncion, int fdia, int fmes, int fanio);
     public void registrarUsuario(String nickname, String nombreFuncion, float costo, int fdia, int fmes, int fanio);
     public DtEspectador getDatosEspectador(String nickname);
+    public DtArtista getDatosArtista(String nickname);
     public List<DtRegistro> getRegistros(String nickname);
     public List<DtFuncion> getFuncionesRegistros(String nickname);
     public List<DtEspectaculo> listarEspectaculosDeArtista(String nickname);
