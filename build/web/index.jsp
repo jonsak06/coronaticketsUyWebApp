@@ -21,13 +21,17 @@
 		<style type="text/css">
 			
 			* {
-				margin:0px;
+				margin:px;
 				padding:0px;
 			}
 			
 			#header {
-				margin:auto;
-				width:500px;
+                                    
+                                padding: 40px;
+                                position: absolute;
+                                left: 23%;
+				/*margin:auto;*/
+				width:1000px;
 				font-family:Arial, Helvetica, sans-serif;
 			}
 			
@@ -77,7 +81,7 @@
 		<div id="header">
 			<ul class="nav">
                             <li><a href="/coronaticketsUyWebApp/login.jsp"<%contexto.setAttribute("vaHacia", "/index.jsp");%>>Iniciar Sesion</a></li>
-                                <li><a href=""><%
+                                <li><a <% if(contexto.getAttribute("tipoUsuario")==null)out.print("href=\"/coronaticketsUyWebApp/altaUsuario.jsp\"");%> ><%
                                         if(contexto.getAttribute("tipoUsuario")!=null){
             out.println(contexto.getAttribute("nickname"));
         }else{out.print("Registrate");}%></a></li>

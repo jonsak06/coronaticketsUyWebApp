@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import root.entidades.Registro;
+import root.fabrica.Fabrica;
+import root.interfaces.iUsuarios;
 
 /**
  *
@@ -36,9 +38,16 @@ public class canjeyRegistro extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            ServletContext contexto = getServletContext();
+            int cantCanjeables = Integer.parseInt(contexto.getAttribute("cantCanjeables").toString());
+            iUsuarios iu = Fabrica.getCrlUsuarios();
+            List<Registro> canjeables = iu.listarCanjeables(contexto.getAttribute("nickname").toString());
             int i = 1;
-            while(i<4){
-                out.println("<li>"+request.getParameter(i+"")+"</li>");
+            while(i<cantCanjeables+1){
+                if(request.getParameter(i+"")!=null){
+
+                    out.println("<li>"+canjeables.get(i-1).getFuncion().getNombre()+"</li>");
+                }else{out.println("<li>ERROR</li>");}
                 i++;
             }
 //            }

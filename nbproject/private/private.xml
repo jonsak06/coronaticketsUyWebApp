@@ -7,8 +7,13 @@
             <file>file:/home/julio/coronaticketsUyWebApp/src/java/pasajeaLogin.java</file>
             <file>file:/home/julio/coronaticketsUyWebApp/src/java/listarEspectaculos.java</file>
             <file>file:/home/julio/coronaticketsUyWebApp/src/java/listarFuncionesDeEspectaculo.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/web/login.jsp</file>
             <file>file:/home/julio/coronaticketsUyWebApp/web/index.jsp</file>
             <file>file:/home/julio/coronaticketsUyWebApp/web/funcionesDeEspectaculo.jsp</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/conf/persistence.xml</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/web/miestilo.css</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/web/listadoDeCanjeables.jsp</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/canjeyRegistro.java</file>
             <file>file:/home/julio/coronaticketsUyWebApp/web/registroEspectadorFuncion.jsp</file>
         </group>
     </open-files>
