@@ -214,7 +214,6 @@ public class ManejadorUsuarios
         Artista vp= lista.getSingleResult();
         vp.setApellido(ar.getApellido());
         vp.setBiografia(ar.getBiografia());
-        vp.setCorreo(ar.getCorreo());
         vp.setImagen(ar.getImagen());
         vp.setNombre(ar.getNombre());
         vp.setPasswd(ar.getPass());

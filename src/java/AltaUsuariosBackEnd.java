@@ -38,9 +38,9 @@ import root.interfaces.iUsuarios;
  *
  * @author Tecnologo
  */
-@WebServlet(urlPatterns = {"/UsuariosBackEnd"})
+@WebServlet(urlPatterns = {"/AltaUsuariosBackEnd"})
 
-public class UsuariosBackEnd extends HttpServlet {
+public class AltaUsuariosBackEnd extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -101,7 +101,7 @@ public class UsuariosBackEnd extends HttpServlet {
             String biografia = request.getParameter("biografia");
             String linkWeb = request.getParameter("link");
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 java.util.Date parsed = null;
             try {
                 parsed = sdf.parse(request.getParameter("fecha"));

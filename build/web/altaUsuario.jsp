@@ -142,7 +142,7 @@
                 document.getElementById("tDescripcion").style.display = "block";
                 document.getElementById("tfDescripcion").style.display = "block";
             }
-            function sesp() { 
+            function sesp() {
                 document.getElementById("tBiografia").style.display = "none";
                 document.getElementById("tfBiografia").style.display = "none";
                 document.getElementById("tfLink").style.display = "none";
@@ -178,7 +178,8 @@
         <li><a href="">Contacto</a></li>
     </ul>
 </div>
-<form action="UsuariosBackEnd"  name="fAltaUsuario" id="fAltaUsuario" method="POST">
+        
+<form action="AltaUsuariosBackEnd"  name="fAltaUsuario" id="fAltaUsuario" method="POST">
     <p>Tipo Usuario:
         <input type="radio" name="us" value="e" id="us" onclick="sesp()"> Espectador
         <input type="radio" name="us" value="a" id="us" onclick="sart()"> Artista
@@ -203,7 +204,7 @@
     <p style="display:none;" id="tBiografia">Biografia:</p>
     <textarea name="biografia" id="tfBiografia" rows="4" cols="30" style="display:none;">
     </textarea>
- 
+
     <p style="display:none;" id="tDescripcion">Descripcion:</p>
     <textarea name="descripcion" id="tfDescripcion" style="display:none;" rows="4" cols="30">
     </textarea>

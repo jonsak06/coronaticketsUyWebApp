@@ -160,8 +160,6 @@
         <li><a href="">Contacto</a></li>
     </ul>
 </div>
-
-
 <%
     ServletContext contexto = getServletContext();
     if (contexto.getAttribute("tipoUsuario") != null) {
@@ -169,39 +167,52 @@
         if (contexto.getAttribute("tipoUsuario").equals("Espectador")) {
 
             DtEspectador es = Fabrica.getCrlUsuarios().getDatosEspectador(contexto.getAttribute("nickname").toString());
-
-            out.print("<form action=\"/UsuariosBackEnd\"/  name=\"/fAltaUsuario\"/ id=\"/fAltaUsuario\"/ method=\"/POST\"/>");
-            out.print("<p>Nombre:<input type=\"/text\"/ name=\"/nombre\"/ value=\"" + es.getNombre() + "\"/ id=\"/nombre\"/ size=\"/30\"/  /></p>");
-            out.print("<p>Apellido:<input type=\"/text\"/ name=\"/apellido\"/ value=\"" + es.getApellido() + "\"/ id=\"/apellido\"/ size=\"/30\"/ /></p>");
-            out.print("<p>Nickname:<input type=\"/text\"/ name=\"/nickname\"/ value=\"" + es.getNickname() + "\"/ id=\"/nickname\"/ size=\"/30\"/ disabled /></p>");
-            out.print("<p>Correo:<input type=\"/text\"/ name=\"/correo\"/ value=\"" + es.getCorreo() + "\"/ id=\"/correo\"/ size=\"/30\"/ disabled /></p>");
-            out.print("<p>Contraseña:<input type=\"/password\"/ name=\"/contrasenia\"/ id=\"/contrasenia\"/ value=\"" + es.getPass() + "\"/ size=\"/30\"/ /></p>");
-            out.print("<p>Fecha: <input type=\"/date\"/ name=\"/fecha\"/ value=\"" + es.getFechaNacimiento().toString() + "\"/ id=\"/fecha\"/></p>");
-            out.print("<input type=\"/file\"/ accept=\"/image/*\"/ name=\"/Imagen\"/ size=\"/150\"//>");
-            out.print("<input type=\"/submit\"/ name=\"/\"/ value=\"/crear\"/>");
-            out.print("</form>");
-
+             %>   
+            <form action="ModificarUsuariosBackEnd"  name="fModificarUsuario" id="fAltaUsuario" method="POST">
+            
+            <%
+            out.print("<p name=\"/Tipo\"/>Espectador</p>");
+            out.print("<p>Nombre:<input type=\"/text\"/ name=\"nombre\"/ value=\"" + es.getNombre() + "\"/ id=\"/nombre\"/ size=\"/30\"/  /></p>");
+            out.print("<p>Apellido:<input type=\"/text\"/ name=\"apellido\"/ value=\"" + es.getApellido() + "\"/ id=\"/apellido\"/ size=\"/30\"/ /></p>");
+            out.print("<p>Nickname:<input type=\"/text\"/ name=\"nickname\"/ value=\"" + es.getNickname() + "\"/ id=\"/nickname\"/ size=\"/30\"/ disabled /></p>");
+            out.print("<p>Correo:<input type=\"/text\"/ name=\"correo\"/ value=\"" + es.getCorreo() + "\"/ id=\"/correo\"/ size=\"/30\"/ disabled /></p>");
+            out.print("<p>Contraseña:<input type=\"/password\"name=\"/contrasenia\"/ id=\"/contrasenia\"/ value=\"" + es.getPass() + "\"/ size=\"/30\"/ /></p>");
+            out.print("<p>Fecha: <input type=\"/date\"/ name=\"fecha\"/ value=\"" + es.getFechaNacimiento().toString() + "\"/ id=\"/fecha\"/></p>");
+            out.print("<input type=\"/file\"/ accept=\"/image/*\"/ name=\"Imagen\"/ size=\"/150\"//>");
+            %>
+            <input type="submit" name="" value="crear">
+            <%
+                %>
+                </form>
+                <%
         } else if (contexto.getAttribute("tipoUsuario").equals("Artista")) {
             DtArtista ar = Fabrica.getCrlUsuarios().getDatosArtista(contexto.getAttribute("nickname").toString());
 
-            out.print("<form action=\"/UsuariosBackEnd\"/  name=\"/fAltaUsuario\"/ id=\"/fAltaUsuario\"/ method=\"/POST\"/>");
-            out.print("<p>Nombre:<input type=\"/text\"/ name=\"/nombre\"/ value=\"" + ar.getNombre() + "\"/ id=\"/nombre\"/ size=\"/30\"/  /></p>");
-            out.print("<p>Apellido:<input type=\"/text\"/ name=\"/apellido\"/ value=\"" + ar.getApellido() + "\"/ id=\"/apellido\"/ size=\"/30\"/ /></p>");
-            out.print("<p>Nickname:<input type=\"/text\"/ name=\"/nickname\"/ value=\"" + ar.getNickname() + "\"/ id=\"/nickname\"/ size=\"/30\"/ disabled /></p>");
-            out.print("<p>Correo:<input type=\"/text\"/ name=\"/correo\"/ value=\"" + ar.getCorreo() + "\"/ id=\"/correo\"/ size=\"/30\"/ disabled /></p>");
-            out.print("<p>Contraseña:<input type=\"/password\"/ name=\"/contrasenia\"/ id=\"/contrasenia\"/ value=\"" + ar.getPass() + "\"/ size=\"/30\"/ /></p>");
-            out.print("<p>Fecha: <input type=\"/date\"/ name=\"/fecha\"/ value=\"" + ar.getFechaNacimiento().toString() + "\"/ id=\"/fecha\"/></p>");
+            %>   
+            <form action="ModificarUsuariosBackEnd"  name="fModificarUsuario" id="fAltaUsuario" method="POST">
+            
+            <%
+            out.print("<p>Nombre:<input type=\"/text\"/ name=\"nombre\"/ value=\"" + ar.getNombre() + "\"/ id=\"/nombre\"/ size=\"/30\"/  /></p>");
+            out.print("<p>Apellido:<input type=\"/text\"/ name=\"apellido\"/ value=\"" + ar.getApellido() + "\"/ id=\"/apellido\"/ size=\"/30\"/ /></p>");
+            out.print("<p>Nickname:<input type=\"/text\"/ name=\"nickname\"/ value=\"" + ar.getNickname() + "\"/ id=\"/nickname\"/ size=\"/30\"/ disabled /></p>");
+            out.print("<p>Correo:<input type=\"/text\"/ name=\"correo\"/ value=\"" + ar.getCorreo() + "\"/ id=\"/correo\"/ size=\"/30\"/ disabled /></p>");
+            out.print("<p>Contraseña:<input type=\"/password\"/ name=\"contrasenia\"/ id=\"/contrasenia\"/ value=\"" + ar.getPass() + "\"/ size=\"/30\"/ /></p>");
+            out.print("<p>Fecha: <input type=\"/date\"/ name=\"fecha\"/ value=\"" + ar.getFechaNacimiento().toString() + "\"/ id=\"/fecha\"/></p>");
 
-            out.print("<p>Link web:<input type=\"/password\"/ name=\"/link\"/ value=\"" + ar.getLinkWeb() + "\"/ size=\"/30\"/ /></p>");
+            out.print("<p>Link web:<input type=\"/password\"/ name=\"link\"/ value=\"" + ar.getLinkWeb() + "\"/ size=\"/30\"/ /></p>");
             out.print("<p>Biografia:</p>"
-                    + "<textarea name=\"/biografia\"/ value=\"" + ar.getBiografia() + " rows=\"/4\"/ cols=\"/30\"/> "
+                    + "<textarea name=\"biografia\"/ value=\"" + ar.getBiografia() + " rows=\"/4\"/ cols=\"/30\"/> "
                     + "</textarea>");
             out.print("<p>Descripcion:</p>"
-                    + "<textarea name=\"/descripcion\"/ value=\"" + ar.getDescripcion() + " rows=\"/4\"/ cols=\"/30\"/>"
+                    + "<textarea name=\"descripcion\"/ placeholder=\"" + ar.getDescripcion() + " rows=\"/4\"/ cols=\"/30\"/>"
                     + "</textarea>");
-            out.print("<input type=\"/file\"/ accept=\"/image/*\"/ name=\"/Imagen\"/ size=\"/150\"//>");
-            out.print("<input type=\"/submit\"/ name=\"/\"/ value=\"crear\"/>");
-            out.print("</form>");
+            out.print("<input type=\"/file\"/ accept=\"image/*\"/ name=\"/Imagen\"/ size=\"/150\"//>");
+            %>
+            <input type="submit" name="" value="crear">
+            <%
+            %>
+                </form>
+                <%
         }
     }
 %>
