@@ -100,10 +100,13 @@
                                                  out.print("<li><a href=\"/coronaticketsUyWebApp/modificarUsuario.jsp\">Modificar Usuario</a></li>");
                                                
                                                 out.print("<li><a href=\"/coronaticketsUyWebApp/artistaError.jsp\">Registrarse a una función de un espectáculo</a></li>");
+                                                out.print("<li><a href=\"/coronaticketsUyWebApp/altaEspectaculo.jsp\">Ingresar nuevo Espectáculo</a></li>");
+
                                                 }
                                                 %>
 						<li><a href="/coronaticketsUyWebApp/altaUsuario.jsp">alta usuario</a></li>
 						<li><a href="/coronaticketsUyWebApp/AltaFUncion.jsp">Alta de Funcion</a>
+                                                    
 							<ul>
 								<li><a href="">Submenu1</a></li>
 								<li><a href="">Submenu2</a></li>

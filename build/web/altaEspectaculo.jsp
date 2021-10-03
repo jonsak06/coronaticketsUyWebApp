@@ -1,23 +1,13 @@
 <%-- 
-    Document   : test
-    Created on : Sep 16, 2021, 10:43:40 PM
+    Document   : altaEspectaculo
+    Created on : Oct 3, 2021, 10:24:13 AM
     Author     : julio
 --%>
 
-<%@page import="root.fabrica.Fabrica"%>
-<%@page import="root.interfaces.iUsuarios"%>
-<%@page import="javax.servlet.ServletContext"%>
-<%@page import="java.util.List"%>
-<%@page import="root.entidades.Espectador"%>
-<%@page import="javax.persistence.*"%>
-<%@page import="javax.persistence.Persistence"%>
-<%@page import="javax.persistence.EntityManagerFactory"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>CoronaTicketsUy</title>
+ <title>CoronaTicketsUy</title>
 		<style type="text/css">
 			
 			* {
@@ -81,7 +71,7 @@
 		<div id="header">
 			<ul class="nav">
                             <li><a href="/coronaticketsUyWebApp/login.jsp"<%contexto.setAttribute("vaHacia", "/index.jsp");%>>Iniciar Sesion</a></li>
-                                <li><a <% if(contexto.getAttribute("tipoUsuario")==null)out.print("href=\"/coronaticketsUyWebApp/altaUsuario.jsp\"");%> ><%
+                                <li><a href=""><%
                                         if(contexto.getAttribute("tipoUsuario")!=null){
             out.println(contexto.getAttribute("nickname"));
         }else{out.print("Registrate");}%></a></li>
@@ -105,8 +95,7 @@
                                                 }
                                                 %>
 						<li><a href="/coronaticketsUyWebApp/altaUsuario.jsp">alta usuario</a></li>
-						<li><a href="/coronaticketsUyWebApp/AltaFUncion.jsp">Alta de Funcion</a>
-                                                    
+						<li><a href="">Submenu4</a>
 							<ul>
 								<li><a href="">Submenu1</a></li>
 								<li><a href="">Submenu2</a></li>
@@ -129,4 +118,19 @@
 			</ul>
 		</div>
     </body>
+<div class="container">
+    <link rel="stylesheet" href="./miestilo.css" type="text/css"><!-- comment -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <form action="altaEspectaculoServ" name="altaEspectaculo" method="POST" class="box">
+                    <h1>Datos del Espectaculo</h1>
+                    <p class="text-muted">Ingresa los datos del espectaculo</p> 
+                    <input type="text" name="nick" placeholder="Nickname"> 
+                    <input type="submit" name="" value="Ingresar">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </html>
