@@ -51,4 +51,5 @@ public interface iUsuarios {
     public boolean existeEspectador(String nickname);
     public boolean tienePaquetesParaEspectaculo(String nickname, String nombreEspectaculo);
     public List<String> listarPaquetesParaEsp(String nickname, String nombreEspectaculo);
+    public List<DtFuncion> getFuncionesRegistrosNoUsados(String nickname);
 }

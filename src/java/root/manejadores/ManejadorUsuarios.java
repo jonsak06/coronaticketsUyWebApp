@@ -411,6 +411,26 @@ public class ManejadorUsuarios
         return lista;
     }
     
+        public static List<DtFuncion> getFuncionesRegistrosNoUsados(String nickname){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<Espectador> consulta = em.createNamedQuery("EspectadorporNick",Espectador.class);
+        consulta.setParameter("nickname", nickname);
+        Espectador esteMen = consulta.getSingleResult();
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+        List<DtFuncion> lista = new ArrayList<DtFuncion>();
+        for(Registro r: esteMen.getRegistros()){
+            if(r.getEstado()==EstadoRegistro.PENDIENTE){
+            lista.add(r.getFuncion().getMyDt());
+            }
+        
+        }
+        return lista;
+    }
+    
     public static List<DtEspectaculo> listarEspectaculosDeArtista(String nickname)
     {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");

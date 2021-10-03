@@ -5,6 +5,7 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -12,6 +13,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import root.datatypes.DtFuncion;
+import root.fabrica.Fabrica;
+import root.interfaces.iUsuarios;
 
 /**
  *
@@ -34,8 +38,21 @@ public class listarCanjeables extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
             ServletContext contexto = getServletContext();
             contexto.setAttribute("funcion", request.getParameter("funcion"));
+            iUsuarios iu = Fabrica.getCrlUsuarios();
+            List<DtFuncion> funciones = iu.getFuncionesRegistrosNoUsados(contexto.getAttribute("nickname").toString());
+            int k = 0;
+            for(DtFuncion i : funciones){
+                if(contexto.getAttribute("funcion").toString().equals(i.getNombre())){
+                k++;
+                }
+            }
+            if(k>0){
+            RequestDispatcher dispatcher = contexto.getRequestDispatcher("/funcionrepetida.jsp");
+            dispatcher.forward(request, response);
+            }else{
             RequestDispatcher dispatcher = contexto.getRequestDispatcher("/listadoDeCanjeables.jsp");
             dispatcher.forward(request, response);
+            }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

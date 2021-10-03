@@ -3,18 +3,47 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/julio/coronaticketsUyWebApp/web/listadoPorPlat.jsp</file>
-            <file>file:/home/julio/coronaticketsUyWebApp/src/java/pasajeaLogin.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/root/entidades/PaqueteDeEspectaculos.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/root/controladores/CtrlEspectaculos.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/web/seleccionarPaquete.jsp</file>
             <file>file:/home/julio/coronaticketsUyWebApp/src/java/listarEspectaculos.java</file>
-            <file>file:/home/julio/coronaticketsUyWebApp/src/java/listarFuncionesDeEspectaculo.java</file>
             <file>file:/home/julio/coronaticketsUyWebApp/web/login.jsp</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/root/interfaces/iPaquetes.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/root/interfaces/IEspectaculos.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/finalizarRegistroPaquete.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/web/listadoPorPlat.jsp</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/root/datatypes/DtPaqueteDeEspectaculos.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/web/registroRealizado.jsp</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/root/entidades/Espectador.java</file>
             <file>file:/home/julio/coronaticketsUyWebApp/web/index.jsp</file>
-            <file>file:/home/julio/coronaticketsUyWebApp/web/funcionesDeEspectaculo.jsp</file>
-            <file>file:/home/julio/coronaticketsUyWebApp/src/conf/persistence.xml</file>
-            <file>file:/home/julio/coronaticketsUyWebApp/web/miestilo.css</file>
             <file>file:/home/julio/coronaticketsUyWebApp/web/listadoDeCanjeables.jsp</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/web/listadoPorCat.jsp</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/web/confirmarRegistro.jsp</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/root/entidades/Registro.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/listarCanjeables.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/root/entidades/Categoria.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/finalizarRegistroCanje.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/web/seleccionarPlatOCat.jsp</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/root/interfaces/iUsuarios.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/listarFuncionesDeEspectaculo.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/platOCat.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/web/funcionesDeEspectaculo.jsp</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/root/manejadores/ManPlataformas.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/finalizarRegistro.java</file>
             <file>file:/home/julio/coronaticketsUyWebApp/src/java/canjeyRegistro.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/root/controladores/crlUsuarios.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/root/manejadores/ManEspectaculo.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/root/controladores/DatosDePruebaCtrl.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/root/fabrica/Fabrica.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/root/controladores/CtrlPaquetes.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/web/confirmacionDeCanje.jsp</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/web/cantidadDeCanjesInvalida.jsp</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/root/datatypes/DtRegistro.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/pasajeaLogin.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/root/manejadores/ManejadorPaquetes.java</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/root/manejadores/ManejadorUsuarios.java</file>
             <file>file:/home/julio/coronaticketsUyWebApp/web/registroEspectadorFuncion.jsp</file>
+            <file>file:/home/julio/coronaticketsUyWebApp/src/java/root/entidades/Espectaculo.java</file>
         </group>
     </open-files>
 </project-private>

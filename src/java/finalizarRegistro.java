@@ -41,6 +41,7 @@ public class finalizarRegistro extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ServletContext contexto = getServletContext();
+        if(request.getParameter("confirmacionSi")!=null){
             iPaquetes ip = Fabrica.getCtrlPaquetes();
             IEspectaculos ie = Fabrica.getCtrlEspectaculos();
             int dia,mes,anio;
@@ -59,6 +60,10 @@ public class finalizarRegistro extends HttpServlet {
             contexto.setAttribute("costo", ie.getCosto(contexto.getAttribute("funcion").toString()));
             RequestDispatcher dispatcher = contexto.getRequestDispatcher("/registroRealizado.jsp");
             dispatcher.forward(request, response);
+        }else{
+        RequestDispatcher dispatcher = contexto.getRequestDispatcher("/index.jsp");
+        dispatcher.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

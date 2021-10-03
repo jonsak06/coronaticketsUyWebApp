@@ -58,7 +58,7 @@ public class finalizarRegistroCanje extends HttpServlet {
             contexto.setAttribute("costo", 0);
             RequestDispatcher dispatcher = contexto.getRequestDispatcher("/registroRealizado.jsp");
             dispatcher.forward(request, response);
-        }else if(request.getParameter("confirmacionNo")!=null){
+        }else /*if(request.getParameter("confirmacionNo")!=null)*/{
             contexto.removeAttribute("espectaculo");
             contexto.removeAttribute("funcion");
             RequestDispatcher dispatcher = contexto.getRequestDispatcher("/index.jsp");

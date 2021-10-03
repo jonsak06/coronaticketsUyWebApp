@@ -169,4 +169,8 @@ public class crlUsuarios implements iUsuarios
    public List<String> listarPaquetesParaEsp(String nickname, String nombreEspectaculo){
        return ManejadorUsuarios.listarPaquetesParaEsp(nickname, nombreEspectaculo);
    }
+   
+   public List<DtFuncion> getFuncionesRegistrosNoUsados(String nickname){
+       return ManejadorUsuarios.getFuncionesNoRegistradas(nickname);
+   }
 }
