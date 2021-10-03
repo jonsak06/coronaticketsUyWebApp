@@ -1,16 +1,19 @@
 <%-- 
-    Document   : registroEspectadorFuncion
-    Created on : Sep 21, 2021, 12:30:39 PM
+    Document   : seleccionarPaquete
+    Created on : Oct 2, 2021, 6:16:57 PM
     Author     : julio
 --%>
 
+<%@page import="root.fabrica.Fabrica"%>
+<%@page import="java.util.List"%>
+<%@page import="root.interfaces.iUsuarios"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
-    <title>CoronaTicketsUy</title>
+     <title>CoronaTicketsUy</title>
 		<style type="text/css">
 			
 			* {
@@ -119,22 +122,26 @@
 			</ul>
 		</div>
     </body>
-        <%
-           // ServletContext contexto = getServletContext();
-            //out.print("<li>"+contexto.getAttribute("nickname")+"<li>");
-        %>
-
     <div class="container">
     <link rel="stylesheet" href="./miestilo.css" type="text/css"><!-- comment -->
-    <div class="row">
+        <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <form action = "listarEspectaculos" name="listarEspectaculos" method="POST" class = "box">
-                    <h1>Búsqueda de Espectáculos</h1>
-                    <input type="text" name="plataforma" value="" placeholder="Buscar por Plataforma o Categoria"/><input type="submit" value="Listar" />
-                </form>
+      <form action = "finalizarRegistroPaquete" name="finalizarRegistroPaquete" method="POST" class="box">
+            <h1>Tiene paquetes de descuento para este espectáculo</h1>
+            <select name="paquete">
+                <%
+                    iUsuarios iu = Fabrica.getCrlUsuarios();
+                    List<String> paquetes = iu.listarPaquetesParaEsp(contexto.getAttribute("nickname").toString(), contexto.getAttribute("espectaculo").toString());
+                    for(String i: paquetes){
+                    out.println("<option>"+i+"</option>");
+                    }
+                %>
+            </select>
+                <input type="submit" value="Seleccionar" />
+        </form>
             </div>
-        </div>
-    </div>
+        </div>    
+        </div>      
     </div>
 </html>

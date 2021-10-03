@@ -1,16 +1,22 @@
 <%-- 
-    Document   : registroEspectadorFuncion
-    Created on : Sep 21, 2021, 12:30:39 PM
+    Document   : confirmacionDeCanje
+    Created on : Oct 2, 2021, 8:19:09 AM
     Author     : julio
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="root.datatypes.DtRegistro"%>
+<%@page import="java.util.List"%>
+<%@page import="root.fabrica.Fabrica"%>
+<%@page import="root.interfaces.iUsuarios"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Seleccione una Funcion</title>
     </head>
-    <title>CoronaTicketsUy</title>
+     <title>CoronaTicketsUy</title>
 		<style type="text/css">
 			
 			* {
@@ -119,22 +125,38 @@
 			</ul>
 		</div>
     </body>
-        <%
-           // ServletContext contexto = getServletContext();
-            //out.print("<li>"+contexto.getAttribute("nickname")+"<li>");
-        %>
-
+    <body>
     <div class="container">
     <link rel="stylesheet" href="./miestilo.css" type="text/css"><!-- comment -->
     <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <form action = "listarEspectaculos" name="listarEspectaculos" method="POST" class = "box">
-                    <h1>Búsqueda de Espectáculos</h1>
-                    <input type="text" name="plataforma" value="" placeholder="Buscar por Plataforma o Categoria"/><input type="submit" value="Listar" />
-                </form>
-            </div>
-        </div>
+    <div class="col-md-12">
+    <div class="card">
+        <form action = "finalizarRegistroCanje" name=" " method="POST" class="box">
+            <h1>Desea confirmar?</h1>
+            <p>Esta a punto de canjear los siguientes registros</p>
+             <%int cantCanjeables = Integer.parseInt(contexto.getAttribute("cantCanjeables").toString());
+            iUsuarios iu = Fabrica.getCrlUsuarios();
+
+            List<DtRegistro> canjeables = iu.listarCanjeables(contexto.getAttribute("nickname").toString());
+            List<String> canje = new ArrayList<String>();
+            int i = 1;
+            while(i<cantCanjeables+1){
+                if(request.getParameter(i+"")!=null){
+                    out.println("<li>"+canjeables.get(i-1).getNombreFuncion()+"</li>");
+                    canje.add(canjeables.get(i-1).getNombreFuncion());
+                    
+                }
+                i++;
+            }
+   
+                    contexto.setAttribute("canje", canje);
+             %>
+             <p class ="text-muted" style="float: right">Costo $0</p>
+             <p class ="text-muted">Confirmar Canje</p>
+             <input style="float: right" type="submit" name="confirmacionSi" value="Si" /><input type="submit" style="float: left" name="confirmacionNo" value="No" />
+        </form>
     </div>
     </div>
+    </div>
+    </body>
 </html>

@@ -4,6 +4,7 @@
     Author     : julio
 --%>
 
+<%@page import="root.entidades.EstadoRegistro"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="root.interfaces.*"%>
@@ -134,30 +135,22 @@
     <div class="col-md-12">
     <div class="card">
         <form action = "listarCanjeables" name="listarCanjeables" method="POST" class="box">
-        <h1>Funciones del espectaculo: <% out.print(request.getParameter("espectaculos")); %></h1>
+            <h1>Funciones del espectaculo: <% out.print(contexto.getAttribute("espectaculo").toString()); %></h1>
         <select name="funcion">
             <%
                 IEspectaculos ie = Fabrica.getCtrlEspectaculos();
-                iUsuarios iu = Fabrica.getCrlUsuarios();
-                List<DtFuncion> listaFin = new ArrayList<DtFuncion>();
-                List<DtFuncion> lista = ie.listarFunciones(request.getParameter("espectaculos"));
-                for(DtFuncion i: lista){
-                //ServletContext contexto = getServletContext();
-                String nick = contexto.getAttribute("nickname").toString();
-                List<DtFuncion> lista2 = iu.getFuncionesNoRegistradas(nick);
-                for(DtFuncion j: lista2){
-                    if(j.getNombre().equals(i.getNombre())){
-                    if(listaFin.contains(i)==false){
-                    listaFin.add(i);
+                List<DtFuncion> lista2 = ie.funcEspNoReg(contexto.getAttribute("nickname").toString(), contexto.getAttribute("espectaculo").toString());
+for(DtFuncion f: lista2){
+                out.println("<option>"+f.getNombre()+"</option>");
                 }
-                }
-                }
-                }
-                for(DtFuncion f: listaFin){
-                out.println("<option>"+f.getNombre()+" "+f.getHoraInicio()+"</option>");
-                }
+                
             %>
-        </select><input type="submit" value="Seleccionar" />
+        </select>
+        <%if(lista2.size()==0){
+                out.println("<p>No quedan funciones disponibles</p>");
+                out.println("<a href=\"/coronaticketsUyWebApp/registroEspectadorFuncion.jsp\">Volver</a>");
+                }else{out.println("<input type=\"submit\" value=\"Seleccionar\" />");}
+                        %>
         </form>
     </div>
     </div>

@@ -5,9 +5,9 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.Integer.parseInt;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -15,18 +15,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import root.datatypes.DtRegistro;
+import root.datatypes.DtPaqueteDeEspectaculos;
 import root.fabrica.Fabrica;
+import root.interfaces.IEspectaculos;
+import root.interfaces.iPaquetes;
 import root.interfaces.iUsuarios;
-
 
 /**
  *
  * @author julio
  */
-@WebServlet(urlPatterns = {"/canjeyRegistro"})
-public class canjeyRegistro extends HttpServlet {
+@WebServlet(urlPatterns = {"/finalizarRegistro"})
+public class finalizarRegistro extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,55 +41,24 @@ public class canjeyRegistro extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ServletContext contexto = getServletContext();
-        if(request.getParameter("continuar")!=null){
+            iPaquetes ip = Fabrica.getCtrlPaquetes();
+            IEspectaculos ie = Fabrica.getCtrlEspectaculos();
+            int dia,mes,anio;
+
+            Date date = new Date();
+            LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            int year  = localDate.getYear();
+            int month = localDate.getMonthValue();
+            int day   = localDate.getDayOfMonth();
+
+//            dia = fecha.getDate()-31;
+//            mes = fecha.getMonth()-12;
+//            anio = fecha.getYear()-1899;
             iUsuarios iu = Fabrica.getCrlUsuarios();
-            if(iu.tienePaquetesParaEspectaculo(contexto.getAttribute("nickname").toString(),contexto.getAttribute("espectaculo").toString())){
-            RequestDispatcher dispatcher = contexto.getRequestDispatcher("/seleccionarPaquete.jsp");
+            iu.registrarUsuario(contexto.getAttribute("nickname").toString(), contexto.getAttribute("funcion").toString(), (float) (ie.getCosto(contexto.getAttribute("funcion").toString())), day, month, year);
+            contexto.setAttribute("costo", ie.getCosto(contexto.getAttribute("funcion").toString()));
+            RequestDispatcher dispatcher = contexto.getRequestDispatcher("/registroRealizado.jsp");
             dispatcher.forward(request, response);
-            }else{
-            RequestDispatcher dispatcher = contexto.getRequestDispatcher("/confirmarRegistro.jsp");
-            dispatcher.forward(request, response);
-            }
-        }else if(request.getParameter("realizarCanje")!=null){
-        HttpSession sesion = request.getSession(false);
-            int i = 0;
-            int j = 0;
-            while (i<= Integer.parseInt(contexto.getAttribute("cantCanjeables").toString()))
-            {
-                if(request.getParameter(i+"")!=null){
-                j++;
-                }
-                i++;
-            }
-            if(j!=3){
-            RequestDispatcher dispatcher = contexto.getRequestDispatcher("/cantidadDeCanjesInvalida.jsp");
-            dispatcher.forward(request, response);
-            }else{
-            RequestDispatcher dispatcher = contexto.getRequestDispatcher("/confirmacionDeCanje.jsp");
-            dispatcher.forward(request, response);
-            }
-        }else{
-            RequestDispatcher dispatcher = contexto.getRequestDispatcher("/confirmarRegistro.jsp");
-            dispatcher.forward(request, response);
-        }
-//            RequestDispatcher dispatcher = contexto.getRequestDispatcher("/confirmacionDeCanje.jsp");
-//            dispatcher.forward(request, response);
-//        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-//            ServletContext contexto = getServletContext();
-//            int cantCanjeables = Integer.parseInt(contexto.getAttribute("cantCanjeables").toString());
-//            iUsuarios iu = Fabrica.getCrlUsuarios();
-//            List<DtRegistro> canjeables = iu.listarCanjeables(contexto.getAttribute("nickname").toString());
-//            int i = 1;
-//            while(i<cantCanjeables+1){
-//                if(request.getParameter(i+"")!=null){
-//
-//                    out.println("<li>"+canjeables.get(i-1).getNombreFuncion()+"</li>");
-//                }
-//                i++;
-//            }
-//            }
-//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

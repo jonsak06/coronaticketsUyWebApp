@@ -34,4 +34,9 @@ public interface IEspectaculos {
     public List<DtEspectaculo> listarRechazados();
     public List<DtEspectaculo> listarIngresados();
     public void aceptar_rechazarIngresado(String nombre, EstadoEspectaculo estado);
+    public boolean existePlataforma(String nombrePlat);
+    public boolean existeCategoria(String nombreCat);
+    public List<DtEspectaculo> listarEspPorCat(String nombreCat);
+    public List<String> listarCategorias();
+    public List<DtFuncion> funcEspNoReg(String nickname, String nombreEspectaculo);
 }

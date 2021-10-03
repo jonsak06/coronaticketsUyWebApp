@@ -38,8 +38,19 @@ public class listarEspectaculos extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
             ServletContext contexto = getServletContext();
+            IEspectaculos ie = Fabrica.getCtrlEspectaculos();
+            if(ie.existePlataforma(request.getParameter("plataforma"))){
+            request.setAttribute("plataforma", request.getParameter("plataforma"));
             RequestDispatcher dispatcher = contexto.getRequestDispatcher("/listadoPorPlat.jsp");
             dispatcher.forward(request, response);
+            }else if(ie.existeCategoria(request.getParameter("plataforma"))){
+            request.setAttribute("plataforma", request.getParameter("plataforma"));
+            RequestDispatcher dispatcher = contexto.getRequestDispatcher("/listadoPorCat.jsp");
+            dispatcher.forward(request, response);
+            }else{
+            RequestDispatcher dispatcher = contexto.getRequestDispatcher("/seleccionarPlatOCat.jsp");
+            dispatcher.forward(request, response);
+            }
 //        try ( PrintWriter out = response.getWriter()) {
 //            /* TODO output your page here. You may use following sample code. */
 //            ServletContext contexto = getServletContext();

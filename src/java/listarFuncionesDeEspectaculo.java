@@ -6,6 +6,7 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -13,6 +14,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import root.datatypes.DtFuncion;
+import root.fabrica.Fabrica;
+import root.interfaces.IEspectaculos;
 
 /**
  *
@@ -34,6 +38,8 @@ public class listarFuncionesDeEspectaculo extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
          ServletContext contexto = getServletContext();
+         IEspectaculos ie = Fabrica.getCtrlEspectaculos();
+         contexto.setAttribute("espectaculo", request.getParameter("espectaculos").toString());
          RequestDispatcher dispatcher = contexto.getRequestDispatcher("/funcionesDeEspectaculo.jsp");
          dispatcher.forward(request, response);
 //        try ( PrintWriter out = response.getWriter()) {

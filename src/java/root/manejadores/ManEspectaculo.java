@@ -11,6 +11,7 @@ import root.datatypes.DtPlataforma;
 import root.datatypes.DtEspectaculo;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -20,12 +21,15 @@ import javax.persistence.TypedQuery;
 import root.entidades.Artista;
 import root.entidades.Compra;
 import root.datatypes.DtArtista;
+import root.entidades.Categoria;
 import root.entidades.Espectaculo;
 import root.entidades.Espectador;
 import root.entidades.EstadoEspectaculo;
+import root.entidades.EstadoRegistro;
 import root.entidades.Funcion;
 import root.entidades.PaqueteDeEspectaculos;
 import root.entidades.Plataforma;
+import root.entidades.Registro;
 
 /**
  *
@@ -82,6 +86,16 @@ public class ManEspectaculo {
        return existe;
        
    }
+    
+    public static boolean existeCategoria(String nombreCat) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        List<Categoria> paq = em.createNamedQuery("Categoria.findByNombre", Categoria.class)
+                .setParameter("nombre", nombreCat).getResultList();
+        
+        em.close();
+        return paq.size()>0;
+    }
     
     public static List<DtFuncion> listarFunciones(String nombreEsp){
        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
@@ -180,6 +194,35 @@ public class ManEspectaculo {
         return plat;
     }
     
+    public static List<DtEspectaculo> listarEspPorCat(String nombreCat){
+    
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<Categoria> consulta = em.createNamedQuery("Categoria.findByNombre", Categoria.class);
+        consulta.setParameter("nombre", nombreCat);
+        List<Categoria> p = consulta.getResultList();
+        Categoria plat = p.get(0);
+        em.getTransaction().commit();
+        List<Espectaculo> todos = em.createNamedQuery("Espectaculo.findAll",Espectaculo.class).getResultList();
+        em.close();
+        emf.close();
+        
+        List<DtEspectaculo> dtE = new ArrayList<DtEspectaculo>();
+        for (Espectaculo i :todos){
+            if(i.getEstado()==EstadoEspectaculo.ACEPTADO){
+                List<Categoria> categoriasDelEsp = i.getCategoria();
+                for(Categoria j: categoriasDelEsp){
+                if(j.getNombre().equals(plat.getNombre())){
+                DtEspectaculo esteDt = i.getMyDt();
+                dtE.add(esteDt);}
+
+                }
+                }
+            
+        }
+        return dtE;
+    }
     
     
     
@@ -308,5 +351,51 @@ public class ManEspectaculo {
         em.close();
         emf.close();
     }
+    
+    public static List<String> listarCategorias(){
+    List<String> lista = new ArrayList<String>();
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+    EntityManager em = emf.createEntityManager();
+    List<Categoria> todas = em.createNamedQuery("Categoria.findAll",Categoria.class).getResultList();
+    em.close();
+    emf.close();
+    for(Categoria i :todas){
+        lista.add(i.getNombre());
+    }
+    return lista;
+    }
      
+    public static List<DtFuncion> funcEspNoReg(String nickname, String nombreEspectaculo){//lista las funciones del espectaculo a las cuales el espectador no esta registrado
+         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+         EntityManager em = emf.createEntityManager();
+         TypedQuery<Espectador> consulta = em.createNamedQuery("EspectadorporNick",Espectador.class);
+         consulta.setParameter("nickname", nickname);
+         Espectador estemen = consulta.getSingleResult();
+         TypedQuery<Espectaculo> consulta2 = em.createNamedQuery("Espectaculo.findByNombre",Espectaculo.class);
+        
+         consulta2.setParameter("nombre", nombreEspectaculo);
+         Espectaculo e = consulta2.getSingleResult();
+         em.close();
+         emf.close();
+         List<Funcion> funcionesDelEsp = e.getFunciones();
+         List<Funcion> funcionesRegistradas = new ArrayList<Funcion>();
+         for(Registro r: estemen.getRegistros()){
+             if(r.getEstado()!=EstadoRegistro.USADO){
+             funcionesRegistradas.add(r.getFuncion());
+             }
+         }
+         List<Funcion> func2 = new ArrayList<Funcion>();
+         List<DtFuncion> resultado = new ArrayList<DtFuncion>();
+         for(Funcion i: funcionesDelEsp){
+             Date date = new Date();
+             if(funcionesRegistradas.contains(i)==false && i.estaCompleta()==false && i.getFecha().after(date)){
+                 func2.add(i);
+             }
+         }
+         for(Funcion f: func2){
+             resultado.add(f.getMyDt());
+         }
+         return resultado;
+    }
+    
 }

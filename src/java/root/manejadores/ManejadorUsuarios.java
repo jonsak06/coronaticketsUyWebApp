@@ -12,10 +12,13 @@ import java.util.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.time.Instant;
+import static java.time.Instant.now;
 import java.util.List;
 import javax.persistence.*;
 import root.entidades.Artista;
 import root.datatypes.DtArtista;
+import root.entidades.Compra;
+import root.entidades.Espectaculo;
 import root.entidades.Espectador;
 import root.entidades.EstadoRegistro;
 import root.entidades.Funcion;
@@ -257,7 +260,7 @@ public class ManejadorUsuarios
         return cantCanj;
     }
     
-    public static List<Registro> listarCanjeables(String nickname){
+    public static List<DtRegistro> listarCanjeables(String nickname){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
         EntityManager em = emf.createEntityManager();
         TypedQuery<Espectador> consulta = em.createNamedQuery("EspectadorporNick",Espectador.class);
@@ -272,7 +275,12 @@ public class ManejadorUsuarios
         }
         em.close();
         emf.close();
-        return canjeables;
+        List<DtRegistro> resultado = new ArrayList<DtRegistro>();
+        for(Registro i: canjeables){
+            DtRegistro dt = i.getMyDt();
+            resultado.add(dt);
+        }
+        return resultado;
     }
     
     public static void canjearRegistros(List<String> canjeables, String nickname, float costo, String nombreFuncion, int fdia, int fmes, int fanio){
@@ -454,16 +462,17 @@ public class ManejadorUsuarios
     consulta.setParameter("nickname", nickname);
     Espectador estemen = consulta.getSingleResult();
     List<Registro> registros = estemen.getRegistros();
+    List<Funcion> funcionesDesteMen = new ArrayList<Funcion>();
+    for(Registro i: registros){
+        if(i.getEstado()!=EstadoRegistro.USADO){
+        funcionesDesteMen.add(i.getFuncion());
+        }
+    }
     TypedQuery<Funcion> consulta2 = em.createNamedQuery("Funcion.findAll",Funcion.class);
     List<Funcion> todasLasFunciones = consulta2.getResultList();
-    for(Registro i: registros){
-        for(Funcion j: todasLasFunciones){
-            if(j.getNombre().equals(i.getFuncion().getNombre())==false){
-                if(resultado.contains(j.getMyDt())==false){
-                resultado.add(j.getMyDt());
-                }
-            }
-        }
+    todasLasFunciones.retainAll(funcionesDesteMen);
+    for(Funcion f: todasLasFunciones){
+    resultado.add(f.getMyDt());
     }
     em.close();
     emf.close();
@@ -471,5 +480,56 @@ public class ManejadorUsuarios
     return resultado;
     }
     
+    public static boolean tienePaquetesParaEspectaculo(String nickname, String nombreEspectaculo){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        Espectador estemen = em.createNamedQuery("EspectadorporNick",Espectador.class).setParameter("nickname", nickname).getSingleResult();
+        Espectaculo esp = em.createNamedQuery("Espectaculo.findByNombre", Espectaculo.class).setParameter("nombre",nombreEspectaculo).getSingleResult();
+        em.close();
+        emf.close();
+        boolean result = true;
+        List<Compra> compras = estemen.getCompras();
+        List<Espectaculo> espectaculosComprados = new ArrayList<Espectaculo>();
+        java.sql.Date f= new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        for(Compra i: compras){
+            if(i.getPaquete().getFechaFin().after(f)){
+            for(Espectaculo e : i.getPaquete().getEspectaculos()){
+            if(espectaculosComprados.contains(e)==false){
+            espectaculosComprados.add(e);
+            }
+            }
+            }
+        }
+        if(espectaculosComprados.contains(esp)){
+        result = true;
+        }else{
+        result = false;
+        }
+        return result;
+    }
+    
+    public static List<String> listarPaquetesParaEsp(String nickname, String nombreEspectaculo){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        Espectador estemen = em.createNamedQuery("EspectadorporNick",Espectador.class).setParameter("nickname", nickname).getSingleResult();
+        Espectaculo esp = em.createNamedQuery("Espectaculo.findByNombre", Espectaculo.class).setParameter("nombre",nombreEspectaculo).getSingleResult();
+        em.close();
+        emf.close();
+        List<String> result = new ArrayList<String>();
+        List<Compra> compras = estemen.getCompras();
+        List<Espectaculo> espectaculosComprados = new ArrayList<Espectaculo>();
+        java.sql.Date f= new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        for(Compra i :compras){
+            if(i.getPaquete().getFechaFin().after(f)){
+                if(i.getPaquete().getEspectaculos().contains(esp)){
+                result.add(i.getPaquete().getNombre());
+                }
+                }
+            }
+            return result; 
+        }
+ 
+    }
+      
    //    
-}
+

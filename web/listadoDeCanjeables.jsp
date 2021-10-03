@@ -134,12 +134,12 @@
                     contexto.setAttribute("cantCanjeables",iu.getCanjeables(nick));
                     if(iu.getCanjeables(nick)<3){
                     out.println("<h1>NO TIENES SUFICIENTES REGISTROS PARA CANJEAR</h1>");
-                    out.println("<input  type = \"submit\" value = \"continuar\" / >");
+                    out.println("<input  name=\"continuar\" type=\"submit\" value=\"continuar\" / >");
                     }else{
                     out.println("<h1>Listado de Canjeables</h1>");
                     int j=1;
-                    for(Registro i: iu.listarCanjeables(nick)){
-                        out.println("<p><input type=\"checkbox\" name="+j+"  value=\"ON\"/ id="+j+"><label for "+i.getFuncion().getNombre()+">"+i.getFuncion().getNombre()+" "+i.getFuncion().getFecha()+"</label></p>");
+                    for(DtRegistro i: iu.listarCanjeables(nick)){
+                        out.println("<p><input type=\"checkbox\" name="+j+"  value=\"ON\"/ id="+j+"><label for "+j+">"+i.getNombreFuncion()+" "+i.getFechaFuncion()+"</label></p>");
                         j++;
                     }
                     out.println("<p>Realizar Canje?</p>");

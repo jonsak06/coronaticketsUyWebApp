@@ -139,6 +139,16 @@ public class ManPlataformas {
         return paq.size()>0;
     }
     
+    public static boolean existePlataforma(String nombrePlat) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        List<Plataforma> paq = em.createNamedQuery("Plataforma.findByNombre", Plataforma.class)
+                .setParameter("nombre", nombrePlat).getResultList();
+        
+        em.close();
+        return paq.size()>0;
+    }
+    
     public static boolean crearFuncion(String nombreEspectaculo, DtFuncion dtFuncion, List<String> artInvi){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
         if(existeFuncion(dtFuncion.getNombre())) {

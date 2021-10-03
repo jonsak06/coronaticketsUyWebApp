@@ -1,6 +1,6 @@
 <%-- 
-    Document   : registroEspectadorFuncion
-    Created on : Sep 21, 2021, 12:30:39 PM
+    Document   : cantidadDeCanjesInvalida
+    Created on : Oct 2, 2021, 8:40:25 AM
     Author     : julio
 --%>
 
@@ -9,8 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Seleccione una Funcion</title>
     </head>
-    <title>CoronaTicketsUy</title>
+     <title>CoronaTicketsUy</title>
 		<style type="text/css">
 			
 			* {
@@ -119,22 +120,20 @@
 			</ul>
 		</div>
     </body>
-        <%
-           // ServletContext contexto = getServletContext();
-            //out.print("<li>"+contexto.getAttribute("nickname")+"<li>");
-        %>
-
+    <body>
     <div class="container">
     <link rel="stylesheet" href="./miestilo.css" type="text/css"><!-- comment -->
     <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <form action = "listarEspectaculos" name="listarEspectaculos" method="POST" class = "box">
-                    <h1>Búsqueda de Espectáculos</h1>
-                    <input type="text" name="plataforma" value="" placeholder="Buscar por Plataforma o Categoria"/><input type="submit" value="Listar" />
-                </form>
-            </div>
-        </div>
+    <div class="col-md-12">
+    <div class="card">
+        <form action = "" name=" " method="POST" class="box">
+            <h1>CANTIDAD INVALIDA</h1>
+            <p class = "text-unmuted">Debes seleccionar exactamente 3 registros para realizar el canje</p>
+            <a href="/coronaticketsUyWebApp/listadoDeCanjeables.jsp">Volver</a>
+            
+        </form>
     </div>
     </div>
+    </div>
+    </body>
 </html>

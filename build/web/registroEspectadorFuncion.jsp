@@ -131,7 +131,7 @@
             <div class="card">
                 <form action = "listarEspectaculos" name="listarEspectaculos" method="POST" class = "box">
                     <h1>Búsqueda de Espectáculos</h1>
-                    <input type="text" name="plataforma" value="" placeholder="Buscar por Plataforma"/><input type="submit" value="Listar" />
+                    <input type="text" name="plataforma" value="" placeholder="Buscar por Plataforma o Categoria"/><input type="submit" value="Listar" />
                 </form>
             </div>
         </div>

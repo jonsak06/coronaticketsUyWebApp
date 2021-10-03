@@ -1,16 +1,20 @@
 <%-- 
-    Document   : registroEspectadorFuncion
-    Created on : Sep 21, 2021, 12:30:39 PM
+    Document   : seleccionarPlatOCat
+    Created on : Oct 2, 2021, 4:32:31 PM
     Author     : julio
 --%>
 
+<%@page import="root.datatypes.DtPlataforma"%>
+<%@page import="java.util.List"%>
+<%@page import="root.fabrica.Fabrica"%>
+<%@page import="root.interfaces.IEspectaculos"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
-    <title>CoronaTicketsUy</title>
+     <title>CoronaTicketsUy</title>
 		<style type="text/css">
 			
 			* {
@@ -119,22 +123,38 @@
 			</ul>
 		</div>
     </body>
-        <%
-           // ServletContext contexto = getServletContext();
-            //out.print("<li>"+contexto.getAttribute("nickname")+"<li>");
-        %>
-
     <div class="container">
     <link rel="stylesheet" href="./miestilo.css" type="text/css"><!-- comment -->
-    <div class="row">
+        <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <form action = "listarEspectaculos" name="listarEspectaculos" method="POST" class = "box">
-                    <h1>Búsqueda de Espectáculos</h1>
-                    <input type="text" name="plataforma" value="" placeholder="Buscar por Plataforma o Categoria"/><input type="submit" value="Listar" />
-                </form>
+      <form action = "platOCat" name="platOCat" method="POST" class="box">
+            <h1>La plataforma o la categoría ingresada no exitste</h1>
+            <p>Sin embargo te invitamos a seleccionar una de las siguientes opciones</p>
+            <p>Categorias</p>
+            <select style="float: left" name="categorias">
+                <%
+                    IEspectaculos ie = Fabrica.getCtrlEspectaculos();
+                    List<String> listadeCat = ie.listarCategorias();
+                    for(String i: listadeCat){
+                    out.println("<option>"+i+"</option>");
+                    }
+                    %>
+            </select><input name="categoriaOK" style="float: right" type="submit" value="Buscar" />
+            
+                        <select style="float: left" name="plataformas">
+                <%
+                    
+                    List<DtPlataforma> listaPlat = ie.listarPlataformas();
+                    for(DtPlataforma i: listaPlat){
+                    out.println("<option>"+i.getNombre()+"</option>");
+                    }
+                    %>
+            </select><input name="plataformaOK" style="float: right" type="submit" value="Buscar" />
+                
+        </form>
             </div>
-        </div>
-    </div>
+        </div>    
+        </div>      
     </div>
 </html>

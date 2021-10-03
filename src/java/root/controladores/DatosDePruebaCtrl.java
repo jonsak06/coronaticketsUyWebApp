@@ -47,7 +47,7 @@ public class DatosDePruebaCtrl implements iDatosDePrueba {
         vp.setApellido("People");
         vp.setBiografia("Grupo   americano   del   disco   creado por   Jacques   Morali   y   Henry   Belolo en   1977.   Según   Marjorie   Burgess, todo   comenzó   cuando   Morali   fue   a un bar gay de Nueva York una noche y notó al bailarín Felipe Rose vestido como un nativo americano.");
         vp.setCorreo("vpeople@tuta.io");
-        vp.setDescripcion("Village   People   es   una   innovadora   formación   musical de   estilo   disco   de   finales   de   los   años   70.   Fue   famosa tanto   por   sus   peculiares   disfraces,   como   por   sus canciones pegadizas, con letras sugerentes y llenas dedobles sentidos.");
+        vp.setDescripcion("Village   People   es   una   innovadora   formación   musical de   estilo   disco   de   finales   de   los   anios   70.   Fue   famosa tanto   por   sus   peculiares   disfraces,   como   por   sus canciones pegadizas, con letras sugerentes y llenas dedobles sentidos.");
         java.sql.Date fvp = new java.sql.Date(1977-1899,1-12,1-31);
         vp.setFechaNacimiento(fvp);
         vp.setImagen("vpeople.jpg");
@@ -83,7 +83,7 @@ public class DatosDePruebaCtrl implements iDatosDePrueba {
 "el   grupo   musical,   Blue   Angel,   en   1983   firmó   con\n" +
 "Portrait   Records   (filial   de   Epic   Records)   y   lanzó   su\n" +
 "exitoso álbum debut She's So Unusual a finales de ese\n" +
-"mismo año. Siguió  lanzando una serie de álbumes en\n" +
+"mismo anio. Siguió  lanzando una serie de álbumes en\n" +
 "los que encontró una inmensa popularidad, superando\n" +
 "los límites de contenido de las letras de sus canciones");
         java.sql.Date fcl = new java.sql.Date(1953-1899,6-12,22-31);
@@ -139,7 +139,7 @@ public class DatosDePruebaCtrl implements iDatosDePrueba {
 "principio, La Ley tenía la aspiración de ser un grupo de\n" +
 "música tecno. Este disco resulta ser un éxito de ventas\n" +
 "y   reciben   una   invitación   al   Festival   Internacional   de\n" +
-"Viña del Mar de febrero de 1994.");
+"Vinia del Mar de febrero de 1994.");
         java.sql.Date fll = new java.sql.Date(1987-1899,2-12,14-31);
         ll.setFechaNacimiento(fll);
         ll.setImagen("la_ley.jpg");
@@ -170,7 +170,7 @@ public class DatosDePruebaCtrl implements iDatosDePrueba {
         dy.setBiografia(" ");
         dy.setCorreo("dyangounchained@gmail.com");
         dy.setDescripcion("José   Gómez   Romero,   conocido   artísticamente   como\n" +
-"Dyango es un cantante español de música romántica.");
+"Dyango es un cantante espaniol de música romántica.");
         java.sql.Date fdy = new java.sql.Date(1981-1899,8-12,13-31);
         dy.setFechaNacimiento(fdy);
         dy.setImagen("dyangounchained.jpg");
@@ -188,10 +188,10 @@ public class DatosDePruebaCtrl implements iDatosDePrueba {
 "Los   Playeros   junto   a   su   hermano   Víctor.   Al   poco\n" +
 "tiempo   se   mudan   a   San   Luis   donde   comienzan   a\n" +
 "hacerse conocidos en la escena musical. Su éxito a nivel\n" +
-"nacional   llega   a   comienzos   de   los   años   1990   cuando\n" +
+"nacional   llega   a   comienzos   de   los   anios   1990   cuando\n" +
 "desembarca en Buenos Aires y graba el éxito \"Violeta\",\n" +
 "originalmente compuesta e interpretada en 1985 por el\n" +
-"músico brasileño Luiz Caldas bajo el título «Fricote»");
+"músico brasilenio Luiz Caldas bajo el título «Fricote»");
         java.sql.Date fal = new java.sql.Date(1952-1899,7-12,17-31);
         al.setFechaNacimiento(fal);
         al.setImagen("alcides.jpg");
@@ -287,9 +287,9 @@ public class DatosDePruebaCtrl implements iDatosDePrueba {
 "más   sonados   éxitos   y   también\n" +
 "nuevas canciones ", 150,10,500,"https://twitter.com/PimpinelaNet",500,8,7,2021,pi,tl);
         em.persist(e5);
-        Espectaculo e6 = new Espectaculo("30 años","Espectáculo conmemorando los 30 años de Violeta.",80,30,150,"https://twitter.com/alcides_shows",450,31,7,2021,al,tl);
+        Espectaculo e6 = new Espectaculo("30 anios","Espectáculo conmemorando los 30 anios de Violeta.",80,30,150,"https://twitter.com/alcides_shows",450,31,7,2021,al,tl);
         em.persist(e6);
-        Espectaculo e7 = new Espectaculo("Grandes Éxitos 2020","Espectáculo  de  gira  con  los\n"+"temas de siempre",120,5,1000,"https://www.youtube.com/c/dyangooficial",500,9,1,2021,dy,yt);
+        Espectaculo e7 = new Espectaculo("Grandes Exitos 2020","Espectáculo  de  gira  con  los\n"+"temas de siempre",120,5,1000,"https://www.youtube.com/c/dyangooficial",500,9,1,2021,dy,yt);
         em.persist(e7);
         Espectaculo e8 = new Espectaculo("Llega a Casa","Primer   Espectáculo   con\n"+"transmisión por streaming",100,100,1500,"https://www.instagram.com/latriplenelson/",400,20,5,2021,tn,in);
         em.persist(e8);
@@ -303,8 +303,8 @@ public class DatosDePruebaCtrl implements iDatosDePrueba {
         em.getTransaction().begin();
         Categoria c1 = new Categoria("Bandas Latinas");
         Categoria c2 = new Categoria("Solistas");
-        Categoria c3 = new Categoria("Rock en Inglés");
-        Categoria c4 = new Categoria("Música Tropical");
+        Categoria c3 = new Categoria("Rock en Ingles");
+        Categoria c4 = new Categoria("Musica Tropical");
         em.persist(c1);
         em.persist(c2);
         em.persist(c3);
@@ -415,15 +415,15 @@ public class DatosDePruebaCtrl implements iDatosDePrueba {
         em.persist(f15);
         List<Artista> artF16 = new ArrayList();
         artF16.add(dy);
-        Funcion f16 = new Funcion("30 años - 1",1,9,2021,21,0,31,7,2021,e6,artF16);
+        Funcion f16 = new Funcion("30 anios - 1",1,9,2021,21,0,31,7,2021,e6,artF16);
         em.persist(f16);
         List<Artista> artF17 = new ArrayList();
         artF17.add(pi);
         artF17.add(dy);
-        Funcion f17 = new Funcion("30 años - 2",1,10,2021,21,0,31,7,2021,e6,artF17);
+        Funcion f17 = new Funcion("30 anios - 2",1,10,2021,21,0,31,7,2021,e6,artF17);
         em.persist(f17);
         List<Artista> artF18 = new ArrayList();
-        Funcion f18 = new Funcion("30 años - 3",15,11,2021,9,0,31,7,2021,e6,artF18);
+        Funcion f18 = new Funcion("30 anios - 3",15,11,2021,9,0,31,7,2021,e6,artF18);
         em.persist(f18);
         em.getTransaction().commit();
         //////////////////////////////////////CARGA DE FUNCIONES TERMINADA////////////////////////

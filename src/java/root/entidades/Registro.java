@@ -136,6 +136,8 @@ public class Registro implements Serializable {
     public DtRegistro getMyDt()
     {
         DtRegistro dt = new DtRegistro(this.id, this.fecha, this.costo, this.estado);
+        dt.setNombreFuncion(this.getFuncion().getNombre());
+        dt.setFechaFuncion(this.getFuncion().getFecha());
         return dt;
     }
 }

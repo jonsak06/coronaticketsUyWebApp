@@ -1,16 +1,22 @@
 <%-- 
-    Document   : registroEspectadorFuncion
-    Created on : Sep 21, 2021, 12:30:39 PM
+    Document   : registroRealizado
+    Created on : Oct 2, 2021, 12:22:27 PM
     Author     : julio
 --%>
 
+<%@page import="root.datatypes.DtFuncion"%>
+<%@page import="root.datatypes.DtFuncion"%>
+<%@page import="root.interfaces.IEspectaculos"%>
+<%@page import="root.interfaces.IEspectaculos"%>
+<%@page import="root.fabrica.Fabrica"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Seleccione una Funcion</title>
     </head>
-    <title>CoronaTicketsUy</title>
+     <title>CoronaTicketsUy</title>
 		<style type="text/css">
 			
 			* {
@@ -119,22 +125,30 @@
 			</ul>
 		</div>
     </body>
-        <%
-           // ServletContext contexto = getServletContext();
-            //out.print("<li>"+contexto.getAttribute("nickname")+"<li>");
-        %>
-
+    <body>
     <div class="container">
     <link rel="stylesheet" href="./miestilo.css" type="text/css"><!-- comment -->
     <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <form action = "listarEspectaculos" name="listarEspectaculos" method="POST" class = "box">
-                    <h1>Búsqueda de Espectáculos</h1>
-                    <input type="text" name="plataforma" value="" placeholder="Buscar por Plataforma o Categoria"/><input type="submit" value="Listar" />
-                </form>
-            </div>
-        </div>
+    <div class="col-md-12">
+    <div class="card">
+        <form action = "finalizarRegistro" name=" " method="POST" class="box">
+            <h1>Registro realizado!</h1>
+            <%
+                IEspectaculos ie = Fabrica.getCtrlEspectaculos();
+                DtFuncion funcion = ie.getDatosFuncion(contexto.getAttribute("funcion").toString());
+                out.println("<p class =\"text-muted \" >Funcion: "+contexto.getAttribute("funcion").toString()+"</p>");
+                out.println("<p class =\"text-muted \" >Espectaculo: "+contexto.getAttribute("espectaculo").toString()+"</p>");
+                out.println("<p class =\"text-muted \" >Fecha y hora: "+funcion.getHoraInicio()+"</p>");
+                out.println("<p class =\"text-muted \" >Costo: "+contexto.getAttribute("costo")+"</p>");
+                contexto.removeAttribute("funcion");
+                contexto.removeAttribute("espectaculo");
+                contexto.removeAttribute("costo");
+                contexto.removeAttribute("funciones");
+                %>
+                <a href="/coronaticketsUyWebApp/index.jsp">Volver al Inicio</a>
+        </form>
     </div>
     </div>
+    </div>
+    </body>
 </html>

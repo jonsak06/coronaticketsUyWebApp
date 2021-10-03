@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author julio
  */
-@WebServlet(urlPatterns = {"/listarCanjeables"})
-public class listarCanjeables extends HttpServlet {
+@WebServlet(urlPatterns = {"/platOCat"})
+public class platOCat extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,10 +32,16 @@ public class listarCanjeables extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-            ServletContext contexto = getServletContext();
-            contexto.setAttribute("funcion", request.getParameter("funcion"));
-            RequestDispatcher dispatcher = contexto.getRequestDispatcher("/listadoDeCanjeables.jsp");
-            dispatcher.forward(request, response);
+        ServletContext contexto = getServletContext();
+        if(request.getParameter("categoriaOK")!=null){
+            request.setAttribute("plataforma", request.getParameter("categorias"));
+            RequestDispatcher dispatcher = contexto.getRequestDispatcher("/listadoPorCat.jsp");
+            dispatcher.forward(request, response);            
+        }else{
+            request.setAttribute("plataforma", request.getParameter("plataformas"));
+            RequestDispatcher dispatcher = contexto.getRequestDispatcher("/listadoPorPlat.jsp");
+            dispatcher.forward(request, response); 
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

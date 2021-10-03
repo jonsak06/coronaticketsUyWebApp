@@ -129,11 +129,11 @@
         <div class="col-md-12">
             <div class="card">
       <form action = "listarFuncionesDeEspectaculo" name="listarFuncionesDeEspectaculo" method="POST" class="box">
-            <h1>Espectaculos en la plataforma: <% out.print(request.getParameter("plataforma")); %></h1>
+            <h1>Espectaculos en la plataforma: <% out.print(request.getAttribute("plataforma")); %></h1>
             <select name="espectaculos">
                 <%
                     IEspectaculos ie = Fabrica.getCtrlEspectaculos();
-                    List<DtEspectaculo> espec = ie.listarEspectaculos(request.getParameter("plataforma"));
+                    List<DtEspectaculo> espec = ie.listarEspectaculos(request.getAttribute("plataforma").toString());
                     for(DtEspectaculo i: espec){
                     out.println("<option>"+i.getNombre()+"</option>");
                     }

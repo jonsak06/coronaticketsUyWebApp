@@ -101,7 +101,7 @@ public class crlUsuarios implements iUsuarios
         return ManejadorUsuarios.getCanjeables(nickname);
     }
     
-    public List<Registro> listarCanjeables(String nickname){
+    public List<DtRegistro> listarCanjeables(String nickname){
         return ManejadorUsuarios.listarCanjeables(nickname);
     }
     
@@ -160,5 +160,13 @@ public class crlUsuarios implements iUsuarios
    
    public List<DtFuncion> getFuncionesNoRegistradas(String nickname){
        return ManejadorUsuarios.getFuncionesNoRegistradas(nickname);
+   }
+   
+   public boolean tienePaquetesParaEspectaculo(String nickname, String nombreEspectaculo){
+       return ManejadorUsuarios.tienePaquetesParaEspectaculo(nickname, nombreEspectaculo);
+   }
+   
+   public List<String> listarPaquetesParaEsp(String nickname, String nombreEspectaculo){
+       return ManejadorUsuarios.listarPaquetesParaEsp(nickname, nombreEspectaculo);
    }
 }

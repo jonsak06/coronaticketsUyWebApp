@@ -33,7 +33,7 @@ public interface iUsuarios {
     public void modificarEspectador(DtEspectador es);
     public List<DtEspectador> getNoRegistrados(String nombreFuncion);
     public int getCanjeables(String nickname);
-    public List<Registro> listarCanjeables(String nickname);
+    public List<DtRegistro> listarCanjeables(String nickname);
     public void canjearRegistros(List<String> canjeables, String nickname, float costo, String nombreFuncion, int fdia, int fmes, int fanio);
     public void registrarUsuario(String nickname, String nombreFuncion, float costo, int fdia, int fmes, int fanio);
     public DtEspectador getDatosEspectador(String nickname);
@@ -49,4 +49,6 @@ public interface iUsuarios {
     public List<DtFuncion> getFuncionesNoRegistradas(String nickname);
     public boolean existeArtista(String nickname);
     public boolean existeEspectador(String nickname);
+    public boolean tienePaquetesParaEspectaculo(String nickname, String nombreEspectaculo);
+    public List<String> listarPaquetesParaEsp(String nickname, String nombreEspectaculo);
 }
