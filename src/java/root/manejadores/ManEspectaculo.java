@@ -43,7 +43,7 @@ public class ManEspectaculo {
      * @param artista
      * @param espectaculo
      */
-    public static void altaEspectaculo(String plataforma, String artista, DtEspectaculo espectaculo)
+    public static void altaEspectaculo(String plataforma, String artista, List<String> categorias,DtEspectaculo espectaculo, String pathImagen)
     {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
         EntityManager em = emf.createEntityManager();
@@ -58,9 +58,18 @@ public class ManEspectaculo {
         Artista esteArtista = consultaArtista.getSingleResult();
         
         Espectaculo nuevoEspectaculo = new Espectaculo(espectaculo.getNombre(),espectaculo.getDescripcion(),espectaculo.getDuracion(),espectaculo.getCantidadMaximaEspectadores(),espectaculo.getCantidadMinimaEspectadores(),espectaculo.getUrl(),espectaculo.getCosto(),espectaculo.getFechaDeRegistro(), estaPlataforma, esteArtista);
-        nuevoEspectaculo.setEstado(EstadoEspectaculo.ACEPTADO);
+        nuevoEspectaculo.setEstado(EstadoEspectaculo.INGRESADO);
+        nuevoEspectaculo.setImagen(pathImagen);
+        
         em.getTransaction().commit();
         em.getTransaction().begin();
+        List<Categoria> categoriasDelEsp = new ArrayList<Categoria>();
+        for(String i:categorias){
+            TypedQuery<Categoria> consulta = em.createNamedQuery("Categoria.findByNombre",Categoria.class);
+            consulta.setParameter("nombre", i);
+            categoriasDelEsp.add(consulta.getSingleResult());
+        }
+        nuevoEspectaculo.setCategoria(categoriasDelEsp);
         em.persist(nuevoEspectaculo);
         em.getTransaction().commit();
         em.getTransaction().begin();

@@ -73,8 +73,8 @@ public class CtrlEspectaculos implements IEspectaculos {
          return ManPlataformas.existeFuncion(nombreFuncion);
      }
      
-     public void altaEspectaculo(String plataforma, String artista, DtEspectaculo espectaculo){
-        ManEspectaculo.altaEspectaculo(plataforma,artista, espectaculo);
+     public void altaEspectaculo(String plataforma, String artista, List<String> categorias,DtEspectaculo espectaculo, String pathImagen){
+        ManEspectaculo.altaEspectaculo(plataforma, artista, categorias,espectaculo, pathImagen);
      }
      
      public List<DtArtista> getInvitados(String nombreFuncion){
