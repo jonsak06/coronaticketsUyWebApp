@@ -356,7 +356,47 @@ public class ManejadorUsuarios {
                 TypedQuery<Artista> consulta2 = em.createNamedQuery("ArtistaporNick", Artista.class);
                 consulta2.setParameter("nickname", seguido);
                 Artista eseMen = consulta2.getSingleResult();
-                lu.add(eseMen);
+                lu.remove(eseMen);
+                esteMen.setSiguiendo(lu);
+
+            }
+        }
+        for (DtEspectador i : lEs) {
+            if (seguido.equals(i.getNickname())) {
+                TypedQuery<Espectador> consulta2 = em.createNamedQuery("EspectadorporNick", Espectador.class);
+                consulta2.setParameter("nickname", seguido);
+                Espectador eseMen = consulta2.getSingleResult();
+                lu.remove(eseMen);
+                esteMen.setSiguiendo(lu);
+            }
+        }
+        em.persist(esteMen);
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+
+    }
+        
+           public static void dejarDeSeguirUsuarioAr(String nickname, String seguido) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<Artista> consulta = em.createNamedQuery("ArtistaporNick", Artista.class);
+        consulta.setParameter("nickname", nickname);
+        Artista esteMen = consulta.getSingleResult();
+
+        List<DtArtista> lAr = getArtistas();
+        List<DtEspectador> lEs = getEspectadores();
+
+        List<Usuario> lu = esteMen.getSiguiendo();
+
+        for (DtArtista i : lAr) {
+            if (seguido.equals(i.getNickname())) {
+
+                TypedQuery<Artista> consulta2 = em.createNamedQuery("ArtistaporNick", Artista.class);
+                consulta2.setParameter("nickname", seguido);
+                Artista eseMen = consulta2.getSingleResult();
+                lu.remove(eseMen);
                 esteMen.setSiguiendo(lu);
 
             }

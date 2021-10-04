@@ -16,7 +16,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="">
+        <form action="dejarDeSeguirUsuarioBackEnd">
             <select name="seguido">
                 <%
                     ServletContext contexto = getServletContext();
@@ -42,7 +42,7 @@
                     }
                 %>
             </select>
-            <input type="submit" name="" value="seguir"> 
+            <input type="submit" name="" value="Dejar de seguir"> 
         </form>
     </body>
 </html>

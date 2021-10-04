@@ -61,4 +61,5 @@ public interface iUsuarios {
      public void seguirUsuarioEs(String nickname, String seguido);
      public void seguirUsuarioAr(String nickname, String seguido);
      public void dejarDeSeguirUsuarioEs(String nickname, String seguido);
+     public void dejarDeSeguirUsuarioAr(String nickname, String seguido);
 }

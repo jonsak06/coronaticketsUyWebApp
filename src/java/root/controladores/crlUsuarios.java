@@ -203,4 +203,8 @@ public class crlUsuarios implements iUsuarios
      {
          ManejadorUsuarios.dejarDeSeguirUsuarioEs(nickname, seguido);
      }
+     public void dejarDeSeguirUsuarioAr(String nickname, String seguido)
+     {
+         ManejadorUsuarios.dejarDeSeguirUsuarioAr(nickname, seguido);
+     }
 }
