@@ -16,7 +16,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="seguirUsuarioBackEnd">
+        <form action="">
             <select name="seguido">
                 <%
                     ServletContext contexto = getServletContext();
@@ -24,7 +24,7 @@
 
                         if (contexto.getAttribute("tipoUsuario").equals("Espectador")) {
 
-                            List<DtUsuario> noS = Fabrica.getCrlUsuarios().getUsuariosQueNoSiguesEs(contexto.getAttribute("nickname").toString());
+                            List<DtUsuario> noS = Fabrica.getCrlUsuarios().getUsuariosQueSiguesEs(contexto.getAttribute("nickname").toString());
 
                             for (DtUsuario i : noS) {
                                 out.println("<option>" + i.getNickname() + "</option>");
@@ -32,7 +32,7 @@
 
                         } else if (contexto.getAttribute("tipoUsuario").equals("Artista")) {
 
-                            List<DtUsuario> noS = Fabrica.getCrlUsuarios().getUsuariosQueNoSiguesAr(contexto.getAttribute("nickname").toString());
+                            List<DtUsuario> noS = Fabrica.getCrlUsuarios().getUsuariosQueSiguesAr(contexto.getAttribute("nickname").toString());
 
                             for (DtUsuario i : noS) {
                                 out.println("<option>" + i.getNickname() + "</option>");

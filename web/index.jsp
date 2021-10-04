@@ -100,9 +100,12 @@
                                 out.print("<li><a href=\"/coronaticketsUyWebApp/seguirUsuario.jsp\">seguirUsuario</a></li>");
                                 out.print("<li><a href=\"/coronaticketsUyWebApp/ConsultarUsuario.jsp\">ConsultarUsuario</a></li>");
                                 out.print("<li><a href=\"/coronaticketsUyWebApp/registroEspectadorFuncion.jsp\">Registrarse a una función de un espectáculo</a></li>");
+                                out.print("<li><a href=\"/coronaticketsUyWebApp/dejarDeSeguirUsuario.jsp\">dejarDeSeguirUsuario</a></li>");
+
                             } else {
                                 out.print("<li><a href=\"/coronaticketsUyWebApp/modificarUsuario.jsp\">Modificar Usuario</a></li>");
                                 out.print("<li><a href=\"/coronaticketsUyWebApp/seguirUsuario.jsp\">seguirUsuario</a></li>");
+                                out.print("<li><a href=\"/coronaticketsUyWebApp/dejarDeSeguirUsuario.jsp\">dejarDeSeguirUsuario</a></li>");
 
                                 out.print("<li><a href=\"/coronaticketsUyWebApp/artistaError.jsp\">Registrarse a una función de un espectáculo</a></li>");
                                 out.print("<li><a href=\"/coronaticketsUyWebApp/altaEspectaculo.jsp\">Ingresar nuevo Espectáculo</a></li>");
