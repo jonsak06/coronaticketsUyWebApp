@@ -83,11 +83,11 @@
                 <li><a href="/coronaticketsUyWebApp/login.jsp"<%contexto.setAttribute("vaHacia", "/index.jsp");%>>Iniciar Sesion</a></li>
                 <li><a <% if (contexto.getAttribute("tipoUsuario") == null)
                         out.print("href=\"/coronaticketsUyWebApp/altaUsuario.jsp\"");%> ><%
-                    if (contexto.getAttribute("tipoUsuario") != null) {
-                        out.println(contexto.getAttribute("nickname"));
-                                    } else {
-                                        out.print("Registrate");
-                                    }%></a></li>
+                            if (contexto.getAttribute("tipoUsuario") != null) {
+                                out.println(contexto.getAttribute("nickname"));
+                            } else {
+                                out.print("Registrate");
+                            }%></a></li>
                 <li><a href="">Servicios</a>
                     <ul>
 
@@ -98,7 +98,7 @@
                             } else if (contexto.getAttribute("tipoUsuario").equals("Espectador")) {
                                 out.print("<li><a href=\"/coronaticketsUyWebApp/modificarUsuario.jsp\">Modificar Usuario</a></li>");
                                 out.print("<li><a href=\"/coronaticketsUyWebApp/seguirUsuario.jsp\">seguirUsuario</a></li>");
-
+                                out.print("<li><a href=\"/coronaticketsUyWebApp/ConsultarUsuario.jsp\">ConsultarUsuario</a></li>");
                                 out.print("<li><a href=\"/coronaticketsUyWebApp/registroEspectadorFuncion.jsp\">Registrarse a una función de un espectáculo</a></li>");
                             } else {
                                 out.print("<li><a href=\"/coronaticketsUyWebApp/modificarUsuario.jsp\">Modificar Usuario</a></li>");
@@ -106,10 +106,10 @@
 
                                 out.print("<li><a href=\"/coronaticketsUyWebApp/artistaError.jsp\">Registrarse a una función de un espectáculo</a></li>");
                                 out.print("<li><a href=\"/coronaticketsUyWebApp/altaEspectaculo.jsp\">Ingresar nuevo Espectáculo</a></li>");
+                                out.print("<li><a href=\"/coronaticketsUyWebApp/ConsultarUsuario.jsp\">ConsultarUsuario</a></li>");
 
                             }
                         %>
-                        <li><a href="/coronaticketsUyWebApp/altaUsuario.jsp">alta usuario</a></li>
                         <li><a href="/coronaticketsUyWebApp/AltaFUncion.jsp">Alta de Funcion</a>
 
                             <ul>
