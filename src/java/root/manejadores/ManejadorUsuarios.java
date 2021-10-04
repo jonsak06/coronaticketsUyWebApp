@@ -17,12 +17,14 @@ import java.util.List;
 import javax.persistence.*;
 import root.entidades.Artista;
 import root.datatypes.DtArtista;
+import root.datatypes.DtUsuario;
 import root.entidades.Compra;
 import root.entidades.Espectaculo;
 import root.entidades.Espectador;
 import root.entidades.EstadoRegistro;
 import root.entidades.Funcion;
 import root.entidades.Registro;
+import root.entidades.Usuario;
 /**
  *
  * @author tecnologo
@@ -126,6 +128,167 @@ public class ManejadorUsuarios
         return us;
     }
     
+    public static List<DtUsuario> getUsuariosQueSiguesAr(String nickname) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<Artista> consulta = em.createNamedQuery("ArtistaporNick", Artista.class);
+
+        Artista a = consulta.getSingleResult();
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+        List<Usuario> lu = a.getSiguiendo();
+        List<DtUsuario> dtA = new ArrayList<DtUsuario>();
+        for (Usuario i : lu) {
+            if (i instanceof Artista) {
+
+                DtUsuario esteDt = ((Artista) i).getMyDt();
+
+                dtA.add(esteDt);
+            }
+            if (i instanceof Espectador) {
+
+                DtUsuario esteDt = ((Espectador) i).getMyDt();
+
+                dtA.add(esteDt);
+            }
+        }
+        return dtA;
+    }
+
+    public static List<DtUsuario> getUsuariosQueSiguesEs(String nickname) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<Espectador> consulta = em.createNamedQuery("EspectadorporNick", Espectador.class);
+
+        Espectador a = consulta.getSingleResult();
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+        List<Usuario> lu = a.getSiguiendo();
+        List<DtUsuario> dtA = new ArrayList<DtUsuario>();
+        for (Usuario i : lu) {
+            if (i instanceof Artista) {
+
+                DtUsuario esteDt = ((Artista) i).getMyDt();
+
+                dtA.add(esteDt);
+            }
+            if (i instanceof Espectador) {
+
+                DtUsuario esteDt = ((Espectador) i).getMyDt();
+
+                dtA.add(esteDt);
+            }
+        }
+        return dtA;
+    }
+
+    
+    public static List<DtUsuario> getUsuariosQueNoSiguesAr(String nickname) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<Artista> consulta = em.createNamedQuery("ArtistaporNick", Artista.class);
+        Artista a = consulta.getSingleResult();
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+
+        List<DtArtista> lAr = getArtistas();
+        List<DtEspectador> lEs = getEspectadores();
+
+        List<Usuario> lu = a.getSiguiendo();
+        List<DtUsuario> dtA = new ArrayList<DtUsuario>();
+        for (DtArtista ar : lAr) {
+            for (Usuario i : lu) {
+                if (i instanceof Artista) {
+                    DtUsuario esteDt = ((Artista) i).getMyDt();
+                    if (!ar.getNickname().equals(esteDt.getNickname())) {
+                        dtA.add(ar);
+                    }
+                }
+                if (i instanceof Espectador) {
+                    DtUsuario esteDt = ((Espectador) i).getMyDt();
+                    if (!ar.getNickname().equals(esteDt.getNickname())) {
+                        dtA.add(ar);
+                    }
+                }
+            }
+        }
+        for (DtEspectador es : lEs) {
+            for (Usuario i : lu) {
+                if (i instanceof Artista) {
+                    DtUsuario esteDt = ((Artista) i).getMyDt();
+                    if (!es.getNickname().equals(esteDt.getNickname())) {
+                        dtA.add(es);
+                    }
+                }
+                if (i instanceof Espectador) {
+                    DtUsuario esteDt = ((Espectador) i).getMyDt();
+                    if (!es.getNickname().equals(esteDt.getNickname())) {
+                        dtA.add(es);
+                    }
+                }
+            }
+        }
+
+        return dtA;
+    }
+    
+    public static List<DtUsuario> getUsuariosQueNoSiguesEs(String nickname) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<Espectador> consulta = em.createNamedQuery("EspectadorporNick", Espectador.class);
+        Espectador a = consulta.getSingleResult();
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+
+        List<DtArtista> lAr = getArtistas();
+        List<DtEspectador> lEs = getEspectadores();
+
+        List<Usuario> lu = a.getSiguiendo();
+        List<DtUsuario> dtA = new ArrayList<DtUsuario>();
+        for (DtArtista ar : lAr) {
+            for (Usuario i : lu) {
+                if (i instanceof Artista) {
+                    DtUsuario esteDt = ((Artista) i).getMyDt();
+                    if (!ar.getNickname().equals(esteDt.getNickname())) {
+                        dtA.add(ar);
+                    }
+                }
+                if (i instanceof Espectador) {
+                    DtUsuario esteDt = ((Espectador) i).getMyDt();
+                    if (!ar.getNickname().equals(esteDt.getNickname())) {
+                        dtA.add(ar);
+                    }
+                }
+            }
+        }
+        for (DtEspectador es : lEs) {
+            for (Usuario i : lu) {
+                if (i instanceof Artista) {
+                    DtUsuario esteDt = ((Artista) i).getMyDt();
+                    if (!es.getNickname().equals(esteDt.getNickname())) {
+                        dtA.add(es);
+                    }
+                }
+                if (i instanceof Espectador) {
+                    DtUsuario esteDt = ((Espectador) i).getMyDt();
+                    if (!es.getNickname().equals(esteDt.getNickname())) {
+                        dtA.add(es);
+                    }
+                }
+            }
+        }
+
+        return dtA;
+    }
+
     public static boolean existeEspectador(String nickname)
     {
         boolean us=false;
