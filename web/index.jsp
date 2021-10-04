@@ -21,7 +21,7 @@
 		<style type="text/css">
 			
 			* {
-				margin:px;
+				margin:0px;
 				padding:0px;
 			}
 			
