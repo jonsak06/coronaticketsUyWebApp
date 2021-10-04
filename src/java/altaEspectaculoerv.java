@@ -69,6 +69,8 @@ public class altaEspectaculoerv extends HttpServlet {
             long o = 0;
                 DtEspectaculo esp = new DtEspectaculo(o,request.getParameter("nombreEsp"),request.getParameter("descripcion"),Integer.parseInt(request.getParameter("duracion")),Integer.parseInt(request.getParameter("cantMax")),Integer.parseInt(request.getParameter("cantMin")),request.getParameter("url"),Float.parseFloat(request.getParameter("costo")), (java.sql.Date) date);
                 //  AQUI LOS PASOS PARA SUBIR LA IMAGEN DESDE LA MAQUINA DEL USUARIO
+                String fotoName ="";
+                if(request.getParameter("upfile")!=null){
                 Part archivo = request.getPart("upfile"); //llamada al parámetro foto de mi formulario.
                 String context = request.getServletContext().getRealPath("/IMAGENES_ESPECTACULOS"); //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
 
@@ -77,8 +79,9 @@ public class altaEspectaculoerv extends HttpServlet {
 
                 archivo.write(context + File.separator + foto); // Escribimos el archivo al disco duro del servidor.
 
-                String fotoName = "IMAGENES_ESPECTACULOS" + File.separator + foto;
+                fotoName = "IMAGENES_ESPECTACULOS" + File.separator + foto;
                 //AQUI SE DEBERIA HABER SUBIDO LA IMAGEN
+                }
                 ie.altaEspectaculo(request.getParameter("plataforma"), contexto.getAttribute("nickname").toString(), catDelEsp, esp, fotoName);
 
                 RequestDispatcher dispatcher = contexto.getRequestDispatcher("/espectaculoIngresado.jsp");

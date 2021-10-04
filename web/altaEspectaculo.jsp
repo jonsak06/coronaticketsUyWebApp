@@ -130,7 +130,7 @@
                 <form action="altaEspectaculoerv" name="altaEspectaculo" method="POST" class="box" enctype='multipart/form-data'>
                     <h1>Datos del Espectaculo</h1>
                     <p class="text-muted">Ingresa los datos del espectaculo</p> 
-                    <select name="plataforma">
+                    <select name="plataforma" id="plataforma">
                         <option>Seleccione una Plataforma</option>
                         <%
                             IEspectaculos ie = Fabrica.getCtrlEspectaculos();
@@ -143,11 +143,55 @@
                     </select>
                     <input type="text" name="nombreEsp" placeholder="Nombre" id="nombre" required> 
                     <textarea name="descripcion" style="background-color: #191919; color: white;border: 2px solid #3498db; padding: 10px 10px; outline: none; color: white; border-radius: 24px; transition: 0.25s" rows="4" cols="40" placeholder="Descripcion"></textarea>
-                    <input type="text" name="duracion" placeholder="Duracion en Minutos" id="duracion" required> 
-                    <input type="text" name="cantMin" placeholder="Cantidad de espectadores mínima" id="cantMin" required> 
-                    <input type="text" name="cantMax" placeholder="Cantidad de espectadores máxima" id="cantMax" required> 
+                    <input type="number" style="    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 10px 10px;
+    width: 250px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s" name="duracion" placeholder="Duracion en Minutos" id="duracion" min="0" required> 
+                    <input type="number" style="    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 10px 10px;
+    width: 250px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s" name="cantMin" placeholder="Cantidad de espectadores mínima" id="cantMin" min="0" required> 
+                    <input type="number" style="    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 10px 10px;
+    width: 250px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s" name="cantMax" placeholder="Cantidad de espectadores máxima" id="cantMax" min="1" required> 
                     <input type="text" name="url" placeholder="URL por la cuál se trasnimitirá" id="url" required> 
-                    <input type="text" name="costo" placeholder="Costo del Espectáculo" id="costo" required> 
+                    <input type="number" style="    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 10px 10px;
+    width: 250px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s" step="0.01" min="0" name="costo" placeholder="Costo del Espectáculo" id="costo" required> 
                     <% 
                     //ServletContext contexto = getServletContext();
                     
@@ -165,7 +209,7 @@
                     </div>
                     <input type="submit" name="ingresar" value="Ingresar" id="ingresar">
                 </form>
-<!--                    <script>
+                    <script>
             const botonIngresar = document.getElementById("ingresar");
 //            const stringToDate = str => {
 //                const partes = str.split("-");
@@ -174,13 +218,25 @@
             
             botonIngresar.addEventListener("click", e => {
 //                const fechaInicio = document.getElementById("fecha-inicio");
-                const nombre = document.getElementById("nombre");
-                if(nombre.value=="") {
+                const plataforma = document.getElementById("plataforma");
+                if(plataforma.value=="Seleccione una Plataforma") {
                         e.preventDefault();
-                        alert("El nombre no puede estar vacío");
+                        alert("Debe seleccionar una Plataforma para el Espectáculo");
                 }
+                const cantMax = document.getElementById("cantMax");
+                const cantMin = document.getElementById("cantMin");
+                if(cantMax.value<=cantMin.value){
+                    e.preventDefault();
+                    alert("La cantidad máxima de espectadores debe superar la cantidad mínima");
+                }
+                const url = document.getElementById("url");
+                if(url.value.toString().includes(" ") || url.value.toString().includes(".")==false){
+                    e.preventDefault();
+                    alert("URL inválida");
+                }
+                
             });
-        </script>-->
+        </script>
             </div>
         </div>
     </div>
