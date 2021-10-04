@@ -19,6 +19,7 @@ public class DtPaqueteDeEspectaculos {
     private Date fechaFin;
     private float descuento;
     private Date fechaAlta;
+    private String imagen;
     
     public DtPaqueteDeEspectaculos(){}
     
@@ -66,6 +67,10 @@ public class DtPaqueteDeEspectaculos {
     
     public Date getFechaAlta() {
         return fechaAlta;
+    }
+    
+    public String getImagen() {
+        return imagen;
     }
     
     
