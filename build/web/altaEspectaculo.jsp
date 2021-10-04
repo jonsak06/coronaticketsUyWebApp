@@ -141,13 +141,13 @@
                         %>
                                 
                     </select>
-                    <input type="text" name="nombreEsp" placeholder="Nombre"> 
+                    <input type="text" name="nombreEsp" placeholder="Nombre" id="nombre" required> 
                     <textarea name="descripcion" style="background-color: #191919; color: white;border: 2px solid #3498db; padding: 10px 10px; outline: none; color: white; border-radius: 24px; transition: 0.25s" rows="4" cols="40" placeholder="Descripcion"></textarea>
-                    <input type="text" name="duracion" placeholder="Duracion en Minutos"> 
-                    <input type="text" name="cantMin" placeholder="Cantidad de espectadores mínima"> 
-                    <input type="text" name="cantMax" placeholder="Cantidad de espectadores máxima"> 
-                    <input type="text" name="url" placeholder="URL por la cuál se trasnimitirá"> 
-                    <input type="text" name="costo" placeholder="Costo del Espectáculo"> 
+                    <input type="text" name="duracion" placeholder="Duracion en Minutos" id="duracion" required> 
+                    <input type="text" name="cantMin" placeholder="Cantidad de espectadores mínima" id="cantMin" required> 
+                    <input type="text" name="cantMax" placeholder="Cantidad de espectadores máxima" id="cantMax" required> 
+                    <input type="text" name="url" placeholder="URL por la cuál se trasnimitirá" id="url" required> 
+                    <input type="text" name="costo" placeholder="Costo del Espectáculo" id="costo" required> 
                     <% 
                     //ServletContext contexto = getServletContext();
                     
@@ -163,8 +163,24 @@
                         <p id="texto">Seleccionar Imagen</p>
                         <input type="file" name="upfile" style="background-color: #191919; color: white;border: 2px solid #3498db; padding: 10px 10px; outline: none; color: white; border-radius: 24px; transition: 0.25s">
                     </div>
-                    <input type="submit" name="" value="Ingresar">
+                    <input type="submit" name="ingresar" value="Ingresar" id="ingresar">
                 </form>
+<!--                    <script>
+            const botonIngresar = document.getElementById("ingresar");
+//            const stringToDate = str => {
+//                const partes = str.split("-");
+//                return new Date(partes[0], partes[1], partes[2]);
+//            };
+            
+            botonIngresar.addEventListener("click", e => {
+//                const fechaInicio = document.getElementById("fecha-inicio");
+                const nombre = document.getElementById("nombre");
+                if(nombre.value=="") {
+                        e.preventDefault();
+                        alert("El nombre no puede estar vacío");
+                }
+            });
+        </script>-->
             </div>
         </div>
     </div>
