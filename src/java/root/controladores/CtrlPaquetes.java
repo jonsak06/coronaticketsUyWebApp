@@ -43,6 +43,11 @@ public class CtrlPaquetes implements iPaquetes {
     }
     
     @Override
+    public List<String> listarPaquetesVigentes() {
+        return mp.getNombresVigentes();
+    }
+    
+    @Override
     public List<String> listarPlataformas() {
         return ManPlataformas.getNombres();
     }

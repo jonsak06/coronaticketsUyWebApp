@@ -39,6 +39,12 @@ public class Compra implements Serializable {
         this.fecha = fecha;
     }
     
+    public Compra (PaqueteDeEspectaculos paq , Date fecha, Espectador esp){
+    this.espectador=esp;
+    this.fecha = fecha;
+    this.paquete = paq;
+    }
+    
     @Column(name = "FECHA_COMPRA")
     private Date fecha;
     public Date getFecha() {
