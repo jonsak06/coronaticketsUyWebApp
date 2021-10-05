@@ -14,8 +14,28 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+        <style>
+            .input-group {
+                margin-top: 20px;
+                width: 100%;
+            }
+            .custom-select {
+                width: 90%;
+            }
+            .infoPaquete {
+                margin-top: 20px;
+                width: 25%;
+            }
+            .selectEsp{
+                width: 100%;
+                height: 100%;
+            }
+        </style>
     </head>
     <body>
+        <%@include file="header.jsp" %>
         <form action="dejarDeSeguirUsuarioBackEnd">
             <select name="seguido">
                 <%
