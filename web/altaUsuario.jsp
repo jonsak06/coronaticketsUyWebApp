@@ -18,23 +18,7 @@
         <title>JSP Page</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 
-        <style>
-            .input-group {
-                margin-top: 20px;
-                width: 100%;
-            }
-            .custom-select {
-                width: 90%;
-            }
-            .infoPaquete {
-                margin-top: 20px;
-                width: 25%;
-            }
-            .selectEsp{
-                width: 100%;
-                height: 100%;
-            }
-        </style>
+        
         <script>
             function sart() {
                 document.getElementById("tBiografia").style.display = "block";
@@ -56,36 +40,49 @@
         </script>
     </head>
     <body>
+        
         <%@include file="header.jsp" %>
+        <link rel="stylesheet" href="./miestilo.css" type="text/css">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
 
-        <form action="AltaUsuariosBackEnd"  name="fAltaUsuario" id="fAltaUsuario" method="POST">
+        <form action="AltaUsuariosBackEnd" class="box" name="fAltaUsuario" id="fAltaUsuario" method="POST">
             <p>Tipo Usuario:
                 <input type="radio" name="us" value="e" id="us" onclick="sesp()"> Espectador
                 <input type="radio" name="us" value="a" id="us" onclick="sart()"> Artista
             </p>
 
-            <p>Nombre:<input type="text" name="nombre" value="" id="nombre" size="30" /></p>
+            <p>Nombre:</p>
+            <input type="text" name="nombre" value="" id="nombre" />
 
-            <p>Apellido:<input type="text" name="apellido" value="" id="apellido" size="30" /></p>
+            <p>Apellido:</p>
+            <input type="text" name="apellido" value="" id="apellido"  />
 
-            <p>Nickname:<input type="text" name="nickname" value="" id="nickname" size="30" /></p>
+            <p>Nickname:</p>
+            <input type="text" name="nickname" value="" id="nickname"/>
 
-            <p>Correo:<input type="text" name="correo" value="" id="correo" size="30" /></p>
+            <p>Correo:</p>
+            <input type="text" name="correo" value="" id="correo" />
 
-            <p>Contraseña:<input type="password" name="contrasenia" id="contrasenia" value="" size="30" /></p>
+            <p>Contraseña:</p>
+            <input type="password" name="contrasenia" id="contrasenia" value="" />
 
-            <p>Confirmar contraseña:<input type="password" name="contraseniaC" id="cContraseña" value="" size="30" /></p>
+            <p>Confirmar contraseña:</p>
+            <input type="password" name="contraseniaC" id="cContraseña" value="" />
 
-            <p>Fecha: <input type="date" name="fecha" id="fecha"></p>
+            <p>Fecha: </p>
+            <input type="date" name="fecha" id="fecha">
 
-            <p style="display:none;" id="tLink">Link web:<input type="link" name="link" value="" id="tfLink" size="30" style="display:none;" /></p>
+            <p style="display:none;" id="tLink">Link web:</p>
+            <input type="text" name="link" value="" id="tfLink"  style="display:none;" />
 
             <p style="display:none;" id="tBiografia">Biografia:</p>
-            <textarea name="biografia" id="tfBiografia" rows="4" cols="30" style="display:none;">
+            <textarea name="biografia" id="tfBiografia"  style="display:none; margin: 0 auto;">
             </textarea>
 
             <p style="display:none;" id="tDescripcion">Descripcion:</p>
-            <textarea name="descripcion" id="tfDescripcion" style="display:none;" rows="4" cols="30">
+            <textarea name="descripcion" id="tfDescripcion"  style="display:none; margin: 0 auto;">
             </textarea>
 
             <input type="file" name="Imagen" size="150"/>
@@ -94,6 +91,9 @@
 
 
         </form>
+                    </div>
+            </div>
+        </div>
     </body>
 </html>
 
