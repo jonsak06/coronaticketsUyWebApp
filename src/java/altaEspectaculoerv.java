@@ -64,28 +64,33 @@ public class altaEspectaculoerv extends HttpServlet {
                 }
                 i++;
             }
+            if(catDelEsp.size()==0){
+            RequestDispatcher dispatcher = contexto.getRequestDispatcher("/catNoSeleccionadas.jsp");
+            dispatcher.forward(request, response);
+            }else{
             java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 
             long o = 0;
                 DtEspectaculo esp = new DtEspectaculo(o,request.getParameter("nombreEsp"),request.getParameter("descripcion"),Integer.parseInt(request.getParameter("duracion")),Integer.parseInt(request.getParameter("cantMax")),Integer.parseInt(request.getParameter("cantMin")),request.getParameter("url"),Float.parseFloat(request.getParameter("costo")), (java.sql.Date) date);
                 //  AQUI LOS PASOS PARA SUBIR LA IMAGEN DESDE LA MAQUINA DEL USUARIO
                 String fotoName ="";
-                if(request.getParameter("upfile")!=null){
+                if(request.getParameter("subir")!=null){
                 Part archivo = request.getPart("upfile"); //llamada al parámetro foto de mi formulario.
                 String context = request.getServletContext().getRealPath("/IMAGENES_ESPECTACULOS"); //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
 
                 String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString(); 
 
 
-                archivo.write(context + File.separator + foto); // Escribimos el archivo al disco duro del servidor.
+                archivo.write(context + File.separator+esp.getNombre().replaceAll("\\s+","") + foto); // Escribimos el archivo al disco duro del servidor.
 
-                fotoName = "IMAGENES_ESPECTACULOS" + File.separator + foto;
+                fotoName = "IMAGENES_ESPECTACULOS" + File.separator+esp.getNombre().replaceAll("\\s+","") + foto;
                 //AQUI SE DEBERIA HABER SUBIDO LA IMAGEN
                 }
                 ie.altaEspectaculo(request.getParameter("plataforma"), contexto.getAttribute("nickname").toString(), catDelEsp, esp, fotoName);
 
                 RequestDispatcher dispatcher = contexto.getRequestDispatcher("/espectaculoIngresado.jsp");
             dispatcher.forward(request, response);
+            }
             }
     }
 
