@@ -56,8 +56,14 @@ public class finalizarRegistro extends HttpServlet {
 //            mes = fecha.getMonth()-12;
 //            anio = fecha.getYear()-1899;
             iUsuarios iu = Fabrica.getCrlUsuarios();
-            iu.registrarUsuario(contexto.getAttribute("nickname").toString(), contexto.getAttribute("funcion").toString(), (float) (ie.getCosto(contexto.getAttribute("funcion").toString())), day, month, year);
+            float costo = 0;
+            if(contexto.getAttribute("costo")!=null){
+            costo = (float)contexto.getAttribute("costo");
+            }else{
+            costo = (float)ie.getCosto(contexto.getAttribute("funcion").toString());
             contexto.setAttribute("costo", ie.getCosto(contexto.getAttribute("funcion").toString()));
+            }
+            iu.registrarUsuario(contexto.getAttribute("nickname").toString(), contexto.getAttribute("funcion").toString(), costo, day, month, year);
             RequestDispatcher dispatcher = contexto.getRequestDispatcher("/registroRealizado.jsp");
             dispatcher.forward(request, response);
         }else{

@@ -1,17 +1,19 @@
 <%-- 
-    Document   : seleccionarPaquete
-    Created on : Oct 2, 2021, 6:16:57 PM
+    Document   : confirmarPaquete
+    Created on : Oct 6, 2021, 4:03:18 PM
     Author     : julio
 --%>
 
+<%@page import="root.datatypes.DtFuncion"%>
+<%@page import="root.datatypes.DtFuncion"%>
+<%@page import="root.interfaces.IEspectaculos"%>
 <%@page import="root.fabrica.Fabrica"%>
-<%@page import="java.util.List"%>
-<%@page import="root.interfaces.iUsuarios"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Seleccione una Funcion</title>
     </head>
      <title>CoronaTicketsUy</title>
 		<style type="text/css">
@@ -122,26 +124,30 @@
 			</ul>
 		</div>
     </body>
+    <body>
     <div class="container">
     <link rel="stylesheet" href="./miestilo.css" type="text/css"><!-- comment -->
-        <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-      <form action = "finalizarRegistroPaquete" name="finalizarRegistroPaquete" method="POST" class="box">
-            <h1>Tiene paquetes de descuento para este espectáculo</h1>
-            <select name="paquete">
-                <%
-                    iUsuarios iu = Fabrica.getCrlUsuarios();
-                    List<String> paquetes = iu.listarPaquetesParaEsp(contexto.getAttribute("nickname").toString(), contexto.getAttribute("espectaculo").toString());
-                    for(String i: paquetes){
-                    out.println("<option>"+i+"</option>");
-                    }
+    <div class="row">
+    <div class="col-md-12">
+    <div class="card">
+        <form action = "finalizarRegistro" name=" " method="POST" class="box">
+            <h1>Desea confirmar?</h1>
+            <%
+                IEspectaculos ie = Fabrica.getCtrlEspectaculos();
+                DtFuncion funcion = ie.getDatosFuncion(contexto.getAttribute("funcion").toString());
+                out.println("<p class =\"text-muted \" >Funcion: "+contexto.getAttribute("funcion").toString()+"</p>");
+                out.println("<p class =\"text-muted \" >Espectaculo: "+contexto.getAttribute("espectaculo").toString()+"</p>");
+                out.println("<p class =\"text-muted \" >Fecha y hora: "+funcion.getHoraInicio()+"</p>");
+                float costo = 0;
+                if(contexto.getAttribute("costo")==null){costo=ie.getCosto(contexto.getAttribute("funcion").toString());}else{
+                costo = (float) contexto.getAttribute("costo");
+                }
+                out.println("<p class =\"text-muted \" >Costo: "+costo+"</p>");
                 %>
-            </select>
-                <input type="submit" name="Aceptar" style="float: right" value="Aceptar" /><input type="submit" name="Cancelar" style="float: left" value="Cancelar" />
+             <input style="float: right" type="submit" name="confirmacionSi" value="Si" /><input type="submit" style="float: left" name="confirmacionNo" value="No" />
         </form>
-            </div>
-        </div>    
-        </div>      
     </div>
+    </div>
+    </div>
+    </body>
 </html>

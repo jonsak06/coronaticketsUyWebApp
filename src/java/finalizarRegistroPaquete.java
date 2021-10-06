@@ -44,37 +44,25 @@ public class finalizarRegistroPaquete extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ServletContext contexto = getServletContext();
-            iPaquetes ip = Fabrica.getCtrlPaquetes();
+        if(request.getParameter("Cancelar")!=null){
+         RequestDispatcher dispatcher = contexto.getRequestDispatcher("/confirmarRegistro.jsp");
+         dispatcher.forward(request, response);
+        }else{
+iPaquetes ip = Fabrica.getCtrlPaquetes();
             DtPaqueteDeEspectaculos dtp = ip.mostrarInfoPaquete(request.getParameter("paquete"));
             IEspectaculos ie = Fabrica.getCtrlEspectaculos();
             float descuento = dtp.getDescuento();
-//            int dia,mes,anio;
-//            Date fecha = new Date();
-//            dia = fecha.getDate()-31;
-//            mes = fecha.getMonth()-12;
-//            anio = fecha.getYear()-1899;
             Date date = new Date();
             LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             int year  = localDate.getYear();
             int month = localDate.getMonthValue();
             int day   = localDate.getDayOfMonth();
             iUsuarios iu = Fabrica.getCrlUsuarios();
-            iu.registrarUsuario(contexto.getAttribute("nickname").toString(), contexto.getAttribute("funcion").toString(), (float) (ie.getCosto(contexto.getAttribute("funcion").toString())*(100-descuento)*0.01), day, month, year);
+            //iu.registrarUsuario(contexto.getAttribute("nickname").toString(), contexto.getAttribute("funcion").toString(), (float) (ie.getCosto(contexto.getAttribute("funcion").toString())*(100-descuento)*0.01), day, month, year);
             contexto.setAttribute("costo", (float) (ie.getCosto(contexto.getAttribute("funcion").toString())*(100-descuento)*0.01));
-            RequestDispatcher dispatcher = contexto.getRequestDispatcher("/registroRealizado.jsp");
-            dispatcher.forward(request, response);
-//        try ( PrintWriter out = response.getWriter()) {
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet finalizarRegistroPaquete</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet finalizarRegistroPaquete at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        }
+         RequestDispatcher dispatcher = contexto.getRequestDispatcher("/confirmarPaquete.jsp");
+         dispatcher.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
