@@ -20,7 +20,10 @@
 
         
         <script>
+            var tus;
+            tus=0;
             function sart() {
+                tus=1;
                 document.getElementById("tBiografia").style.display = "block";
                 document.getElementById("tfBiografia").style.display = "block";
                 document.getElementById("tfLink").style.display = "block";
@@ -29,6 +32,7 @@
                 document.getElementById("tfDescripcion").style.display = "block";
             }
             function sesp() {
+                tus=1;
                 document.getElementById("tBiografia").style.display = "none";
                 document.getElementById("tfBiografia").style.display = "none";
                 document.getElementById("tfLink").style.display = "none";
@@ -54,25 +58,25 @@
             </p>
 
             <p>Nombre:</p>
-            <input type="text" name="nombre" value="" id="nombre" />
+            <input type="text" name="nombre" value="" id="nombre" required/>
 
             <p>Apellido:</p>
-            <input type="text" name="apellido" value="" id="apellido"  />
+            <input type="text" name="apellido" value="" id="apellido"  required/>
 
             <p>Nickname:</p>
-            <input type="text" name="nickname" value="" id="nickname"/>
+            <input type="text" name="nickname" value="" id="nickname" required/>
 
             <p>Correo:</p>
-            <input type="text" name="correo" value="" id="correo" />
+            <input type="text" name="correo" value="" id="correo" required/>
 
             <p>Contraseña:</p>
-            <input type="password" name="contrasenia" id="contrasenia" value="" />
+            <input type="password" name="contrasenia" id="contrasenia" value="" required/>
 
             <p>Confirmar contraseña:</p>
-            <input type="password" name="contraseniaC" id="cContraseña" value="" />
+            <input type="password" name="contraseniaC" id="cContraseña" value="" required/>
 
             <p>Fecha: </p>
-            <input type="date" name="fecha" id="fecha">
+            <input type="date" name="fecha" id="fecha" required>
 
             <p style="display:none;" id="tLink">Link web:</p>
             <input type="text" name="link" value="" id="tfLink"  style="display:none;" />

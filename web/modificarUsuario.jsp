@@ -37,16 +37,16 @@
                         <%
                             out.print("<p name=\"/Tipo\"/>Espectador</p>");
                             out.print("<p class=\"text-muted\">Nombre:</p>");
-                            out.print("<input type=\"text\" name=\"nombre\" value=\"" + es.getNombre() + "\" id=\"nombre\">");
+                            out.print("<input type=\"text\" name=\"nombre\" value=\"" + es.getNombre() + "\" id=\"nombre\" required>");
                             out.print("<p class=\"text-muted\">Apellido:</p>");
-                           out.print("<input type=\"text\" name=\"apellido\" value=\"" + es.getApellido() + "\" id=\"apellido\" />");
+                           out.print("<input type=\"text\" name=\"apellido\" value=\"" + es.getApellido() + "\" id=\"apellido\" required/>");
                            
                             out.print("<p class=\"text-muted\">Correo:</p>");
-                            out.print("<input type=\"text\" name=\"correo\" value=\"" + es.getCorreo() + "\"/ id=\"correo\" disabled />");
+                            out.print("<input type=\"text\" name=\"correo\" value=\"" + es.getCorreo() + "\"/ id=\"correo\" disabled required/>");
                             out.print("<p class=\"text-muted\">Contraseña:</p>");
-                            out.print("<input type=\"password\" name=\"contrasenia\" id=\"contrasenia\" value=\"" + es.getPass() + "\" />");
+                            out.print("<input type=\"password\" name=\"contrasenia\" id=\"contrasenia\" value=\"" + es.getPass() + "\"  required/>");
                             out.print("<p class=\"text-muted\">Fecha: </p>");
-                                 out.print("<input type=\"date\" name=\"fecha\" value=\"" + es.getFechaNacimiento().toString() + "\" id=\"fecha\">");
+                                 out.print("<input type=\"date\" name=\"fecha\" value=\"" + es.getFechaNacimiento().toString() + "\" id=\"fecha\" required>");
                             out.print("<p class=\"text-muted\">Link web:</p>");
                             out.print("<input type=\"file\" accept=\"image*\" name=\"Imagen\"/>");
                         %>
@@ -62,16 +62,16 @@
 
                         <%                
                             out.print("<p class=\"text-muted\">Nombre:</p>");
-                            out.print("<input type=\"text\" name=\"nombre\" value=\"" + ar.getNombre() + "\" id=\"nombre\">");
+                            out.print("<input type=\"text\" name=\"nombre\" value=\"" + ar.getNombre() + "\" id=\"nombre\" required>");
                             out.print("<p class=\"text-muted\">Apellido:</p>");
-                           out.print("<input type=\"text\" name=\"apellido\" value=\"" + ar.getApellido() + "\" id=\"apellido\" />");
+                           out.print("<input type=\"text\" name=\"apellido\" value=\"" + ar.getApellido() + "\" id=\"apellido\" required/>");
                            
                             out.print("<p class=\"text-muted\">Correo:</p>");
-                            out.print("<input type=\"text\" name=\"correo\" value=\"" + ar.getCorreo() + "\"/ id=\"correo\" disabled />");
+                            out.print("<input type=\"text\" name=\"correo\" value=\"" + ar.getCorreo() + "\"/ id=\"correo\" disabled required/>");
                             out.print("<p class=\"text-muted\">Contraseña:</p>");
-                            out.print("<input type=\"password\" name=\"contrasenia\" id=\"contrasenia\" value=\"" + ar.getPass() + "\" />");
+                            out.print("<input type=\"password\" name=\"contrasenia\" id=\"contrasenia\" value=\"" + ar.getPass() + "\" required/>");
                             out.print("<p class=\"text-muted\">Fecha: </p>");
-                                 out.print("<input type=\"date\" name=\"fecha\" value=\"" + ar.getFechaNacimiento().toString() + "\" id=\"fecha\">");
+                                 out.print("<input type=\"date\" name=\"fecha\" value=\"" + ar.getFechaNacimiento().toString() + "\" id=\"fecha\" required>");
                             out.print("<p class=\"text-muted\">Link web:</p>");
                             out.print("<input type=\"text\" name=\"link\" value=\"" + ar.getLinkWeb() + "\" />");
                             
