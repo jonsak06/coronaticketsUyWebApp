@@ -16,8 +16,20 @@
 	<body>
             <%@include file="header.jsp" %>
             <%ServletContext contexto = getServletContext();%>
-        <h1>Cerrar Sesión</h1>
-        <form action="CerrarSesion"><input type="submit" value="SI" />
+                <div class="container">
+    <link rel="stylesheet" href="./miestilo.css" type="text/css"><!-- comment -->
+    <div class="row">
+    <div class="col-md-12">
+    <div class="card">                          
+        <form action="CerrarSesion" method="POST" class="box">
+            <h1>Cerrar Sesión</h1>
+            <input type="submit" value="SI" />
         </form>
+    </div>
+    </div>
+    </div>
+            
+            
+
     </body>
 </html>
