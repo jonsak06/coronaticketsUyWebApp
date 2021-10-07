@@ -1,6 +1,6 @@
 <%-- 
-    Document   : cerrarSesion
-    Created on : Sep 25, 2021, 10:54:30 AM
+    Document   : paqueteRepetido
+    Created on : Oct 6, 2021, 7:59:46 PM
     Author     : julio
 --%>
 
@@ -16,8 +16,19 @@
 	<body>
             <%@include file="header.jsp" %>
             <%ServletContext contexto = getServletContext();%>
-        <h1>Cerrar Sesión</h1>
-        <form action="CerrarSesion"><input type="submit" value="SI" />
+    <div class="container">
+    <link rel="stylesheet" href="./miestilo.css" type="text/css"><!-- comment -->
+    <div class="row">
+    <div class="col-md-12">
+    <div class="card">
+        <form action = "" name=" " method="POST" class="box">
+            <h1>YA TIENE ESE PAQUETE COMPRADO</h1>
+            <p class = "text-unmuted">Vuelve para elegir otro</p>
+            <a href="/coronaticketsUyWebApp/compraPaquetes.jsp">Volver</a>
+            
         </form>
+    </div>
+    </div>
+    </div>
     </body>
 </html>

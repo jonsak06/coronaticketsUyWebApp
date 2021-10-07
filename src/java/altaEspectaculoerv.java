@@ -58,7 +58,7 @@ public class altaEspectaculoerv extends HttpServlet {
             List<String> categorias = ie.listarCategorias();
             List<String> catDelEsp = new ArrayList<String>();
             int i = 1;
-            while(i<categorias.size()){
+            while(i<=categorias.size()){
                 if(request.getParameter(i+"")!=null){
                     catDelEsp.add(categorias.get(i-1));
                 }
@@ -76,14 +76,14 @@ public class altaEspectaculoerv extends HttpServlet {
                 String fotoName ="";
                 if(request.getParameter("subir")!=null){
                 Part archivo = request.getPart("upfile"); //llamada al parámetro foto de mi formulario.
-                String context = request.getServletContext().getRealPath("/IMAGENES_ESPECTACULOS"); //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
+                String context = "/var/www/img/";//request.getServletContext().getRealPath("/IMAGENES_ESPECTACULOS"); //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
 
                 String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString(); 
 
 
                 archivo.write(context + File.separator+esp.getNombre().replaceAll("\\s+","") + foto); // Escribimos el archivo al disco duro del servidor.
 
-                fotoName = "IMAGENES_ESPECTACULOS" + File.separator+esp.getNombre().replaceAll("\\s+","") + foto;
+                fotoName = File.separator+esp.getNombre().replaceAll("\\s+","") + foto;
                 //AQUI SE DEBERIA HABER SUBIDO LA IMAGEN
                 }
                 ie.altaEspectaculo(request.getParameter("plataforma"), contexto.getAttribute("nickname").toString(), catDelEsp, esp, fotoName);

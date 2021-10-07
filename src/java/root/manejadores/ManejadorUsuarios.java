@@ -18,12 +18,14 @@ import java.util.List;
 import javax.persistence.*;
 import root.entidades.Artista;
 import root.datatypes.DtArtista;
+import root.datatypes.DtPaqueteDeEspectaculos;
 import root.datatypes.DtUsuario;
 import root.entidades.Compra;
 import root.entidades.Espectaculo;
 import root.entidades.Espectador;
 import root.entidades.EstadoRegistro;
 import root.entidades.Funcion;
+import root.entidades.PaqueteDeEspectaculos;
 import root.entidades.Registro;
 import root.entidades.Usuario;
 
@@ -830,6 +832,37 @@ public class ManejadorUsuarios {
             }
         }
         return result;
+    }
+    
+    public static List<DtPaqueteDeEspectaculos> getPaquetesDelUsuario(String nickname){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        Espectador estemen = em.createNamedQuery("EspectadorporNick", Espectador.class).setParameter("nickname", nickname).getSingleResult();
+        em.close();
+        emf.close();
+        List<DtPaqueteDeEspectaculos> resultado = new ArrayList<DtPaqueteDeEspectaculos>();
+        List<Compra> compras = estemen.getCompras();
+        for(Compra i:compras){
+            resultado.add(i.getPaquete().getMyDt());
+        }
+        return resultado;
+    }
+    
+    public static void comprarPaquete(String nickname, String nombrePaq){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        Espectador estemen = em.createNamedQuery("EspectadorporNick",Espectador.class).setParameter("nickname", nickname).getSingleResult();
+        PaqueteDeEspectaculos paq = em.createNamedQuery("PaqueteByName",PaqueteDeEspectaculos.class).setParameter("nombre", nombrePaq).getSingleResult();
+        long fecha = new java.util.Date().getTime();
+        java.sql.Date date = new java.sql.Date(fecha);
+        Compra compra = new Compra(paq, date,estemen);
+        em.persist(compra);
+        em.getTransaction().commit();
+        
+        
+        em.close();
+        emf.close();
     }
 
 }

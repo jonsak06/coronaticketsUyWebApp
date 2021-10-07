@@ -62,4 +62,6 @@ public interface iUsuarios {
      public void seguirUsuarioAr(String nickname, String seguido);
      public void dejarDeSeguirUsuarioEs(String nickname, String seguido);
      public void dejarDeSeguirUsuarioAr(String nickname, String seguido);
+     public List<DtPaqueteDeEspectaculos> getPaquetesDelUsuario(String nickname);
+     public void comprarPaquete(String nickname, String nombrePaq);
 }

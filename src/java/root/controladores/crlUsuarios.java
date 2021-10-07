@@ -207,4 +207,12 @@ public class crlUsuarios implements iUsuarios
      {
          ManejadorUsuarios.dejarDeSeguirUsuarioAr(nickname, seguido);
      }
+     
+     public List<DtPaqueteDeEspectaculos> getPaquetesDelUsuario(String nickname){
+         return ManejadorUsuarios.getPaquetesDelUsuario(nickname);
+     }
+     
+     public void comprarPaquete(String nickname, String nombrePaq){
+          ManejadorUsuarios.comprarPaquete(nickname, nombrePaq);
+     }
 }
