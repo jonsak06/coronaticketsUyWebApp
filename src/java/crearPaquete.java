@@ -3,15 +3,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import org.apache.naming.java.javaURLContextFactory;
 import root.fabrica.Fabrica;
 import root.interfaces.iPaquetes;
 
@@ -20,6 +32,7 @@ import root.interfaces.iPaquetes;
  * @author dexion
  */
 @WebServlet(urlPatterns = {"/crearPaquete"})
+@MultipartConfig()
 public class crearPaquete extends HttpServlet {
 
     /**
@@ -40,14 +53,23 @@ public class crearPaquete extends HttpServlet {
             String fechaInicio = request.getParameter("fechaInicio");
             String fechaFin = request.getParameter("fechaFin");
             int descuento = Integer.parseInt(request.getParameter("descuento"));
-            String imagen = request.getParameter("imagen");
             
             iPaquetes ip = Fabrica.getCtrlPaquetes();
-//            ip.confirmarAltaPaquete(nombre, descripcion, fechaInicio, fechaFin, descuento);
+            ip.confirmarAltaPaquete(nombre, descripcion, java.sql.Date.valueOf(fechaInicio), java.sql.Date.valueOf(fechaFin), descuento);
             
-//            ServletContext contexto = getServletContext();
-//            RequestDispatcher dispatcher = contexto.getRequestDispatcher("/creacionPaquetes.jsp");
-//            dispatcher.forward(request, response);
+            //subida de imagen
+            String path = "/home/julio/Downloads/imgsPaqs/";
+            Part imgPart = request.getPart("imagen");
+            if(imgPart.getSize() != 0) { //control de que haya un archivo en el input
+                String imgName = nombre+"_imagen";
+                for(Part part : request.getParts()) {
+                    part.write(path + imgName);
+                }
+                ip.agregarImagenPaquete(nombre, path+imgName);
+            }
+            
+            request.setAttribute("creado", true);// agrego atributo para mostrar alerta de paquete creado con js
+            request.getRequestDispatcher("/creacionPaquetes.jsp").forward(request, response);
         }
     }
 

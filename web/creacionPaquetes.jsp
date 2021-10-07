@@ -1,5 +1,5 @@
 <%-- 
-    Document   : crearPaquete
+    Document   : creacionPaquetes
     Created on : Oct 3, 2021, 3:51:54 PM
     Author     : dexion
 --%>
@@ -22,13 +22,25 @@
         </style>
     </head>
     <body>
+        <% 
+            //usuarios que no sean artistas son redirigidos al inicio
+            try {
+                ServletContext contexto = getServletContext();
+                String tipoUsuario = contexto.getAttribute("tipoUsuario").toString();
+                if(!tipoUsuario.equals("Artista")) {
+                    response.sendRedirect("index.jsp");
+                }
+            } catch(Exception e) {
+                response.sendRedirect("index.jsp");
+            }
+        %>
         <%@include file="header.jsp"%>
         
         <div class="container formContainer">
-            <form class="row g-3">
+            <form method="post" action="crearPaquete" enctype="multipart/form-data" class="row g-3">
                 <div class="col-12">
                     <label for="nombre" class="form-label">Nombre del paquete</label>
-                    <input name="nombre" type="text" class="form-control" id="nombre" required>
+                    <input name="nombre" type="text" class="form-control" id="nombre" required> 
                 </div>
                 <div class="mb-3">
                     <label for="descripcion" class="form-label">Descripcion</label>
@@ -65,6 +77,9 @@
         %>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
         <script>
+            if(${creado == true}) {
+                alert("Paquete creado");
+            }
             const botonCrearPaq = document.getElementById("crear-paquete");
             const stringToDate = str => {
                 const partes = str.split("-");

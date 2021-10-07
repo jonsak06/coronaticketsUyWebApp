@@ -23,4 +23,5 @@ public interface iPaquetes {
     public DtPaqueteDeEspectaculos mostrarInfoPaquete(String nombrePaquete);
     public List<String> listarEspectaculosIncluidos(String nombrePaquete);
     public DtEspectaculo mostarInfoEspectaculo(String nombreEspectaculo);
+    public void agregarImagenPaquete(String nombrePaquete, String pathImg);
 }
