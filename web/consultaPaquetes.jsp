@@ -100,7 +100,7 @@
         const paqs = document.getElementById("inputGroupSelect04");
         const botonConsultarPaq = document.querySelector(".btn-outline-secondary");
         paqs.addEventListener("change", e => {
-            if(e.target.value == "Seleccione...") {
+            if(e.target.value === "Seleccione...") {
                 botonConsultarPaq.disabled = true;
             } else {
                 botonConsultarPaq.disabled = false;
@@ -108,9 +108,9 @@
         });
         const esps = document.querySelector(".selectEsp");
         const botonConsultarEsp = Array.from(document.querySelectorAll(".btn")).pop();
-        if(esps != null) {
+        if(esps !== null) {
             esps.addEventListener("change", e => {
-                if(e.target.value == "Espectaculos...") {
+                if(e.target.value === "Espectaculos...") {
                     botonConsultarEsp.disabled = true;
                 } else {
                     botonConsultarEsp.disabled = false;

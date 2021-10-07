@@ -92,7 +92,7 @@
                 const fechaInicio = document.getElementById("fecha-inicio");
                 const fechaFin = document.getElementById("fecha-fin");
                 const nombre = document.getElementById("nombre").value;
-                if(fechaInicio.value != "" && fechaFin.value != "") {
+                if(fechaInicio.value !== "" && fechaFin.value !== "") {
                     if(stringToDate(fechaInicio.value) > stringToDate(fechaFin.value)) {
                         e.preventDefault();
                         alert("La fecha de fin debe ser mayor o igual a la fecha de inicio");
