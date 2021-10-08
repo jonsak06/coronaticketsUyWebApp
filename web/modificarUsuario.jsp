@@ -77,8 +77,19 @@
                 width: 300px;
                 border-color: #2ecc71
             }
+            
+            
+            
+            
+            
 
         </style>
+        <script>
+            
+                
+                
+            
+            </script>
     </head>
     <body>
         <link rel="stylesheet" href="./miestilo.css" type="text/css">
@@ -94,7 +105,7 @@
 
                                 DtEspectador es = Fabrica.getCrlUsuarios().getDatosEspectador(contexto.getAttribute("nickname").toString());
                     %>   
-                    <form action="ModificarUsuariosBackEnd"  name="fModificarUsuario" class="box" id="fAltaUsuario" method="POST">
+                    <form action="ModificarUsuariosBackEnd"  enctype="multipart/form-data"   name="fModificarUsuario" class="box" id="fAltaUsuario" method="POST">
 
                         <%
                             out.print("<p name=\"/Tipo\"/>Espectador</p>");
@@ -102,15 +113,17 @@
                             out.print("<input type=\"text\" name=\"nombre\" value=\"" + es.getNombre() + "\" id=\"nombre\" required>");
                             out.print("<p class=\"text-muted\">Apellido:</p>");
                            out.print("<input type=\"text\" name=\"apellido\" value=\"" + es.getApellido() + "\" id=\"apellido\" required/>");
+                           out.print("<p class=\"text-muted\">Nickname:</p>");
+                           out.print("<input type=\"text\" name=\"nickname\" class=\"disable\" value=\"" + es.getNickname()+ "\" id=\"nickname\" disabled/>");
                            
                             out.print("<p class=\"text-muted\">Correo:</p>");
-                            out.print("<input type=\"text\" name=\"correo\" value=\"" + es.getCorreo() + "\"/ id=\"correo\" disabled required/>");
+                            out.print("<input type=\"text\" name=\"correo\" value=\"" + es.getCorreo() + "\"/ id=\"correo\" disabled />");
                             out.print("<p class=\"text-muted\">Contraseña:</p>");
-                            out.print("<input type=\"password\" name=\"contrasenia\" id=\"contrasenia\" value=\"" + es.getPass() + "\"  required/>");
+                            out.print("<input type=\"password\" name=\"contrasenia\" class=\"disable\" id=\"contrasenia\" value=\"" + es.getPass() + "\"  required/>");
                             out.print("<p class=\"text-muted\">Fecha: </p>");
                                  out.print("<input type=\"date\" name=\"fecha\" value=\"" + es.getFechaNacimiento().toString() + "\" id=\"fecha\" required>");
                             out.print("<p class=\"text-muted\">Imagen:</p>");
-                            out.print("<input type=\"file\" accept=\"image*\" name=\"Imagen\"/>");
+                            out.print("<input type=\"file\" accept=\"image*\" name=\"imagen\"/>");
                         %>
                         <input type="submit" name="" value="Modificar">
                         <%
@@ -120,16 +133,18 @@
                         DtArtista ar = Fabrica.getCrlUsuarios().getDatosArtista(contexto.getAttribute("nickname").toString());
 
                     %>   
-                    <form action="ModificarUsuariosBackEnd" class="box"  name="fModificarUsuario" id="fAltaUsuario" method="POST">
+                    <form action="ModificarUsuariosBackEnd" class="box"  enctype="multipart/form-data"   name="fModificarUsuario" id="fAltaUsuario" method="POST">
 
                         <%                
                             out.print("<p class=\"text-muted\">Nombre:</p>");
                             out.print("<input type=\"text\" name=\"nombre\" value=\"" + ar.getNombre() + "\" id=\"nombre\" required>");
                             out.print("<p class=\"text-muted\">Apellido:</p>");
                            out.print("<input type=\"text\" name=\"apellido\" value=\"" + ar.getApellido() + "\" id=\"apellido\" required/>");
+                           out.print("<p class=\"text-muted\">Nickname:</p>");
+                           out.print("<input type=\"text\" name=\"nickname\" class=\"disable\" value=\"" + ar.getNickname()+ "\" id=\"nickname\" disabled/>");
                            
                             out.print("<p class=\"text-muted\">Correo:</p>");
-                            out.print("<input type=\"text\" name=\"correo\" value=\"" + ar.getCorreo() + "\"/ id=\"correo\" disabled required/>");
+                            out.print("<input type=\"text\" name=\"correo\" class=\"disable\" value=\"" + ar.getCorreo() + "\"/ id=\"correo\" disabled required/>");
                             out.print("<p class=\"text-muted\">Contraseña:</p>");
                             out.print("<input type=\"password\" name=\"contrasenia\" id=\"contrasenia\" value=\"" + ar.getPass() + "\" required/>");
                             out.print("<p class=\"text-muted\">Fecha: </p>");
@@ -143,7 +158,7 @@
                             out.print("<p class=\"text-muted\">Descripcion:</p>");
                             out.print("<textarea name=\"descripcion\"/ placeholder=\"" + ar.getDescripcion() + "\" /> </textarea>");
                             out.print("<p class=\"text-muted\">Imagen:</p>");
-                            out.print("<input type=\"file\" accept=\"image*\" name=\"Imagen\"/>");
+                            out.print("<input type=\"file\" accept=\"image*\" name=\"imagen\"/>");
                         %>
                         <input type="submit" name="" value="Modificar">
                         <%

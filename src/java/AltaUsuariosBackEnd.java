@@ -121,9 +121,23 @@ public class AltaUsuariosBackEnd extends HttpServlet {
             java.sql.Date fecha = new java.sql.Date(parsed.getTime());
 
           //  Date fecha = new Date(1,1,1);
-            String imagen = "";
+            String imagen = "silueta.jpg";
             long id = 0;
-            DtArtista ar = new DtArtista(linkWeb, biografia, descripcion, id, nombre, apellido, correo, nickname, imagen, fecha, pass);
+            DtArtista ar = null;
+            String path = "/home/tecnologo/Descargas/imgsUs/";
+            Part imgPart = request.getPart("imagen");
+            if(imgPart.getSize() != 0) { //control de que haya un archivo en el input
+                String imgName = nickname;
+                for(Part part : request.getParts()) {
+                    part.write(path + imgName);
+                }
+                 ar = new DtArtista(linkWeb, biografia, descripcion, id, nombre, apellido, correo, nickname, path + imgName, fecha, pass);
+            
+            }else
+            {
+                ar = new DtArtista(linkWeb, biografia, descripcion, id, nombre, apellido, correo, nickname, imagen, fecha, pass);
+            
+            }
             iu.altaArtista(ar);
         }
 
