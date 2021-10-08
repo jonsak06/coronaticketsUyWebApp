@@ -17,6 +17,68 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <link rel="stylesheet" href="./miestilo.css" type="text/css">
+        <style>
+            .box textarea {
+                border: 0;
+                background: none;
+                display: block;
+                margin: 20px auto;
+                text-align: center;
+                border: 2px solid #3498db;
+                padding: 10px 10px;
+                width: 300px;
+                height: 300px;
+                outline: none;
+                color: white;
+                border-radius: 24px;
+                transition: 0.25s
+            }
+
+            .box textarea:focus {
+                width: 250px;
+                height: 250px;
+                border-color: #2ecc71
+            }
+            .box input[type="date"] {
+                border: 0;
+                background: none;
+                display: block;
+                margin: 20px auto;
+                text-align: center;
+                border: 2px solid #3498db;
+                padding: 10px 10px;
+                width: 250px;
+                outline: none;
+                color: white;
+                border-radius: 24px;
+                transition: 0.25s
+            }
+            .box input[type="date"]:focus {
+                width: 200px;
+                border-color: #2ecc71
+            }
+
+            .box input[type="file"] {
+                border: 0;
+                background: none;
+                display: block;
+                margin: 20px auto;
+                text-align: center;
+                border: 2px solid #3498db;
+                padding: 10px 10px;
+                width: 350px;
+                outline: none;
+                color: white;
+                border-radius: 24px;
+                transition: 0.25s
+            }
+            .box input[type="file"]:focus {
+                width: 300px;
+                border-color: #2ecc71
+            }
+
+        </style>
     </head>
     <body>
         <link rel="stylesheet" href="./miestilo.css" type="text/css">
@@ -47,10 +109,10 @@
                             out.print("<input type=\"password\" name=\"contrasenia\" id=\"contrasenia\" value=\"" + es.getPass() + "\"  required/>");
                             out.print("<p class=\"text-muted\">Fecha: </p>");
                                  out.print("<input type=\"date\" name=\"fecha\" value=\"" + es.getFechaNacimiento().toString() + "\" id=\"fecha\" required>");
-                            out.print("<p class=\"text-muted\">Link web:</p>");
+                            out.print("<p class=\"text-muted\">Imagen:</p>");
                             out.print("<input type=\"file\" accept=\"image*\" name=\"Imagen\"/>");
                         %>
-                        <input type="submit" name="" value="crear">
+                        <input type="submit" name="" value="Modificar">
                         <%
                         %>
                     </form>
@@ -80,9 +142,10 @@
                            
                             out.print("<p class=\"text-muted\">Descripcion:</p>");
                             out.print("<textarea name=\"descripcion\"/ placeholder=\"" + ar.getDescripcion() + "\" /> </textarea>");
+                            out.print("<p class=\"text-muted\">Imagen:</p>");
                             out.print("<input type=\"file\" accept=\"image*\" name=\"Imagen\"/>");
                         %>
-                        <input type="submit" name="" value="crear">
+                        <input type="submit" name="" value="Modificar">
                         <%
                         %>
                     </form>

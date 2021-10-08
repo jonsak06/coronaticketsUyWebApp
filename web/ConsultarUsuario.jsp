@@ -18,22 +18,132 @@ Author     : tecnologo
         <title>JSP Page</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 
+        
         <style>
-            .input-group {
-                margin-top: 20px;
-                width: 100%;
-            }
-            .custom-select {
-                width: 90%;
-            }
-            .infoPaquete {
-                margin-top: 20px;
-                width: 25%;
-            }
-            .selectEsp{
-                width: 100%;
-                height: 100%;
-            }
+            body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: linear-gradient(to right, #b92b27, #1565c0)
+}
+
+.card {
+    margin-bottom: 10px;
+    border: none
+}
+
+.box {
+    width: 500px;
+    padding: 40px;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    background: #191919;
+    ;
+    text-align: center;
+    transition: 0.25s;
+}
+
+.box input[type="text"],
+.box input[type="password"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 10px 10px;
+    width: 250px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s
+}
+
+
+.box h1 {
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500
+}
+
+.box input[type="text"]:focus,
+.box input[type="password"]:focus {
+    width: 200px;
+    border-color: #2ecc71
+}
+
+.box select:focus {
+    width: 200px;
+    border-color: #2ecc71
+}
+
+.box select {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 10px 10px;
+    width: 250px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s
+}
+
+.box li {
+    color: white;
+    font-weight: 250
+}
+
+.box p{
+    color: white;
+    font-weight: 250
+}
+
+
+.box input[type="submit"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer
+}
+
+.box input[type="submit"]:hover {
+    background: #2ecc71
+}
+
+.forgot {
+    text-decoration: underline
+}
+
+
+            table {
+   border-collapse: separate;
+   border-spacing: 5px;
+   background: #191919;
+   color: #fff;
+   margin: 0 auto;
+}
+td, th {
+   background: #fff;
+   color: #000;
+}
+.abajo
+{
+    margin-top: 500px;
+}
+
         </style>
         <script>
             var anterior = "nada";
@@ -87,22 +197,24 @@ Author     : tecnologo
 
     <body>
         <%@include file="header.jsp" %>
-        <%
-            ServletContext contexto = getServletContext();
-            if (contexto.getAttribute("tipoUsuario") != null) {
+        <form class="box" >
 
-                if (contexto.getAttribute("tipoUsuario").equals("Espectador")) {
+            <%
+                ServletContext contexto = getServletContext();
+                if (contexto.getAttribute("tipoUsuario") != null) {
 
-                    DtEspectador es = Fabrica.getCrlUsuarios().getDatosEspectador(contexto.getAttribute("nickname").toString());
+                    if (contexto.getAttribute("tipoUsuario").equals("Espectador")) {
 
-                    out.print("<p name=\"/Tipo\"/>Espectador</p>");
-                    out.print("<p>Nombre:" + es.getNombre() + "</p>");
-                    out.print("<p>Apellido:" + es.getApellido() + "</p>");
-                    out.print("<p>Nickname:" + es.getNickname() + "</p>");
-                    out.print("<p>Correo:" + es.getCorreo() + "</p>");
-                    out.print("<p>Fecha de nacimiento: " + es.getFechaNacimiento().toString() + "</p>");
-        %>
-        <form>
+                        DtEspectador es = Fabrica.getCrlUsuarios().getDatosEspectador(contexto.getAttribute("nickname").toString());
+
+                        out.print("<p name=\"/Tipo\"/>Espectador</p>");
+                        out.print("<p>Nombre:" + es.getNombre() + "</p>");
+                        out.print("<p>Apellido:" + es.getApellido() + "</p>");
+                        out.print("<p>Nickname:" + es.getNickname() + "</p>");
+                        out.print("<p>Correo:" + es.getCorreo() + "</p>");
+                        out.print("<p>Fecha de nacimiento: " + es.getFechaNacimiento().toString() + "</p>");
+            %>
+
             <select id="selectedFuncion" name="Funciones" onchange="ShowSelected();">
                 <%
                     List<DtFuncion> funciones = Fabrica.getCrlUsuarios().getFuncionesRegistros(contexto.getAttribute("nickname").toString());
@@ -112,6 +224,7 @@ Author     : tecnologo
                 %>
             </select>
         </form>
+            <div class="abajo">
         <%
             for (int i = 0; i < funciones.size(); i++) {
                 List<DtRegistro> r = Fabrica.getCrlUsuarios().getRegistros(contexto.getAttribute("nickname").toString());
@@ -133,18 +246,20 @@ Author     : tecnologo
                 out.print("</table>");
             }
         } else if (contexto.getAttribute("tipoUsuario").equals("Artista")) {
+        %> 
+        <form class="box">
 
-            DtArtista ar = Fabrica.getCrlUsuarios().getDatosArtista(contexto.getAttribute("nickname").toString());
+            <% DtArtista ar = Fabrica.getCrlUsuarios().getDatosArtista(contexto.getAttribute("nickname").toString());
 
-            out.print("<p name=\"/Tipo\"/>Espectador</p>");
-            out.print("<p>Nombre:" + ar.getNombre() + "</p>");
-            out.print("<p>Apellido:" + ar.getApellido() + "</p>");
-            out.print("<p>Nickname:" + ar.getNickname() + "</p>");
-            out.print("<p>Correo:" + ar.getCorreo() + "</p>");
-            out.print("<p>Fecha de nacimiento: " + ar.getFechaNacimiento().toString() + "</p>");
+                out.print("<p name=\"/Tipo\"/>Espectador</p>");
+                out.print("<p>Nombre:" + ar.getNombre() + "</p>");
+                out.print("<p>Apellido:" + ar.getApellido() + "</p>");
+                out.print("<p>Nickname:" + ar.getNickname() + "</p>");
+                out.print("<p>Correo:" + ar.getCorreo() + "</p>");
+                out.print("<p>Fecha de nacimiento: " + ar.getFechaNacimiento().toString() + "</p>");
 
-        %>  
-        <form>
+            %>  
+
             <select id="selectedEspectaculo" name="Funciones" onchange="EspectaculoSelected();">
                 <%            List<DtEspectaculo> espectaculos = Fabrica.getCrlUsuarios().listarEspectaculosDeArtista(contexto.getAttribute("nickname").toString());
                     for (DtEspectaculo i : espectaculos) {
@@ -278,6 +393,8 @@ Author     : tecnologo
                 }
             }
         %>
+                    </div>
+
     </body>
 </html>
 
