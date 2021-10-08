@@ -40,7 +40,7 @@
                                 
                     </select>
                     <input type="text" name="nombreEsp" placeholder="Nombre" id="nombre" required> 
-                    <textarea name="descripcion" style="background-color: #191919; color: white;border: 2px solid #3498db; padding: 10px 10px; outline: none; color: white; border-radius: 24px; transition: 0.25s" rows="4" cols="40" placeholder="Descripcion"></textarea>
+                    <textarea name="descripcion" style="background-color: #191919; color: white;border: 2px solid #3498db; padding: 10px 10px; outline: none; color: white; border-radius: 24px; transition: 0.25s" rows="4" cols="30" placeholder="Descripcion"></textarea>
                     <input type="number" style="    border: 0;
     background: none;
     display: block;
