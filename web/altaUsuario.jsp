@@ -20,6 +20,9 @@
 
 
         <script>
+            if(${creadoUs == true}) {
+                alert("Usuario creado");
+            }
             var tus;
             tus = 0;
             function sart() {
@@ -133,7 +136,7 @@
             <div class="col-md-12">
                 <div class="card">
 
-                    <form action="AltaUsuariosBackEnd" class="box" name="fAltaUsuario" id="fAltaUsuario" method="POST">
+                    <form action="AltaUsuariosBackEnd" enctype="multipart/form-data" class="box" name="fAltaUsuario" id="fAltaUsuario" method="POST">
                         <p>Tipo Usuario:
                             <input type="radio" name="us" value="e" id="us" onclick="sesp()"> Espectador
                             <input type="radio" name="us" value="a" id="us" onclick="sart()"> Artista
@@ -171,7 +174,7 @@
                         <textarea name="descripcion" id="tfDescripcion"  style="display:none; margin: 0 auto;">
                         </textarea>
                         <p>Imagen: </p>
-                        <input type="file" name="Imagen" size="150"/>
+                        <input type="file" name="imagen" size="150" id="imagen"/>
 
 
                         <input type="submit" name="" value="crear" id="crear">

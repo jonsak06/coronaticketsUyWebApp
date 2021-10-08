@@ -23,10 +23,12 @@ import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import root.datatypes.DtArtista;
@@ -39,7 +41,7 @@ import root.interfaces.iUsuarios;
  * @author Tecnologo
  */
 @WebServlet(urlPatterns = {"/AltaUsuariosBackEnd"})
-
+@MultipartConfig()
 public class AltaUsuariosBackEnd extends HttpServlet {
 
     /**
@@ -63,15 +65,7 @@ public class AltaUsuariosBackEnd extends HttpServlet {
             String nickname = request.getParameter("nickname");
             
     
-//            String ruta=request.getParameter("imagen");
-//            Path origen = Paths.get(request.getParameter("imagen"));
-//            Path destino = Paths.get(request.getParameter("nickname")+".jpg");
-//            try {
-//                Files.copy(origen, destino, StandardCopyOption.REPLACE_EXISTING);
-//            } catch (IOException ex){
-//                Logger.getLogger(request.getParameter("nickname")).log(Level.SEVERE, null, ex);
-//            }
-//            ruta = destino.toString();
+          
             
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             java.util.Date parsed = null;
@@ -83,10 +77,25 @@ public class AltaUsuariosBackEnd extends HttpServlet {
             }
             java.sql.Date fecha = new java.sql.Date(parsed.getTime());
            // Date fecha = new Date(1,1,1);
-            String imagen = "";
+            String imagen = "silueta.jpg";
             long id = 0;
             int canjeables = 0;
-            DtEspectador es = new DtEspectador(canjeables, id, nombre, apellido, correo, nickname, imagen, fecha, pass);
+            DtEspectador es=null;
+            
+           String path = "/home/tecnologo/Descargas/imgsUs/";
+            Part imgPart = request.getPart("imagen");
+            if(imgPart.getSize() != 0) { //control de que haya un archivo en el input
+                String imgName = nickname;
+                for(Part part : request.getParts()) {
+                    part.write(path + imgName);
+                }
+                es = new DtEspectador(canjeables, id, nombre, apellido, correo, nickname, path+imgName, fecha, pass);
+            
+            }else
+            {
+                 es = new DtEspectador(canjeables, id, nombre, apellido, correo, nickname, imagen, fecha, pass);
+            
+            }
             iu.altaEspectador(es);
             
         } else if ("a".equals(request.getParameter("us"))) {
@@ -119,8 +128,8 @@ public class AltaUsuariosBackEnd extends HttpServlet {
         }
 
         ServletContext contexto = getServletContext();
-
-        RequestDispatcher dispatcher = contexto.getRequestDispatcher("/index.jsp");
+        request.setAttribute("creadoUs", true);
+        RequestDispatcher dispatcher = contexto.getRequestDispatcher("/altaUsuario.jsp");
         dispatcher.forward(request, response);
     }
 
