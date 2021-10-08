@@ -33,6 +33,7 @@
                 height: 100%;
             }
         </style>
+        <link rel="stylesheet" href="headerStyles.css">
     </head>
     <body>
         <%@include file="header.jsp" %>
@@ -64,5 +65,6 @@
             </select>
             <input type="submit" name="" value="Dejar de seguir"> 
         </form>
+            <%@include file="headerScript.jsp"%>
     </body>
 </html>

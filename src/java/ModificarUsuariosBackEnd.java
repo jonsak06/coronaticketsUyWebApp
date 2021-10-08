@@ -9,15 +9,18 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.sql.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import root.datatypes.DtArtista;
@@ -30,15 +33,14 @@ import root.interfaces.iUsuarios;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author tecnologo
  */
-
 @WebServlet(urlPatterns = {"/ModificarUsuariosBackEnd"})
-public class ModificarUsuariosBackEnd extends HttpServlet{
-  
+@MultipartConfig()
+public class ModificarUsuariosBackEnd extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -53,15 +55,13 @@ public class ModificarUsuariosBackEnd extends HttpServlet{
         response.setContentType("text/html;charset=UTF-8");
         iUsuarios iu = Fabrica.getCrlUsuarios();
         ServletContext contexto = getServletContext();
-                
+
         if ("Espectador".equals(contexto.getAttribute("tipoUsuario").toString())) {
             String nombre = request.getParameter("nombre");
             String apellido = request.getParameter("apellido");
-            String correo = request.getParameter("correo");
             String pass = request.getParameter("contrasenia");
             String nickname = contexto.getAttribute("nickname").toString();
-            
-    
+
 //            String ruta=request.getParameter("imagen");
 //            Path origen = Paths.get(request.getParameter("imagen"));
 //            Path destino = Paths.get(request.getParameter("nickname")+".jpg");
@@ -71,7 +71,6 @@ public class ModificarUsuariosBackEnd extends HttpServlet{
 //                Logger.getLogger(request.getParameter("nickname")).log(Level.SEVERE, null, ex);
 //            }
 //            ruta = destino.toString();
-            
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             java.util.Date parsed = null;
             try {
@@ -81,18 +80,39 @@ public class ModificarUsuariosBackEnd extends HttpServlet{
                 e1.printStackTrace();
             }
             java.sql.Date fecha = new java.sql.Date(parsed.getTime());
-           // Date fecha = new Date(1,1,1);
+            // Date fecha = new Date(1,1,1);
             String imagen = "";
             long id = 0;
             int canjeables = 0;
-            DtEspectador es = new DtEspectador(canjeables, id, nombre, apellido, correo, nickname, imagen, fecha, pass);
-            iu.modificarEspectador(es);
-            
+            DtEspectador es = null;
+            DtEspectador esNew = null;
+            List<DtEspectador> le = iu.getEspectadores();
+
+            for (DtEspectador i : le) {
+                if (i.getNickname().equals(nickname)) {
+                    es = i;
+                }
+            }
+
+            String path = "/home/tecnologo/Descargas/imgsUs/";
+            Part imgPart = request.getPart("imagen");
+            if (imgPart.getSize() != 0) { //control de que haya un archivo en el input
+                String imgName = nickname;
+                for (Part part : request.getParts()) {
+                    part.write(path + imgName);
+                }
+                esNew = new DtEspectador(es.getCanjeables(), es.getId(), nombre, apellido, es.getCorreo(), es.getNickname(), path + imgName, fecha, pass);
+
+            } else {
+                esNew = new DtEspectador(es.getCanjeables(), es.getId(), nombre, apellido, es.getCorreo(), es.getNickname(), es.getImagen(), fecha, pass);
+
+            }
+            iu.modificarEspectador(esNew);
+
         } else if ("Artista".equals(contexto.getAttribute("tipoUsuario").toString())) {
-         
+
             String nombre = request.getParameter("nombre");
             String apellido = request.getParameter("apellido");
-            String correo = request.getParameter("correo");
             String pass = request.getParameter("contrasenia");
             String nickname = contexto.getAttribute("nickname").toString();
             String descripcion = request.getParameter("descripcion");
@@ -100,7 +120,7 @@ public class ModificarUsuariosBackEnd extends HttpServlet{
             String linkWeb = request.getParameter("link");
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                java.util.Date parsed = null;
+            java.util.Date parsed = null;
             try {
                 parsed = sdf.parse(request.getParameter("fecha"));
             } catch (ParseException e1) {
@@ -109,11 +129,27 @@ public class ModificarUsuariosBackEnd extends HttpServlet{
             }
             java.sql.Date fecha = new java.sql.Date(parsed.getTime());
 
-          //  Date fecha = new Date(1,1,1);
-            String imagen = "";
+            //  Date fecha = new Date(1,1,1);
+            String imagen = "silueta.jpg";
             long id = 0;
-            DtArtista ar = new DtArtista(linkWeb, biografia, descripcion, id, nombre, apellido, correo, nickname, imagen, fecha, pass);
-            iu.modificarArtista(ar);
+            DtArtista ar = iu.getDatosArtista(nickname);
+            DtArtista arNew = null;
+
+            String path = "/home/tecnologo/Descargas/imgsUs/";
+            Part imgPart = request.getPart("imagen");
+            if (imgPart.getSize() != 0) { //control de que haya un archivo en el input
+                String imgName = nickname;
+                for (Part part : request.getParts()) {
+                    part.write(path + imgName);
+                }
+                arNew = new DtArtista(linkWeb, biografia, descripcion, ar.getId(), nombre, apellido, ar.getCorreo(), ar.getNickname(), path + imgName, fecha, pass);
+
+            } else {
+                arNew = new DtArtista(linkWeb, biografia, descripcion, ar.getId(), nombre, apellido, ar.getCorreo(), ar.getNickname(), imagen, fecha, pass);
+
+            }
+
+            iu.modificarArtista(arNew);
         }
 
         RequestDispatcher dispatcher = contexto.getRequestDispatcher("/index.jsp");
