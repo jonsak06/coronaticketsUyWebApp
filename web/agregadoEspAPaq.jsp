@@ -142,13 +142,16 @@
             });
             const botonAgregar = document.querySelector(".btnAgregar");
             const esps = document.getElementById("inputGroupSelect03");
-            esps.addEventListener("change", e => {
-                if(e.target.value === "Seleccione...") {
-                    botonAgregar.disabled = true;
-                } else {
-                    botonAgregar.disabled = false;
-                }
-            });
+            if(esps !== null) {
+                esps.addEventListener("change", e => {
+                    if(e.target.value === "Seleccione...") {
+                        botonAgregar.disabled = true;
+                    } else {
+                        botonAgregar.disabled = false;
+                    }
+                });
+            }
+            
         </script>
     </body>
 </html>
