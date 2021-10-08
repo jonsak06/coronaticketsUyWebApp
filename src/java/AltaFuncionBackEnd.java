@@ -5,39 +5,31 @@
 
 
 
-import java.awt.Image;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.sql.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import root.datatypes.DtArtista;
-import root.datatypes.DtEspectador;
+import root.datatypes.DtFuncion;
 import root.fabrica.Fabrica;
-import root.interfaces.iUsuarios;
 import root.interfaces.IEspectaculos;
+import root.interfaces.iUsuarios;
 
 /**
  *
  * @author osiris
  */
 @WebServlet(urlPatterns = {"/AltaFuncionBackEnd"})
-public class AltaFuncion extends HttpServlet {
+public class AltaFuncionBackEnd extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,11 +43,58 @@ public class AltaFuncion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String nombre = request.getParameter("nombre");
-            String apellido = request.getParameter("apellido");
-            String correo = request.getParameter("correo");
-            String pass = request.getParameter("contrasenia");
-            String nickname = request.getParameter("nickname");
+        
+        ServletContext contexto = getServletContext();
+    
+    String nombreEspec = request.getParameter("espectaculos");
+    String nombre = request.getParameter("nombre");
+    long id = 0L;
+    
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    java.util.Date parsed = null;
+    try
+    {
+      parsed = sdf.parse(request.getParameter("fecha"));
+    }
+    catch (ParseException e1)
+    {
+      e1.printStackTrace();
+    }
+    java.sql.Date fecha = new java.sql.Date(parsed.getTime());
+    
+    SimpleDateFormat sdfH = new SimpleDateFormat("HH:mm");
+    parsed = null;
+    try
+    {
+      parsed = sdfH.parse(request.getParameter("hora"));
+    }
+    catch (ParseException e1)
+    {
+      e1.printStackTrace();
+    }
+    Timestamp time = new Timestamp(parsed.getTime());
+    
+    List<DtArtista> listaArt = Fabrica.getCrlUsuarios().getArtistas();
+    List<String> listaCon = new ArrayList();
+    for (DtArtista i : listaArt) {
+      if ((!i.getNickname().equals(contexto.getAttribute("nickname").toString())) && 
+        (request.getParameter(i.getNickname()) != null)) {
+        listaCon.add(i.getNickname());
+      }
+    }
+    parsed = null;
+    try
+    {
+      parsed = sdf.parse(request.getParameter("fechaA"));
+    }
+    catch (ParseException e1)
+    {
+      e1.printStackTrace();
+    }
+    java.sql.Date fechaA = new java.sql.Date(parsed.getTime());
+    
+    DtFuncion fun = new DtFuncion(Long.valueOf(id), nombre, time, fecha, fechaA);
+    Fabrica.getCtrlEspectaculos().crearFuncion(nombreEspec, fun, listaCon);
            
         
         
