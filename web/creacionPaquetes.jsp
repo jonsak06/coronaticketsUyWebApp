@@ -20,14 +20,15 @@
                 margin-top: 30px;
             }
         </style>
+        <link rel="stylesheet" href="headerStyles.css">
     </head>
     <body>
         <% 
             //usuarios que no sean artistas son redirigidos al inicio
             try {
                 ServletContext contexto = getServletContext();
-                String tipoUsuario = contexto.getAttribute("tipoUsuario").toString();
-                if(!tipoUsuario.equals("Artista")) {
+                String tipoUsr = contexto.getAttribute("tipoUsr").toString();
+                if(!tipoUsr.equals("Artista")) {
                     response.sendRedirect("index.jsp");
                 }
             } catch(Exception e) {
@@ -75,7 +76,7 @@
             Gson gson = new Gson();
             String jsonPaqs = gson.toJson(paqs);
         %>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+        <%@include file="headerScript.jsp"%>
         <script>
             if(${creado == true}) {
                 alert("Paquete creado");

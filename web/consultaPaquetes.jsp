@@ -36,6 +36,7 @@
                 height: 100%;
             }
         </style>
+        <link rel="stylesheet" href="headerStyles.css">
     </head>
     <body>
     <%@include file="header.jsp" %>
@@ -94,8 +95,7 @@
             }
         %>
     </div>
-  
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+        <%@include file="headerScript.jsp"%>
     <script>
         const paqs = document.getElementById("inputGroupSelect04");
         const botonConsultarPaq = document.querySelector(".btn-outline-secondary");
