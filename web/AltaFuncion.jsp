@@ -17,7 +17,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <style type="text/css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+<!--        <style type="text/css">
 
             * {
                 margin:px;
@@ -73,11 +74,12 @@
                 top:0px;
             }
 
-        </style>
-
+        </style>-->
+        <link rel="stylesheet" href="headerStyles.css">
     </head>
     <body>
-        <div id="header">
+        <%@include file="header.jsp"%>
+<!--        <div id="header">
             <ul class="nav">
                 <li><a href="/coronaticketsUyWebApp/login.jsp">Iniciar Sesion</a></li>
                 <li><a href="">Usuarios</a>
@@ -99,7 +101,7 @@
         </li>
         <li><a href="">Contacto</a></li>
     </ul>
-</div>
+</div>-->
 
 <script>
     function linkPlataformas() {
@@ -187,6 +189,6 @@
 
 
 </form>
-
+<%@include file="headerScript.jsp"%>
 </body>
 </html>

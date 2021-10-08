@@ -15,6 +15,7 @@
     </head>
 	<body>
             <%@include file="header.jsp" %>
+            <link rel="stylesheet" href="headerStyles.css">
             <%ServletContext contexto = getServletContext();%>
     <div class="container">
     <link rel="stylesheet" href="./miestilo.css" type="text/css"><!-- comment -->
@@ -30,5 +31,6 @@
     </div>
     </div>
     </div>
+    <%@include file="headerScript.jsp"%>
     </body>
 </html>

@@ -93,6 +93,7 @@
     </head>
     <body>
         <link rel="stylesheet" href="./miestilo.css" type="text/css">
+        <link rel="stylesheet" href="headerStyles.css">
         <%@include file="header.jsp" %>
         <div class="row">
             <div class="col-md-12">
@@ -170,5 +171,6 @@
                 </div>
             </div>
         </div>
+        <%@include file="headerScript.jsp"%>
     </body>
 </html>

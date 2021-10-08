@@ -149,6 +149,7 @@ Author     : tecnologo
             }
 
         </style>
+        <link rel="stylesheet" href="headerStyles.css">
         <script>
             var anterior = "nada";
             function ShowSelected()
@@ -403,6 +404,7 @@ Author     : tecnologo
             %>
         </div>
 
+        <%@include file="headerScript.jsp"%>
     </body>
 </html>
 
