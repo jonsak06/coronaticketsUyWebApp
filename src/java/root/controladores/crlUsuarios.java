@@ -215,4 +215,11 @@ public class crlUsuarios implements iUsuarios
      public void comprarPaquete(String nickname, String nombrePaq){
           ManejadorUsuarios.comprarPaquete(nickname, nombrePaq);
      }
+     
+     public List<DtUsuario> getUsuariosQueTeSiguenAr(String nickname){
+         return ManejadorUsuarios.getUsuariosQueTeSiguenAr(nickname);
+     }
+     public List<DtUsuario> getUsuariosQueTeSiguenEs(String nickname){
+         return ManejadorUsuarios.getUsuariosQueTeSiguenEs(nickname);
+     }
 }
