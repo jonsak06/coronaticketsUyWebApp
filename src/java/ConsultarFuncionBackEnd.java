@@ -40,17 +40,25 @@ public class ConsultarFuncionBackEnd extends HttpServlet {
                     contexto.setAttribute("ArtistaSeleccionadoEnConsultarFuncion", request.getParameter("artista"));
                 }
             }else if (request.getParameter("funcion") != null) {
-                if (!request.getParameter("funcion").equals("Seleccione...")) {
+                if (!request.getParameter("funcion").equals("Funciones...")) {
                     contexto.setAttribute("FuncionSeleccionadaEnConsultarFuncion", request.getParameter("funcion"));
+                        contexto.setAttribute("ArtistaSeleccionadoEnConsultarFuncion", "Seleccione...");
+                
                 }
             }else if (request.getParameter("espectaculo") != null) {
-                if (!request.getParameter("espectaculo").equals("Seleccione...")) {
+                if (!request.getParameter("espectaculo").equals("Espectaculos...")) {
                     contexto.setAttribute("EspectaculoSeleccionadpEnConsultarFuncion", request.getParameter("espectaculo"));
+                    contexto.setAttribute("FuncionSeleccionadaEnConsultarFuncion", "Funciones...");
+                    contexto.setAttribute("ArtistaSeleccionadoEnConsultarFuncion", "Seleccione...");
                 }
             }
             else if (request.getParameter("plataforma") != null) {
                 if (!request.getParameter("plataforma").equals("Seleccione...")) {
                     contexto.setAttribute("PlataformaSeleccionadaEnConsultarFuncion", request.getParameter("plataforma"));
+                    contexto.setAttribute("EspectaculoSeleccionadpEnConsultarFuncion", "Espectaculos...");
+                    contexto.setAttribute("FuncionSeleccionadaEnConsultarFuncion", "Funciones...");
+                    contexto.setAttribute("ArtistaSeleccionadoEnConsultarFuncion", "Seleccione...");
+                
                 }
             }
             

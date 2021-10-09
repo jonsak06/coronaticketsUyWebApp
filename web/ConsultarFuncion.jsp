@@ -23,7 +23,6 @@
     <body>
         <%@include file="header.jsp"%>
         <%ServletContext contexto = getServletContext();
-            out.println("<h1> " + contexto.getAttribute("nickname").toString() + " </h1> ");
         %>
 
         <form action="ConsultarFuncionBackEnd" class="container">
@@ -91,7 +90,7 @@
 
                                     }
                                 } else {
-                                    if (contexto.getAttribute("EspectaculoSeleccionadpEnConsultarFuncion") != "Espectaculos...") {
+                                    if (contexto.getAttribute("EspectaculoSeleccionadpEnConsultarFuncion").toString() != "Espectaculos...") {
                                         out.print("<option selected>" + contexto.getAttribute("EspectaculoSeleccionadpEnConsultarFuncion").toString() + "</option>");
 
                                         for (DtEspectaculo e : esps) {
@@ -125,7 +124,7 @@
                                 if (contexto.getAttribute("EspectaculoSeleccionadpEnConsultarFuncion") != null) {
                                     String esp = contexto.getAttribute("EspectaculoSeleccionadpEnConsultarFuncion").toString();
 
-                                    if (esp != "Seleccione..." && esp != null) {
+                                    if (esp != "Espectaculos..." && esp != null) {
                                         for (DtEspectaculo e : esps) {
                                             if (esp.equals(e.getNombre())) {
                                                 out.print("<div class='card' style='width: 18rem;'>");
@@ -145,8 +144,32 @@
 
                                                 out.print("<select name='funcion' class='custom-select selectEsp' id='inputGroupSelect04f'>");
                                                 out.print("<option selected>Funciones...</option>");
-                                                for (DtFuncion f : fun) {
-                                                    out.print("<option >" + f.getNombre() + "</option>");
+                                                if (contexto.getAttribute("FuncionSeleccionadaEnConsultarEspectaculo") == null) {
+                                                    out.print("<option selected>Funciones...</option>");
+
+                                                    for (DtFuncion f : fun) {
+                                                        out.print("<option >" + f.getNombre() + "</option>");
+
+                                                    }
+                                                } else {
+                                                    if (contexto.getAttribute("FuncionSeleccionadaEnConsultarEspectaculo").toString() != "Funciones...") {
+                                                        out.print("<option selected>" + contexto.getAttribute("FuncionSeleccionadaEnConsultarEspectaculo").toString() + "</option>");
+
+                                                        for (DtFuncion f : fun) {
+                                                            if (!contexto.getAttribute("FuncionSeleccionadaEnConsultarEspectaculo").toString().equals(f.getNombre())) {
+                                                                out.print("<option >" + f.getNombre() + "</option>");
+
+                                                            }
+
+                                                        }
+                                                    } else {
+                                                        out.print("<option selected>Funciones...</option>");
+
+                                                        for (DtFuncion f : fun) {
+                                                            out.print("<option >" + f.getNombre() + "</option>");
+
+                                                        }
+                                                    }
 
                                                 }
                                                 out.print("</select>");
@@ -161,7 +184,7 @@
                                                 if (contexto.getAttribute("FuncionSeleccionadaEnConsultarFuncion") != null) {
                                                     String sfun = contexto.getAttribute("FuncionSeleccionadaEnConsultarFuncion").toString();
 
-                                                    if (sfun != "Seleccione..." && sfun != null) {
+                                                    if (sfun != "Funciones..." && sfun != null) {
                                                         for (DtFuncion f : fun) {
                                                             if (sfun.equals(f.getNombre())) {
                                                                 out.print("<div class='card' style='width: 18rem;'>");
@@ -176,11 +199,36 @@
                                                                 out.print("<form action=\"ConsultarFuncionBackEnd\">");
 
                                                                 out.print("<select name='artista' class='custom-select selectEsp' id='inputGroupSelect04a'>");
-                                                                out.print("<option selected>Artistas...</option>");
-                                                                for (DtArtista a : ars) {
-                                                                    out.print("<option >" + a.getNickname() + "</option>");
+                                                                
+                                     
+
+                                                                if (contexto.getAttribute("ArtistaSeleccionadoEnConsultarFuncion") != null) {
+                                                                    String selUsu = contexto.getAttribute("ArtistaSeleccionadoEnConsultarFuncion").toString();
+                                                                    if (selUsu != "Seleccione...") {
+                                                                        out.println("<option selected>" + selUsu + "</option>");
+                                                                        for (DtArtista a : ars) {
+                                                                            if (!a.getNickname().equals(selUsu)) {
+
+                                                                                out.println("<option>" + a.getNickname() + "</option>");
+                                                                            }
+                                                                        }
+
+                                                                    } else {
+                                                                        out.println("<option selected>Seleccione...</option>");
+                                                                        for (DtArtista a : ars) {
+                                                                            out.println("<option>" + a.getNickname() + "</option>");
+                                                                        }
+
+                                                                    }
+
+                                                                } else {
+                                                                    out.println("<option selected>Seleccione...</option>");
+                                                                    for (DtArtista a : ars) {
+                                                                        out.println("<option>" + a.getNickname() + "</option>");
+                                                                    }
 
                                                                 }
+
                                                                 out.print("</select>");
 
                                                                 out.print("</li>");
@@ -196,7 +244,7 @@
 
                                                                     if (sar != "Seleccione..." && sar != null) {
                                                                         for (DtArtista a : ars) {
-                                                                            if (sfun.equals(f.getNombre())) {
+                                                                            if (sar.equals(a.getNickname())) {
                                                                                 out.print("<div class='card' style='width: 18rem;'>");
                                                                                 out.print("<p class='card-text'>" + a.getNickname() + "</p>");
                                                                                 out.print("<p class='card-text'>" + a.getCorreo() + "</p>");
