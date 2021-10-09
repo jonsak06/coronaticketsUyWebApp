@@ -91,8 +91,8 @@
 
                                     }
                                 } else {
-                                    if (contexto.getAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo") != "Espectaculos...") {
-                                        out.print("<option selected>" + contexto.getAttribute("EspectaculoSeleccionadpEnConsultarFuncion").toString() + "</option>");
+                                    if (contexto.getAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo").toString() != "Espectaculos...") {
+                                        out.print("<option selected>" + contexto.getAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo").toString() + "</option>");
 
                                         for (DtEspectaculo e : esps) {
                                             if (!contexto.getAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo").toString().equals(e.getNombre())) {
@@ -121,7 +121,7 @@
                                 out.print("<button class='btn btn-outline-secondarye' type='submit' disabled>Consultar</button>");
                                 out.print("</form>");
                                 out.print("</div>");
-
+//
                                 if (contexto.getAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo") != null) {
                                     String esp = contexto.getAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo").toString();
 
@@ -144,9 +144,33 @@
                                                 out.print("<form action=\"ConsultarEspectaculoBackEnd\">");
 
                                                 out.print("<select name='funcion' class='custom-select selectEsp' id='inputGroupSelect04f'>");
-                                                out.print("<option selected>Funciones...</option>");
-                                                for (DtFuncion f : fun) {
-                                                    out.print("<option >" + f.getNombre() + "</option>");
+                                                
+                                                if (contexto.getAttribute("FuncionSeleccionadaEnConsultarEspectaculo") == null) {
+                                                    out.print("<option selected>Funciones...</option>");
+
+                                                    for (DtFuncion f : fun) {
+                                                        out.print("<option >" + f.getNombre() + "</option>");
+
+                                                    }
+                                                } else {
+                                                    if (contexto.getAttribute("FuncionSeleccionadaEnConsultarEspectaculo").toString() != "Funciones...") {
+                                                        out.print("<option selected>" + contexto.getAttribute("FuncionSeleccionadaEnConsultarEspectaculo").toString() + "</option>");
+
+                                                        for (DtFuncion f : fun) {
+                                                            if (!contexto.getAttribute("FuncionSeleccionadaEnConsultarEspectaculo").toString().equals(f.getNombre())) {
+                                                                out.print("<option >" + f.getNombre() + "</option>");
+
+                                                            }
+
+                                                        }
+                                                    } else {
+                                                        out.print("<option selected>Funciones...</option>");
+
+                                                        for (DtFuncion f : fun) {
+                                                            out.print("<option >" + f.getNombre() + "</option>");
+
+                                                        }
+                                                    }
 
                                                 }
                                                 out.print("</select>");
@@ -177,19 +201,54 @@
                                                         }
                                                     }
                                                 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////777
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
                                                 List<String> paqs = Fabrica.getCtrlPaquetes().listarPaquetes();
 
                                                 out.print("<form action=\"ConsultarEspectaculoBackEnd\">");
 
                                                 out.print("<select name='paquete' class='custom-select selectEsp' id='inputGroupSelect04p'>");
-                                                out.print("<option selected>Paquetes...</option>");
-                                                for (String i : paqs) {
-                                                    if (Fabrica.getCtrlPaquetes().listarEspectaculosIncluidos(i).contains(e.getNombre())) {
-                                                        out.print("<option >" + i + "</option>");
+                                                
+                                           
+                                                
+                                                
+                                                
+                                                if (contexto.getAttribute("PaqueteSeleccionadoEnConsultarEspectaculo") == null) {
+                                                    out.print("<option selected>Paquetes...</option>");
+
+                                                    for (String i : paqs) {
+                                                        if (Fabrica.getCtrlPaquetes().listarEspectaculosIncluidos(i).contains(e.getNombre())) {
+                                                            out.print("<option >" + i + "</option>");
+                                                        }
+
+                                                    }
+                                                } else {
+                                                    if (contexto.getAttribute("PaqueteSeleccionadoEnConsultarEspectaculo").toString() != "Paquetes...") {
+                                                        out.print("<option selected>" + contexto.getAttribute("PaqueteSeleccionadoEnConsultarEspectaculo").toString() + "</option>");
+                                                        for (String i : paqs) {
+                                                            if (Fabrica.getCtrlPaquetes().listarEspectaculosIncluidos(i).contains(e.getNombre())) {
+                                                                if (!contexto.getAttribute("PaqueteSeleccionadoEnConsultarEspectaculo").toString().equals(i)) {
+                                                                    out.print("<option >" + i + "</option>");
+                                                                }
+                                                            }
+                                                        }
+                                                    } else {
+                                                        out.print("<option selected>Paquetes...</option>");
+
+                                                        for (String i : paqs) {
+                                                            if (Fabrica.getCtrlPaquetes().listarEspectaculosIncluidos(i).contains(e.getNombre())) {
+                                                                out.print("<option >" + i + "</option>");
+                                                            }
+
+                                                        }
                                                     }
 
                                                 }
+                                                
+                                                
+                                                
                                                 out.print("</select>");
 
                                                 out.print("</li>");
@@ -224,6 +283,9 @@
                                                         }
                                                     }
                                                 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////777
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
                                                 //////////////////////////
                                             }
                                         }

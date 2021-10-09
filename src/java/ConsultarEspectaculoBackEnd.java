@@ -45,13 +45,19 @@ public class ConsultarEspectaculoBackEnd extends HttpServlet {
                     contexto.setAttribute("FuncionSeleccionadaEnConsultarEspectaculo", request.getParameter("funcion"));
                 }
             }else if (request.getParameter("espectaculo") != null) {
-                if (!request.getParameter("espectaculo").equals("Seleccione...")) {
+                if (!request.getParameter("espectaculo").equals("Espectaculos...")) {
                     contexto.setAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo", request.getParameter("espectaculo"));
+                    contexto.setAttribute("PaqueteSeleccionadoEnConsultarEspectaculo", "Paquetes...");
+                    contexto.setAttribute("FuncionSeleccionadaEnConsultarEspectaculo", "Funciones...");
                 }
             }
             else if (request.getParameter("plataforma") != null) {
                 if (!request.getParameter("plataforma").equals("Seleccione...")) {
                     contexto.setAttribute("PlataformaSeleccionadaEnConsultarEspectaculo", request.getParameter("plataforma"));
+                    
+                    contexto.setAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo", "Espectaculos...");
+                    contexto.setAttribute("PaqueteSeleccionadoEnConsultarEspectaculo", "Paquetes...");
+                    contexto.setAttribute("FuncionSeleccionadaEnConsultarEspectaculo", "Funciones...");
                 }
             }
             RequestDispatcher dispatcher = contexto.getRequestDispatcher("/consultarEspectaculo.jsp");
