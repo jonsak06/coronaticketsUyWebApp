@@ -110,4 +110,8 @@ public class CtrlEspectaculos implements IEspectaculos {
     public List<DtFuncion> listarTodasLasFunciones(String nombreEsp){
         return ManEspectaculo.listarTodasLasFunciones(nombreEsp);
     }
+    
+    public List<DtEspectaculo> listarTodosLosEspectaculos() {
+        return ManEspectaculo.listarEspectaculos();
+    }
 }
