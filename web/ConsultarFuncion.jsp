@@ -28,16 +28,34 @@
 
         <form action="ConsultarFuncionBackEnd" class="container">
             <div class="input-group">
-                <select name="plataforma" class="custom-select" id="inputGroupSelect04">
-                    <option selected>Seleccione...</option>
-                    <%
-                        List<DtPlataforma> listaDePlat = Fabrica.getCtrlEspectaculos().listarPlataformas();
+                <%
+                    
+                    out.println("<select name=\"plataforma\" class=\"custom-select\" id=\"inputGroupSelect04\">");
+                    String plat = request.getParameter("plataforma");
+                     List<DtPlataforma> listaDePlat = Fabrica.getCtrlEspectaculos().listarPlataformas();
+                if (plat != "Seleccione..." && plat != null){ 
+                   out.println("<option selected>"+ plat +"</option>");
+                        for (DtPlataforma p : listaDePlat) {
+                            if(!plat.equals(p.getNombre())){
+                            out.println("<option>" + p.getNombre() + "</option>");
+                            }
+                        }
+                   
+                }
+                else{
+                 out.println("<option selected>Seleccione...</option>");
+                    
+                    
+                       
 
                         for (DtPlataforma p : listaDePlat) {
                             out.println("<option>" + p.getNombre() + "</option>");
                         }
-                    %>
-                </select>
+                    
+                    
+                }
+                out.println("</select>");
+                        %>
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="submit" disabled>Consultar</button>
                 </div>
@@ -46,7 +64,7 @@
         <div class="container infoDeFunciones">
 
             <%
-                String plat = request.getParameter("plataforma");
+               
                 if (plat != "Seleccione..." && plat != null) {
                     for (DtPlataforma p : listaDePlat) {
                         if (plat.equals(p.getNombre())) {
@@ -62,46 +80,51 @@
                             for (DtEspectaculo u : esps) {
                                 listStrin.add(u.getNombre());
                             }
-
-                            out.print("<select name='espectaculo' class='custom-select selectEsp' id='inputGroupSelect04'>");
+                            out.print("<form action=\"ConsultarFuncionBackEnd\">");      
+                            out.print("<select name='espectaculo' class='custom-select selectEsp' id='inputGroupSelect04e'>");
                             out.print("<option selected>Espectaculos...</option>");
                             for (DtEspectaculo e : listEspA) {
                                 if (listStrin.contains(e.getNombre())) {
                                     out.print("<option >" + e.getNombre() + "</option>");
                                 }
                             }
+                            
                             out.print("</select>");
+                            
 
                             out.print("</li>");
                             out.print("</ul>");
                             out.print("<div class='card-body'>");
-                            out.print("<button class='btn btn-outline-secondary' type='submit' disabled>Consultar</button>");
+                            out.print("<button class='btn btn-outline-secondarye' type='submit' disabled>Consultar</button>");
+                            out.print("</form>");
                             out.print("</div>");
-                            out.print("</div>");
+                            
 
-                            String plat = request.getParameter("plataforma");
-                            if (plat != "Seleccione..." && plat != null) {
-                                for (DtPlataforma p : listaDePlat) {
-                                    if (plat.equals(p.getNombre())) {
+                            String esp = request.getParameter("espectaculo");
+                            if (esp != "Seleccione..." && esp != null) {
+                                for (DtEspectaculo e : listEspA) {
+                                    if (esp.equals(e.getNombre())) {
                                         out.print("<div class='card' style='width: 18rem;'>");
-                                        out.print("<p class='card-text'>" + p.getNombre() + "</p>");
-                                        out.print("<p class='card-text'>" + p.getUrl() + "</p>");
-                                        out.print("<p class='card-text'>" + p.getDescripcion() + "</p>");
+                                        out.print("<p class='card-text'>" + e.getNombre() + "</p>");
+                                        out.print("<p class='card-text'>" + e.getDescripcion()+ "</p>");
+                                        out.print("<p class='card-text'>" + e.getDuracion() + "</p>");
+                                        out.print("<p class='card-text'>" + e.getCantidadMaximaEspectadores() + "</p>");
+                                        out.print("<p class='card-text'>" + e.getCantidadMinimaEspectadores() + "</p>");
+                                        out.print("<p class='card-text'>" + e.getUrl() + "</p>");
+                                        out.print("<p class='card-text'>" + e.getCosto()+ "</p>");
+                                        out.print("<p class='card-text'>" + e.getFechaDeRegistro() + "</p>");
+                                       
                                         out.print("</div>");
 
-                                        List<DtEspectaculo> esps = Fabrica.getCtrlEspectaculos().listarEspectaculos(p.getNombre());
-                                        List<DtEspectaculo> listEspA = Fabrica.getCrlUsuarios().listarEspectaculosDeArtista(contexto.getAttribute("nickname").toString());
-                                        List<String> listStrin = new ArrayList<String>();
-                                        for (DtEspectaculo u : esps) {
-                                            listStrin.add(u.getNombre());
-                                        }
+                                        List<DtFuncion> fun = Fabrica.getCtrlEspectaculos().listarFunciones(request.getParameter("espectaculo"));
+                                       
+                                        
 
                                         out.print("<select name='espectaculo' class='custom-select selectEsp' id='inputGroupSelect04'>");
                                         out.print("<option selected>Espectaculos...</option>");
-                                        for (DtEspectaculo e : listEspA) {
-                                            if (listStrin.contains(e.getNombre())) {
-                                                out.print("<option >" + e.getNombre() + "</option>");
-                                            }
+                                        for (DtFuncion f : fun) {
+                                            out.print("<option >" + f.getNombre() + "</option>");
+                                            
                                         }
                                         out.print("</select>");
 
@@ -137,7 +160,17 @@
             });
 
         </script>        
+           <script>   const esps = document.getElementById("inputGroupSelect04e");
+            const botonConsultarEsps = document.querySelector(".btn-outline-secondarye");
+            esps.addEventListener("change", e => {
+                if (e.target.value === "Seleccione...") {
+                    botonConsultarEsps.disabled = true;
+                } else {
+                    botonConsultarEsps.disabled = false;
+                }
+            });
 
+        </script>   
 
     </body>
 
