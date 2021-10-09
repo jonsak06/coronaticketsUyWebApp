@@ -864,6 +864,68 @@ public class ManejadorUsuarios {
         em.close();
         emf.close();
     }
+    
+    
+    
+    
+    public static List<DtUsuario> getUsuariosQueTeSiguenAr(String nickname) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<Artista> consulta = em.createNamedQuery("ArtistaporNick", Artista.class);
+        consulta.setParameter("nickname", nickname);
+        Artista esteMen = consulta.getSingleResult();
+
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+        List<Usuario> lu = esteMen.getSeguidores();
+        List<DtUsuario> dtA = new ArrayList<DtUsuario>();
+        for (Usuario i : lu) {
+            if (i instanceof Artista) {
+
+                DtUsuario esteDt = ((Artista) i).getMyDt();
+
+                dtA.add(esteDt);
+            }
+            if (i instanceof Espectador) {
+
+                DtUsuario esteDt = ((Espectador) i).getMyDt();
+
+                dtA.add(esteDt);
+            }
+        }
+        return dtA;
+    }
+
+    public static List<DtUsuario> getUsuariosQueTeSiguenEs(String nickname) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<Espectador> consulta = em.createNamedQuery("EspectadorporNick", Espectador.class);
+        consulta.setParameter("nickname", nickname);
+        Espectador esteMen = consulta.getSingleResult();
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+        List<Usuario> lu = esteMen.getSeguidores();
+        List<DtUsuario> dtA = new ArrayList<DtUsuario>();
+        for (Usuario i : lu) {
+            if (i instanceof Artista) {
+
+                DtUsuario esteDt = ((Artista) i).getMyDt();
+
+                dtA.add(esteDt);
+            }
+            if (i instanceof Espectador) {
+
+                DtUsuario esteDt = ((Espectador) i).getMyDt();
+
+                dtA.add(esteDt);
+            }
+        }
+        return dtA;
+    }
 
 }
 
