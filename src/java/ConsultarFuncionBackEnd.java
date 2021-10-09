@@ -32,9 +32,20 @@ public class ConsultarFuncionBackEnd extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-           ServletContext contexto = getServletContext();
+            ServletContext contexto = getServletContext();
+            if (request.getParameter("espectaculo") != null) {
+                if (!request.getParameter("espectaculo").equals("Seleccione...")) {
+                    contexto.setAttribute("EspectaculoSeleccionadpEnConsultarFuncion", request.getParameter("espectaculo"));
+                }
+            }
+            else if (request.getParameter("plataforma") != null) {
+                if (!request.getParameter("plataforma").equals("Seleccione...")) {
+                    contexto.setAttribute("PlataformaSeleccionadaEnConsultarFuncion", request.getParameter("plataforma"));
+                }
+            }
+            
             RequestDispatcher dispatcher = contexto.getRequestDispatcher("/ConsultarFuncion.jsp");
             dispatcher.forward(request, response);
         }
