@@ -199,8 +199,6 @@
                                                                 out.print("<form action=\"ConsultarFuncionBackEnd\">");
 
                                                                 out.print("<select name='artista' class='custom-select selectEsp' id='inputGroupSelect04a'>");
-                                                                
-                                     
 
                                                                 if (contexto.getAttribute("ArtistaSeleccionadoEnConsultarFuncion") != null) {
                                                                     String selUsu = contexto.getAttribute("ArtistaSeleccionadoEnConsultarFuncion").toString();
