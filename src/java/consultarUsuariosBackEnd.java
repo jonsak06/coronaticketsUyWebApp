@@ -38,15 +38,19 @@ public class consultarUsuariosBackEnd extends HttpServlet {
               ServletContext contexto = getServletContext();
             if (request.getParameter("paquete") != null) {
                 if (!request.getParameter("paquete").equals("Paquetes...")) {
-                    contexto.setAttribute("PaqueteSeleccionadoEnConsultarEspectaculo", request.getParameter("paquete"));
+                    contexto.setAttribute("PaqueteSeleccionadoEnConsultarUsuario", request.getParameter("paquete"));
                 }
             }else if (request.getParameter("funcion") != null) {
                 if (!request.getParameter("funcion").equals("Funciones...")) {
                     contexto.setAttribute("FuncionSeleccionadaEnConsultarUsuario", request.getParameter("funcion"));
                 }
+            }else if (request.getParameter("registro") != null) {
+                if (!request.getParameter("registro").equals("Seleccione...")) {
+                    contexto.setAttribute("RegistroSeleccionadaEnConsultarUsuario", request.getParameter("registro"));
+                }
             }else if (request.getParameter("espectaculo") != null) {
                 if (!request.getParameter("espectaculo").equals("Seleccione...")) {
-                    contexto.setAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo", request.getParameter("espectaculo"));
+                    contexto.setAttribute("EspectaculoSeleccionadpEnConsultarUsuario", request.getParameter("espectaculo"));
                 }
             }
             else if (request.getParameter("usuario") != null) {
