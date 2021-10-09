@@ -20,72 +20,57 @@ Author     : tecnologo
 
 
         <link rel="stylesheet" href="headerStyles.css">
-        <script>
-            var anterior = "nada";
-            function ShowSelected()
-            {
 
-                var seleccionadas = document.getElementsByClassName("tabla");
-                for (x = 0; x < seleccionadas.length; x++)
-                {
-                    seleccionadas[x].style.display = "none";
-                }
-
-
-
-                /* Para obtener el texto */
-                var funcion = document.getElementById("selectedFuncion");
-                var selected = funcion.options[funcion.selectedIndex].text;
-                alert(selected);
-
-                document.getElementById(selected).style.display = "block";
-
-
-
-            }
-            EspectaculoSelected()
-            {
-                var tablas = document.getElementsByTagName("table");
-                for (x = 0; x < tablas.length; x++)
-                {
-                    tablas[x].style.display = "none";
-                }
-
-
-
-                /* Para obtener el texto */
-                var funcion = document.getElementById("selectedFuncion");
-                var selected = funcion.options[funcion.selectedIndex].text;
-                alert(selected);
-
-                var seleccionadas = document.getElementsByClassName()(selected);
-                for (x = 0; x < seleccionadas.length; x++)
-                {
-                    seleccionadas[x].style.display = "block";
-                }
-
-
-            }
-
-        </script>
     </head>
 
     <body>
 
         <%@include file="header.jsp" %>
+        <%ServletContext contexto = getServletContext();
+        %>
         <form action="consultarUsuariosBackEnd" class="container">
             <div class="input-group">
-                <select name="Usuario" class="custom-select" id="inputGroupSelect04">
-                    <option selected>Seleccione...</option>
-                    <%                    
+                <select name="usuario" class="custom-select" id="inputGroupSelect04">
+
+                    <%
                         List<DtArtista> lArt = Fabrica.getCrlUsuarios().getArtistas();
                         List<DtEspectador> lEsp = Fabrica.getCrlUsuarios().getEspectadores();
 
-                        for (DtArtista a : lArt) {
-                            out.println("<option>" + a.getNickname() + "</option>");
-                        }
-                        for (DtEspectador e : lEsp) {
-                            out.println("<option>" + e.getNickname() + "</option>");
+                        if (contexto.getAttribute("UsuarioSeleccionadaEnConsultarUsuario") != null) {
+                            String selUsu = contexto.getAttribute("UsuarioSeleccionadaEnConsultarUsuario").toString();
+                            if (selUsu != "Seleccione...") {
+                                out.println("<option selected>" + selUsu + "</option>");
+                                for (DtArtista a : lArt) {
+                                    if (!a.getNickname().equals(selUsu)) {
+
+                                        out.println("<option>" + a.getNickname() + "</option>");
+                                    }
+                                }
+                                for (DtEspectador e : lEsp) {
+                                    if (!e.getNickname().equals(selUsu)) {
+
+                                        out.println("<option>" + e.getNickname() + "</option>");
+                                    }
+                                }
+                            } else {
+                                out.println("<option selected>Seleccione...</option>");
+                                for (DtArtista a : lArt) {
+                                    out.println("<option>" + a.getNickname() + "</option>");
+                                }
+                                for (DtEspectador e : lEsp) {
+                                    out.println("<option>" + e.getNickname() + "</option>");
+                                }
+                            }
+
+                        } else {
+                            out.println("<option selected>Seleccione...</option>");
+                            for (DtArtista a : lArt) {
+                                out.println("<option>" + a.getNickname() + "</option>");
+                            }
+                            for (DtEspectador e : lEsp) {
+                                out.println("<option>" + e.getNickname() + "</option>");
+                            }
+
                         }
                     %>
                 </select>
@@ -94,50 +79,99 @@ Author     : tecnologo
                 </div>
             </div>
         </form> 
-              <div class="container infoUsuario">
-        
-        <% 
-            String usu = request.getParameter("Usuario");
-            if(usu != "Seleccione..." && usu != null)
-            {
-            
-                for (DtArtista a : lArt) {
-                    if(usu.equals(a.getNickname()))
-                    {
-                    out.print("<div class='card' style='width: 18rem;'>");
-                out.print("<img src='"+a.getImagen()+"' class='card-img-top' alt='imagen del paquete'>");
-                    out.print("<div class='card-body'>");
-                    out.print("<h5 class='card-title'>"+a.getNickname()+"</h5>");
-                    out.print("<p class='card-text'>"+a.getNombre()+"</p>");
-                    out.print("<p class='card-text'>"+a.getApellido()+"</p>");
-                    out.print("<p class='card-text'>"+a.getCorreo()+"</p>");
-                    out.print("<p class='card-text'>"+a.getFechaNacimiento().toString()+"</p>");
-                    out.print("</div>");
-                out.print("</div>");
+        <div class="container infoUsuario">
+
+            <%
+                if (contexto.getAttribute("UsuarioSeleccionadaEnConsultarUsuario") != null) {
+                    String selUsu = contexto.getAttribute("UsuarioSeleccionadaEnConsultarUsuario").toString();
+                    if (selUsu != "Seleccione..." && selUsu != null) {
+///////////////////////////////////////////////////////////////////////////////                        
+///////////////////////////////////////////////////////////////////////////////  
+                        for (DtArtista a : lArt) {
+                            if (selUsu.equals(a.getNickname())) {
+                                out.print("<div class='card' style='width: 18rem;'>");
+                                out.print("<img src='" + a.getImagen() + "' class='card-img-top' alt='imagen del paquete'>");
+                                out.print("<div class='card-body'>");
+                                out.print("<h5 class='card-title'>" + a.getNickname() + "</h5>");
+                                out.print("<p class='card-text'>" + a.getNombre() + "</p>");
+                                out.print("<p class='card-text'>" + a.getApellido() + "</p>");
+                                out.print("<p class='card-text'>" + a.getCorreo() + "</p>");
+                                out.print("<p class='card-text'>" + a.getFechaNacimiento().toString() + "</p>");
+                                out.print("</div>");
+                                out.print("</div>");
+                            }
+                        }
+                        
+///////////////////////////////////////////////////////////////////////////////                        
+///////////////////////////////////////////////////////////////////////////////                        
+                        
+                        for (DtEspectador e : lEsp) {
+                            if (selUsu.equals(e.getNickname())) {
+                                out.print("<div class='card' style='width: 18rem;'>");
+                                out.print("<img src='" + e.getImagen() + "' class='card-img-top' alt='imagen del paquete'>");
+                                out.print("<div class='card-body'>");
+                                out.print("<h5 class='card-title'>" + e.getNickname() + "</h5>");
+                                out.print("<p class='card-text'>" + e.getNombre() + "</p>");
+                                out.print("<p class='card-text'>" + e.getApellido() + "</p>");
+                                out.print("<p class='card-text'>" + e.getCorreo() + "</p>");
+                                out.print("<p class='card-text'>" + e.getFechaNacimiento().toString() + "</p>");
+                                out.print("</div>");
+                                out.print("</div>");
+                                
+                                List<DtRegistro> lRegistr = Fabrica.getCrlUsuarios().getRegistros(e.getNickname());
+
+                                out.print("<form action=\"ConsultarFuncionBackEnd\">");
+
+                                out.print("<select name='espectaculo' class='custom-select selectEsp' id='inputGroupSelect04e'>");
+                                if (contexto.getAttribute("FuncionSeleccionadaEnConsultarUsuario") == null) {
+                                    out.print("<option selected>Seleccione...</option>");
+
+                                    for (DtRegistro reg : lRegistr) {
+                                        out.print("<option >" + reg.getNombreFuncion() + "</option>");
+
+                                    }
+                                } else {
+                                    if (contexto.getAttribute("FuncionSeleccionadaEnConsultarUsuario") != "Espectaculos...") {
+                                        out.print("<option selected>" + contexto.getAttribute("FuncionSeleccionadaEnConsultarUsuario").toString() + "</option>");
+
+                                        for (DtRegistro reg : lRegistr) {
+                                            if (!contexto.getAttribute("FuncionSeleccionadaEnConsultarUsuario").toString().equals(e.getNombre())) {
+                                                out.print("<option >" + reg.getNombreFuncion() + "</option>");
+
+                                            }
+
+                                        }
+                                    } else {
+                                        out.print("<option selected>Seleccione...</option>");
+
+                                        for (DtRegistro reg : lRegistr) {
+                                            out.print("<option >" + reg.getNombreFuncion() + "</option>");
+
+                                        }
+                                    }
+
+                                }
+
+                                out.print("</select>");
+                                //aaaa
+
+                                out.print("</li>");
+                                out.print("</ul>");
+                                out.print("<div class='card-body'>");
+                                out.print("<button class='btn btn-outline-secondarye' type='submit' disabled>Consultar</button>");
+                                out.print("</form>");
+                                out.print("</div>");
+
+                            }
+                        }
+///////////////////////////////////////////////////////////////////////////////                        
+///////////////////////////////////////////////////////////////////////////////                          
                     }
                 }
-                for (DtEspectador e : lEsp) {
-                    if(usu.equals(e.getNickname()))
-                    {
-                    out.print("<div class='card' style='width: 18rem;'>");
-                out.print("<img src='"+e.getImagen()+"' class='card-img-top' alt='imagen del paquete'>");
-                    out.print("<div class='card-body'>");
-                    out.print("<h5 class='card-title'>"+e.getNickname()+"</h5>");
-                    out.print("<p class='card-text'>"+e.getNombre()+"</p>");
-                    out.print("<p class='card-text'>"+e.getApellido()+"</p>");
-                    out.print("<p class='card-text'>"+e.getCorreo()+"</p>");
-                    out.print("<p class='card-text'>"+e.getFechaNacimiento().toString()+"</p>");
-                    out.print("</div>");
-                out.print("</div>");
-                
-                
-                
-                    }
-                }
-                 
-            }
-        %>
-    </div>  
+
+
+            %>
+        </div>  
 
 
         <script>

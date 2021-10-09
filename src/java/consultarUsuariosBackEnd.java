@@ -35,7 +35,25 @@ public class consultarUsuariosBackEnd extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            ServletContext contexto = getServletContext();
+              ServletContext contexto = getServletContext();
+            if (request.getParameter("paquete") != null) {
+                if (!request.getParameter("paquete").equals("Paquetes...")) {
+                    contexto.setAttribute("PaqueteSeleccionadoEnConsultarEspectaculo", request.getParameter("paquete"));
+                }
+            }else if (request.getParameter("funcion") != null) {
+                if (!request.getParameter("funcion").equals("Funciones...")) {
+                    contexto.setAttribute("FuncionSeleccionadaEnConsultarUsuario", request.getParameter("funcion"));
+                }
+            }else if (request.getParameter("espectaculo") != null) {
+                if (!request.getParameter("espectaculo").equals("Seleccione...")) {
+                    contexto.setAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo", request.getParameter("espectaculo"));
+                }
+            }
+            else if (request.getParameter("usuario") != null) {
+                if (!request.getParameter("usuario").equals("Seleccione...")) {
+                    contexto.setAttribute("UsuarioSeleccionadaEnConsultarUsuario", request.getParameter("usuario"));
+                }
+            }
             RequestDispatcher dispatcher = contexto.getRequestDispatcher("/ConsultarUsuario.jsp");
             dispatcher.forward(request, response);
         }

@@ -24,7 +24,6 @@
     <body>
         <%@include file="header.jsp"%>
         <%ServletContext contexto = getServletContext();
-            out.println("<h1> " + contexto.getAttribute("nickname").toString() + " </h1> ");
         %>
 
         <form action="ConsultarEspectaculoBackEnd" class="container">

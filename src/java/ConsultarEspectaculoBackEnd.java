@@ -37,11 +37,11 @@ public class ConsultarEspectaculoBackEnd extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
               ServletContext contexto = getServletContext();
             if (request.getParameter("paquete") != null) {
-                if (!request.getParameter("paquete").equals("Seleccione...")) {
+                if (!request.getParameter("paquete").equals("Paquetes...")) {
                     contexto.setAttribute("PaqueteSeleccionadoEnConsultarEspectaculo", request.getParameter("paquete"));
                 }
             }else if (request.getParameter("funcion") != null) {
-                if (!request.getParameter("funcion").equals("Seleccione...")) {
+                if (!request.getParameter("funcion").equals("Funciones...")) {
                     contexto.setAttribute("FuncionSeleccionadaEnConsultarEspectaculo", request.getParameter("funcion"));
                 }
             }else if (request.getParameter("espectaculo") != null) {
