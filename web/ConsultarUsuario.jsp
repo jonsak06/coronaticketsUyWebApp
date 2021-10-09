@@ -100,6 +100,94 @@ Author     : tecnologo
                                 out.print("</div>");
                                 out.print("</div>");
 
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                List<DtUsuario> lUsuarQueSigues = Fabrica.getCrlUsuarios().getUsuariosQueSiguesAr(a.getNickname());
+                                out.print("<form action=\"consultarUsuariosBackEnd\">");
+
+                                out.print("<select name='usuQueSiges' class='custom-select selectEsp' id='inputGroupSelect04us'>");
+                                if (contexto.getAttribute("UsuarioQueSiguesSeleccionadEnConsultarUsuario") == null) {
+                                    out.print("<option selected>Seleccione...</option>");
+
+                                    for (DtUsuario usu : lUsuarQueSigues) {
+                                        out.print("<option >" + usu.getNickname() + "</option>");
+
+                                    }
+                                } else {
+                                    if (contexto.getAttribute("UsuarioQueSiguesSeleccionadEnConsultarUsuario").toString() != "Seleccione...") {
+                                        out.print("<option selected>" + contexto.getAttribute("UsuarioQueSiguesSeleccionadEnConsultarUsuario").toString() + "</option>");
+
+                                        for (DtUsuario usu : lUsuarQueSigues) {
+                                            if (!contexto.getAttribute("UsuarioQueSiguesSeleccionadEnConsultarUsuario").toString().equals(usu.getNickname())) {
+                                                out.print("<option >" + usu.getNickname() + "</option>");
+
+                                            }
+
+                                        }
+                                    } else {
+                                        out.print("<option selected>Seleccione...</option>");
+
+                                        for (DtUsuario usu : lUsuarQueSigues) {
+                                            out.print("<option >" + usu.getNickname() + "</option>");
+
+                                        }
+                                    }
+
+                                }
+
+                                out.print("</select>");
+                                //aaaa
+
+                                out.print("</li>");
+                                out.print("</ul>");
+                                out.print("<div class='card-body'>");
+                                out.print("<button class='btn btn-outline-secondaryus' type='submit' disabled>Consultar</button>");
+                                out.print("</form>");
+                                out.print("</div>");
+
+///////////////////////////////////////////////////////////////////////////////                        
+///////////////////////////////////////////////////////////////////////////////  
+                                //////////////////////////////////////////////
+                                if (contexto.getAttribute("UsuarioQueSiguesSeleccionadEnConsultarUsuario") != null) {
+                                    String sfun = contexto.getAttribute("UsuarioQueSiguesSeleccionadEnConsultarUsuario").toString();
+
+                                    if (sfun != "Seleccione..." && sfun != null) {
+                                        for (DtUsuario u : lUsuarQueSigues) {
+                                            if (sfun.equals(u.getNickname())) {
+                                                if (u instanceof DtArtista) {
+                                                    out.print("<div class='card' style='width: 18rem;'>");
+                                                    out.print("<img src='" + ((DtArtista) u).getImagen() + "' class='card-img-top' alt='imagen del paquete'>");
+                                                    out.print("<div class='card-body'>");
+                                                    out.print("<h5 class='card-title'>" + ((DtArtista) u).getNickname() + "</h5>");
+                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getNombre() + "</p>");
+                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getApellido() + "</p>");
+                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getCorreo() + "</p>");
+                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getFechaNacimiento().toString() + "</p>");
+                                                    out.print("</div>");
+                                                    out.print("</div>");
+                                                }
+                                                if (u instanceof DtEspectador) {
+                                                    out.print("<div class='card' style='width: 18rem;'>");
+                                                    out.print("<img src='" + ((DtEspectador) u).getImagen() + "' class='card-img-top' alt='imagen del paquete'>");
+                                                    out.print("<div class='card-body'>");
+                                                    out.print("<h5 class='card-title'>" + ((DtEspectador) u).getNickname() + "</h5>");
+                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getNombre() + "</p>");
+                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getApellido() + "</p>");
+                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getCorreo() + "</p>");
+                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getFechaNacimiento().toString() + "</p>");
+                                                    out.print("</div>");
+                                                    out.print("</div>");
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                }
+
+///////////////////////////////////////////////////////////////////////////////                        
+/////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                 List<DtEspectaculo> lEspectac = Fabrica.getCrlUsuarios().listarEspectaculosDeArtista(a.getNickname());
                                 out.print("<form action=\"consultarUsuariosBackEnd\">");
 
@@ -112,7 +200,7 @@ Author     : tecnologo
 
                                     }
                                 } else {
-                                    if (contexto.getAttribute("EspectaculoSeleccionadpEnConsultarUsuario") != "Seleccione...") {
+                                    if (contexto.getAttribute("EspectaculoSeleccionadpEnConsultarUsuario").toString() != "Seleccione...") {
                                         out.print("<option selected>" + contexto.getAttribute("EspectaculoSeleccionadpEnConsultarUsuario").toString() + "</option>");
 
                                         for (DtEspectaculo esp : lEspectac) {
@@ -160,7 +248,6 @@ Author     : tecnologo
                                                 out.print("<p class='card-text'>" + lEspectac.get(i).getUrl() + "</p>");
                                                 out.print("<p class='card-text'>" + lEspectac.get(i).getCosto() + "</p>");
                                                 out.print("<p class='card-text'>" + lEspectac.get(i).getFechaDeRegistro() + "</p>");
-
                                                 out.print("</div>");
 
                                                 List<DtFuncion> fun = Fabrica.getCtrlEspectaculos().listarTodasLasFunciones(contexto.getAttribute("EspectaculoSeleccionadpEnConsultarUsuario").toString());
@@ -176,7 +263,7 @@ Author     : tecnologo
 
                                                     }
                                                 } else {
-                                                    if (contexto.getAttribute("FuncionSeleccionadaEnConsultarUsuario") != "Espectaculos...") {
+                                                    if (contexto.getAttribute("FuncionSeleccionadaEnConsultarUsuario").toString() != "Espectaculos...") {
                                                         out.print("<option selected>" + contexto.getAttribute("FuncionSeleccionadaEnConsultarUsuario").toString() + "</option>");
 
                                                         for (DtFuncion f : fun) {
@@ -237,7 +324,6 @@ Author     : tecnologo
 
                                                 out.print("<select name='paquete' class='custom-select selectEsp' id='inputGroupSelect04pak'>");
                                                 out.print("<option selected>Paquetes...</option>");
-                                               
 
                                                 if (contexto.getAttribute("PaqueteSeleccionadoEnConsultarUsuario") == null) {
                                                     out.print("<option selected>Paquetes...</option>");
@@ -249,7 +335,7 @@ Author     : tecnologo
 
                                                     }
                                                 } else {
-                                                    if (contexto.getAttribute("PaqueteSeleccionadoEnConsultarUsuario") != "Paquetes...") {
+                                                    if (contexto.getAttribute("PaqueteSeleccionadoEnConsultarUsuario").toString() != "Paquetes...") {
                                                         out.print("<option selected>" + contexto.getAttribute("PaqueteSeleccionadoEnConsultarUsuario").toString() + "</option>");
                                                         for (String p : paqs) {
                                                             if (Fabrica.getCtrlPaquetes().listarEspectaculosIncluidos(p).contains(lEspectac.get(i).getNombre())) {
@@ -282,7 +368,7 @@ Author     : tecnologo
                                                 out.print("</div>");
                                                 ///////////////////////////////////////////////////////////////////////////////                        
 ///////////////////////////////////////////////////////////////////////////////   
-                                                
+
                                                 if (contexto.getAttribute("PaqueteSeleccionadoEnConsultarUsuario") != null) {
                                                     String spaq = contexto.getAttribute("PaqueteSeleccionadoEnConsultarUsuario").toString();
 
@@ -331,6 +417,102 @@ Author     : tecnologo
                                 out.print("</div>");
                                 out.print("</div>");
 
+                                
+                                
+                                
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                List<DtUsuario> lUsuarQueSigues = Fabrica.getCrlUsuarios().getUsuariosQueSiguesEs(e.getNickname());
+                                out.print("<form action=\"consultarUsuariosBackEnd\">");
+
+                                out.print("<select name='usuQueSiges' class='custom-select selectEsp' id='inputGroupSelect04us'>");
+                                if (contexto.getAttribute("UsuarioQueSiguesSeleccionadEnConsultarUsuario") == null) {
+                                    out.print("<option selected>Seleccione...</option>");
+
+                                    for (DtUsuario usu : lUsuarQueSigues) {
+                                        out.print("<option >" + usu.getNickname() + "</option>");
+
+                                    }
+                                } else {
+                                    if (contexto.getAttribute("UsuarioQueSiguesSeleccionadEnConsultarUsuario").toString() != "Seleccione...") {
+                                        out.print("<option selected>" + contexto.getAttribute("UsuarioQueSiguesSeleccionadEnConsultarUsuario").toString() + "</option>");
+
+                                        for (DtUsuario usu : lUsuarQueSigues) {
+                                            if (!contexto.getAttribute("UsuarioQueSiguesSeleccionadEnConsultarUsuario").toString().equals(usu.getNickname())) {
+                                                out.print("<option >" + usu.getNickname() + "</option>");
+
+                                            }
+
+                                        }
+                                    } else {
+                                        out.print("<option selected>Seleccione...</option>");
+
+                                        for (DtUsuario usu : lUsuarQueSigues) {
+                                            out.print("<option >" + usu.getNickname() + "</option>");
+
+                                        }
+                                    }
+
+                                }
+
+                                out.print("</select>");
+                                //aaaa
+
+                                out.print("</li>");
+                                out.print("</ul>");
+                                out.print("<div class='card-body'>");
+                                out.print("<button class='btn btn-outline-secondaryus' type='submit' disabled>Consultar</button>");
+                                out.print("</form>");
+                                out.print("</div>");
+
+///////////////////////////////////////////////////////////////////////////////                        
+///////////////////////////////////////////////////////////////////////////////  
+                                //////////////////////////////////////////////
+                                if (contexto.getAttribute("UsuarioQueSiguesSeleccionadEnConsultarUsuario") != null) {
+                                    String sfun = contexto.getAttribute("UsuarioQueSiguesSeleccionadEnConsultarUsuario").toString();
+
+                                    if (sfun != "Seleccione..." && sfun != null) {
+                                        for (DtUsuario u : lUsuarQueSigues) {
+                                            if (sfun.equals(u.getNickname())) {
+                                                if (u instanceof DtArtista) {
+                                                    out.print("<div class='card' style='width: 18rem;'>");
+                                                    out.print("<img src='" + ((DtArtista) u).getImagen() + "' class='card-img-top' alt='imagen del paquete'>");
+                                                    out.print("<div class='card-body'>");
+                                                    out.print("<h5 class='card-title'>" + ((DtArtista) u).getNickname() + "</h5>");
+                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getNombre() + "</p>");
+                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getApellido() + "</p>");
+                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getCorreo() + "</p>");
+                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getFechaNacimiento().toString() + "</p>");
+                                                    out.print("</div>");
+                                                    out.print("</div>");
+                                                }
+                                                if (u instanceof DtEspectador) {
+                                                    out.print("<div class='card' style='width: 18rem;'>");
+                                                    out.print("<img src='" + ((DtEspectador) u).getImagen() + "' class='card-img-top' alt='imagen del paquete'>");
+                                                    out.print("<div class='card-body'>");
+                                                    out.print("<h5 class='card-title'>" + ((DtEspectador) u).getNickname() + "</h5>");
+                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getNombre() + "</p>");
+                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getApellido() + "</p>");
+                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getCorreo() + "</p>");
+                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getFechaNacimiento().toString() + "</p>");
+                                                    out.print("</div>");
+                                                    out.print("</div>");
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                }
+
+///////////////////////////////////////////////////////////////////////////////                        
+/////////////////////////////////////////////////////////////////////////////// 
+////////////////////////////////////////////////////////////////////////////////
+                                
+                                
+                                
+                                
+                                
+                                
                                 List<DtRegistro> lRegistr = Fabrica.getCrlUsuarios().getRegistros(e.getNickname());
                                 List<DtFuncion> lFunciones = Fabrica.getCrlUsuarios().getFuncionesRegistros(e.getNickname());
                                 out.print("<form action=\"consultarUsuariosBackEnd\">");
@@ -344,7 +526,7 @@ Author     : tecnologo
 
                                     }
                                 } else {
-                                    if (contexto.getAttribute("RegistroSeleccionadaEnConsultarUsuario") != "Seleccione...") {
+                                    if (contexto.getAttribute("RegistroSeleccionadaEnConsultarUsuario").toString() != "Seleccione...") {
                                         out.print("<option selected>" + contexto.getAttribute("RegistroSeleccionadaEnConsultarUsuario").toString() + "</option>");
 
                                         for (DtRegistro reg : lRegistr) {
@@ -451,7 +633,7 @@ Author     : tecnologo
             });
 
         </script>
-        
+
         <script>
             const paks = document.getElementById("inputGroupSelect04pak");
             const botonConsultarPak = document.querySelector(".btn-outline-secondarypak");
@@ -460,6 +642,19 @@ Author     : tecnologo
                     botonConsultarPak.disabled = true;
                 } else {
                     botonConsultarPak.disabled = false;
+                }
+            });
+
+        </script>
+
+        <script>
+            const usuSeguidoSelected = document.getElementById("inputGroupSelect04us");
+            const botonConsultarUSS = document.querySelector(".btn-outline-secondaryus");
+            usuSeguidoSelected.addEventListener("change", e => {
+                if (e.target.value === "Seleccione...") {
+                    botonConsultarUSS.disabled = true;
+                } else {
+                    botonConsultarUSS.disabled = false;
                 }
             });
 

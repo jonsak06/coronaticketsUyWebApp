@@ -51,11 +51,27 @@ public class consultarUsuariosBackEnd extends HttpServlet {
             }else if (request.getParameter("espectaculo") != null) {
                 if (!request.getParameter("espectaculo").equals("Seleccione...")) {
                     contexto.setAttribute("EspectaculoSeleccionadpEnConsultarUsuario", request.getParameter("espectaculo"));
+                    contexto.setAttribute("FuncionSeleccionadaEnConsultarUsuario", "Funciones...");
+                    contexto.setAttribute("PaqueteSeleccionadoEnConsultarUsuario","Paquetes...");
+                }
+            }else if (request.getParameter("usuQueSiges") != null) {
+                if (!request.getParameter("usuQueSiges").equals("Seleccione...")) {
+                    contexto.setAttribute("UsuarioQueSiguesSeleccionadEnConsultarUsuario", request.getParameter("usuQueSiges"));
+                    
                 }
             }
             else if (request.getParameter("usuario") != null) {
                 if (!request.getParameter("usuario").equals("Seleccione...")) {
                     contexto.setAttribute("UsuarioSeleccionadaEnConsultarUsuario", request.getParameter("usuario"));
+                    
+                    contexto.setAttribute("EspectaculoSeleccionadpEnConsultarUsuario", "Seleccione...");
+                    contexto.setAttribute("FuncionSeleccionadaEnConsultarUsuario", "Funciones...");
+                    contexto.setAttribute("PaqueteSeleccionadoEnConsultarUsuario","Paquetes...");
+                    
+                    contexto.setAttribute("UsuarioQueSiguesSeleccionadEnConsultarUsuario", "Seleccione...");
+                    
+                    
+                    contexto.setAttribute("RegistroSeleccionadaEnConsultarUsuario","Seleccione...");
                 }
             }
             RequestDispatcher dispatcher = contexto.getRequestDispatcher("/ConsultarUsuario.jsp");
