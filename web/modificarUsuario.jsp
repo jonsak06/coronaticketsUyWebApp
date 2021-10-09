@@ -77,19 +77,19 @@
                 width: 300px;
                 border-color: #2ecc71
             }
-            
-            
-            
-            
-            
+
+
+
+
+
 
         </style>
         <script>
-            
-                
-                
-            
-            </script>
+
+
+
+
+        </script>
     </head>
     <body>
         <link rel="stylesheet" href="./miestilo.css" type="text/css">
@@ -98,8 +98,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <%
-                        ServletContext contexto = getServletContext();
+                    <%                        ServletContext contexto = getServletContext();
                         if (contexto.getAttribute("tipoUsuario") != null) {
 
                             if (contexto.getAttribute("tipoUsuario").equals("Espectador")) {
@@ -113,16 +112,16 @@
                             out.print("<p class=\"text-muted\">Nombre:</p>");
                             out.print("<input type=\"text\" name=\"nombre\" value=\"" + es.getNombre() + "\" id=\"nombre\" required>");
                             out.print("<p class=\"text-muted\">Apellido:</p>");
-                           out.print("<input type=\"text\" name=\"apellido\" value=\"" + es.getApellido() + "\" id=\"apellido\" required/>");
-                           out.print("<p class=\"text-muted\">Nickname:</p>");
-                           out.print("<input type=\"text\" name=\"nickname\" class=\"disable\" value=\"" + es.getNickname()+ "\" id=\"nickname\" disabled/>");
-                           
+                            out.print("<input type=\"text\" name=\"apellido\" value=\"" + es.getApellido() + "\" id=\"apellido\" required/>");
+                            out.print("<p class=\"text-muted\">Nickname:</p>");
+                            out.print("<input type=\"text\" name=\"nickname\" class=\"disable\" value=\"" + es.getNickname() + "\" id=\"nickname\" disabled/>");
+
                             out.print("<p class=\"text-muted\">Correo:</p>");
                             out.print("<input type=\"text\" name=\"correo\" value=\"" + es.getCorreo() + "\"/ id=\"correo\" disabled />");
                             out.print("<p class=\"text-muted\">Contraseña:</p>");
                             out.print("<input type=\"password\" name=\"contrasenia\" class=\"disable\" id=\"contrasenia\" value=\"" + es.getPass() + "\"  required/>");
                             out.print("<p class=\"text-muted\">Fecha: </p>");
-                                 out.print("<input type=\"date\" name=\"fecha\" value=\"" + es.getFechaNacimiento().toString() + "\" id=\"fecha\" required>");
+                            out.print("<input type=\"date\" name=\"fecha\" value=\"" + es.getFechaNacimiento().toString() + "\" id=\"fecha\" required>");
                             out.print("<p class=\"text-muted\">Imagen:</p>");
                             out.print("<input type=\"file\" accept=\"image*\" name=\"imagen\"/>");
                         %>
@@ -136,26 +135,25 @@
                     %>   
                     <form action="ModificarUsuariosBackEnd" class="box"  enctype="multipart/form-data"   name="fModificarUsuario" id="fAltaUsuario" method="POST">
 
-                        <%                
-                            out.print("<p class=\"text-muted\">Nombre:</p>");
+                        <%                            out.print("<p class=\"text-muted\">Nombre:</p>");
                             out.print("<input type=\"text\" name=\"nombre\" value=\"" + ar.getNombre() + "\" id=\"nombre\" required>");
                             out.print("<p class=\"text-muted\">Apellido:</p>");
-                           out.print("<input type=\"text\" name=\"apellido\" value=\"" + ar.getApellido() + "\" id=\"apellido\" required/>");
-                           out.print("<p class=\"text-muted\">Nickname:</p>");
-                           out.print("<input type=\"text\" name=\"nickname\" class=\"disable\" value=\"" + ar.getNickname()+ "\" id=\"nickname\" disabled/>");
-                           
+                            out.print("<input type=\"text\" name=\"apellido\" value=\"" + ar.getApellido() + "\" id=\"apellido\" required/>");
+                            out.print("<p class=\"text-muted\">Nickname:</p>");
+                            out.print("<input type=\"text\" name=\"nickname\" class=\"disable\" value=\"" + ar.getNickname() + "\" id=\"nickname\" disabled/>");
+
                             out.print("<p class=\"text-muted\">Correo:</p>");
                             out.print("<input type=\"text\" name=\"correo\" class=\"disable\" value=\"" + ar.getCorreo() + "\"/ id=\"correo\" disabled required/>");
                             out.print("<p class=\"text-muted\">Contraseña:</p>");
                             out.print("<input type=\"password\" name=\"contrasenia\" id=\"contrasenia\" value=\"" + ar.getPass() + "\" required/>");
                             out.print("<p class=\"text-muted\">Fecha: </p>");
-                                 out.print("<input type=\"date\" name=\"fecha\" value=\"" + ar.getFechaNacimiento().toString() + "\" id=\"fecha\" required>");
+                            out.print("<input type=\"date\" name=\"fecha\" value=\"" + ar.getFechaNacimiento().toString() + "\" id=\"fecha\" required>");
                             out.print("<p class=\"text-muted\">Link web:</p>");
                             out.print("<input type=\"text\" name=\"link\" value=\"" + ar.getLinkWeb() + "\" />");
-                            
+
                             out.print("<p class=\"text-muted\">Biografia:</p>");
-                             out.print("<textarea name=\"biografia\"/ placeholder=\"" + ar.getBiografia() + "\" /></textarea>");
-                           
+                            out.print("<textarea name=\"biografia\"/ placeholder=\"" + ar.getBiografia() + "\" /></textarea>");
+
                             out.print("<p class=\"text-muted\">Descripcion:</p>");
                             out.print("<textarea name=\"descripcion\"/ placeholder=\"" + ar.getDescripcion() + "\" /> </textarea>");
                             out.print("<p class=\"text-muted\">Imagen:</p>");

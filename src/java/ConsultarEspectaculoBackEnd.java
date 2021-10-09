@@ -1,22 +1,11 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 
-
-
-import java.awt.Image;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.sql.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -24,20 +13,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import root.datatypes.DtArtista;
-import root.datatypes.DtEspectador;
-import root.fabrica.Fabrica;
-import root.interfaces.iUsuarios;
-import root.interfaces.IEspectaculos;
 
 /**
  *
- * @author osiris
+ * @author tecnologo
  */
-@WebServlet(urlPatterns = {"/AltaFuncionBackEnd"})
-public class AltaFuncion extends HttpServlet {
+@WebServlet(urlPatterns = {"/ConsultarEspectaculoBackEnd"})
+public class ConsultarEspectaculoBackEnd extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,17 +33,29 @@ public class AltaFuncion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String nombre = request.getParameter("nombre");
-            String apellido = request.getParameter("apellido");
-            String correo = request.getParameter("correo");
-            String pass = request.getParameter("contrasenia");
-            String nickname = request.getParameter("nickname");
-           
-        
-        
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-           
+              ServletContext contexto = getServletContext();
+            if (request.getParameter("paquete") != null) {
+                if (!request.getParameter("paquete").equals("Paquetes...")) {
+                    contexto.setAttribute("PaqueteSeleccionadoEnConsultarEspectaculo", request.getParameter("paquete"));
+                }
+            }else if (request.getParameter("funcion") != null) {
+                if (!request.getParameter("funcion").equals("Funciones...")) {
+                    contexto.setAttribute("FuncionSeleccionadaEnConsultarEspectaculo", request.getParameter("funcion"));
+                }
+            }else if (request.getParameter("espectaculo") != null) {
+                if (!request.getParameter("espectaculo").equals("Seleccione...")) {
+                    contexto.setAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo", request.getParameter("espectaculo"));
+                }
+            }
+            else if (request.getParameter("plataforma") != null) {
+                if (!request.getParameter("plataforma").equals("Seleccione...")) {
+                    contexto.setAttribute("PlataformaSeleccionadaEnConsultarEspectaculo", request.getParameter("plataforma"));
+                }
+            }
+            RequestDispatcher dispatcher = contexto.getRequestDispatcher("/consultarEspectaculo.jsp");
+            dispatcher.forward(request, response);
         }
     }
 

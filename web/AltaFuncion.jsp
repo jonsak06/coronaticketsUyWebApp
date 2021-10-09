@@ -6,7 +6,6 @@
 
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="com.google.gson.Gson"%>
 <%@page import="root.interfaces.*"%>
 <%@page import="root.datatypes.*"%>
 <%@page import="root.fabrica.Fabrica"%>
@@ -124,7 +123,7 @@
     
     
 </script>
-<form action=""  name="fAltadeFuncion" id="" method="POST">
+<form action="AltaFuncionBackEnd"  name="fAltadeFuncion" id="" method="POST">
 
 <select id="Plataformas" onchange="linkPlataformas()">
     <%
@@ -142,7 +141,7 @@
     for (DtPlataforma i : plat) {
         List<DtEspectaculo> pespectaculos = Fabrica.getCtrlEspectaculos().listarEspectaculos(i.getNombre());
         List<DtEspectaculo> espec = Fabrica.getCrlUsuarios().listarEspectaculosDeArtista(contexto.getAttribute("nickname").toString());
-        out.print("<select id=\"" + i.getNombre() + "\" style=\"display:none;\" class=\"espectaculos\"> ");
+        out.print("<select id=\"" + i.getNombre() + "\" style=\"display:none;\" name=\"espectaculos\" class=\"espectaculos\"> ");
         
         for (DtEspectaculo pe : pespectaculos) {
             for (DtEspectaculo e : espec) {
@@ -163,7 +162,7 @@
 
 <p>Hora de Inicio: <input type="time" name="hora" value="11:45" step="1"/></p>
 
-<select id="Artistas confirmados" multiple required >
+<p> Artistas Invitados </p>
     <%
         
         ServletContext contexto1 = getServletContext();
@@ -171,14 +170,14 @@
         List<String> lisDelInput = new ArrayList<String>();
         List<DtArtista> dtArtistas = Fabrica.getCrlUsuarios().getArtistas();
         for (DtArtista i : dtArtistas) {
-            liart.add(i.getNombre());
+            out.print("<label><input name=\""+ i.getNickname() +"\" type=\"checkbox\" value=\"true\"> "+ i.getNickname() +"</label><br>");
         }
-        
-        
+         
     %>
-</select>
+    
 
-<button id="confirmar" onclick="confirmarArtista()"> Confirmar Artista </button>
+
+
 
 
 <p>Fecha de Alta: <input type="date" name="fechaA" id="FechadeAlta"></p>
@@ -186,6 +185,7 @@
 <input type="file" name="Imagen" size="150"/>
 
 <input type="submit" name="" value="crear">
+
 
 
 </form>
