@@ -1,6 +1,7 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 
 import java.io.IOException;
@@ -15,10 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author osiris
+ * @author tecnologo
  */
-@WebServlet(urlPatterns = {"/ConsultarFuncionBackEnd"})
-public class ConsultarFuncionBackEnd extends HttpServlet {
+@WebServlet(urlPatterns = {"/ConsultarEspectaculoBackEnd"})
+public class ConsultarEspectaculoBackEnd extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,27 +35,26 @@ public class ConsultarFuncionBackEnd extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            ServletContext contexto = getServletContext();
-            if (request.getParameter("artista") != null) {
-                if (!request.getParameter("artista").equals("Seleccione...")) {
-                    contexto.setAttribute("ArtistaSeleccionadoEnConsultarFuncion", request.getParameter("artista"));
+              ServletContext contexto = getServletContext();
+            if (request.getParameter("paquete") != null) {
+                if (!request.getParameter("paquete").equals("Seleccione...")) {
+                    contexto.setAttribute("PaqueteSeleccionadoEnConsultarEspectaculo", request.getParameter("paquete"));
                 }
             }else if (request.getParameter("funcion") != null) {
                 if (!request.getParameter("funcion").equals("Seleccione...")) {
-                    contexto.setAttribute("FuncionSeleccionadaEnConsultarFuncion", request.getParameter("funcion"));
+                    contexto.setAttribute("FuncionSeleccionadaEnConsultarEspectaculo", request.getParameter("funcion"));
                 }
             }else if (request.getParameter("espectaculo") != null) {
                 if (!request.getParameter("espectaculo").equals("Seleccione...")) {
-                    contexto.setAttribute("EspectaculoSeleccionadpEnConsultarFuncion", request.getParameter("espectaculo"));
+                    contexto.setAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo", request.getParameter("espectaculo"));
                 }
             }
             else if (request.getParameter("plataforma") != null) {
                 if (!request.getParameter("plataforma").equals("Seleccione...")) {
-                    contexto.setAttribute("PlataformaSeleccionadaEnConsultarFuncion", request.getParameter("plataforma"));
+                    contexto.setAttribute("PlataformaSeleccionadaEnConsultarEspectaculo", request.getParameter("plataforma"));
                 }
             }
-            
-            RequestDispatcher dispatcher = contexto.getRequestDispatcher("/ConsultarFuncion.jsp");
+            RequestDispatcher dispatcher = contexto.getRequestDispatcher("/consultarEspectaculo.jsp");
             dispatcher.forward(request, response);
         }
     }

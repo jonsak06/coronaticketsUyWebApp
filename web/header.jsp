@@ -41,7 +41,7 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" id="altaEspectaculo" href="altaEspectaculo.jsp">Alta de espectaculo</a></li>
-                    <li><a class="dropdown-item" id="consultaEspectaculo" href="#">Consulta de espectaculo</a></li>
+                    <li><a class="dropdown-item" id="consultaEspectaculo" href="consultarEspectaculo.jsp">Consulta de espectaculo</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" id="altaFuncion" href="AltaFuncion.jsp">Alta de funcion</a></li>
                     <li><a class="dropdown-item" id="consultaFuncion" href="ConsultarFuncion.jsp">Consulta de funcion</a></li>

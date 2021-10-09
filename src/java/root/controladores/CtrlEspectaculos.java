@@ -107,4 +107,7 @@ public class CtrlEspectaculos implements IEspectaculos {
     public List<DtFuncion> funcEspNoReg(String nickname, String nombreEspectaculo){
         return ManEspectaculo.funcEspNoReg(nickname, nombreEspectaculo);
     }
+    public List<DtFuncion> listarTodasLasFunciones(String nombreEsp){
+        return ManEspectaculo.listarTodasLasFunciones(nombreEsp);
+    }
 }

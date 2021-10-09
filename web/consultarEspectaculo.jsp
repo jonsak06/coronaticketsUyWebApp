@@ -1,9 +1,10 @@
 <%-- 
-    Document   : ConsultarFuncion
-    Created on : Oct 8, 2021, 9:18:52 PM
-    Author     : osiris
+    Document   : consultarEspectaculo
+    Created on : 9 oct. 2021, 02:39:23
+    Author     : tecnologo
 --%>
 
+<
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="root.interfaces.*"%>
@@ -26,14 +27,14 @@
             out.println("<h1> " + contexto.getAttribute("nickname").toString() + " </h1> ");
         %>
 
-        <form action="ConsultarFuncionBackEnd" class="container">
+        <form action="ConsultarEspectaculoBackEnd" class="container">
             <div class="input-group">
                 <%
                     out.println("<select name=\"plataforma\" class=\"custom-select\" id=\"inputGroupSelect04\">");
 
                     List<DtPlataforma> listaDePlat = Fabrica.getCtrlEspectaculos().listarPlataformas();
-                    if (contexto.getAttribute("PlataformaSeleccionadaEnConsultarFuncion") != null) {
-                        String plat = contexto.getAttribute("PlataformaSeleccionadaEnConsultarFuncion").toString();
+                    if (contexto.getAttribute("PlataformaSeleccionadaEnConsultarEspectaculo") != null) {
+                        String plat = contexto.getAttribute("PlataformaSeleccionadaEnConsultarEspectaculo").toString();
                         if (plat != "Seleccione...") {
                             out.println("<option selected>" + plat + "</option>");
                             for (DtPlataforma p : listaDePlat) {
@@ -67,8 +68,8 @@
         <div class="container infoDeFunciones">
 
             <%
-                if (contexto.getAttribute("PlataformaSeleccionadaEnConsultarFuncion") != null) {
-                    String plat = contexto.getAttribute("PlataformaSeleccionadaEnConsultarFuncion").toString();
+                if (contexto.getAttribute("PlataformaSeleccionadaEnConsultarEspectaculo") != null) {
+                    String plat = contexto.getAttribute("PlataformaSeleccionadaEnConsultarEspectaculo").toString();
                     if (plat != "Seleccione..." && plat != null) {
                         for (DtPlataforma p : listaDePlat) {
                             if (plat.equals(p.getNombre())) {
@@ -80,10 +81,10 @@
 
                                 List<DtEspectaculo> esps = Fabrica.getCtrlEspectaculos().listarEspectaculos(p.getNombre());
 
-                                out.print("<form action=\"ConsultarFuncionBackEnd\">");
+                                out.print("<form action=\"ConsultarEspectaculoBackEnd\">");
 
                                 out.print("<select name='espectaculo' class='custom-select selectEsp' id='inputGroupSelect04e'>");
-                                if (contexto.getAttribute("EspectaculoSeleccionadpEnConsultarFuncion") == null) {
+                                if (contexto.getAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo") == null) {
                                     out.print("<option selected>Espectaculos...</option>");
 
                                     for (DtEspectaculo e : esps) {
@@ -91,11 +92,11 @@
 
                                     }
                                 } else {
-                                    if (contexto.getAttribute("EspectaculoSeleccionadpEnConsultarFuncion") != "Espectaculos...") {
+                                    if (contexto.getAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo") != "Espectaculos...") {
                                         out.print("<option selected>" + contexto.getAttribute("EspectaculoSeleccionadpEnConsultarFuncion").toString() + "</option>");
 
                                         for (DtEspectaculo e : esps) {
-                                            if (!contexto.getAttribute("EspectaculoSeleccionadpEnConsultarFuncion").toString().equals(e.getNombre())) {
+                                            if (!contexto.getAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo").toString().equals(e.getNombre())) {
                                                 out.print("<option >" + e.getNombre() + "</option>");
 
                                             }
@@ -122,8 +123,8 @@
                                 out.print("</form>");
                                 out.print("</div>");
 
-                                if (contexto.getAttribute("EspectaculoSeleccionadpEnConsultarFuncion") != null) {
-                                    String esp = contexto.getAttribute("EspectaculoSeleccionadpEnConsultarFuncion").toString();
+                                if (contexto.getAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo") != null) {
+                                    String esp = contexto.getAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo").toString();
 
                                     if (esp != "Seleccione..." && esp != null) {
                                         for (DtEspectaculo e : esps) {
@@ -140,8 +141,8 @@
 //////////////////////////////////////////////////
                                                 out.print("</div>");
 
-                                                List<DtFuncion> fun = Fabrica.getCtrlEspectaculos().listarTodasLasFunciones(contexto.getAttribute("EspectaculoSeleccionadpEnConsultarFuncion").toString());
-                                                out.print("<form action=\"ConsultarFuncionBackEnd\">");
+                                                List<DtFuncion> fun = Fabrica.getCtrlEspectaculos().listarTodasLasFunciones(contexto.getAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo").toString());
+                                                out.print("<form action=\"ConsultarEspectaculoBackEnd\">");
 
                                                 out.print("<select name='funcion' class='custom-select selectEsp' id='inputGroupSelect04f'>");
                                                 out.print("<option selected>Funciones...</option>");
@@ -158,10 +159,11 @@
                                                 out.print("</div>");
                                                 out.print("</form>");
                                                 out.print("</div>");
-                                                if (contexto.getAttribute("FuncionSeleccionadaEnConsultarFuncion") != null) {
-                                                    String sfun = contexto.getAttribute("FuncionSeleccionadaEnConsultarFuncion").toString();
 
-                                                    if (sfun != "Seleccione..." && sfun != null) {
+                                                if (contexto.getAttribute("FuncionSeleccionadaEnConsultarEspectaculo") != null) {
+                                                    String sfun = contexto.getAttribute("FuncionSeleccionadaEnConsultarEspectaculo").toString();
+
+                                                    if (sfun != "Funciones..." && sfun != null) {
                                                         for (DtFuncion f : fun) {
                                                             if (sfun.equals(f.getNombre())) {
                                                                 out.print("<div class='card' style='width: 18rem;'>");
@@ -172,52 +174,58 @@
 
                                                                 out.print("</div>");
 
-                                                                List<DtArtista> ars = Fabrica.getCtrlEspectaculos().getInvitados(contexto.getAttribute("FuncionSeleccionadaEnConsultarFuncion").toString());
-                                                                out.print("<form action=\"ConsultarFuncionBackEnd\">");
-
-                                                                out.print("<select name='artista' class='custom-select selectEsp' id='inputGroupSelect04a'>");
-                                                                out.print("<option selected>Artistas...</option>");
-                                                                for (DtArtista a : ars) {
-                                                                    out.print("<option >" + a.getNickname() + "</option>");
-
-                                                                }
-                                                                out.print("</select>");
-
-                                                                out.print("</li>");
-                                                                out.print("</ul>");
-                                                                out.print("<div class='card-body'>");
-                                                                out.print("<button class='btn btn-outline-secondarya' type='submit' disabled>Consultar</button>");
-                                                                out.print("</form>");
-
-                                                                out.print("</div>");
-                                                                ///////////////////////////////////////////////////////////////////////////////////////////
-                                                                if (contexto.getAttribute("ArtistaSeleccionadoEnConsultarFuncion") != null) {
-                                                                    String sar = contexto.getAttribute("ArtistaSeleccionadoEnConsultarFuncion").toString();
-
-                                                                    if (sar != "Seleccione..." && sar != null) {
-                                                                        for (DtArtista a : ars) {
-                                                                            if (sfun.equals(f.getNombre())) {
-                                                                                out.print("<div class='card' style='width: 18rem;'>");
-                                                                                out.print("<p class='card-text'>" + a.getNickname() + "</p>");
-                                                                                out.print("<p class='card-text'>" + a.getCorreo() + "</p>");
-                                                                                out.print("<p class='card-text'>" + a.getNombre() + "</p>");
-                                                                                out.print("<p class='card-text'>" + a.getApellido() + "</p>");
-                                                                                out.print("<p class='card-text'>" + a.getFechaNacimiento().toString() + "</p>");
-                                                                                out.print("<p class='card-text'>" + a.getLinkWeb() + "</p>");
-                                                                                out.print("<p class='card-text'>" + a.getBiografia() + "</p>");
-                                                                                out.print("<p class='card-text'>" + a.getDescripcion() + "</p>");
-
-                                                                                out.print("</div>");
-
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                                ////////////////////////////////
                                                             }
                                                         }
                                                     }
                                                 }
+
+                                                List<String> paqs = Fabrica.getCtrlPaquetes().listarPaquetes();
+
+                                                out.print("<form action=\"ConsultarEspectaculoBackEnd\">");
+
+                                                out.print("<select name='paquete' class='custom-select selectEsp' id='inputGroupSelect04p'>");
+                                                out.print("<option selected>Paquetes...</option>");
+                                                for (String i : paqs) {
+                                                    if (Fabrica.getCtrlPaquetes().listarEspectaculosIncluidos(i).contains(e.getNombre())) {
+                                                        out.print("<option >" + i + "</option>");
+                                                    }
+
+                                                }
+                                                out.print("</select>");
+
+                                                out.print("</li>");
+                                                out.print("</ul>");
+                                                out.print("<div class='card-body'>");
+                                                out.print("<button class='btn btn-outline-secondaryp' type='submit' disabled>Consultar</button>");
+                                                out.print("</div>");
+                                                out.print("</form>");
+                                                out.print("</div>");
+
+//                                                
+                                                ///////////////////////////////////////////////////////////////////////////////////////
+                                                if (contexto.getAttribute("PaqueteSeleccionadoEnConsultarEspectaculo") != null) {
+                                                    String spaq = contexto.getAttribute("PaqueteSeleccionadoEnConsultarEspectaculo").toString();
+
+                                                    if (spaq != "Paquetes..." && spaq != null) {
+                                                        for (String paq : paqs) {
+                                                            if (spaq.equals(paq)) {
+                                                                DtPaqueteDeEspectaculos instanciaP = Fabrica.getCtrlPaquetes().mostrarInfoPaquete(paq);
+                                                                out.print("<div class='card' style='width: 18rem;'>");
+                                                                out.print("<p class='card-text'>" + instanciaP.getNombre() + "</p>");
+                                                                out.print("<p class='card-text'>" + instanciaP.getDescripcion() + "</p>");
+                                                                out.print("<p class='card-text'>" + instanciaP.getDescuento() + "</p>");
+
+                                                                out.print("<p class='card-text'>" + instanciaP.getFechaInicio().toString() + "</p>");
+                                                                out.print("<p class='card-text'>" + instanciaP.getFechaFin().toString() + "</p>");
+                                                                out.print("<p class='card-text'>" + instanciaP.getFechaAlta().toString() + "</p>");
+
+                                                                out.print("</div>");
+
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                //////////////////////////
                                             }
                                         }
                                     }
@@ -233,13 +241,13 @@
             %>
         </div>
 
-        <script>   const paqs = document.getElementById("inputGroupSelect04");
-            const botonConsultarPaq = document.querySelector(".btn-outline-secondary");
-            paqs.addEventListener("change", e => {
+        <script>   const plats = document.getElementById("inputGroupSelect04");
+            const botonConsultarPlat = document.querySelector(".btn-outline-secondary");
+            plats.addEventListener("change", e => {
                 if (e.target.value === "Seleccione...") {
-                    botonConsultarPaq.disabled = true;
+                    botonConsultarPlat.disabled = true;
                 } else {
-                    botonConsultarPaq.disabled = false;
+                    botonConsultarPlat.disabled = false;
                 }
             });
 
@@ -275,6 +283,18 @@
                     botonConsultarArs.disabled = true;
                 } else {
                     botonConsultarArs.disabled = false;
+                }
+            });
+
+        </script> 
+        <script>
+            const paqs = document.getElementById("inputGroupSelect04p");
+            const botonConsultarPaqs = document.querySelector(".btn-outline-secondaryp");
+            paqs.addEventListener("change", e => {
+                if (e.target.value === "Seleccione...") {
+                    botonConsultarPaqs.disabled = true;
+                } else {
+                    botonConsultarPaqs.disabled = false;
                 }
             });
 

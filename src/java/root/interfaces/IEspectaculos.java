@@ -39,4 +39,5 @@ public interface IEspectaculos {
     public List<DtEspectaculo> listarEspPorCat(String nombreCat);
     public List<String> listarCategorias();
     public List<DtFuncion> funcEspNoReg(String nickname, String nombreEspectaculo);
+    public List<DtFuncion> listarTodasLasFunciones(String nombreEsp);
 }
