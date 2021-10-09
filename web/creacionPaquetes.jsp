@@ -25,15 +25,15 @@
     <body>
         <% 
             //usuarios que no sean artistas son redirigidos al inicio
-            try {
-                ServletContext contexto = getServletContext();
-                String tipoUsr = contexto.getAttribute("tipoUsr").toString();
-                if(!tipoUsr.equals("Artista")) {
-                    response.sendRedirect("index.jsp");
-                }
-            } catch(Exception e) {
-                response.sendRedirect("index.jsp");
-            }
+//            try {
+//                ServletContext contexto = getServletContext();
+//                String tipoUsr = contexto.getAttribute("tipoUsr").toString();
+//                if(!tipoUsr.equals("Artista")) {
+//                    response.sendRedirect("index.jsp");
+//                }
+//            } catch(Exception e) {
+//                response.sendRedirect("index.jsp");
+//            }
         %>
         <%@include file="header.jsp"%>
         

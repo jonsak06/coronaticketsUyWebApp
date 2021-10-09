@@ -41,10 +41,10 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" id="altaEspectaculo" href="altaEspectaculo.jsp">Alta de espectaculo</a></li>
-                    <li><a class="dropdown-item" id="consultaEspectaculo" href="consultarEspectaculo.jsp">Consulta de espectaculo</a></li>
+                    <li><a class="dropdown-item" id="consultaEspectaculo" href="#">Consulta de espectaculo</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" id="altaFuncion" href="AltaFuncion.jsp">Alta de funcion</a></li>
-                    <li><a class="dropdown-item" id="consultaFuncion" href="ConsultarFuncion.jsp">Consulta de funcion</a></li>
+                    <li><a class="dropdown-item" id="consultaFuncion" href="#">Consulta de funcion</a></li>
                     <li><a class="dropdown-item" id="registroAFuncion" href="registroEspectadorFuncion.jsp">Registro a funcion</a></li>
                 </ul>
             </li>
@@ -61,8 +61,8 @@
             </li>
         </ul>
 
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-            <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+        <form action="buscarEspYPaq" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+            <input type="search" name="buscar" class="form-control form-control-dark" placeholder="Espectaculos, Paquetes" aria-label="Search">
         </form>
 
         <div class="text-end">
