@@ -46,7 +46,7 @@ public class ManPlataformas {
         }
     
    public static Plataforma getPlataforma(String nombrePlataforma){
-       EntityManagerFactory emf = Persistence.createEntityManagerFactory("PLATAFORMA");
+       EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
        EntityManager em = emf.createEntityManager();
        em.getTransaction().begin();
        TypedQuery<Plataforma> consulta = em.createNamedQuery("Plataforma.findByNombre",Plataforma.class);
