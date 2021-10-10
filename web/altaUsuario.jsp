@@ -174,8 +174,9 @@
                         <textarea name="descripcion" id="tfDescripcion"  style="display:none; margin: 0 auto;">
                         </textarea>
                         <p>Imagen: </p>
-                        <input type="file" name="imagen" size="150" id="imagen"/>
-
+                        <input type="file" name="imagen" id="imagen"/>
+                        <p><input type="checkbox" name="subir"  value="ON" id="subir"><label for suir>Subir Archivo</label>
+                    
 
                         <input type="submit" name="" value="crear" id="crear">
 
