@@ -14,16 +14,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import root.datatypes.DtEspectaculo;
-import root.fabrica.Fabrica;
-import root.interfaces.IEspectaculos;
-import root.interfaces.iPaquetes;
+import root.datatypes.DtPaqueteDeEspectaculos;
 
 /**
  *
- * @author dexion
+ * @author julio
  */
-@WebServlet(urlPatterns = {"/buscarEspYPaq"})
-public class buscarEspYPaq extends HttpServlet {
+@WebServlet(urlPatterns = {"/filtrarBusqueda"})
+public class filtrarBusqueda extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,38 +37,42 @@ public class buscarEspYPaq extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             ServletContext contexto = getServletContext();
-            String busqueda = request.getParameter("buscar");
-            iPaquetes ip = Fabrica.getCtrlPaquetes();
-            IEspectaculos ie = Fabrica.getCtrlEspectaculos();
-            List<String> paqs = ip.listarPaquetes();
-            List<String> paqsFiltrados = new ArrayList();
-            for(String p : paqs) {
-                if(p.toLowerCase().contains(busqueda.toLowerCase())) {
-                    paqsFiltrados.add(p);
-                }
-            }
-            List<DtEspectaculo> dvEsps = ie.listarTodosLosEspectaculos();
-            contexto.setAttribute("dvEsps", dvEsps);
-            List<String> esps = new ArrayList();
+            String filtro = request.getParameter("filtro");
+            List<DtEspectaculo> dvEsps = (List<DtEspectaculo>) contexto.getAttribute("dvEsps");
+            List<DtEspectaculo> dvEspsFiltrados = new ArrayList();
             List<String> espsFiltrados = new ArrayList();
-            for(DtEspectaculo e : dvEsps) {
-                esps.add(e.getNombre());
-            }
-            for(String e : esps) {
-                if(e.toLowerCase().contains(busqueda.toLowerCase())) {
-                    espsFiltrados.add(e);
-                }
-            }
             
-            if(busqueda.equals("")) {
-                contexto.setAttribute("espectaculos", esps);
-                contexto.setAttribute("paquetes", paqs);
-            } else {
-                contexto.setAttribute("paquetes", paqsFiltrados);
+//            List<DtPaqueteDeEspectaculos> dvPaqs = (List<DtPaqueteDeEspectaculos>) contexto.getAttribute("dvPaqs");
+            List<DtPaqueteDeEspectaculos> dvPaqsFiltrados = new ArrayList();
+            List<String> paqsFiltrados = new ArrayList();
+            
+            if(filtro.equals("Anio (descendente)")) {
+//                Boolean agregado = false;
+//                for(DtEspectaculo e : dvEsps) {
+//                    agregado = false;
+//                    if(dvEspsFiltrados.isEmpty()) {
+//                        dvEspsFiltrados.add(e);
+//                    } else {
+//                        for(int i=0; i<dvEspsFiltrados.size();++i) {
+//                            if(e.getFechaDeRegistro().getTime() > dvEspsFiltrados.get(i).getFechaDeRegistro().getTime()) {
+//                                dvEspsFiltrados.add(i-1,e);
+//                                agregado = true;
+//                            }
+//                        } 
+//                        if(agregado == false) {
+//                            dvEspsFiltrados.add(e);
+//                        }
+//                    }       
+//                }
+//                for(DtEspectaculo e : dvEspsFiltrados) {
+//                    espsFiltrados.add(e.getNombre());
+//                }
                 contexto.setAttribute("espectaculos", espsFiltrados);
+                
+                contexto.getRequestDispatcher("/busquedaEspYPaq.jsp").forward(request, response);
+            } else if(filtro.equals("Plataforma")) {
+                
             }
-            
-            contexto.getRequestDispatcher("/busquedaEspYPaq.jsp").forward(request, response);
         }
     }
 

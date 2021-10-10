@@ -4,6 +4,7 @@
     Author     : dexion
 --%>
 
+<%@page import="com.google.gson.Gson"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -25,31 +26,80 @@
             .list-group-item {
                 height: 60px;
             }
+            .containerFiltrado {
+                margin-top: 30px;
+            }
         </style>
     </head>
     <body>
         <%@include file="header.jsp"%>
+        <div class="container containerFiltrado">
+            <form action="filtrarBusqueda">
+                <div class="input-group">
+                    <select name="filtro" class="custom-select" id="inputGroupSelect04">
+                        <option selected>Seleccione...</option>
+                        <option>Alfabeticamente (A-Z)</option>
+                        <option>Anio (descendente)</option>
+                        <option>Plataforma</option>
+                        <option>Categoria</option>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" id="btnFiltrar" type="submit" disabled>Filtrar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
         <div class="container">
             <h2>Espectaculos</h2>
-                <ul class="list-group">
+                <ul class="list-group" id="ulEsps">
                     <%
-                        List<String> esps = (List<String>) request.getAttribute("espectaculos");
+                        ServletContext contexto = getServletContext();
+                        List<String> esps = (List<String>) contexto.getAttribute("espectaculos");
                         for(String e : esps){
-                            out.println("<li class='list-group-item'>"+e+"<form action='#'>"+"<input type='hidden' name='#' value='"+e+"'>"+"<button class='btn btn-outline-secondary' type='submit'>Consultar</button>"+"</form>"+"</li>");
+                            out.println("<li class='list-group-item'>"+e+"<form action='consultarEsp2'>"+"<input type='hidden' name='espectaculo' value='"+e+"'>"+"<button class='btn btn-outline-secondary' type='submit'>Consultar</button>"+"</form>"+"</li>");
                         }
                     %>
                 </ul>
             <h2>Paquetes</h2>
-            <ul class="list-group">
+            <ul class="list-group" id="ulPaqs">
                 <%
-                    List<String> paqs = (List<String>) request.getAttribute("paquetes");
+                    List<String> paqs = (List<String>) contexto.getAttribute("paquetes");
                     for(String p : paqs){
                         out.println("<li class='list-group-item'>"+p+"<form action='consultarPaquete'>"+"<input type='hidden' name='paquete' value='"+p+"'>"+"<button class='btn btn-outline-secondary' type='submit'>Consultar</button>"+"</form>"+"</li>");
                     }
                 %>
             </ul>
         </div>
-        
+            <script>
+                const botonFiltrar = document.getElementById("btnFiltrar");
+                const opcionFiltrado = document.getElementById("inputGroupSelect04");
+                
+                opcionFiltrado.addEventListener("change", e => {
+                    if(e.target.value === "Seleccione...") {
+                        botonFiltrar.disabled = true;
+                    } else {
+                        botonFiltrar.disabled = false;
+                    }
+                });
+                
+                botonFiltrar.addEventListener("click", e => {
+                    if(opcionFiltrado.value === "Alfabeticamente (A-Z)") {
+                        e.preventDefault();
+                        sortList("ulEsps");
+                        sortList("ulPaqs"); 
+                    }
+                    
+                });
+                
+                function sortList(ul) {
+                var ul = document.getElementById(ul);
+
+                Array.from(ul.getElementsByTagName("LI"))
+                  .sort((a, b) => a.textContent.localeCompare(b.textContent))
+                  .forEach(li => ul.appendChild(li));
+                }
+                
+            </script>
         <%@include file="headerScript.jsp"%>
     </body>
 </html>
