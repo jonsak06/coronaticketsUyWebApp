@@ -51,10 +51,27 @@ public class ConsultarEspectaculoBackEnd extends HttpServlet {
                     contexto.setAttribute("FuncionSeleccionadaEnConsultarEspectaculo", "Funciones...");
                 }
             }
-            else if (request.getParameter("plataforma") != null) {
+            else if (request.getParameter("categoria") != null) {
+                if (!request.getParameter("categoria").equals("Seleccione...")) {
+                    contexto.setAttribute("CategoriaSeleccionadaEnConsultarEspectaculo", request.getParameter("categoria"));
+                    
+                    contexto.setAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo", "Espectaculos...");
+                    contexto.setAttribute("PaqueteSeleccionadoEnConsultarEspectaculo", "Paquetes...");
+                    contexto.setAttribute("FuncionSeleccionadaEnConsultarEspectaculo", "Funciones...");
+                }
+            }else if (request.getParameter("plataforma") != null) {
                 if (!request.getParameter("plataforma").equals("Seleccione...")) {
                     contexto.setAttribute("PlataformaSeleccionadaEnConsultarEspectaculo", request.getParameter("plataforma"));
                     
+                    contexto.setAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo", "Espectaculos...");
+                    contexto.setAttribute("PaqueteSeleccionadoEnConsultarEspectaculo", "Paquetes...");
+                    contexto.setAttribute("FuncionSeleccionadaEnConsultarEspectaculo", "Funciones...");
+                }
+            }else if (request.getParameter("tipoConsulta") != null) {
+                if (!request.getParameter("tipoConsulta").equals("Seleccione...")) {
+                    contexto.setAttribute("tipoDeConsultaEspectaculos", request.getParameter("tipoConsulta"));
+                    
+                    contexto.setAttribute("PlataformaSeleccionadaEnConsultarEspectaculo", "Seleccione...");
                     contexto.setAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo", "Espectaculos...");
                     contexto.setAttribute("PaqueteSeleccionadoEnConsultarEspectaculo", "Paquetes...");
                     contexto.setAttribute("FuncionSeleccionadaEnConsultarEspectaculo", "Funciones...");
