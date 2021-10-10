@@ -35,7 +35,7 @@ Author     : tecnologo
                     <%
                         List<DtArtista> lArt = Fabrica.getCrlUsuarios().getArtistas();
                         List<DtEspectador> lEsp = Fabrica.getCrlUsuarios().getEspectadores();
-                        
+
                         if (contexto.getAttribute("UsuarioSeleccionadaEnConsultarUsuario") != null) {
                             String selUsu = contexto.getAttribute("UsuarioSeleccionadaEnConsultarUsuario").toString();
                             if (selUsu != "Seleccione...") {
@@ -276,15 +276,62 @@ Author     : tecnologo
 ///////////////////////////////////////////////////////////////////////////////                        
 /////////////////////////////////////////////////////////////////////////////// 
 ////////////////////////////////////////////////////////////////////////////////
-                                
-                                List<DtEspectaculo> lEspectac = Fabrica.getCrlUsuarios().listarEspectaculosDeArtista(a.getNickname());
+                                List<DtEspectaculo> lAuxEspe = Fabrica.getCrlUsuarios().listarEspectaculosDeArtista(a.getNickname());
+
+                                List<DtEspectaculo> lEspectac = new ArrayList<DtEspectaculo>();
+                                List<DtEspectaculo> lEspectacRechazador = Fabrica.getCtrlEspectaculos().listarRechazados();
+                                List<DtEspectaculo> lEspectacIngresados = Fabrica.getCtrlEspectaculos().listarIngresados();
+                                List<String> aux = new ArrayList<String>();
+                                if (contexto.getAttribute("tipoUsuario") != null) {
+                                    if (!contexto.getAttribute("nickname").toString().equals(a.getNickname())) {
+                                        for (DtEspectaculo ingre : lEspectacIngresados) {
+                                            aux.add(ingre.getNombre());
+                                        }
+
+                                        for (DtEspectaculo recha : lEspectacRechazador) {
+                                            aux.add(recha.getNombre());
+                                        }
+                                        for (DtEspectaculo espe : lAuxEspe) {
+                                            if (!aux.contains(espe.getNombre())) {
+                                                lEspectac.add(espe);
+                                            }
+
+                                        }
+                                    } else {
+                                        for (DtEspectaculo ingre : lEspectacIngresados) {
+                                            aux.add(ingre.getNombre());
+                                        }
+                                        for (DtEspectaculo recha : lEspectacRechazador) {
+                                            aux.add(recha.getNombre());
+                                        }
+                                        for (DtEspectaculo espe : lAuxEspe) {
+                                            lEspectac.add(espe);
+                                        }
+                                    }
+                                } else {
+                                    for (DtEspectaculo ingre : lEspectacIngresados) {
+                                        aux.add(ingre.getNombre());
+                                    }
+                                    for (DtEspectaculo recha : lEspectacRechazador) {
+                                        aux.add(recha.getNombre());
+                                    }
+                                    for (DtEspectaculo espe : lAuxEspe) {
+                                        if (!aux.contains(espe.getNombre())) {
+                                            lEspectac.add(espe);
+                                        }
+
+                                    }
+
+                                }
                                 out.print("<form action=\"consultarUsuariosBackEnd\">");
 
                                 out.print("<select name='espectaculo' class='custom-select selectEsp' id='inputGroupSelect04r'>");
+
                                 if (contexto.getAttribute("EspectaculoSeleccionadpEnConsultarUsuario") == null) {
                                     out.print("<option selected>Seleccione...</option>");
 
                                     for (DtEspectaculo esp : lEspectac) {
+
                                         out.print("<option >" + esp.getNombre() + "</option>");
 
                                     }
@@ -339,101 +386,83 @@ Author     : tecnologo
                                                 out.print("<p class='card-text'>" + lEspectac.get(i).getFechaDeRegistro() + "</p>");
                                                 out.print("</div>");
 
-                                                List<DtFuncion> fun = Fabrica.getCtrlEspectaculos().listarTodasLasFunciones(contexto.getAttribute("EspectaculoSeleccionadpEnConsultarUsuario").toString());
-                                                out.print("<form action=\"consultarUsuariosBackEnd\">");
+                                                if (!aux.contains(sesp)) {
+                                                    List<DtFuncion> fun = Fabrica.getCtrlEspectaculos().listarTodasLasFunciones(contexto.getAttribute("EspectaculoSeleccionadpEnConsultarUsuario").toString());
+                                                    out.print("<form action=\"consultarUsuariosBackEnd\">");
 
-                                                out.print("<select name='funcion' class='custom-select selectEsp' id='inputGroupSelect04f'>");
+                                                    out.print("<select name='funcion' class='custom-select selectEsp' id='inputGroupSelect04f'>");
 
-                                                if (contexto.getAttribute("FuncionSeleccionadaEnConsultarUsuario") == null) {
-                                                    out.print("<option selected>Funciones...</option>");
-
-                                                    for (DtFuncion f : fun) {
-                                                        out.print("<option >" + f.getNombre() + "</option>");
-
-                                                    }
-                                                } else {
-                                                    if (contexto.getAttribute("FuncionSeleccionadaEnConsultarUsuario").toString() != "Espectaculos...") {
-                                                        out.print("<option selected>" + contexto.getAttribute("FuncionSeleccionadaEnConsultarUsuario").toString() + "</option>");
-
-                                                        for (DtFuncion f : fun) {
-                                                            if (!contexto.getAttribute("FuncionSeleccionadaEnConsultarUsuario").toString().equals(f.getNombre())) {
-                                                                out.print("<option >" + f.getNombre() + "</option>");
-
-                                                            }
-
-                                                        }
-                                                    } else {
+                                                    if (contexto.getAttribute("FuncionSeleccionadaEnConsultarUsuario") == null) {
                                                         out.print("<option selected>Funciones...</option>");
 
                                                         for (DtFuncion f : fun) {
                                                             out.print("<option >" + f.getNombre() + "</option>");
 
                                                         }
+                                                    } else {
+                                                        if (contexto.getAttribute("FuncionSeleccionadaEnConsultarUsuario").toString() != "Espectaculos...") {
+                                                            out.print("<option selected>" + contexto.getAttribute("FuncionSeleccionadaEnConsultarUsuario").toString() + "</option>");
+
+                                                            for (DtFuncion f : fun) {
+                                                                if (!contexto.getAttribute("FuncionSeleccionadaEnConsultarUsuario").toString().equals(f.getNombre())) {
+                                                                    out.print("<option >" + f.getNombre() + "</option>");
+
+                                                                }
+
+                                                            }
+                                                        } else {
+                                                            out.print("<option selected>Funciones...</option>");
+
+                                                            for (DtFuncion f : fun) {
+                                                                out.print("<option >" + f.getNombre() + "</option>");
+
+                                                            }
+                                                        }
+
                                                     }
 
-                                                }
+                                                    out.print("</select>");
 
-                                                out.print("</select>");
-
-                                                out.print("</li>");
-                                                out.print("</ul>");
-                                                out.print("<div class='card-body'>");
-                                                out.print("<button class='btn btn-outline-secondaryf' type='submit' disabled>Consultar</button>");
-                                                out.print("</div>");
-                                                out.print("</form>");
-                                                out.print("</div>");
+                                                    out.print("</li>");
+                                                    out.print("</ul>");
+                                                    out.print("<div class='card-body'>");
+                                                    out.print("<button class='btn btn-outline-secondaryf' type='submit' disabled>Consultar</button>");
+                                                    out.print("</div>");
+                                                    out.print("</form>");
+                                                    out.print("</div>");
 
 ///////////////////////////////////////////////////////////////////////////////                        
 ///////////////////////////////////////////////////////////////////////////////  
-                                                //////////////////////////////////////////////
-                                                if (contexto.getAttribute("FuncionSeleccionadaEnConsultarUsuario") != null) {
-                                                    String sfun = contexto.getAttribute("FuncionSeleccionadaEnConsultarUsuario").toString();
+                                                    //////////////////////////////////////////////
+                                                    if (contexto.getAttribute("FuncionSeleccionadaEnConsultarUsuario") != null) {
+                                                        String sfun = contexto.getAttribute("FuncionSeleccionadaEnConsultarUsuario").toString();
 
-                                                    if (sfun != "Funciones..." && sfun != null) {
-                                                        for (DtFuncion f : fun) {
-                                                            if (sfun.equals(f.getNombre())) {
-                                                                out.print("<div class='card' style='width: 18rem;'>");
-                                                                out.print("<p class='card-text'>" + f.getNombre() + "</p>");
-                                                                out.print("<p class='card-text'>" + f.getFecha().toString() + "</p>");
-                                                                out.print("<p class='card-text'>" + f.getFechaDeRegistro().toString() + "</p>");
-                                                                out.print("<p class='card-text'>" + f.getHoraInicio().toString() + "</p>");
+                                                        if (sfun != "Funciones..." && sfun != null) {
+                                                            for (DtFuncion f : fun) {
+                                                                if (sfun.equals(f.getNombre())) {
+                                                                    out.print("<div class='card' style='width: 18rem;'>");
+                                                                    out.print("<p class='card-text'>" + f.getNombre() + "</p>");
+                                                                    out.print("<p class='card-text'>" + f.getFecha().toString() + "</p>");
+                                                                    out.print("<p class='card-text'>" + f.getFechaDeRegistro().toString() + "</p>");
+                                                                    out.print("<p class='card-text'>" + f.getHoraInicio().toString() + "</p>");
 
-                                                                out.print("</div>");
+                                                                    out.print("</div>");
 
-                                                            }
-                                                        }
-                                                    }
-                                                }
-
-///////////////////////////////////////////////////////////////////////////////                        
-/////////////////////////////////////////////////////////////////////////////// 
-                                                List<String> paqs = Fabrica.getCtrlPaquetes().listarPaquetes();
-
-                                                out.print("<form action=\"consultarUsuariosBackEnd\">");
-
-                                                out.print("<select name='paquete' class='custom-select selectEsp' id='inputGroupSelect04pak'>");
-                                                out.print("<option selected>Paquetes...</option>");
-
-                                                if (contexto.getAttribute("PaqueteSeleccionadoEnConsultarUsuario") == null) {
-                                                    out.print("<option selected>Paquetes...</option>");
-
-                                                    for (String p : paqs) {
-                                                        if (Fabrica.getCtrlPaquetes().listarEspectaculosIncluidos(p).contains(lEspectac.get(i).getNombre())) {
-                                                            out.print("<option >" + p + "</option>");
-                                                        }
-
-                                                    }
-                                                } else {
-                                                    if (contexto.getAttribute("PaqueteSeleccionadoEnConsultarUsuario").toString() != "Paquetes...") {
-                                                        out.print("<option selected>" + contexto.getAttribute("PaqueteSeleccionadoEnConsultarUsuario").toString() + "</option>");
-                                                        for (String p : paqs) {
-                                                            if (Fabrica.getCtrlPaquetes().listarEspectaculosIncluidos(p).contains(lEspectac.get(i).getNombre())) {
-                                                                if (!contexto.getAttribute("PaqueteSeleccionadoEnConsultarUsuario").toString().equals(p)) {
-                                                                    out.print("<option >" + p + "</option>");
                                                                 }
                                                             }
                                                         }
-                                                    } else {
+                                                    }
+
+///////////////////////////////////////////////////////////////////////////////                        
+/////////////////////////////////////////////////////////////////////////////// 
+                                                    List<String> paqs = Fabrica.getCtrlPaquetes().listarPaquetes();
+
+                                                    out.print("<form action=\"consultarUsuariosBackEnd\">");
+
+                                                    out.print("<select name='paquete' class='custom-select selectEsp' id='inputGroupSelect04pak'>");
+                                                    out.print("<option selected>Paquetes...</option>");
+
+                                                    if (contexto.getAttribute("PaqueteSeleccionadoEnConsultarUsuario") == null) {
                                                         out.print("<option selected>Paquetes...</option>");
 
                                                         for (String p : paqs) {
@@ -442,46 +471,66 @@ Author     : tecnologo
                                                             }
 
                                                         }
-                                                    }
+                                                    } else {
+                                                        if (contexto.getAttribute("PaqueteSeleccionadoEnConsultarUsuario").toString() != "Paquetes...") {
+                                                            out.print("<option selected>" + contexto.getAttribute("PaqueteSeleccionadoEnConsultarUsuario").toString() + "</option>");
+                                                            for (String p : paqs) {
+                                                                if (Fabrica.getCtrlPaquetes().listarEspectaculosIncluidos(p).contains(lEspectac.get(i).getNombre())) {
+                                                                    if (!contexto.getAttribute("PaqueteSeleccionadoEnConsultarUsuario").toString().equals(p)) {
+                                                                        out.print("<option >" + p + "</option>");
+                                                                    }
+                                                                }
+                                                            }
+                                                        } else {
+                                                            out.print("<option selected>Paquetes...</option>");
 
-                                                }
-
-                                                out.print("</select>");
-
-                                                out.print("</li>");
-                                                out.print("</ul>");
-                                                out.print("<div class='card-body'>");
-                                                out.print("<button class='btn btn-outline-secondarypak' type='submit' disabled>Consultar</button>");
-                                                out.print("</div>");
-                                                out.print("</form>");
-                                                out.print("</div>");
-                                                ///////////////////////////////////////////////////////////////////////////////                        
-///////////////////////////////////////////////////////////////////////////////   
-
-                                                if (contexto.getAttribute("PaqueteSeleccionadoEnConsultarUsuario") != null) {
-                                                    String spaq = contexto.getAttribute("PaqueteSeleccionadoEnConsultarUsuario").toString();
-
-                                                    if (spaq != "Paquetes..." && spaq != null) {
-                                                        for (String paq : paqs) {
-                                                            if (spaq.equals(paq)) {
-                                                                DtPaqueteDeEspectaculos instanciaP = Fabrica.getCtrlPaquetes().mostrarInfoPaquete(paq);
-                                                                out.print("<div class='card' style='width: 18rem;'>");
-                                                                out.print("<p class='card-text'>" + instanciaP.getNombre() + "</p>");
-                                                                out.print("<p class='card-text'>" + instanciaP.getDescripcion() + "</p>");
-                                                                out.print("<p class='card-text'>" + instanciaP.getDescuento() + "</p>");
-
-                                                                out.print("<p class='card-text'>" + instanciaP.getFechaInicio().toString() + "</p>");
-                                                                out.print("<p class='card-text'>" + instanciaP.getFechaFin().toString() + "</p>");
-                                                                out.print("<p class='card-text'>" + instanciaP.getFechaAlta().toString() + "</p>");
-
-                                                                out.print("</div>");
+                                                            for (String p : paqs) {
+                                                                if (Fabrica.getCtrlPaquetes().listarEspectaculosIncluidos(p).contains(lEspectac.get(i).getNombre())) {
+                                                                    out.print("<option >" + p + "</option>");
+                                                                }
 
                                                             }
                                                         }
+
                                                     }
-                                                }
-                                                ///////////////////////////////////////////////////////////////////////////////                        
+
+                                                    out.print("</select>");
+
+                                                    out.print("</li>");
+                                                    out.print("</ul>");
+                                                    out.print("<div class='card-body'>");
+                                                    out.print("<button class='btn btn-outline-secondarypak' type='submit' disabled>Consultar</button>");
+                                                    out.print("</div>");
+                                                    out.print("</form>");
+                                                    out.print("</div>");
+                                                    ///////////////////////////////////////////////////////////////////////////////                        
+///////////////////////////////////////////////////////////////////////////////   
+
+                                                    if (contexto.getAttribute("PaqueteSeleccionadoEnConsultarUsuario") != null) {
+                                                        String spaq = contexto.getAttribute("PaqueteSeleccionadoEnConsultarUsuario").toString();
+
+                                                        if (spaq != "Paquetes..." && spaq != null) {
+                                                            for (String paq : paqs) {
+                                                                if (spaq.equals(paq)) {
+                                                                    DtPaqueteDeEspectaculos instanciaP = Fabrica.getCtrlPaquetes().mostrarInfoPaquete(paq);
+                                                                    out.print("<div class='card' style='width: 18rem;'>");
+                                                                    out.print("<p class='card-text'>" + instanciaP.getNombre() + "</p>");
+                                                                    out.print("<p class='card-text'>" + instanciaP.getDescripcion() + "</p>");
+                                                                    out.print("<p class='card-text'>" + instanciaP.getDescuento() + "</p>");
+
+                                                                    out.print("<p class='card-text'>" + instanciaP.getFechaInicio().toString() + "</p>");
+                                                                    out.print("<p class='card-text'>" + instanciaP.getFechaFin().toString() + "</p>");
+                                                                    out.print("<p class='card-text'>" + instanciaP.getFechaAlta().toString() + "</p>");
+
+                                                                    out.print("</div>");
+
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                    ///////////////////////////////////////////////////////////////////////////////                        
 ///////////////////////////////////////////////////////////////////////////////  
+                                                }
                                             }
                                         }
                                     }
