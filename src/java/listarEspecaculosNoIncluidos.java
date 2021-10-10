@@ -5,13 +5,16 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import root.datatypes.DtEspectaculo;
 import root.fabrica.Fabrica;
+import root.interfaces.IEspectaculos;
 import root.interfaces.iPaquetes;
 
 /**
@@ -37,8 +40,16 @@ public class listarEspecaculosNoIncluidos extends HttpServlet {
             String paquete = request.getParameter("paquete");
             String plataforma = request.getParameter("plataforma");
             iPaquetes ip = Fabrica.getCtrlPaquetes();
+            IEspectaculos ie = Fabrica.getCtrlEspectaculos();
             List<String> esps = ip.listarEspectaculosNoIncluidos(paquete, plataforma);
-            request.setAttribute("espectaculos", esps);
+            List<String> espsAceptados = new ArrayList();
+            List<DtEspectaculo> aceptados = ie.listarAceptados();
+            for(DtEspectaculo e : aceptados) {
+                if(esps.contains(e.getNombre())) {
+                    espsAceptados.add(e.getNombre());
+                }
+            }
+            request.setAttribute("espectaculos", espsAceptados);
             request.getRequestDispatcher("/agregadoEspAPaq.jsp").forward(request, response);
         }
     }

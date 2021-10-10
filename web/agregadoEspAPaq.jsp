@@ -40,15 +40,15 @@
     <body>
         <% 
             //usuarios que no sean artistas son redirigidos al inicio
-            try {
-                ServletContext contexto = getServletContext();
-                String tipoUsuario = contexto.getAttribute("tipoUsuario").toString();
-                if(!tipoUsuario.equals("Artista")) {
-                    response.sendRedirect("index.jsp");
-                }
-            } catch(Exception e) {
-                response.sendRedirect("index.jsp");
-            }
+//            try {
+//                ServletContext contexto = getServletContext();
+//                String tipoUsuario = contexto.getAttribute("tipoUsuario").toString();
+//                if(!tipoUsuario.equals("Artista")) {
+//                    response.sendRedirect("index.jsp");
+//                }
+//            } catch(Exception e) {
+//                response.sendRedirect("index.jsp");
+//            }
         %>
         <%@include file="header.jsp"%>
         <form action="listarEspecaculosNoIncluidos" class="container">
