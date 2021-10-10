@@ -26,7 +26,7 @@
             var tus;
             tus = 0;
             function sart() {
-                tus = 1;
+                tus = 2;
                 document.getElementById("tBiografia").style.display = "block";
                 document.getElementById("tfBiografia").style.display = "block";
                 document.getElementById("tfLink").style.display = "block";
@@ -138,8 +138,8 @@
 
                     <form action="AltaUsuariosBackEnd" enctype="multipart/form-data" class="box" name="fAltaUsuario" id="fAltaUsuario" method="POST">
                         <p>Tipo Usuario:
-                            <input type="radio" name="us" value="e" id="us" onclick="sesp()"> Espectador
-                            <input type="radio" name="us" value="a" id="us" onclick="sart()"> Artista
+                            <input type="radio" name="us" value="e" id="use" onclick="sesp()"> Espectador
+                            <input type="radio" name="us" value="a" id="usa" onclick="sart()"> Artista
                         </p>
 
                         <p>Nombre:</p>
@@ -203,7 +203,16 @@
                             if (jsonUsC.includes(document.getElementById("correo").value)) {
                                 e.preventDefault();
                                 alert("El correo ya esta usado");
+                            }if(document.getElementById("correo").value.includes(".@")||document.getElementById("correo").value.includes("@.")||!document.getElementById("correo").value.includes("@")||!document.getElementById("correo").value.includes("."))
+                            {
+                                e.preventDefault();
+                                alert("El correo es invalido");
+                            }if(tus==2&&!document.getElementById("tfLink").value.includes(".")&&!document.getElementById("tfLink").value=="" )
+                            {
+                                e.preventDefault();
+                                alert("link invalido");
                             }
+                            
                         });
 
                     </script>

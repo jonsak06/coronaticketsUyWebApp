@@ -76,14 +76,14 @@ public class altaEspectaculoerv extends HttpServlet {
                 String fotoName ="";
                 if(request.getParameter("subir")!=null){
                 Part archivo = request.getPart("upfile"); //llamada al parámetro foto de mi formulario.
-                String context = "/var/www/img/espectaculos/";//request.getServletContext().getRealPath("/IMAGENES_ESPECTACULOS"); //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
+                String context = "/home/"+System.getProperty("user.name")+"/coronaticketsUyWebApp/web/IMAGENES_ESPECTACULOS"; //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
 
                 String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString(); 
 
 
                 archivo.write(context + File.separator+esp.getNombre().replaceAll("\\s+","") + foto); // Escribimos el archivo al disco duro del servidor.
 
-                fotoName = File.separator+esp.getNombre().replaceAll("\\s+","") + foto;
+                fotoName = "IMAGENES_ESPECTACULOS" + File.separator+esp.getNombre().replaceAll("\\s+","") + foto;
                 //AQUI SE DEBERIA HABER SUBIDO LA IMAGEN
                 }
                 ie.altaEspectaculo(request.getParameter("plataforma"), contexto.getAttribute("nickname").toString(), catDelEsp, esp, fotoName);
