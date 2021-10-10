@@ -19,6 +19,7 @@ public class DtFuncion {
     private Timestamp horaInicio;
     private Date fechaDeRegistro;
     private Date fecha;
+    private String imagen;
     
     public DtFuncion(){}
 
@@ -28,6 +29,14 @@ public class DtFuncion {
         this.horaInicio = horaInicio;
         this.fechaDeRegistro = fechaDeRegistro;
         this.fecha = fecha;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getImagen() {
+        return imagen;
     }
     
     

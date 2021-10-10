@@ -22,6 +22,8 @@ public class DtEspectaculo {
     private String url;
     private float costo;
     private Date fechaDeRegistro;
+    private String imagen;
+    
 
     public DtEspectaculo(){}
     public DtEspectaculo(Long id, String nombre, String descripcion, int duracion, int cantidadMaximaEspectadores, int cantidadMinimaEspectadores, String url, float costo, Date fechaDeRegistro) {
@@ -34,6 +36,30 @@ public class DtEspectaculo {
         this.url = url;
         this.costo = costo;
         this.fechaDeRegistro = fechaDeRegistro;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public DtEspectaculo(Long id, String nombre, String descripcion, int duracion, int cantidadMaximaEspectadores, int cantidadMinimaEspectadores, String url, float costo, Date fechaDeRegistro, String imagen, String nombreArtista) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.duracion = duracion;
+        this.cantidadMaximaEspectadores = cantidadMaximaEspectadores;
+        this.cantidadMinimaEspectadores = cantidadMinimaEspectadores;
+        this.url = url;
+        this.costo = costo;
+        this.fechaDeRegistro = fechaDeRegistro;
+        this.imagen = imagen;
+        this.nombreArtista = nombreArtista;
+    }
+
+    
+
+    public String getImagen() {
+        return imagen;
     }
     
     private String nombreArtista;

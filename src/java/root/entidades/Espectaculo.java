@@ -249,6 +249,7 @@ public class Espectaculo implements Serializable {
         DtEspectaculo dt = new DtEspectaculo(this.id, this.nombre, this.descripcion, this.duracion, this.cantidadMaximaEspectadores, this.cantidadMinimaEspectadores, this.url, this.costo, this.fechaDeRegistro);
         String nombreArt = this.artista.getNombre()+" "+this.artista.getApellido();
         dt.setNombreArtista(nombreArt);
+        dt.setImagen(this.imagen);
         return dt;
     }
 

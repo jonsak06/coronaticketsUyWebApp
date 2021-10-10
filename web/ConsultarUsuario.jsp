@@ -17,9 +17,162 @@ Author     : tecnologo
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-
-
         <link rel="stylesheet" href="headerStyles.css">
+        <style>
+
+
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: sans-serif;
+                background: linear-gradient(to right, #b92b27, #1565c0)
+            }
+
+            .card {
+                margin-bottom: 10px;
+                border: none
+            }
+
+            .box {
+                width: 500px;
+                padding: 40px;
+                position: absolute;
+                top: 25%;
+                left: 25%;
+                background: #191919;
+                ;
+                text-align: center;
+                transition: 0.25s;
+                margin-top: 100px
+            }
+
+            .box input[type="text"],
+            .box input[type="password"] {
+                border: 0;
+                background: none;
+                display: block;
+                margin: 20px auto;
+                text-align: center;
+                border: 2px solid #3498db;
+                padding: 10px 10px;
+                width: 250px;
+                outline: none;
+                color: white;
+                border-radius: 24px;
+                transition: 0.25s
+            }
+
+
+            .box h1 {
+                color: white;
+                text-transform: uppercase;
+            }
+
+            .box h3 {
+                color: white;
+                text-transform: uppercase;
+                font-size: 40px;
+
+            }
+            .box h4 {
+                color: white;
+                text-transform: uppercase;
+                font-size: 30px;
+
+            }
+            .box h6 {
+                color: white;
+                text-transform: uppercase;
+
+            }
+
+            .box input[type="text"]:focus,
+            .box input[type="password"]:focus {
+                width: 200px;
+                border-color: #2ecc71
+            }
+
+            .box select:focus {
+                width: 200px;
+                border-color: #2ecc71
+            }
+
+            .box select {
+                border: 0;
+                background: none;
+                display: block;
+                margin: 20px auto;
+                text-align: center;
+                border: 2px solid #3498db;
+                padding: 10px 10px;
+                width: 250px;
+                outline: none;
+                color: white;
+                border-radius: 24px;
+                transition: 0.25s
+            }
+
+            .box li {
+                color: white;
+                font-weight: 250
+            }
+
+            .box p{
+                color: white;
+                font-weight: 250
+            }
+
+
+            .box input[type="submit"] {
+                border: 0;
+                background: none;
+                display: block;
+                margin: 20px auto;
+                text-align: center;
+                border: 2px solid #2ecc71;
+                padding: 14px 40px;
+                outline: none;
+                color: white;
+                border-radius: 24px;
+                transition: 0.25s;
+                cursor: pointer
+            }
+
+            .box button {
+                border: 0;
+                background: none;
+                display: block;
+                margin: 20px auto;
+                text-align: center;
+                border: 2px solid #2ecc71;
+                padding: 14px 40px;
+                outline: none;
+                color: white;
+                border-radius: 24px;
+                transition: 0.25s;
+                cursor: pointer
+            }
+
+            .box option {
+                background: black;
+                color: white;
+            }
+
+            .box input[type="submit"]:hover {
+                background: #2ecc71
+            }
+
+            .box img{
+                height: 300px;
+                width: 300px;
+                margin: 20px auto;
+            }
+            .forgot {
+                text-decoration: underline
+            }
+
+
+        </style>
 
     </head>
 
@@ -29,7 +182,7 @@ Author     : tecnologo
         <%ServletContext contexto = getServletContext();
         %>
         <form action="consultarUsuariosBackEnd" class="container">
-            <div class="input-group">
+            <div class="box">
                 <select name="usuario" class="custom-select" id="inputGroupSelect04">
 
                     <%
@@ -77,7 +230,7 @@ Author     : tecnologo
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="submit" disabled>Consultar</button>
                 </div>
-            </div>
+
         </form> 
         <div class="container infoUsuario">
 
@@ -89,22 +242,24 @@ Author     : tecnologo
 ///////////////////////////////////////////////////////////////////////////////  
                         for (DtArtista a : lArt) {
                             if (selUsu.equals(a.getNickname())) {
-                                out.print("<div class='card' style='width: 18rem;'>");
-                                out.print("<img src='" + a.getImagen() + "' class='card-img-top' alt='imagen del paquete'>");
-                                out.print("<div class='card-body'>");
-                                out.print("<h5 class='card-title'>" + a.getNickname() + "</h5>");
-                                out.print("<p class='card-text'>" + a.getNombre() + "</p>");
-                                out.print("<p class='card-text'>" + a.getApellido() + "</p>");
-                                out.print("<p class='card-text'>" + a.getCorreo() + "</p>");
-                                out.print("<p class='card-text'>" + a.getFechaNacimiento().toString() + "</p>");
-                                out.print("</div>");
-                                out.print("</div>");
+                                out.print("<img src='" + a.getImagen() + "' alt='imagen del artista'>");
+
+                                out.print("<h3>Nickname: " + a.getNickname() + "</h3>");
+                                out.print("<p>Nombre:" + a.getNombre() + "</p>");
+                                out.print("<p>Apellido:" + a.getApellido() + "</p>");
+                                out.print("<p>Correo:" + a.getCorreo() + "</p>");
+                                out.print("<p>Fecha de Nacimiento:" + a.getFechaNacimiento().toString() + "</p>");
+                                out.print("<p>Link web:" + a.getLinkWeb() + "</p>");
+                                out.print("<p>Biografia:" + a.getBiografia() + "</p>");
+                                out.print("<p>Descripcion:" + a.getDescripcion() + "</p>");
 
                                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                 List<DtUsuario> lUsuarQueSigues = Fabrica.getCrlUsuarios().getUsuariosQueSiguesAr(a.getNickname());
                                 out.print("<form action=\"consultarUsuariosBackEnd\">");
-
+                                out.print("</br>");
+                                out.print("</br>");
+                                out.print("<h6>Seleccione usuario seguido:</h6>");
                                 out.print("<select name='usuQueSiges' class='custom-select selectEsp' id='inputGroupSelect04us'>");
                                 if (contexto.getAttribute("UsuarioQueSiguesSeleccionadEnConsultarUsuario") == null) {
                                     out.print("<option selected>Seleccione...</option>");
@@ -140,10 +295,9 @@ Author     : tecnologo
 
                                 out.print("</li>");
                                 out.print("</ul>");
-                                out.print("<div class='card-body'>");
+
                                 out.print("<button class='btn btn-outline-secondaryus' type='submit' disabled>Consultar</button>");
                                 out.print("</form>");
-                                out.print("</div>");
 
 ///////////////////////////////////////////////////////////////////////////////                        
 ///////////////////////////////////////////////////////////////////////////////  
@@ -155,28 +309,28 @@ Author     : tecnologo
                                         for (DtUsuario u : lUsuarQueSigues) {
                                             if (sfun.equals(u.getNickname())) {
                                                 if (u instanceof DtArtista) {
-                                                    out.print("<div class='card' style='width: 18rem;'>");
-                                                    out.print("<img src='" + ((DtArtista) u).getImagen() + "' class='card-img-top' alt='imagen del paquete'>");
-                                                    out.print("<div class='card-body'>");
-                                                    out.print("<h5 class='card-title'>" + ((DtArtista) u).getNickname() + "</h5>");
-                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getNombre() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getApellido() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getCorreo() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getFechaNacimiento().toString() + "</p>");
-                                                    out.print("</div>");
-                                                    out.print("</div>");
+
+                                                    out.print("<img src='" + ((DtArtista) u).getImagen() + "'alt='imagen del seguido'>");
+
+                                                    out.print("<h4> Nickname:" + ((DtArtista) u).getNickname() + "</h4>");
+                                                    out.print("<p> Nombre:" + ((DtArtista) u).getNombre() + "</p>");
+                                                    out.print("<p> Apellido:" + ((DtArtista) u).getApellido() + "</p>");
+                                                    out.print("<p> Correo:" + ((DtArtista) u).getCorreo() + "</p>");
+                                                    out.print("<p> Fecha de nacimiento" + ((DtArtista) u).getFechaNacimiento().toString() + "</p>");
+                                                    out.print("<p> Link web:" + ((DtArtista) u).getLinkWeb() + "</p>");
+                                                    out.print("<p> Biografia:" + ((DtArtista) u).getBiografia() + "</p>");
+                                                    out.print("<p> Descciopcion:" + ((DtArtista) u).getDescripcion() + "</p>");
+
                                                 }
                                                 if (u instanceof DtEspectador) {
-                                                    out.print("<div class='card' style='width: 18rem;'>");
-                                                    out.print("<img src='" + ((DtEspectador) u).getImagen() + "' class='card-img-top' alt='imagen del paquete'>");
-                                                    out.print("<div class='card-body'>");
-                                                    out.print("<h5 class='card-title'>" + ((DtEspectador) u).getNickname() + "</h5>");
-                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getNombre() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getApellido() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getCorreo() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getFechaNacimiento().toString() + "</p>");
-                                                    out.print("</div>");
-                                                    out.print("</div>");
+                                                    out.print("<img src='" + ((DtEspectador) u).getImagen() + "' alt='imagen del seguido'>");
+
+                                                    out.print("<h4 >" + ((DtEspectador) u).getNickname() + "</h4>");
+                                                    out.print("<p >" + ((DtEspectador) u).getNombre() + "</p>");
+                                                    out.print("<p >" + ((DtEspectador) u).getApellido() + "</p>");
+                                                    out.print("<p>" + ((DtEspectador) u).getCorreo() + "</p>");
+                                                    out.print("<p>" + ((DtEspectador) u).getFechaNacimiento().toString() + "</p>");
+
                                                 }
 
                                             }
@@ -193,7 +347,9 @@ Author     : tecnologo
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                 List<DtUsuario> lUsuarQueTeSiguen = Fabrica.getCrlUsuarios().getUsuariosQueTeSiguenAr(a.getNickname());
                                 out.print("<form action=\"consultarUsuariosBackEnd\">");
-
+                                out.print("</br>");
+                                out.print("</br>");
+                                out.print("<h6>Seleccione usuario que lo seguen:</h6>");
                                 out.print("<select name='usuQueTeSigen' class='custom-select selectEsp' id='inputGroupSelect04uts'>");
                                 if (contexto.getAttribute("UsuarioQueTeSiguenSeleccionadEnConsultarUsuario") == null) {
                                     out.print("<option selected>Seleccione...</option>");
@@ -229,10 +385,9 @@ Author     : tecnologo
 
                                 out.print("</li>");
                                 out.print("</ul>");
-                                out.print("<div class='card-body'>");
+
                                 out.print("<button class='btn btn-outline-secondaryuts' type='submit' disabled>Consultar</button>");
                                 out.print("</form>");
-                                out.print("</div>");
 
 ///////////////////////////////////////////////////////////////////////////////                        
 ///////////////////////////////////////////////////////////////////////////////  
@@ -244,28 +399,27 @@ Author     : tecnologo
                                         for (DtUsuario u : lUsuarQueSigues) {
                                             if (sfun.equals(u.getNickname())) {
                                                 if (u instanceof DtArtista) {
-                                                    out.print("<div class='card' style='width: 18rem;'>");
-                                                    out.print("<img src='" + ((DtArtista) u).getImagen() + "' class='card-img-top' alt='imagen del paquete'>");
-                                                    out.print("<div class='card-body'>");
-                                                    out.print("<h5 class='card-title'>" + ((DtArtista) u).getNickname() + "</h5>");
-                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getNombre() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getApellido() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getCorreo() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getFechaNacimiento().toString() + "</p>");
-                                                    out.print("</div>");
-                                                    out.print("</div>");
+                                                    out.print("<img src='" + ((DtArtista) u).getImagen() + "' alt='imagen del usuario que te sigue'>");
+
+                                                    out.print("<h4> Nickname: " + ((DtArtista) u).getNickname() + "</h4>");
+                                                    out.print("<p> Nombre: " + ((DtArtista) u).getNombre() + "</p>");
+                                                    out.print("<p> Apellido: " + ((DtArtista) u).getApellido() + "</p>");
+                                                    out.print("<p> Correo: " + ((DtArtista) u).getCorreo() + "</p>");
+                                                    out.print("<p> Fecha de Nacimiento: " + ((DtArtista) u).getFechaNacimiento().toString() + "</p>");
+                                                    out.print("<p> Link web: " + ((DtArtista) u).getLinkWeb() + "</p>");
+                                                    out.print("<p> Biografia: " + ((DtArtista) u).getBiografia() + "</p>");
+                                                    out.print("<p> Descripcion: " + ((DtArtista) u).getDescripcion() + "</p>");
+
                                                 }
                                                 if (u instanceof DtEspectador) {
-                                                    out.print("<div class='card' style='width: 18rem;'>");
-                                                    out.print("<img src='" + ((DtEspectador) u).getImagen() + "' class='card-img-top' alt='imagen del paquete'>");
-                                                    out.print("<div class='card-body'>");
-                                                    out.print("<h5 class='card-title'>" + ((DtEspectador) u).getNickname() + "</h5>");
-                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getNombre() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getApellido() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getCorreo() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getFechaNacimiento().toString() + "</p>");
-                                                    out.print("</div>");
-                                                    out.print("</div>");
+                                                    out.print("<img src='" + ((DtEspectador) u).getImagen() + "' alt='imagen del paquete'>");
+
+                                                    out.print("<h4> Nickname: " + ((DtEspectador) u).getNickname() + "</h4>");
+                                                    out.print("<p>Nombre: " + ((DtEspectador) u).getNombre() + "</p>");
+                                                    out.print("<p>Apellido: " + ((DtEspectador) u).getApellido() + "</p>");
+                                                    out.print("<p>Correo: " + ((DtEspectador) u).getCorreo() + "</p>");
+                                                    out.print("<p>Fecha de Nacimiento: " + ((DtEspectador) u).getFechaNacimiento().toString() + "</p>");
+
                                                 }
 
                                             }
@@ -326,7 +480,9 @@ Author     : tecnologo
                                 out.print("<form action=\"consultarUsuariosBackEnd\">");
 
                                 out.print("<select name='espectaculo' class='custom-select selectEsp' id='inputGroupSelect04r'>");
-
+                                out.print("</br>");
+                                out.print("</br>");
+                                out.print("<h6>Seleccione usuario Espectaculo:</h6>");
                                 if (contexto.getAttribute("EspectaculoSeleccionadpEnConsultarUsuario") == null) {
                                     out.print("<option selected>Seleccione...</option>");
 
@@ -362,10 +518,9 @@ Author     : tecnologo
 
                                 out.print("</li>");
                                 out.print("</ul>");
-                                out.print("<div class='card-body'>");
+
                                 out.print("<button class='btn btn-outline-secondaryr' type='submit' disabled>Consultar</button>");
                                 out.print("</form>");
-                                out.print("</div>");
 
 ///////////////////////////////////////////////////////////////////////////////                        
 /////////////////////////////////////////////////////////////////////////////// 
@@ -375,21 +530,22 @@ Author     : tecnologo
                                     if (sesp != "Seleccione..." && sesp != null) {
                                         for (int i = 0; i < lEspectac.size(); i++) {
                                             if (sesp.equals(lEspectac.get(i).getNombre())) {
-                                                out.print("<div class='card' style='width: 18rem;'>");
-                                                out.print("<p class='card-text'>" + lEspectac.get(i).getNombre() + "</p>");
-                                                out.print("<p class='card-text'>" + lEspectac.get(i).getDescripcion() + "</p>");
-                                                out.print("<p class='card-text'>" + lEspectac.get(i).getDuracion() + "</p>");
-                                                out.print("<p class='card-text'>" + lEspectac.get(i).getCantidadMaximaEspectadores() + "</p>");
-                                                out.print("<p class='card-text'>" + lEspectac.get(i).getCantidadMinimaEspectadores() + "</p>");
-                                                out.print("<p class='card-text'>" + lEspectac.get(i).getUrl() + "</p>");
-                                                out.print("<p class='card-text'>" + lEspectac.get(i).getCosto() + "</p>");
-                                                out.print("<p class='card-text'>" + lEspectac.get(i).getFechaDeRegistro() + "</p>");
-                                                out.print("</div>");
+                                                out.print("<img src='" + lEspectac.get(i).getImagen() + "' alt='imagen del espectaculo'>");
+                                                out.print("<h4> Nombre: " + lEspectac.get(i).getNombre() + "</h4>");
+                                                out.print("<p> Descripcion:" + lEspectac.get(i).getDescripcion() + "</p>");
+                                                out.print("<p> Duracion:" + lEspectac.get(i).getDuracion() + "</p>");
+                                                out.print("<p> Cantidad maxima de espectadores:" + lEspectac.get(i).getCantidadMaximaEspectadores() + "</p>");
+                                                out.print("<p> Cantidad minima de espectadores:" + lEspectac.get(i).getCantidadMinimaEspectadores() + "</p>");
+                                                out.print("<p> Url:" + lEspectac.get(i).getUrl() + "</p>");
+                                                out.print("<p> Costo:" + lEspectac.get(i).getCosto() + "</p>");
+                                                out.print("<p> FechaDeRegistro:" + lEspectac.get(i).getFechaDeRegistro() + "</p>");
 
                                                 if (!aux.contains(sesp)) {
                                                     List<DtFuncion> fun = Fabrica.getCtrlEspectaculos().listarTodasLasFunciones(contexto.getAttribute("EspectaculoSeleccionadpEnConsultarUsuario").toString());
                                                     out.print("<form action=\"consultarUsuariosBackEnd\">");
-
+                                                    out.print("</br>");
+                                                    out.print("</br>");
+                                                    out.print("<h6>Seleccione Funcion:</h6>");
                                                     out.print("<select name='funcion' class='custom-select selectEsp' id='inputGroupSelect04f'>");
 
                                                     if (contexto.getAttribute("FuncionSeleccionadaEnConsultarUsuario") == null) {
@@ -425,11 +581,10 @@ Author     : tecnologo
 
                                                     out.print("</li>");
                                                     out.print("</ul>");
-                                                    out.print("<div class='card-body'>");
+
                                                     out.print("<button class='btn btn-outline-secondaryf' type='submit' disabled>Consultar</button>");
-                                                    out.print("</div>");
+                                                    
                                                     out.print("</form>");
-                                                    out.print("</div>");
 
 ///////////////////////////////////////////////////////////////////////////////                        
 ///////////////////////////////////////////////////////////////////////////////  
@@ -440,13 +595,11 @@ Author     : tecnologo
                                                         if (sfun != "Funciones..." && sfun != null) {
                                                             for (DtFuncion f : fun) {
                                                                 if (sfun.equals(f.getNombre())) {
-                                                                    out.print("<div class='card' style='width: 18rem;'>");
+                                                                    
                                                                     out.print("<p class='card-text'>" + f.getNombre() + "</p>");
                                                                     out.print("<p class='card-text'>" + f.getFecha().toString() + "</p>");
                                                                     out.print("<p class='card-text'>" + f.getFechaDeRegistro().toString() + "</p>");
                                                                     out.print("<p class='card-text'>" + f.getHoraInicio().toString() + "</p>");
-
-                                                                    out.print("</div>");
 
                                                                 }
                                                             }
@@ -498,14 +651,13 @@ Author     : tecnologo
 
                                                     out.print("</li>");
                                                     out.print("</ul>");
-                                                    out.print("<div class='card-body'>");
+
                                                     out.print("<button class='btn btn-outline-secondarypak' type='submit' disabled>Consultar</button>");
                                                     out.print("</div>");
                                                     out.print("</form>");
-                                                    out.print("</div>");
+
                                                     ///////////////////////////////////////////////////////////////////////////////                        
 ///////////////////////////////////////////////////////////////////////////////   
-
                                                     if (contexto.getAttribute("PaqueteSeleccionadoEnConsultarUsuario") != null) {
                                                         String spaq = contexto.getAttribute("PaqueteSeleccionadoEnConsultarUsuario").toString();
 
@@ -546,14 +698,12 @@ Author     : tecnologo
                             if (selUsu.equals(e.getNickname())) {
                                 out.print("<div class='card' style='width: 18rem;'>");
                                 out.print("<img src='" + e.getImagen() + "' class='card-img-top' alt='imagen del paquete'>");
-                                out.print("<div class='card-body'>");
+                                out.print("</div>");
                                 out.print("<h5 class='card-title'>" + e.getNickname() + "</h5>");
                                 out.print("<p class='card-text'>" + e.getNombre() + "</p>");
                                 out.print("<p class='card-text'>" + e.getApellido() + "</p>");
                                 out.print("<p class='card-text'>" + e.getCorreo() + "</p>");
                                 out.print("<p class='card-text'>" + e.getFechaNacimiento().toString() + "</p>");
-                                out.print("</div>");
-                                out.print("</div>");
 
                                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -595,7 +745,7 @@ Author     : tecnologo
 
                                 out.print("</li>");
                                 out.print("</ul>");
-                                out.print("<div class='card-body'>");
+
                                 out.print("<button class='btn btn-outline-secondaryus' type='submit' disabled>Consultar</button>");
                                 out.print("</form>");
                                 out.print("</div>");
@@ -612,26 +762,24 @@ Author     : tecnologo
                                                 if (u instanceof DtArtista) {
                                                     out.print("<div class='card' style='width: 18rem;'>");
                                                     out.print("<img src='" + ((DtArtista) u).getImagen() + "' class='card-img-top' alt='imagen del paquete'>");
-                                                    out.print("<div class='card-body'>");
+                                                    out.print("</div>");
                                                     out.print("<h5 class='card-title'>" + ((DtArtista) u).getNickname() + "</h5>");
                                                     out.print("<p class='card-text'>" + ((DtArtista) u).getNombre() + "</p>");
                                                     out.print("<p class='card-text'>" + ((DtArtista) u).getApellido() + "</p>");
                                                     out.print("<p class='card-text'>" + ((DtArtista) u).getCorreo() + "</p>");
                                                     out.print("<p class='card-text'>" + ((DtArtista) u).getFechaNacimiento().toString() + "</p>");
-                                                    out.print("</div>");
-                                                    out.print("</div>");
+
                                                 }
                                                 if (u instanceof DtEspectador) {
                                                     out.print("<div class='card' style='width: 18rem;'>");
                                                     out.print("<img src='" + ((DtEspectador) u).getImagen() + "' class='card-img-top' alt='imagen del paquete'>");
-                                                    out.print("<div class='card-body'>");
+                                                    out.print("</div>");
                                                     out.print("<h5 class='card-title'>" + ((DtEspectador) u).getNickname() + "</h5>");
                                                     out.print("<p class='card-text'>" + ((DtEspectador) u).getNombre() + "</p>");
                                                     out.print("<p class='card-text'>" + ((DtEspectador) u).getApellido() + "</p>");
                                                     out.print("<p class='card-text'>" + ((DtEspectador) u).getCorreo() + "</p>");
                                                     out.print("<p class='card-text'>" + ((DtEspectador) u).getFechaNacimiento().toString() + "</p>");
-                                                    out.print("</div>");
-                                                    out.print("</div>");
+
                                                 }
 
                                             }
@@ -682,7 +830,7 @@ Author     : tecnologo
 
                                 out.print("</li>");
                                 out.print("</ul>");
-                                out.print("<div class='card-body'>");
+
                                 out.print("<button class='btn btn-outline-secondaryuts' type='submit' disabled>Consultar</button>");
                                 out.print("</form>");
                                 out.print("</div>");
@@ -699,26 +847,24 @@ Author     : tecnologo
                                                 if (u instanceof DtArtista) {
                                                     out.print("<div class='card' style='width: 18rem;'>");
                                                     out.print("<img src='" + ((DtArtista) u).getImagen() + "' class='card-img-top' alt='imagen del paquete'>");
-                                                    out.print("<div class='card-body'>");
+                                                    out.print("</div>");
                                                     out.print("<h5 class='card-title'>" + ((DtArtista) u).getNickname() + "</h5>");
                                                     out.print("<p class='card-text'>" + ((DtArtista) u).getNombre() + "</p>");
                                                     out.print("<p class='card-text'>" + ((DtArtista) u).getApellido() + "</p>");
                                                     out.print("<p class='card-text'>" + ((DtArtista) u).getCorreo() + "</p>");
                                                     out.print("<p class='card-text'>" + ((DtArtista) u).getFechaNacimiento().toString() + "</p>");
-                                                    out.print("</div>");
-                                                    out.print("</div>");
+
                                                 }
                                                 if (u instanceof DtEspectador) {
                                                     out.print("<div class='card' style='width: 18rem;'>");
                                                     out.print("<img src='" + ((DtEspectador) u).getImagen() + "' class='card-img-top' alt='imagen del paquete'>");
-                                                    out.print("<div class='card-body'>");
+                                                    out.print("</div>");
                                                     out.print("<h5 class='card-title'>" + ((DtEspectador) u).getNickname() + "</h5>");
                                                     out.print("<p class='card-text'>" + ((DtEspectador) u).getNombre() + "</p>");
                                                     out.print("<p class='card-text'>" + ((DtEspectador) u).getApellido() + "</p>");
                                                     out.print("<p class='card-text'>" + ((DtEspectador) u).getCorreo() + "</p>");
                                                     out.print("<p class='card-text'>" + ((DtEspectador) u).getFechaNacimiento().toString() + "</p>");
-                                                    out.print("</div>");
-                                                    out.print("</div>");
+
                                                 }
 
                                             }
@@ -769,7 +915,7 @@ Author     : tecnologo
 
                                         out.print("</li>");
                                         out.print("</ul>");
-                                        out.print("<div class='card-body'>");
+
                                         out.print("<button class='btn btn-outline-secondaryr' type='submit' disabled>Consultar</button>");
                                         out.print("</form>");
                                         out.print("</div>");
@@ -841,7 +987,7 @@ Author     : tecnologo
 
                                 out.print("</li>");
                                 out.print("</ul>");
-                                out.print("<div class='card-body'>");
+
                                 out.print("<button class='btn btn-outline-secondaryr' type='submit' disabled>Consultar</button>");
                                 out.print("</form>");
                                 out.print("</div>");
@@ -882,87 +1028,87 @@ Author     : tecnologo
 
             %>
         </div>  
+    </div>
 
+    <script>
+        const usus = document.getElementById("inputGroupSelect04");
+        const botonConsultarUsu = document.querySelector(".btn-outline-secondary");
+        usus.addEventListener("change", e => {
+            if (e.target.value === "Seleccione...") {
+                botonConsultarUsu.disabled = true;
+            } else {
+                botonConsultarUsu.disabled = false;
+            }
+        });
 
-        <script>
-            const usus = document.getElementById("inputGroupSelect04");
-            const botonConsultarUsu = document.querySelector(".btn-outline-secondary");
-            usus.addEventListener("change", e => {
-                if (e.target.value === "Seleccione...") {
-                    botonConsultarUsu.disabled = true;
-                } else {
-                    botonConsultarUsu.disabled = false;
-                }
-            });
+    </script>
 
-        </script>
+    <script>
+        const regis = document.getElementById("inputGroupSelect04r");
+        const botonConsultarReg = document.querySelector(".btn-outline-secondaryr");
+        regis.addEventListener("change", e => {
+            if (e.target.value === "Seleccione...") {
+                botonConsultarReg.disabled = true;
+            } else {
+                botonConsultarReg.disabled = false;
+            }
+        });
 
-        <script>
-            const regis = document.getElementById("inputGroupSelect04r");
-            const botonConsultarReg = document.querySelector(".btn-outline-secondaryr");
-            regis.addEventListener("change", e => {
-                if (e.target.value === "Seleccione...") {
-                    botonConsultarReg.disabled = true;
-                } else {
-                    botonConsultarReg.disabled = false;
-                }
-            });
+    </script>
 
-        </script>
+    <script>
+        const funs = document.getElementById("inputGroupSelect04f");
+        const botonConsultarFun = document.querySelector(".btn-outline-secondaryf");
+        funs.addEventListener("change", e => {
+            if (e.target.value === "Seleccione...") {
+                botonConsultarFun.disabled = true;
+            } else {
+                botonConsultarFun.disabled = false;
+            }
+        });
 
-        <script>
-            const funs = document.getElementById("inputGroupSelect04f");
-            const botonConsultarFun = document.querySelector(".btn-outline-secondaryf");
-            funs.addEventListener("change", e => {
-                if (e.target.value === "Seleccione...") {
-                    botonConsultarFun.disabled = true;
-                } else {
-                    botonConsultarFun.disabled = false;
-                }
-            });
+    </script>
 
-        </script>
+    <script>
+        const paks = document.getElementById("inputGroupSelect04pak");
+        const botonConsultarPak = document.querySelector(".btn-outline-secondarypak");
+        paks.addEventListener("change", e => {
+            if (e.target.value === "Seleccione...") {
+                botonConsultarPak.disabled = true;
+            } else {
+                botonConsultarPak.disabled = false;
+            }
+        });
 
-        <script>
-            const paks = document.getElementById("inputGroupSelect04pak");
-            const botonConsultarPak = document.querySelector(".btn-outline-secondarypak");
-            paks.addEventListener("change", e => {
-                if (e.target.value === "Seleccione...") {
-                    botonConsultarPak.disabled = true;
-                } else {
-                    botonConsultarPak.disabled = false;
-                }
-            });
+    </script>
 
-        </script>
+    <script>
+        const usuSeguidoSelected = document.getElementById("inputGroupSelect04us");
+        const botonConsultarUSS = document.querySelector(".btn-outline-secondaryus");
+        usuSeguidoSelected.addEventListener("change", e => {
+            if (e.target.value === "Seleccione...") {
+                botonConsultarUSS.disabled = true;
+            } else {
+                botonConsultarUSS.disabled = false;
+            }
+        });
 
-        <script>
-            const usuSeguidoSelected = document.getElementById("inputGroupSelect04us");
-            const botonConsultarUSS = document.querySelector(".btn-outline-secondaryus");
-            usuSeguidoSelected.addEventListener("change", e => {
-                if (e.target.value === "Seleccione...") {
-                    botonConsultarUSS.disabled = true;
-                } else {
-                    botonConsultarUSS.disabled = false;
-                }
-            });
+    </script>
 
-        </script>
+    <script>
+        const usuQueTeSigueSelected = document.getElementById("inputGroupSelect04uts");
+        const botonConsultarUTS = document.querySelector(".btn-outline-secondaryuts");
+        usuQueTeSigueSelected.addEventListener("change", e => {
+            if (e.target.value === "Seleccione...") {
+                botonConsultarUTS.disabled = true;
+            } else {
+                botonConsultarUTS.disabled = false;
+            }
+        });
 
-        <script>
-            const usuQueTeSigueSelected = document.getElementById("inputGroupSelect04uts");
-            const botonConsultarUTS = document.querySelector(".btn-outline-secondaryuts");
-            usuQueTeSigueSelected.addEventListener("change", e => {
-                if (e.target.value === "Seleccione...") {
-                    botonConsultarUTS.disabled = true;
-                } else {
-                    botonConsultarUTS.disabled = false;
-                }
-            });
-
-        </script>
-        <%@include file="headerScript.jsp"%>
-    </body>
+    </script>
+    <%@include file="headerScript.jsp"%>
+</body>
 
 </html>
 
