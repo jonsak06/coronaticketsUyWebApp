@@ -18,12 +18,13 @@
     <body>
         <h1>Hello World!</h1>
         <%
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
-            EntityManager em = emf.createEntityManager();
-            Espectaculo e = em.createNamedQuery("Espectaculo.findByNombre", Espectaculo.class).setParameter("nombre", "test2").getSingleResult();
-            em.close();
-            emf.close();
-            out.print("<img src="+e.getImagen()+">");
+//            EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+//            EntityManager em = emf.createEntityManager();
+//            Espectaculo e = em.createNamedQuery("Espectaculo.findByNombre", Espectaculo.class).setParameter("nombre", "test2").getSingleResult();
+//            em.close();
+//            emf.close();
+//            out.print("<img src="+e.getImagen()+">");
             %>
+            <<img src="home/julio/Downloads/in.jpg" />
     </body>
 </html>
