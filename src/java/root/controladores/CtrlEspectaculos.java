@@ -114,4 +114,8 @@ public class CtrlEspectaculos implements IEspectaculos {
     public List<DtEspectaculo> listarTodosLosEspectaculos() {
         return ManEspectaculo.listarEspectaculos();
     }
+    
+    public List<DtEspectaculo> listarAceptados() {
+        return ManEspectaculo.listarAceptados();
+    }
 }

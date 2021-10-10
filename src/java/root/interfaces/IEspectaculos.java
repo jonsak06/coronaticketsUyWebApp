@@ -41,4 +41,5 @@ public interface IEspectaculos {
     public List<DtFuncion> funcEspNoReg(String nickname, String nombreEspectaculo);
     public List<DtFuncion> listarTodasLasFunciones(String nombreEsp);
     public List<DtEspectaculo> listarTodosLosEspectaculos();
+    public List<DtEspectaculo> listarAceptados();
 }
