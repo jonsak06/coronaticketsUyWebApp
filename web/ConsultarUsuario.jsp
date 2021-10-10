@@ -80,6 +80,13 @@ Author     : tecnologo
                 font-size: 30px;
 
             }
+            
+            .box h5 {
+                color: white;
+                text-transform: uppercase;
+                font-size: 22px;
+
+            }
             .box h6 {
                 color: white;
                 text-transform: uppercase;
@@ -396,8 +403,11 @@ Author     : tecnologo
                                     String sfun = contexto.getAttribute("UsuarioQueTeSiguenSeleccionadEnConsultarUsuario").toString();
 
                                     if (sfun != "Seleccione..." && sfun != null) {
-                                        for (DtUsuario u : lUsuarQueSigues) {
+
+                                        for (DtUsuario u : lUsuarQueTeSiguen) {
+
                                             if (sfun.equals(u.getNickname())) {
+
                                                 if (u instanceof DtArtista) {
                                                     out.print("<img src='" + ((DtArtista) u).getImagen() + "' alt='imagen del usuario que te sigue'>");
 
@@ -412,7 +422,7 @@ Author     : tecnologo
 
                                                 }
                                                 if (u instanceof DtEspectador) {
-                                                    out.print("<img src='" + ((DtEspectador) u).getImagen() + "' alt='imagen del paquete'>");
+                                                    out.print("<img src='" + ((DtEspectador) u).getImagen() + "' alt='imagen del usuario que te sigue'>");
 
                                                     out.print("<h4> Nickname: " + ((DtEspectador) u).getNickname() + "</h4>");
                                                     out.print("<p>Nombre: " + ((DtEspectador) u).getNombre() + "</p>");
@@ -478,11 +488,12 @@ Author     : tecnologo
 
                                 }
                                 out.print("<form action=\"consultarUsuariosBackEnd\">");
+                                out.print("</br>");
+                                out.print("</br>");
+                                out.print("<h6>Seleccione Espectaculo:</h6>");
 
                                 out.print("<select name='espectaculo' class='custom-select selectEsp' id='inputGroupSelect04r'>");
-                                out.print("</br>");
-                                out.print("</br>");
-                                out.print("<h6>Seleccione usuario Espectaculo:</h6>");
+
                                 if (contexto.getAttribute("EspectaculoSeleccionadpEnConsultarUsuario") == null) {
                                     out.print("<option selected>Seleccione...</option>");
 
@@ -583,7 +594,7 @@ Author     : tecnologo
                                                     out.print("</ul>");
 
                                                     out.print("<button class='btn btn-outline-secondaryf' type='submit' disabled>Consultar</button>");
-                                                    
+
                                                     out.print("</form>");
 
 ///////////////////////////////////////////////////////////////////////////////                        
@@ -595,11 +606,11 @@ Author     : tecnologo
                                                         if (sfun != "Funciones..." && sfun != null) {
                                                             for (DtFuncion f : fun) {
                                                                 if (sfun.equals(f.getNombre())) {
-                                                                    
-                                                                    out.print("<p class='card-text'>" + f.getNombre() + "</p>");
-                                                                    out.print("<p class='card-text'>" + f.getFecha().toString() + "</p>");
-                                                                    out.print("<p class='card-text'>" + f.getFechaDeRegistro().toString() + "</p>");
-                                                                    out.print("<p class='card-text'>" + f.getHoraInicio().toString() + "</p>");
+                                                                    out.print("<img src='" + f.getImagen() + "' alt='imagen de la funcion'>");
+                                                                    out.print("<h5>" + f.getNombre() + "</h5>");
+                                                                    out.print("<p>" + f.getFecha().toString() + "</p>");
+                                                                    out.print("<p>" + f.getFechaDeRegistro().toString() + "</p>");
+                                                                    out.print("<p>" + f.getHoraInicio().toString() + "</p>");
 
                                                                 }
                                                             }
@@ -611,7 +622,9 @@ Author     : tecnologo
                                                     List<String> paqs = Fabrica.getCtrlPaquetes().listarPaquetes();
 
                                                     out.print("<form action=\"consultarUsuariosBackEnd\">");
-
+                                                    out.print("</br>");
+                                                    out.print("</br>");
+                                                    out.print("<h6>Seleccione Paquete:</h6>");
                                                     out.print("<select name='paquete' class='custom-select selectEsp' id='inputGroupSelect04pak'>");
                                                     out.print("<option selected>Paquetes...</option>");
 
@@ -653,7 +666,7 @@ Author     : tecnologo
                                                     out.print("</ul>");
 
                                                     out.print("<button class='btn btn-outline-secondarypak' type='submit' disabled>Consultar</button>");
-                                                    out.print("</div>");
+
                                                     out.print("</form>");
 
                                                     ///////////////////////////////////////////////////////////////////////////////                        
@@ -665,16 +678,14 @@ Author     : tecnologo
                                                             for (String paq : paqs) {
                                                                 if (spaq.equals(paq)) {
                                                                     DtPaqueteDeEspectaculos instanciaP = Fabrica.getCtrlPaquetes().mostrarInfoPaquete(paq);
-                                                                    out.print("<div class='card' style='width: 18rem;'>");
-                                                                    out.print("<p class='card-text'>" + instanciaP.getNombre() + "</p>");
-                                                                    out.print("<p class='card-text'>" + instanciaP.getDescripcion() + "</p>");
-                                                                    out.print("<p class='card-text'>" + instanciaP.getDescuento() + "</p>");
+                                                                    out.print("<img src='" + instanciaP.getImagen() + "' alt='imagen del paquete'>");
+                                                                    out.print("<h5>Nombre:" + instanciaP.getNombre() + "</h5>");
+                                                                    out.print("<p>Descipcion:" + instanciaP.getDescripcion() + "</p>");
+                                                                    out.print("<p>Decuento:" + instanciaP.getDescuento() + "</p>");
 
-                                                                    out.print("<p class='card-text'>" + instanciaP.getFechaInicio().toString() + "</p>");
-                                                                    out.print("<p class='card-text'>" + instanciaP.getFechaFin().toString() + "</p>");
-                                                                    out.print("<p class='card-text'>" + instanciaP.getFechaAlta().toString() + "</p>");
-
-                                                                    out.print("</div>");
+                                                                    out.print("<p>Fecha Inicio:" + instanciaP.getFechaInicio().toString() + "</p>");
+                                                                    out.print("<p>Fecha Fin:" + instanciaP.getFechaFin().toString() + "</p>");
+                                                                    out.print("<p>Fecha de alta:" + instanciaP.getFechaAlta().toString() + "</p>");
 
                                                                 }
                                                             }
@@ -696,20 +707,20 @@ Author     : tecnologo
 ///////////////////////////////////////////////////////////////////////////////                        
                         for (DtEspectador e : lEsp) {
                             if (selUsu.equals(e.getNickname())) {
-                                out.print("<div class='card' style='width: 18rem;'>");
-                                out.print("<img src='" + e.getImagen() + "' class='card-img-top' alt='imagen del paquete'>");
-                                out.print("</div>");
-                                out.print("<h5 class='card-title'>" + e.getNickname() + "</h5>");
-                                out.print("<p class='card-text'>" + e.getNombre() + "</p>");
-                                out.print("<p class='card-text'>" + e.getApellido() + "</p>");
-                                out.print("<p class='card-text'>" + e.getCorreo() + "</p>");
-                                out.print("<p class='card-text'>" + e.getFechaNacimiento().toString() + "</p>");
+                                out.print("<img src='" + e.getImagen() + "' alt='imagen del Usuario'>");
+                                out.print("<h3>Nickname" + e.getNickname() + "</h3>");
+                                out.print("<p>Nombre:" + e.getNombre() + "</p>");
+                                out.print("<p>Apellido:" + e.getApellido() + "</p>");
+                                out.print("<p>Correo:" + e.getCorreo() + "</p>");
+                                out.print("<p>Fecha de nacimiento:" + e.getFechaNacimiento().toString() + "</p>");
 
                                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                 List<DtUsuario> lUsuarQueSigues = Fabrica.getCrlUsuarios().getUsuariosQueSiguesEs(e.getNickname());
                                 out.print("<form action=\"consultarUsuariosBackEnd\">");
-
+                                out.print("</br>");
+                                out.print("</br>");
+                                out.print("<h6>Seleccione Usuario al que sigue:</h6>");
                                 out.print("<select name='usuQueSiges' class='custom-select selectEsp' id='inputGroupSelect04us'>");
                                 if (contexto.getAttribute("UsuarioQueSiguesSeleccionadEnConsultarUsuario") == null) {
                                     out.print("<option selected>Seleccione...</option>");
@@ -748,7 +759,6 @@ Author     : tecnologo
 
                                 out.print("<button class='btn btn-outline-secondaryus' type='submit' disabled>Consultar</button>");
                                 out.print("</form>");
-                                out.print("</div>");
 
 ///////////////////////////////////////////////////////////////////////////////                        
 ///////////////////////////////////////////////////////////////////////////////  
@@ -760,25 +770,27 @@ Author     : tecnologo
                                         for (DtUsuario u : lUsuarQueSigues) {
                                             if (sfun.equals(u.getNickname())) {
                                                 if (u instanceof DtArtista) {
-                                                    out.print("<div class='card' style='width: 18rem;'>");
-                                                    out.print("<img src='" + ((DtArtista) u).getImagen() + "' class='card-img-top' alt='imagen del paquete'>");
-                                                    out.print("</div>");
-                                                    out.print("<h5 class='card-title'>" + ((DtArtista) u).getNickname() + "</h5>");
-                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getNombre() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getApellido() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getCorreo() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getFechaNacimiento().toString() + "</p>");
+
+                                                    out.print("<img src='" + ((DtArtista) u).getImagen() + "'alt='imagen del seguido'>");
+
+                                                    out.print("<h4> Nickname:" + ((DtArtista) u).getNickname() + "</h4>");
+                                                    out.print("<p> Nombre:" + ((DtArtista) u).getNombre() + "</p>");
+                                                    out.print("<p> Apellido:" + ((DtArtista) u).getApellido() + "</p>");
+                                                    out.print("<p> Correo:" + ((DtArtista) u).getCorreo() + "</p>");
+                                                    out.print("<p> Fecha de nacimiento" + ((DtArtista) u).getFechaNacimiento().toString() + "</p>");
+                                                    out.print("<p> Link web:" + ((DtArtista) u).getLinkWeb() + "</p>");
+                                                    out.print("<p> Biografia:" + ((DtArtista) u).getBiografia() + "</p>");
+                                                    out.print("<p> Descciopcion:" + ((DtArtista) u).getDescripcion() + "</p>");
 
                                                 }
                                                 if (u instanceof DtEspectador) {
-                                                    out.print("<div class='card' style='width: 18rem;'>");
-                                                    out.print("<img src='" + ((DtEspectador) u).getImagen() + "' class='card-img-top' alt='imagen del paquete'>");
-                                                    out.print("</div>");
-                                                    out.print("<h5 class='card-title'>" + ((DtEspectador) u).getNickname() + "</h5>");
-                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getNombre() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getApellido() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getCorreo() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getFechaNacimiento().toString() + "</p>");
+                                                    out.print("<img src='" + ((DtEspectador) u).getImagen() + "' alt='imagen del seguido'>");
+
+                                                    out.print("<h4 >" + ((DtEspectador) u).getNickname() + "</h4>");
+                                                    out.print("<p >" + ((DtEspectador) u).getNombre() + "</p>");
+                                                    out.print("<p >" + ((DtEspectador) u).getApellido() + "</p>");
+                                                    out.print("<p>" + ((DtEspectador) u).getCorreo() + "</p>");
+                                                    out.print("<p>" + ((DtEspectador) u).getFechaNacimiento().toString() + "</p>");
 
                                                 }
 
@@ -794,8 +806,10 @@ Author     : tecnologo
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                 List<DtUsuario> lUsuarQueTeSiguen = Fabrica.getCrlUsuarios().getUsuariosQueTeSiguenEs(e.getNickname());
                                 out.print("<form action=\"consultarUsuariosBackEnd\">");
-
-                                out.print("<select name='usuQueTeSigen' class='custom-select selectEsp' id='inputGroupSelect04uts'>");
+                                out.print("</br>");
+                                out.print("</br>");
+                                out.print("<h6>Seleccione Usuario que lo siguen:</h6>");
+                                out.print("<select name='usuQueTeSigen' id='inputGroupSelect04uts'>");
                                 if (contexto.getAttribute("UsuarioQueTeSiguenSeleccionadEnConsultarUsuario") == null) {
                                     out.print("<option selected>Seleccione...</option>");
 
@@ -833,7 +847,6 @@ Author     : tecnologo
 
                                 out.print("<button class='btn btn-outline-secondaryuts' type='submit' disabled>Consultar</button>");
                                 out.print("</form>");
-                                out.print("</div>");
 
 ///////////////////////////////////////////////////////////////////////////////                        
 ///////////////////////////////////////////////////////////////////////////////  
@@ -842,28 +855,32 @@ Author     : tecnologo
                                     String sfun = contexto.getAttribute("UsuarioQueTeSiguenSeleccionadEnConsultarUsuario").toString();
 
                                     if (sfun != "Seleccione..." && sfun != null) {
-                                        for (DtUsuario u : lUsuarQueSigues) {
+
+                                        for (DtUsuario u : lUsuarQueTeSiguen) {
+
                                             if (sfun.equals(u.getNickname())) {
+
                                                 if (u instanceof DtArtista) {
-                                                    out.print("<div class='card' style='width: 18rem;'>");
-                                                    out.print("<img src='" + ((DtArtista) u).getImagen() + "' class='card-img-top' alt='imagen del paquete'>");
-                                                    out.print("</div>");
-                                                    out.print("<h5 class='card-title'>" + ((DtArtista) u).getNickname() + "</h5>");
-                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getNombre() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getApellido() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getCorreo() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtArtista) u).getFechaNacimiento().toString() + "</p>");
+                                                    out.print("<img src='" + ((DtArtista) u).getImagen() + "' alt='imagen del usuario que te sigue'>");
+
+                                                    out.print("<h4> Nickname: " + ((DtArtista) u).getNickname() + "</h4>");
+                                                    out.print("<p> Nombre: " + ((DtArtista) u).getNombre() + "</p>");
+                                                    out.print("<p> Apellido: " + ((DtArtista) u).getApellido() + "</p>");
+                                                    out.print("<p> Correo: " + ((DtArtista) u).getCorreo() + "</p>");
+                                                    out.print("<p> Fecha de Nacimiento: " + ((DtArtista) u).getFechaNacimiento().toString() + "</p>");
+                                                    out.print("<p> Link web: " + ((DtArtista) u).getLinkWeb() + "</p>");
+                                                    out.print("<p> Biografia: " + ((DtArtista) u).getBiografia() + "</p>");
+                                                    out.print("<p> Descripcion: " + ((DtArtista) u).getDescripcion() + "</p>");
 
                                                 }
                                                 if (u instanceof DtEspectador) {
-                                                    out.print("<div class='card' style='width: 18rem;'>");
-                                                    out.print("<img src='" + ((DtEspectador) u).getImagen() + "' class='card-img-top' alt='imagen del paquete'>");
-                                                    out.print("</div>");
-                                                    out.print("<h5 class='card-title'>" + ((DtEspectador) u).getNickname() + "</h5>");
-                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getNombre() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getApellido() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getCorreo() + "</p>");
-                                                    out.print("<p class='card-text'>" + ((DtEspectador) u).getFechaNacimiento().toString() + "</p>");
+                                                    out.print("<img src='" + ((DtEspectador) u).getImagen() + "' alt='imagen del usuario que te sigue'>");
+
+                                                    out.print("<h4> Nickname: " + ((DtEspectador) u).getNickname() + "</h4>");
+                                                    out.print("<p>Nombre: " + ((DtEspectador) u).getNombre() + "</p>");
+                                                    out.print("<p>Apellido: " + ((DtEspectador) u).getApellido() + "</p>");
+                                                    out.print("<p>Correo: " + ((DtEspectador) u).getCorreo() + "</p>");
+                                                    out.print("<p>Fecha de Nacimiento: " + ((DtEspectador) u).getFechaNacimiento().toString() + "</p>");
 
                                                 }
 
@@ -880,7 +897,9 @@ Author     : tecnologo
                                         List<DtPaqueteDeEspectaculos> listaPaquetes = Fabrica.getCrlUsuarios().getPaquetesDelUsuario(e.getNickname());
 
                                         out.print("<form action=\"consultarUsuariosBackEnd\">");
-
+                                        out.print("</br>");
+                                        out.print("</br>");
+                                        out.print("<h6>Seleccione Paquete que compro:</h6>");
                                         out.print("<select name='paqueteComprado' class='custom-select selectEsp' id='inputGroupSelect04r'>");
                                         if (contexto.getAttribute("PaqueteCompradoSeleccionadoEnConsultarUsuario") == null) {
                                             out.print("<option selected>Seleccione...</option>");
@@ -918,7 +937,6 @@ Author     : tecnologo
 
                                         out.print("<button class='btn btn-outline-secondaryr' type='submit' disabled>Consultar</button>");
                                         out.print("</form>");
-                                        out.print("</div>");
 
                                         if (contexto.getAttribute("PaqueteCompradoSeleccionadoEnConsultarUsuario") != null) {
                                             String spaq = contexto.getAttribute("PaqueteCompradoSeleccionadoEnConsultarUsuario").toString();
@@ -926,16 +944,14 @@ Author     : tecnologo
                                             if (spaq != "Paquetes..." && spaq != null) {
                                                 for (DtPaqueteDeEspectaculos instanciaP : listaPaquetes) {
                                                     if (spaq.equals(instanciaP.getNombre())) {
-                                                        out.print("<div class='card' style='width: 18rem;'>");
-                                                        out.print("<p class='card-text'>" + instanciaP.getNombre() + "</p>");
-                                                        out.print("<p class='card-text'>" + instanciaP.getDescripcion() + "</p>");
-                                                        out.print("<p class='card-text'>" + instanciaP.getDescuento() + "</p>");
+                                                        out.print("<img src='" + instanciaP.getImagen() + "' alt='imagen del espectaculo'>");
+                                                        out.print("<h4>" + instanciaP.getNombre() + "</h4>");
+                                                        out.print("<p>" + instanciaP.getDescripcion() + "</p>");
+                                                        out.print("<p>" + instanciaP.getDescuento() + "</p>");
 
-                                                        out.print("<p class='card-text'>" + instanciaP.getFechaInicio().toString() + "</p>");
-                                                        out.print("<p class='card-text'>" + instanciaP.getFechaFin().toString() + "</p>");
-                                                        out.print("<p class='card-text'>" + instanciaP.getFechaAlta().toString() + "</p>");
-
-                                                        out.print("</div>");
+                                                        out.print("<p>" + instanciaP.getFechaInicio().toString() + "</p>");
+                                                        out.print("<p>" + instanciaP.getFechaFin().toString() + "</p>");
+                                                        out.print("<p>" + instanciaP.getFechaAlta().toString() + "</p>");
 
                                                     }
                                                 }
@@ -951,7 +967,9 @@ Author     : tecnologo
                                 List<DtRegistro> lRegistr = Fabrica.getCrlUsuarios().getRegistros(e.getNickname());
                                 List<DtFuncion> lFunciones = Fabrica.getCrlUsuarios().getFuncionesRegistros(e.getNickname());
                                 out.print("<form action=\"consultarUsuariosBackEnd\">");
-
+                                out.print("</br>");
+                                out.print("</br>");
+                                out.print("<h6>Seleccione Registro:</h6>");
                                 out.print("<select name='registro' class='custom-select selectEsp' id='inputGroupSelect04r'>");
                                 if (contexto.getAttribute("RegistroSeleccionadaEnConsultarUsuario") == null) {
                                     out.print("<option selected>Seleccione...</option>");
@@ -990,7 +1008,6 @@ Author     : tecnologo
 
                                 out.print("<button class='btn btn-outline-secondaryr' type='submit' disabled>Consultar</button>");
                                 out.print("</form>");
-                                out.print("</div>");
 
 ///////////////////////////////////////////////////////////////////////////////                        
 /////////////////////////////////////////////////////////////////////////////// 
@@ -1000,16 +1017,14 @@ Author     : tecnologo
                                     if (sfun != "Seleccione..." && sfun != null) {
                                         for (int i = 0; i < lFunciones.size(); i++) {
                                             if (sfun.equals(lFunciones.get(i).getNombre())) {
-                                                out.print("<div class='card' style='width: 18rem;'>");
-                                                out.print("<p class='card-text'>" + lFunciones.get(i).getNombre() + "</p>");
-                                                out.print("<p class='card-text'>" + lFunciones.get(i).getFecha().toString() + "</p>");
-                                                out.print("<p class='card-text'>" + lFunciones.get(i).getFechaDeRegistro().toString() + "</p>");
-                                                out.print("<p class='card-text'>" + lFunciones.get(i).getHoraInicio().toString() + "</p>");
-                                                out.print("<p class='card-text'>" + lRegistr.get(i).getCosto() + "</p>");
-                                                out.print("<p class='card-text'>" + lRegistr.get(i).getEstado().toString() + "</p>");
-                                                out.print("<p class='card-text'>" + lRegistr.get(i).getFecha().toString() + "</p>");
-
-                                                out.print("</div>");
+                                                out.print("<img src='" + lFunciones.get(i).getImagen() + "' alt='imagen de la fuincion'>");
+                                                out.print("<h4>" + lFunciones.get(i).getNombre() + "</h4>");
+                                                out.print("<p>" + lFunciones.get(i).getFecha().toString() + "</p>");
+                                                out.print("<p>" + lFunciones.get(i).getFechaDeRegistro().toString() + "</p>");
+                                                out.print("<p>" + lFunciones.get(i).getHoraInicio().toString() + "</p>");
+                                                out.print("<p>" + lRegistr.get(i).getCosto() + "</p>");
+                                                out.print("<p>" + lRegistr.get(i).getEstado().toString() + "</p>");
+                                                out.print("<p>" + lRegistr.get(i).getFecha().toString() + "</p>");
 
                                             }
                                         }
