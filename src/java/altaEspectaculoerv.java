@@ -76,7 +76,7 @@ public class altaEspectaculoerv extends HttpServlet {
                 String fotoName ="";
                 if(request.getParameter("subir")!=null){
                 Part archivo = request.getPart("upfile"); //llamada al parámetro foto de mi formulario.
-                String context = "/var/www/img/";//request.getServletContext().getRealPath("/IMAGENES_ESPECTACULOS"); //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
+                String context = "/var/www/img/espectaculos/";//request.getServletContext().getRealPath("/IMAGENES_ESPECTACULOS"); //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
 
                 String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString(); 
 
