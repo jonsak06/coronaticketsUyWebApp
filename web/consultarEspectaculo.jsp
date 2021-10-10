@@ -25,7 +25,7 @@
         <%@include file="header.jsp"%>
         <%ServletContext contexto = getServletContext();
         %>
-
+        
         <form action="ConsultarEspectaculoBackEnd" class="container">
             <div class="input-group">
                 <%
@@ -360,6 +360,7 @@
             });
 
         </script> 
+        <%@include file="headerScript.jsp"%>
     </body>
 
 

@@ -325,6 +325,7 @@
             });
 
         </script> 
+        <%@include file="headerScript.jsp"%>
     </body>
 
 
