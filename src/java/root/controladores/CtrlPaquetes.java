@@ -114,4 +114,8 @@ public class CtrlPaquetes implements iPaquetes {
         em.close();
         emf.close();
     }
+    
+    public List<DtPaqueteDeEspectaculos> listarDtPaquetes() {
+        return mp.getDtPaquetes();
+    }
 }

@@ -82,4 +82,16 @@ public class ManejadorPaquetes {
         em.close();
         return paq;
     }
+    
+    public List<DtPaqueteDeEspectaculos> getDtPaquetes() {
+        List<DtPaqueteDeEspectaculos> lista = new ArrayList();
+        EntityManager em = emf.createEntityManager();
+        List<PaqueteDeEspectaculos> paqs = em.createNamedQuery("PaqueteDeEspectaculos.findAll", PaqueteDeEspectaculos.class)
+               .getResultList();
+        em.close();
+        for(PaqueteDeEspectaculos p : paqs) {
+            lista.add(p.getMyDt());
+        }
+        return lista;
+    }
 }
