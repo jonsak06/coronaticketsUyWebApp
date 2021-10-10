@@ -39,29 +39,46 @@ public class ConsultarFuncionBackEnd extends HttpServlet {
                 if (!request.getParameter("artista").equals("Seleccione...")) {
                     contexto.setAttribute("ArtistaSeleccionadoEnConsultarFuncion", request.getParameter("artista"));
                 }
-            }else if (request.getParameter("funcion") != null) {
+            } else if (request.getParameter("funcion") != null) {
                 if (!request.getParameter("funcion").equals("Funciones...")) {
                     contexto.setAttribute("FuncionSeleccionadaEnConsultarFuncion", request.getParameter("funcion"));
-                        contexto.setAttribute("ArtistaSeleccionadoEnConsultarFuncion", "Seleccione...");
-                
+                    contexto.setAttribute("ArtistaSeleccionadoEnConsultarFuncion", "Seleccione...");
+
                 }
-            }else if (request.getParameter("espectaculo") != null) {
+            } else if (request.getParameter("espectaculo") != null) {
                 if (!request.getParameter("espectaculo").equals("Espectaculos...")) {
                     contexto.setAttribute("EspectaculoSeleccionadpEnConsultarFuncion", request.getParameter("espectaculo"));
                     contexto.setAttribute("FuncionSeleccionadaEnConsultarFuncion", "Funciones...");
                     contexto.setAttribute("ArtistaSeleccionadoEnConsultarFuncion", "Seleccione...");
                 }
-            }
-            else if (request.getParameter("plataforma") != null) {
+            } else if (request.getParameter("plataforma") != null) {
                 if (!request.getParameter("plataforma").equals("Seleccione...")) {
                     contexto.setAttribute("PlataformaSeleccionadaEnConsultarFuncion", request.getParameter("plataforma"));
                     contexto.setAttribute("EspectaculoSeleccionadpEnConsultarFuncion", "Espectaculos...");
                     contexto.setAttribute("FuncionSeleccionadaEnConsultarFuncion", "Funciones...");
                     contexto.setAttribute("ArtistaSeleccionadoEnConsultarFuncion", "Seleccione...");
-                
+
+                }
+            } else if (request.getParameter("categoria") != null) {
+                if (!request.getParameter("categoria").equals("Seleccione...")) {
+                    contexto.setAttribute("CategoriaSeleccionadaEnConsultarFuncion", request.getParameter("categoria"));
+
+                    contexto.setAttribute("EspectaculoSeleccionadpEnConsultarFuncion", "Espectaculos...");
+                    contexto.setAttribute("FuncionSeleccionadaEnConsultarFuncion", "Funciones...");
+                    contexto.setAttribute("ArtistaSeleccionadoEnConsultarFuncion", "Seleccione...");
+                }
+            } else if (request.getParameter("tipoConsulta") != null) {
+                if (!request.getParameter("tipoConsulta").equals("Seleccione...")) {
+                    contexto.setAttribute("tipoDeConsultaFunciones", request.getParameter("tipoConsulta"));
+
+                    contexto.setAttribute("PlataformaSeleccionadaEnConsultarFuncion", "Seleccione...");
+                    contexto.setAttribute("EspectaculoSeleccionadpEnConsultarFuncion", "Espectaculos...");
+                    contexto.setAttribute("FuncionSeleccionadaEnConsultarFuncion", "Funciones...");
+                    contexto.setAttribute("ArtistaSeleccionadoEnConsultarFuncion", "Seleccione...");
+
                 }
             }
-            
+
             RequestDispatcher dispatcher = contexto.getRequestDispatcher("/ConsultarFuncion.jsp");
             dispatcher.forward(request, response);
         }
