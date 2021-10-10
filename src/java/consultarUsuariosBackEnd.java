@@ -48,6 +48,11 @@ public class consultarUsuariosBackEnd extends HttpServlet {
                 if (!request.getParameter("registro").equals("Seleccione...")) {
                     contexto.setAttribute("RegistroSeleccionadaEnConsultarUsuario", request.getParameter("registro"));
                 }
+            }else if (request.getParameter("paqueteComprado") != null) {
+                if (!request.getParameter("paqueteComprado").equals("Seleccione...")) {
+                    contexto.setAttribute("PaqueteCompradoSeleccionadoEnConsultarUsuario", request.getParameter("paqueteComprado"));
+                    
+                }
             }else if (request.getParameter("espectaculo") != null) {
                 if (!request.getParameter("espectaculo").equals("Seleccione...")) {
                     contexto.setAttribute("EspectaculoSeleccionadpEnConsultarUsuario", request.getParameter("espectaculo"));
@@ -57,6 +62,11 @@ public class consultarUsuariosBackEnd extends HttpServlet {
             }else if (request.getParameter("usuQueSiges") != null) {
                 if (!request.getParameter("usuQueSiges").equals("Seleccione...")) {
                     contexto.setAttribute("UsuarioQueSiguesSeleccionadEnConsultarUsuario", request.getParameter("usuQueSiges"));
+                    
+                }
+            }else if (request.getParameter("usuQueTeSigen") != null) {
+                if (!request.getParameter("usuQueTeSigen").equals("Seleccione...")) {
+                    contexto.setAttribute("UsuarioQueTeSiguenSeleccionadEnConsultarUsuario", request.getParameter("usuQueTeSigen"));
                     
                 }
             }
@@ -69,6 +79,7 @@ public class consultarUsuariosBackEnd extends HttpServlet {
                     contexto.setAttribute("PaqueteSeleccionadoEnConsultarUsuario","Paquetes...");
                     
                     contexto.setAttribute("UsuarioQueSiguesSeleccionadEnConsultarUsuario", "Seleccione...");
+                    contexto.setAttribute("UsuarioQueTeSiguenSeleccionadEnConsultarUsuario", "Seleccione...");
                     
                     
                     contexto.setAttribute("RegistroSeleccionadaEnConsultarUsuario","Seleccione...");
