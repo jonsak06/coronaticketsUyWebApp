@@ -4,6 +4,10 @@
     Author     : julio
 --%>
 
+<%@page import="root.entidades.Espectaculo"%>
+<%@page import="javax.persistence.EntityManager"%>
+<%@page import="javax.persistence.Persistence"%>
+<%@page import="javax.persistence.EntityManagerFactory"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,6 +17,13 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <img src=".../in.jpg" />
+        <%
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+            EntityManager em = emf.createEntityManager();
+            Espectaculo e = em.createNamedQuery("Espectaculo.findByNombre", Espectaculo.class).setParameter("nombre", "test2").getSingleResult();
+            em.close();
+            emf.close();
+            out.print("<img src="+e.getImagen()+">");
+            %>
     </body>
 </html>
