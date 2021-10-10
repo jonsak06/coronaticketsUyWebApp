@@ -58,7 +58,7 @@ public class crearPaquete extends HttpServlet {
             ip.confirmarAltaPaquete(nombre, descripcion, java.sql.Date.valueOf(fechaInicio), java.sql.Date.valueOf(fechaFin), descuento);
             
             //subida de imagen
-            String path = "/home/julio/Downloads/imgsPaqs/";
+            String path = "/var/www/img/paquetes/";
             Part imgPart = request.getPart("imagen");
             if(imgPart.getSize() != 0) { //control de que haya un archivo en el input
                 String imgName = nombre+"_imagen";
