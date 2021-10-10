@@ -79,6 +79,7 @@
                     out.print("<li class='list-group-item'>Fecha de fin: "+dvPaq.getFechaFin().toString()+"</li>");
                     out.print("<li class='list-group-item'>");
                     
+                    out.print("<form action='consultarEsp2'>");
                     out.print("<select name='espectaculo' class='custom-select selectEsp' id='inputGroupSelect04'>");
                     out.print("<option selected>Espectaculos...</option>");
                     for(String e : esps) {
@@ -90,6 +91,7 @@
                     out.print("</ul>");
                     out.print("<div class='card-body'>");
                       out.print("<button class='btn btn-outline-secondary' type='submit' disabled>Consultar</button>");
+                      out.print("</form>");
                     out.print("</div>");
                 out.print("</div>");
             }
