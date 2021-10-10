@@ -1045,6 +1045,20 @@ Author     : tecnologo
         </div>  
     </div>
 
+        
+        <script>
+        function validar_email( email ) 
+{
+    var regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(email) ? true : false;
+}
+        
+        
+        
+        </script>
+        
+        
+        
     <script>
         const usus = document.getElementById("inputGroupSelect04");
         const botonConsultarUsu = document.querySelector(".btn-outline-secondary");
@@ -1055,7 +1069,8 @@ Author     : tecnologo
                 botonConsultarUsu.disabled = false;
             }
         });
-
+        
+        
     </script>
 
     <script>
