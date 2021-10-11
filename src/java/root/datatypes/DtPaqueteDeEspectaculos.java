@@ -19,6 +19,7 @@ public class DtPaqueteDeEspectaculos {
     private Date fechaFin;
     private float descuento;
     private Date fechaAlta;
+    private String imagen;
     
     public DtPaqueteDeEspectaculos(){}
     
@@ -38,6 +39,17 @@ public class DtPaqueteDeEspectaculos {
         this.fechaFin = fechaFin;
         this.descuento = descuento;
         this.fechaAlta = fechaAlta;
+    }
+    
+    public DtPaqueteDeEspectaculos(Long id, String nombre, String descripcion, Date fechaInicio, Date fechaFin, float descuento, Date fechaAlta, String imagen) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.descuento = descuento;
+        this.fechaAlta = fechaAlta;
+        this.imagen = imagen;
     }
 
     public Long getId() {
@@ -66,6 +78,10 @@ public class DtPaqueteDeEspectaculos {
     
     public Date getFechaAlta() {
         return fechaAlta;
+    }
+    
+    public String getImagen() {
+        return imagen;
     }
     
     

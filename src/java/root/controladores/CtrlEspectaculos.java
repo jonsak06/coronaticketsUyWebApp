@@ -53,6 +53,10 @@ public class CtrlEspectaculos implements IEspectaculos {
         return ManEspectaculo.getDatosFuncion(nombreFuncion);
     }
     
+    public boolean existePlataforma(String nombrePlat){
+        return ManPlataformas.existePlataforma(nombrePlat);
+    }
+    
     public boolean ingresarPlataforma(String nombre, String descripcion, String url){
         return ManPlataformas.ingresarPlataforma(nombre, descripcion, url);
     }
@@ -69,8 +73,8 @@ public class CtrlEspectaculos implements IEspectaculos {
          return ManPlataformas.existeFuncion(nombreFuncion);
      }
      
-     public void altaEspectaculo(String plataforma, String artista, DtEspectaculo espectaculo){
-        ManEspectaculo.altaEspectaculo(plataforma,artista, espectaculo);
+     public void altaEspectaculo(String plataforma, String artista, List<String> categorias,DtEspectaculo espectaculo, String pathImagen){
+        ManEspectaculo.altaEspectaculo(plataforma, artista, categorias,espectaculo, pathImagen);
      }
      
      public List<DtArtista> getInvitados(String nombreFuncion){
@@ -86,5 +90,32 @@ public class CtrlEspectaculos implements IEspectaculos {
     
     public void aceptar_rechazarIngresado(String nombre, EstadoEspectaculo estado){
         ManEspectaculo.aceptar_rechazarIngresado(nombre, estado);
+    }
+    
+    public boolean existeCategoria(String nombreCat){
+    return ManEspectaculo.existeCategoria(nombreCat);
+    }
+    
+    public List<DtEspectaculo> listarEspPorCat(String nombreCat){
+    return ManEspectaculo.listarEspPorCat(nombreCat);
+    }
+    
+    public List<String> listarCategorias(){
+    return ManEspectaculo.listarCategorias();
+    }
+    
+    public List<DtFuncion> funcEspNoReg(String nickname, String nombreEspectaculo){
+        return ManEspectaculo.funcEspNoReg(nickname, nombreEspectaculo);
+    }
+    public List<DtFuncion> listarTodasLasFunciones(String nombreEsp){
+        return ManEspectaculo.listarTodasLasFunciones(nombreEsp);
+    }
+    
+    public List<DtEspectaculo> listarTodosLosEspectaculos() {
+        return ManEspectaculo.listarEspectaculos();
+    }
+    
+    public List<DtEspectaculo> listarAceptados() {
+        return ManEspectaculo.listarAceptados();
     }
 }

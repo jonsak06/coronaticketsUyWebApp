@@ -46,7 +46,7 @@ public class ManPlataformas {
         }
     
    public static Plataforma getPlataforma(String nombrePlataforma){
-       EntityManagerFactory emf = Persistence.createEntityManagerFactory("PLATAFORMA");
+       EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
        EntityManager em = emf.createEntityManager();
        em.getTransaction().begin();
        TypedQuery<Plataforma> consulta = em.createNamedQuery("Plataforma.findByNombre",Plataforma.class);
@@ -139,6 +139,16 @@ public class ManPlataformas {
         return paq.size()>0;
     }
     
+    public static boolean existePlataforma(String nombrePlat) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        List<Plataforma> paq = em.createNamedQuery("Plataforma.findByNombre", Plataforma.class)
+                .setParameter("nombre", nombrePlat).getResultList();
+        
+        em.close();
+        return paq.size()>0;
+    }
+    
     public static boolean crearFuncion(String nombreEspectaculo, DtFuncion dtFuncion, List<String> artInvi){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
         if(existeFuncion(dtFuncion.getNombre())) {
@@ -146,7 +156,6 @@ public class ManPlataformas {
         }
          EntityManager em = emf.createEntityManager();
        em.getTransaction().begin();
-       
       TypedQuery<Espectaculo> consulta = em.createNamedQuery("Espectaculo.findByNombre",Espectaculo.class);
         consulta.setParameter("nombre", nombreEspectaculo);
         Espectaculo esteEspectaculo = consulta.getSingleResult();
@@ -168,6 +177,7 @@ public class ManPlataformas {
        
        
        Funcion nuevafun =new Funcion(listaArtConf, dtFuncion.getNombre(),dtFuncion.getHoraInicio(),dtFuncion.getFecha(),dtFuncion.getFechaDeRegistro(), esteEspectaculo);
+       nuevafun.setImagen(dtFuncion.getImagen());
         em.persist(nuevafun);
         em.getTransaction().commit();
         em.close();

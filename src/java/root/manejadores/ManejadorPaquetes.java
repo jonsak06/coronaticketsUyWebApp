@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package root.manejadores;
+import static java.time.Instant.now;
 import root.datatypes.DtPaqueteDeEspectaculos;
 import java.util.*;
 import javax.persistence.*;
@@ -59,11 +60,38 @@ public class ManejadorPaquetes {
        return nombres;
     }
     
+        public List<String> getNombresVigentes() {
+       EntityManager em = emf.createEntityManager();
+       List<PaqueteDeEspectaculos> paqs = em.createNamedQuery("PaqueteDeEspectaculos.findAll", PaqueteDeEspectaculos.class)
+               .getResultList();
+       em.close();
+       ArrayList<String> nombres = new ArrayList();
+       for(PaqueteDeEspectaculos p: paqs){
+           Date date = new Date();
+           if(p.getFechaFin().after(date)){
+           nombres.add(p.getNombre());
+           }
+       }
+       return nombres;
+    }
+    
     public PaqueteDeEspectaculos getPaquete(String nombrePaquete) {
         EntityManager em = emf.createEntityManager();
         PaqueteDeEspectaculos paq = em.createNamedQuery("PaqueteByName", PaqueteDeEspectaculos.class)
                 .setParameter("nombre", nombrePaquete).getSingleResult();
         em.close();
         return paq;
+    }
+    
+    public List<DtPaqueteDeEspectaculos> getDtPaquetes() {
+        List<DtPaqueteDeEspectaculos> lista = new ArrayList();
+        EntityManager em = emf.createEntityManager();
+        List<PaqueteDeEspectaculos> paqs = em.createNamedQuery("PaqueteDeEspectaculos.findAll", PaqueteDeEspectaculos.class)
+               .getResultList();
+        em.close();
+        for(PaqueteDeEspectaculos p : paqs) {
+            lista.add(p.getMyDt());
+        }
+        return lista;
     }
 }

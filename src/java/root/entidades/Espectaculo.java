@@ -8,6 +8,7 @@ package root.entidades;
 import root.datatypes.DtEspectaculo;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -42,7 +43,8 @@ public class Espectaculo implements Serializable {
         this.setPlataforma(p);
         this.setURL(url);
         this.estado = EstadoEspectaculo.ACEPTADO;
-        
+        this.categoria = new ArrayList<Categoria>();
+
     }
 
     public Espectaculo(String nombre, String descripcion, int duracion, int cantidadMaximaEspectadores, int cantidadMinimaEspectadores, String url, float costo, Date fechaDeRegistro, Plataforma plataforma, Artista artista) {
@@ -57,6 +59,8 @@ public class Espectaculo implements Serializable {
         this.plataforma = plataforma;
         this.artista = artista;
         this.estado = EstadoEspectaculo.ACEPTADO;
+        this.categoria = new ArrayList<Categoria>();
+
     }
     
     
@@ -157,14 +161,14 @@ public class Espectaculo implements Serializable {
         this.fechaDeRegistro = f;
     }
     
-    @ManyToOne
-    private Categoria categoria;
+    @ManyToMany
+    private List<Categoria> categoria;
 
-    public Categoria getCategoria() {
+    public List<Categoria> getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
+    public void setCategoria(List<Categoria> categoria) {
         this.categoria = categoria;
     }
     
@@ -245,6 +249,13 @@ public class Espectaculo implements Serializable {
         DtEspectaculo dt = new DtEspectaculo(this.id, this.nombre, this.descripcion, this.duracion, this.cantidadMaximaEspectadores, this.cantidadMinimaEspectadores, this.url, this.costo, this.fechaDeRegistro);
         String nombreArt = this.artista.getNombre()+" "+this.artista.getApellido();
         dt.setNombreArtista(nombreArt);
+        dt.setImagen(this.imagen);
+        dt.setPlataforma(this.plataforma.getNombre());
+        List<String> categorias = new ArrayList();
+        for(Categoria c : this.categoria) {
+            categorias.add(c.getNombre());
+        }
+        dt.setCategorias(categorias);
         return dt;
     }
 

@@ -16,6 +16,25 @@ public class DtRegistro {
     private float costo;
     private EstadoRegistro estado;
     
+    private String nombreFuncion;
+
+    public String getNombreFuncion() {
+        return nombreFuncion;
+    }
+
+    private java.sql.Date fechaFuncion;
+
+    public Date getFechaFuncion() {
+        return fechaFuncion;
+    }
+
+    public void setFechaFuncion(Date fechaFuncion) {
+        this.fechaFuncion = fechaFuncion;
+    }
+    public void setNombreFuncion(String nombreFuncion) {
+        this.nombreFuncion = nombreFuncion;
+    }
+    
     public DtRegistro(){}
 
     public DtRegistro(Long id, Date fecha, float costo, EstadoRegistro estado) {

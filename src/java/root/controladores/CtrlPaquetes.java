@@ -43,6 +43,11 @@ public class CtrlPaquetes implements iPaquetes {
     }
     
     @Override
+    public List<String> listarPaquetesVigentes() {
+        return mp.getNombresVigentes();
+    }
+    
+    @Override
     public List<String> listarPlataformas() {
         return ManPlataformas.getNombres();
     }
@@ -93,5 +98,24 @@ public class CtrlPaquetes implements iPaquetes {
     public DtEspectaculo mostarInfoEspectaculo(String nombreEspectaculo) {
         Espectaculo e = ManEspectaculo.getEspectaculo(nombreEspectaculo);
         return e.getMyDt();
+    }
+    
+    @Override
+    public void agregarImagenPaquete(String nombrePaquete, String pathImg) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<PaqueteDeEspectaculos> consulta = em.createNamedQuery("PaqueteByName",PaqueteDeEspectaculos.class);
+        consulta.setParameter("nombre", nombrePaquete);
+        PaqueteDeEspectaculos p = consulta.getSingleResult();
+        em.getTransaction().begin();
+        p.setImagen(pathImg);
+        em.persist(p);
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+    }
+    
+    public List<DtPaqueteDeEspectaculos> listarDtPaquetes() {
+        return mp.getDtPaquetes();
     }
 }

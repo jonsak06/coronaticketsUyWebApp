@@ -190,6 +190,7 @@ public class Funcion implements Serializable {
     public DtFuncion getMyDt()
     {
         DtFuncion dt = new DtFuncion(this.id, this.nombre, this.horaInicio, this.fechaDeRegistro, this.fecha);
+        dt.setImagen(this.imagen);
         return dt;
     }
 }

@@ -14,6 +14,7 @@ import root.datatypes.DtFuncion;
 import root.datatypes.DtPaqueteDeEspectaculos;
 import root.datatypes.DtPlataforma;
 import root.datatypes.DtRegistro;
+import root.datatypes.DtUsuario;
 import root.manejadores.ManEspectaculo;
 import root.manejadores.ManejadorUsuarios;
 import root.entidades.Registro;
@@ -64,6 +65,13 @@ public class crlUsuarios implements iUsuarios
         }
         
     }
+    public boolean existeArtista(String nickname){
+        return ManejadorUsuarios.existeArtista(nickname);
+    }
+    
+    public boolean existeEspectador(String nickname){
+        return ManejadorUsuarios.existeEspectador(nickname);
+    }
     
     public void altaArtista(DtArtista ar)
     { 
@@ -94,7 +102,7 @@ public class crlUsuarios implements iUsuarios
         return ManejadorUsuarios.getCanjeables(nickname);
     }
     
-    public List<Registro> listarCanjeables(String nickname){
+    public List<DtRegistro> listarCanjeables(String nickname){
         return ManejadorUsuarios.listarCanjeables(nickname);
     }
     
@@ -108,6 +116,10 @@ public class crlUsuarios implements iUsuarios
    
    public DtEspectador getDatosEspectador(String nickname){
        return ManejadorUsuarios.getDatosEspectador(nickname);
+   }
+   
+   public DtArtista getDatosArtista(String nickname){
+       return ManejadorUsuarios.getDatosArtista(nickname);
    }
    
    public List<DtRegistro> getRegistros(String nickname)
@@ -146,4 +158,68 @@ public class crlUsuarios implements iUsuarios
    public  void actualizarRegistros(){
        ManejadorUsuarios.actualizarRegistros();
    }
+   
+   public List<DtFuncion> getFuncionesNoRegistradas(String nickname){
+       return ManejadorUsuarios.getFuncionesNoRegistradas(nickname);
+   }
+   
+   public boolean tienePaquetesParaEspectaculo(String nickname, String nombreEspectaculo){
+       return ManejadorUsuarios.tienePaquetesParaEspectaculo(nickname, nombreEspectaculo);
+   }
+   
+   public List<String> listarPaquetesParaEsp(String nickname, String nombreEspectaculo){
+       return ManejadorUsuarios.listarPaquetesParaEsp(nickname, nombreEspectaculo);
+   }
+   
+   public List<DtFuncion> getFuncionesRegistrosNoUsados(String nickname){
+       return ManejadorUsuarios.getFuncionesNoRegistradas(nickname);
+   }
+   public List<DtUsuario> getUsuariosQueNoSiguesAr(String nickname)
+   {
+       return ManejadorUsuarios.getUsuariosQueNoSiguesAr(nickname);
+   }
+   
+     public List<DtUsuario> getUsuariosQueSiguesAr(String nickname) 
+     {
+         return ManejadorUsuarios.getUsuariosQueSiguesAr(nickname);
+     }
+     public List<DtUsuario> getUsuariosQueSiguesEs(String nickname){
+         return ManejadorUsuarios.getUsuariosQueSiguesEs(nickname);
+     }
+     public List<DtUsuario> getUsuariosQueNoSiguesEs(String nickname){
+         return ManejadorUsuarios.getUsuariosQueNoSiguesEs(nickname);
+     }
+     
+     
+     public void seguirUsuarioEs(String nickname, String seguido){
+         ManejadorUsuarios.seguirUsuarioEs(nickname, seguido);
+     }
+     
+     public void seguirUsuarioAr(String nickname, String seguido){
+         ManejadorUsuarios.seguirUsuarioAr(nickname, seguido);
+     }
+     
+     public void dejarDeSeguirUsuarioEs(String nickname, String seguido)
+     {
+         ManejadorUsuarios.dejarDeSeguirUsuarioEs(nickname, seguido);
+     }
+     public void dejarDeSeguirUsuarioAr(String nickname, String seguido)
+     {
+         ManejadorUsuarios.dejarDeSeguirUsuarioAr(nickname, seguido);
+     }
+     
+     public List<DtPaqueteDeEspectaculos> getPaquetesDelUsuario(String nickname){
+         return ManejadorUsuarios.getPaquetesDelUsuario(nickname);
+     }
+     
+     public void comprarPaquete(String nickname, String nombrePaq){
+          ManejadorUsuarios.comprarPaquete(nickname, nombrePaq);
+     }
+     
+     public List<DtUsuario> getUsuariosQueTeSiguenAr(String nickname){
+         return ManejadorUsuarios.getUsuariosQueTeSiguenAr(nickname);
+     }
+     public List<DtUsuario> getUsuariosQueTeSiguenEs(String nickname){
+         return ManejadorUsuarios.getUsuariosQueTeSiguenEs(nickname);
+     }
 }
