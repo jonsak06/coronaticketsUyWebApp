@@ -85,7 +85,9 @@
 
         </style>
         <script>
-
+            if(${modificadoUs == true}) {
+                alert("Usuario modificado");
+            }
 
 
 
@@ -125,6 +127,8 @@
                             out.print("<p class=\"text-muted\">Imagen:</p>");
                             out.print("<input type=\"file\" accept=\"image*\" name=\"imagen\"/>");
                         %>
+                    <p><input type="checkbox" name="subir"  value="ON" id="subir"><label for suir>Subir Archivo</label>
+                    
                         <input type="submit" name="" value="Modificar">
                         <%
                         %>
@@ -159,6 +163,8 @@
                             out.print("<p class=\"text-muted\">Imagen:</p>");
                             out.print("<input type=\"file\" accept=\"image*\" name=\"imagen\"/>");
                         %>
+                        <p><input type="checkbox" name="subir"  value="ON" id="subir"><label for suir>Subir Archivo</label>
+                    
                         <input type="submit" name="" value="Modificar">
                         <%
                         %>

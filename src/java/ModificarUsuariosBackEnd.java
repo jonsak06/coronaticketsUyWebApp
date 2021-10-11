@@ -1,5 +1,6 @@
 
 import java.awt.Image;
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.io.IOException;
@@ -81,32 +82,33 @@ public class ModificarUsuariosBackEnd extends HttpServlet {
             }
             java.sql.Date fecha = new java.sql.Date(parsed.getTime());
             // Date fecha = new Date(1,1,1);
-            String imagen = "";
+            String imagen = "silueta.jpg";
+            if (request.getParameter("subir") != null) {
+                Part archivo = request.getPart("imagen"); //llamada al parámetro foto de mi formulario.
+                String context = "/home/" + System.getProperty("user.name") + "/coronaticketsUyWebApp/web/IMAGENES_USUARIOS"; //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
+
+                String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString();
+
+                archivo.write(context + File.separator + nickname.replaceAll("\\s+", "") + foto); // Escribimos el archivo al disco duro del servidor.
+
+                imagen = "IMAGENES_USUARIOS" + File.separator + nickname.replaceAll("\\s+", "") + foto;
+                //AQUI SE DEBERIA HABER SUBIDO LA IMAGEN
+            }
             long id = 0;
             int canjeables = 0;
             DtEspectador es = null;
             DtEspectador esNew = null;
             List<DtEspectador> le = iu.getEspectadores();
-
+            
             for (DtEspectador i : le) {
                 if (i.getNickname().equals(nickname)) {
                     es = i;
                 }
             }
 
-            String path = "/home/tecnologo/Descargas/imgsUs/";
-            Part imgPart = request.getPart("imagen");
-            if (imgPart.getSize() != 0) { //control de que haya un archivo en el input
-                String imgName = nickname;
-                for (Part part : request.getParts()) {
-                    part.write(path + imgName);
-                }
-                esNew = new DtEspectador(es.getCanjeables(), es.getId(), nombre, apellido, es.getCorreo(), es.getNickname(), path + imgName, fecha, pass);
-
-            } else {
-                esNew = new DtEspectador(es.getCanjeables(), es.getId(), nombre, apellido, es.getCorreo(), es.getNickname(), es.getImagen(), fecha, pass);
-
-            }
+                esNew = new DtEspectador(es.getCanjeables(), es.getId(), nombre, apellido, es.getCorreo(), es.getNickname(), imagen, fecha, pass);
+                
+            
             iu.modificarEspectador(esNew);
 
         } else if ("Artista".equals(contexto.getAttribute("tipoUsuario").toString())) {
@@ -131,28 +133,29 @@ public class ModificarUsuariosBackEnd extends HttpServlet {
 
             //  Date fecha = new Date(1,1,1);
             String imagen = "silueta.jpg";
+            if (request.getParameter("subir") != null) {
+                Part archivo = request.getPart("imagen"); //llamada al parámetro foto de mi formulario.
+                String context = "/home/" + System.getProperty("user.name") + "/coronaticketsUyWebApp/web/IMAGENES_USUARIOS"; //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
+
+                String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString();
+
+                archivo.write(context + File.separator + nickname.replaceAll("\\s+", "") + foto); // Escribimos el archivo al disco duro del servidor.
+
+                imagen = "IMAGENES_USUARIOS" + File.separator + nickname.replaceAll("\\s+", "") + foto;
+                //AQUI SE DEBERIA HABER SUBIDO LA IMAGEN
+            }
             long id = 0;
             DtArtista ar = iu.getDatosArtista(nickname);
             DtArtista arNew = null;
 
-            String path = "/home/tecnologo/Descargas/imgsUs/";
-            Part imgPart = request.getPart("imagen");
-            if (imgPart.getSize() != 0) { //control de que haya un archivo en el input
-                String imgName = nickname;
-                for (Part part : request.getParts()) {
-                    part.write(path + imgName);
-                }
-                arNew = new DtArtista(linkWeb, biografia, descripcion, ar.getId(), nombre, apellido, ar.getCorreo(), ar.getNickname(), path + imgName, fecha, pass);
-
-            } else {
                 arNew = new DtArtista(linkWeb, biografia, descripcion, ar.getId(), nombre, apellido, ar.getCorreo(), ar.getNickname(), imagen, fecha, pass);
 
-            }
-
+            
             iu.modificarArtista(arNew);
         }
-
-        RequestDispatcher dispatcher = contexto.getRequestDispatcher("/index.jsp");
+        
+        request.setAttribute("modificadoUs", true);
+        RequestDispatcher dispatcher = contexto.getRequestDispatcher("/modificarUsuario.jsp");
         dispatcher.forward(request, response);
     }
 

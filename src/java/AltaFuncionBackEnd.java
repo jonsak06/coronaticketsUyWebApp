@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -103,6 +104,11 @@ public class AltaFuncionBackEnd extends HttpServlet {
         DtFuncion fun = new DtFuncion(Long.valueOf(id), nombre, time, fecha, fechaA);
         fun.setImagen(imagen);
         Fabrica.getCtrlEspectaculos().crearFuncion(nombreEspec, fun, listaCon);
+        
+        request.setAttribute("creadoFun", true);
+        RequestDispatcher dispatcher = contexto.getRequestDispatcher("/AltaFuncion.jsp");
+        dispatcher.forward(request, response);
+        
 
         
     }
