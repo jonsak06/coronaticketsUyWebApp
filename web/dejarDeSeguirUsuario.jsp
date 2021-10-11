@@ -180,11 +180,6 @@
 
 
         </style>
-        <script>
-            if (${dejarSeguirUs == true}) {
-                alert("Usuario Ya no seguido");
-            }
-        </script>
     </head>
     <body>
         <%@include file="header.jsp" %>

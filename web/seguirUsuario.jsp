@@ -178,11 +178,6 @@
 
 
         </style>
-        <script>
-            if (${seguidoUsu == true}) {
-                alert("Usuario seguido");
-            }
-        </script>
     </head>
     <body>
         <%@include file="header.jsp" %>

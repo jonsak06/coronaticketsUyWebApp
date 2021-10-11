@@ -47,7 +47,7 @@ public class dejarDeSeguirUsuarioBackEnd extends HttpServlet {
             String seguido = request.getParameter("seguido");
             Fabrica.getCrlUsuarios().dejarDeSeguirUsuarioAr(nickname, seguido);
         }
-        request.setAttribute("dejarSeguirUs", true);
+
         RequestDispatcher dispatcher = contexto.getRequestDispatcher("/seguirUsuario.jsp");
         dispatcher.forward(request, response);
     }

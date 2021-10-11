@@ -47,7 +47,7 @@ public class seguirUsuarioBackEnd extends HttpServlet {
             String seguido = request.getParameter("seguido");
             Fabrica.getCrlUsuarios().seguirUsuarioAr(nickname, seguido);
         }
-        request.setAttribute("seguidoUsu", true);
+
         RequestDispatcher dispatcher = contexto.getRequestDispatcher("/seguirUsuario.jsp");
         dispatcher.forward(request, response);
     }
