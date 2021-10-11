@@ -156,7 +156,6 @@ public class ManPlataformas {
         }
          EntityManager em = emf.createEntityManager();
        em.getTransaction().begin();
-       
       TypedQuery<Espectaculo> consulta = em.createNamedQuery("Espectaculo.findByNombre",Espectaculo.class);
         consulta.setParameter("nombre", nombreEspectaculo);
         Espectaculo esteEspectaculo = consulta.getSingleResult();
