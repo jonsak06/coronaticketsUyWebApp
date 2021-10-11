@@ -6,6 +6,7 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import root.datatypes.DtEspectaculo;
+import root.datatypes.DtPaqueteDeEspectaculos;
 import root.fabrica.Fabrica;
 import root.interfaces.IEspectaculos;
 import root.interfaces.iPaquetes;
@@ -42,25 +44,53 @@ public class buscarEspYPaq extends HttpServlet {
             String busqueda = request.getParameter("buscar");
             iPaquetes ip = Fabrica.getCtrlPaquetes();
             IEspectaculos ie = Fabrica.getCtrlEspectaculos();
-            List<String> paqs = ip.listarPaquetes();
+            List<DtPaqueteDeEspectaculos> dvPaqs = ip.listarDtPaquetes();
+            List<String> paqs = new ArrayList();
             List<String> paqsFiltrados = new ArrayList();
+            
+            for(DtPaqueteDeEspectaculos p : dvPaqs) {
+                paqs.add(p.getNombre());
+            }
+            
+            for(Iterator<DtPaqueteDeEspectaculos> it = dvPaqs.iterator(); it.hasNext();) {
+                if(!it.next().getNombre().toLowerCase().contains(busqueda.toLowerCase())) {
+                    it.remove();
+                }
+            }
+            
+            for(DtPaqueteDeEspectaculos p : dvPaqs) {
+                paqsFiltrados.add(p.getNombre());
+            }
+            
             for(String p : paqs) {
                 if(p.toLowerCase().contains(busqueda.toLowerCase())) {
                     paqsFiltrados.add(p);
                 }
             }
+            
+            contexto.setAttribute("dvPaqs", dvPaqs);
+            
+            
             List<DtEspectaculo> dvEsps = ie.listarTodosLosEspectaculos();
-            contexto.setAttribute("dvEsps", dvEsps);
             List<String> esps = new ArrayList();
             List<String> espsFiltrados = new ArrayList();
+            
             for(DtEspectaculo e : dvEsps) {
                 esps.add(e.getNombre());
             }
-            for(String e : esps) {
-                if(e.toLowerCase().contains(busqueda.toLowerCase())) {
-                    espsFiltrados.add(e);
+            
+            for(Iterator<DtEspectaculo> it = dvEsps.iterator(); it.hasNext();) {
+                if(!it.next().getNombre().toLowerCase().contains(busqueda.toLowerCase())) {
+                    it.remove();
                 }
             }
+            
+            for(DtEspectaculo e : dvEsps) {
+                espsFiltrados.add(e.getNombre());
+            }
+            
+            contexto.setAttribute("dvEsps", dvEsps);
+            
             
             if(busqueda.equals("")) {
                 contexto.setAttribute("espectaculos", esps);

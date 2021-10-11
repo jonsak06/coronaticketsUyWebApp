@@ -250,6 +250,7 @@ public class Espectaculo implements Serializable {
         String nombreArt = this.artista.getNombre()+" "+this.artista.getApellido();
         dt.setNombreArtista(nombreArt);
         dt.setImagen(this.imagen);
+        dt.setPlataforma(this.plataforma.getNombre());
         return dt;
     }
 

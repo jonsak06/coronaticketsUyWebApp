@@ -23,6 +23,7 @@ public class DtEspectaculo {
     private float costo;
     private Date fechaDeRegistro;
     private String imagen;
+    private String plataforma;
     
 
     public DtEspectaculo(){}
@@ -40,6 +41,10 @@ public class DtEspectaculo {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+    
+    public void setPlataforma(String plataforma) {
+        this.plataforma = plataforma;
     }
 
     public DtEspectaculo(Long id, String nombre, String descripcion, int duracion, int cantidadMaximaEspectadores, int cantidadMinimaEspectadores, String url, float costo, Date fechaDeRegistro, String imagen, String nombreArtista) {
@@ -107,6 +112,10 @@ public class DtEspectaculo {
 
     public Date getFechaDeRegistro() {
         return fechaDeRegistro;
+    }
+    
+    public String getPlataforma() {
+        return plataforma;
     }
     
 }

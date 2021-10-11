@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import root.datatypes.DtEspectaculo;
 import root.datatypes.DtPaqueteDeEspectaculos;
+import root.fabrica.Fabrica;
+import root.interfaces.IEspectaculos;
 
 /**
  *
@@ -42,7 +44,7 @@ public class filtrarBusqueda extends HttpServlet {
             List<DtEspectaculo> dvEspsFiltrados = new ArrayList();
             List<String> espsFiltrados = new ArrayList();
             
-//            List<DtPaqueteDeEspectaculos> dvPaqs = (List<DtPaqueteDeEspectaculos>) contexto.getAttribute("dvPaqs");
+            List<DtPaqueteDeEspectaculos> dvPaqs = (List<DtPaqueteDeEspectaculos>) contexto.getAttribute("dvPaqs");
             List<DtPaqueteDeEspectaculos> dvPaqsFiltrados = new ArrayList();
             List<String> paqsFiltrados = new ArrayList();
             
@@ -71,7 +73,34 @@ public class filtrarBusqueda extends HttpServlet {
                 
                 contexto.getRequestDispatcher("/busquedaEspYPaq.jsp").forward(request, response);
             } else if(filtro.equals("Plataforma")) {
+                List<String> instagram = new ArrayList();
+                List<String> facebook = new ArrayList();
+                List<String> twitter = new ArrayList();
+                List<String> youtube = new ArrayList();
                 
+//                IEspectaculos ie = Fabrica.getCtrlEspectaculos();
+//                List<DtEspectaculo> espsIN = ie.listarEspectaculos("Instagram Live");
+//                List<DtEspectaculo> espsFB = ie.listarEspectaculos("Facebook Watch");
+//                List<DtEspectaculo> espsTW = ie.listarEspectaculos("Twitter Live");
+//                List<DtEspectaculo> espsYT = ie.listarEspectaculos("Youtube");
+                for(DtEspectaculo e : dvEsps) {
+                    if(e.getPlataforma().equals("Instagram Live")) {
+                        instagram.add(e.getNombre());
+                    } else if(e.getPlataforma().equals("Facebook Watch")) {
+                        facebook.add(e.getNombre());
+                    } else if(e.getPlataforma().equals("Twitter Live")) {
+                        twitter.add(e.getNombre());
+                    } else if(e.getPlataforma().equals("Youtube")) {
+                        youtube.add(e.getNombre());
+                    }
+                }
+                
+                contexto.setAttribute("instagram", instagram);
+                contexto.setAttribute("facebook", facebook);
+                contexto.setAttribute("twitter", twitter);
+                contexto.setAttribute("youtube", youtube);
+                
+                contexto.getRequestDispatcher("/filtradosPlataforma.jsp").forward(request, response);
             }
         }
     }
