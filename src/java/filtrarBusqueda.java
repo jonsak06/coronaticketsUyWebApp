@@ -78,11 +78,6 @@ public class filtrarBusqueda extends HttpServlet {
                 List<String> twitter = new ArrayList();
                 List<String> youtube = new ArrayList();
                 
-//                IEspectaculos ie = Fabrica.getCtrlEspectaculos();
-//                List<DtEspectaculo> espsIN = ie.listarEspectaculos("Instagram Live");
-//                List<DtEspectaculo> espsFB = ie.listarEspectaculos("Facebook Watch");
-//                List<DtEspectaculo> espsTW = ie.listarEspectaculos("Twitter Live");
-//                List<DtEspectaculo> espsYT = ie.listarEspectaculos("Youtube");
                 for(DtEspectaculo e : dvEsps) {
                     if(e.getPlataforma().equals("Instagram Live")) {
                         instagram.add(e.getNombre());
@@ -101,6 +96,33 @@ public class filtrarBusqueda extends HttpServlet {
                 contexto.setAttribute("youtube", youtube);
                 
                 contexto.getRequestDispatcher("/filtradosPlataforma.jsp").forward(request, response);
+            } else if(filtro.equals("Categoria")) {
+                List<String> latinas = new ArrayList();
+                List<String> solistas = new ArrayList();
+                List<String> rockIngles = new ArrayList();
+                List<String> tropical = new ArrayList();
+                
+                for(DtEspectaculo e : dvEsps) {
+                    if(e.getCategorias().contains("Bandas Latinas")) {
+                        latinas.add(e.getNombre());
+                    } 
+                    if(e.getCategorias().contains("Solistas")) {
+                        solistas.add(e.getNombre());
+                    } 
+                    if(e.getCategorias().contains("Rock en Inglés")) {
+                        rockIngles.add(e.getNombre());
+                    } 
+                    if(e.getCategorias().contains("Música Tropical")) {
+                        tropical.add(e.getNombre());
+                    } 
+                }
+                
+                contexto.setAttribute("latinas", latinas);
+                contexto.setAttribute("solistas", solistas);
+                contexto.setAttribute("rockIngles", rockIngles);
+                contexto.setAttribute("tropical", tropical);
+                
+                contexto.getRequestDispatcher("/filtradosCategoria.jsp").forward(request, response);
             }
         }
     }

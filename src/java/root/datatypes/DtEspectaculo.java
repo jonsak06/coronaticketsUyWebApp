@@ -24,6 +24,7 @@ public class DtEspectaculo {
     private Date fechaDeRegistro;
     private String imagen;
     private String plataforma;
+    private List<String> categorias;
     
 
     public DtEspectaculo(){}
@@ -45,6 +46,10 @@ public class DtEspectaculo {
     
     public void setPlataforma(String plataforma) {
         this.plataforma = plataforma;
+    }
+    
+    public void setCategorias(List<String> categorias) {
+        this.categorias = categorias;
     }
 
     public DtEspectaculo(Long id, String nombre, String descripcion, int duracion, int cantidadMaximaEspectadores, int cantidadMinimaEspectadores, String url, float costo, Date fechaDeRegistro, String imagen, String nombreArtista) {
@@ -116,6 +121,10 @@ public class DtEspectaculo {
     
     public String getPlataforma() {
         return plataforma;
+    }
+    
+    public List<String> getCategorias() {
+        return categorias;
     }
     
 }

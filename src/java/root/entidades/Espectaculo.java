@@ -251,6 +251,11 @@ public class Espectaculo implements Serializable {
         dt.setNombreArtista(nombreArt);
         dt.setImagen(this.imagen);
         dt.setPlataforma(this.plataforma.getNombre());
+        List<String> categorias = new ArrayList();
+        for(Categoria c : this.categoria) {
+            categorias.add(c.getNombre());
+        }
+        dt.setCategorias(categorias);
         return dt;
     }
 
