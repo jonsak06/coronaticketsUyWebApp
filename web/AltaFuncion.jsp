@@ -9,6 +9,7 @@
 <%@page import="root.interfaces.*"%>
 <%@page import="root.datatypes.*"%>
 <%@page import="root.fabrica.Fabrica"%>
+<%@page import="com.google.gson.Gson"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -88,12 +89,34 @@
     <body>
         <%@include file="header.jsp"%>
 
-        <%
-            List<String> Existentes = new ArrayList<String>();
+        <%            List<String> Existentes = new ArrayList<String>();
+            List<DtPlataforma> lplat = Fabrica.getCtrlEspectaculos().listarPlataformas();
+            for (DtPlataforma p : lplat) {
+                List<DtEspectaculo> lesp = Fabrica.getCtrlEspectaculos().listarEspectaculos(p.getNombre());
+                for (DtEspectaculo e : lesp) {
+                    List<DtFuncion> lfun = Fabrica.getCtrlEspectaculos().listarTodasLasFunciones(e.getNombre());
+                    {
+                        for (DtFuncion f : lfun) {
+                            Existentes.add(f.getNombre());
+
+                        }
+                    }
+
+                }
+            }
+            Gson gson = new Gson();
+            String jsonFun = gson.toJson(Existentes);
         %>
         <script>
+            if(${creadoFun == true}) {
+                alert("Funcion creada");
+            }
+            var tus;
+            tus = 0;
+            var esp;
+            esp = 0;
             function linkPlataformas() {
-                if (document.getElementById("Plataformas").value != "Seleccione")
+                if (document.getElementById("Plataformas").value != "Seleccione...")
                 {
                     var espectaculos = document.getElementsByClassName("espectaculos");
                     for (i = 0; i < espectaculos.length; i++) {
@@ -103,9 +126,10 @@
                     var selected = aux.options[aux.selectedIndex].text;
                     alert(selected);
                     document.getElementById(selected).style.display = "block";
+                    tus = 1;
                 }
             }
-
+            
 
 
 
@@ -118,6 +142,7 @@
 
                     List<DtPlataforma> plat = Fabrica.getCtrlEspectaculos().listarPlataformas();
                     out.print("<option selected>Seleccione...</option>");
+                    
                     for (DtPlataforma i : plat) {
                         out.print("<option> " + i.getNombre() + " </option>");
                     }
@@ -129,8 +154,7 @@
                 for (DtPlataforma i : plat) {
                     List<DtEspectaculo> pespectaculos = Fabrica.getCtrlEspectaculos().listarEspectaculos(i.getNombre());
                     List<DtEspectaculo> espec = Fabrica.getCrlUsuarios().listarEspectaculosDeArtista(contexto.getAttribute("nickname").toString());
-                    out.print("<select id=\"" + i.getNombre() + "\" style=\"display:none;\" name=\"espectaculos\" class=\"espectaculos\"> ");
-
+                    out.print("<select id=\""+i.getNombre()+"\" style=\"display:none;\" name=\"espectaculos\" class=\"espectaculos\"  onchange=\"sEspectaculo()\"> ");
                     for (DtEspectaculo pe : pespectaculos) {
                         for (DtEspectaculo e : espec) {
                             if (e.getNombre().equals(pe.getNombre())) {
@@ -171,11 +195,29 @@
             <input type="file" name="Imagen"/>
             <p><input type="checkbox" name="subir"  value="ON" id="subir"><label for suir>Subir Archivo</label>
 
-                <input type="submit" name="" value="crear">
+                <input type="submit" name="" value="crear" id="crear">
 
 
 
         </form>
         <%@include file="headerScript.jsp"%>
+        <script>
+            const botonCrearPaq = document.getElementById("crear");
+            const jsonFun = <%=jsonFun%>;
+            botonCrearPaq.addEventListener("click", e => {
+                if (jsonFun.includes(document.getElementById("nombre").value)) {
+                    e.preventDefault();
+                    alert("El Nombre ya existe");
+                }
+                if (tus == 0)
+                {
+                        e.preventDefault();
+                    alert("Seleccione Plataforma");
+                }
+                
+
+            });
+
+        </script>
     </body>
 </html>

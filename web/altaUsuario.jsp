@@ -20,7 +20,7 @@
         <link rel="stylesheet" href="headerStyles.css">
 
         <script>
-            if(${creadoUs == true}) {
+            if (${creadoUs == true}) {
                 alert("Usuario creado");
             }
             var tus;
@@ -176,9 +176,9 @@
                         <p>Imagen: </p>
                         <input type="file" name="imagen" id="imagen"/>
                         <p><input type="checkbox" name="subir"  value="ON" id="subir"><label for suir>Subir Archivo</label>
-                    
 
-                        <input type="submit" name="" value="crear" id="crear">
+
+                            <input type="submit" name="" value="crear" id="crear">
 
 
                     </form>
@@ -204,16 +204,33 @@
                             if (jsonUsC.includes(document.getElementById("correo").value)) {
                                 e.preventDefault();
                                 alert("El correo ya esta usado");
-                            }if(document.getElementById("correo").value.includes(".@")||document.getElementById("correo").value.includes("@.")||!document.getElementById("correo").value.includes("@")||!document.getElementById("correo").value.includes("."))
+                            }
+                            if (document.getElementById("correo").value.includes(".@") || document.getElementById("correo").value.includes("@.") || document.getElementById("correo").value.includes(" ") || !document.getElementById("correo").value.includes("@") || !document.getElementById("correo").value.includes("."))
                             {
                                 e.preventDefault();
                                 alert("El correo es invalido");
-                            }if(tus==2&&!document.getElementById("tfLink").value.includes(".")&&!document.getElementById("tfLink").value=="" )
+                            }
+                            if (tus == 2 && !document.getElementById("tfLink").value.includes(".") && !document.getElementById("tfLink").value == "")
                             {
                                 e.preventDefault();
                                 alert("link invalido");
                             }
-                            
+                            var correo = document.getElementById("correo").value;
+
+                            var partesDelCorreo = correo.split("@", 2);
+
+                            for (var i = 0; i < partesDelCorreo.log(partesDelCorreo.length); i++)
+                            {
+                                if (i == 1)
+                                {
+                                    if (!partesDelCorreo[i].value.includes(".") || partesDelCorreo[i].value.includes("@")) {
+                                        e.preventDefault();
+                                        alert("El correo es invalido");
+                                    }
+                                }
+                            }
+
+
                         });
 
                     </script>
