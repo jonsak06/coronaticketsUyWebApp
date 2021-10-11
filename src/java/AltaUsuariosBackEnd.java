@@ -123,7 +123,7 @@ public class AltaUsuariosBackEnd extends HttpServlet {
             long id = 0;
             DtArtista ar = null;
             if (request.getParameter("subir") != null) {
-                Part archivo = request.getPart("upfile"); //llamada al parámetro foto de mi formulario.
+                Part archivo = request.getPart("imagen"); //llamada al parámetro foto de mi formulario.
                 String context = "/home/" + System.getProperty("user.name") + "/coronaticketsUyWebApp/web/IMAGENES_USUARIOS"; //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
 
                 String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString();
