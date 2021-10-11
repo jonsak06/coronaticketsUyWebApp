@@ -9,6 +9,8 @@
  * @author tecnologo
  */
 import java.awt.Image;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.io.IOException;
@@ -63,10 +65,7 @@ public class AltaUsuariosBackEnd extends HttpServlet {
             String correo = request.getParameter("correo");
             String pass = request.getParameter("contrasenia");
             String nickname = request.getParameter("nickname");
-            
-    
-          
-            
+
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             java.util.Date parsed = null;
             try {
@@ -76,30 +75,29 @@ public class AltaUsuariosBackEnd extends HttpServlet {
                 e1.printStackTrace();
             }
             java.sql.Date fecha = new java.sql.Date(parsed.getTime());
-           // Date fecha = new Date(1,1,1);
+            // Date fecha = new Date(1,1,1);
             String imagen = "silueta.jpg";
             long id = 0;
             int canjeables = 0;
-            DtEspectador es=null;
-            
-           String path = "/home/tecnologo/Descargas/imgsUs/";
-            Part imgPart = request.getPart("imagen");
-            if(imgPart.getSize() != 0) { //control de que haya un archivo en el input
-                String imgName = nickname;
-                for(Part part : request.getParts()) {
-                    part.write(path + imgName);
-                }
-                es = new DtEspectador(canjeables, id, nombre, apellido, correo, nickname, path+imgName, fecha, pass);
-            
-            }else
-            {
-                 es = new DtEspectador(canjeables, id, nombre, apellido, correo, nickname, imagen, fecha, pass);
-            
+            DtEspectador es = null;
+
+            if (request.getParameter("subir") != null) {
+                Part archivo = request.getPart("upfile"); //llamada al parámetro foto de mi formulario.
+                String context = "/home/" + System.getProperty("user.name") + "/coronaticketsUyWebApp/web/IMAGENES_USUARIOS"; //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
+
+                String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString();
+
+                archivo.write(context + File.separator + nickname.replaceAll("\\s+", "") + foto); // Escribimos el archivo al disco duro del servidor.
+
+                imagen = "IMAGENES_ESPECTACULOS" + File.separator + nickname.replaceAll("\\s+", "") + foto;
+                //AQUI SE DEBERIA HABER SUBIDO LA IMAGEN
             }
+            es = new DtEspectador(canjeables, id, nombre, apellido, correo, nickname, imagen, fecha, pass);
+
             iu.altaEspectador(es);
-            
+
         } else if ("a".equals(request.getParameter("us"))) {
-          
+
             String nombre = request.getParameter("nombre");
             String apellido = request.getParameter("apellido");
             String correo = request.getParameter("correo");
@@ -111,7 +109,7 @@ public class AltaUsuariosBackEnd extends HttpServlet {
             String linkWeb = request.getParameter("link");
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                java.util.Date parsed = null;
+            java.util.Date parsed = null;
             try {
                 parsed = sdf.parse(request.getParameter("fecha"));
             } catch (ParseException e1) {
@@ -120,24 +118,23 @@ public class AltaUsuariosBackEnd extends HttpServlet {
             }
             java.sql.Date fecha = new java.sql.Date(parsed.getTime());
 
-          //  Date fecha = new Date(1,1,1);
+            //  Date fecha = new Date(1,1,1);
             String imagen = "silueta.jpg";
             long id = 0;
             DtArtista ar = null;
-            String path = "/home/tecnologo/Descargas/imgsUs/";
-            Part imgPart = request.getPart("imagen");
-            if(imgPart.getSize() != 0) { //control de que haya un archivo en el input
-                String imgName = nickname;
-                for(Part part : request.getParts()) {
-                    part.write(path + imgName);
-                }
-                 ar = new DtArtista(linkWeb, biografia, descripcion, id, nombre, apellido, correo, nickname, path + imgName, fecha, pass);
-            
-            }else
-            {
-                ar = new DtArtista(linkWeb, biografia, descripcion, id, nombre, apellido, correo, nickname, imagen, fecha, pass);
-            
+            if (request.getParameter("subir") != null) {
+                Part archivo = request.getPart("upfile"); //llamada al parámetro foto de mi formulario.
+                String context = "/home/" + System.getProperty("user.name") + "/coronaticketsUyWebApp/web/IMAGENES_USUARIOS"; //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
+
+                String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString();
+
+                archivo.write(context + File.separator + nickname.replaceAll("\\s+", "") + foto); // Escribimos el archivo al disco duro del servidor.
+
+                imagen = "IMAGENES_ESPECTACULOS" + File.separator + nickname.replaceAll("\\s+", "") + foto;
+                //AQUI SE DEBERIA HABER SUBIDO LA IMAGEN
             }
+            ar = new DtArtista(linkWeb, biografia, descripcion, id, nombre, apellido, correo, nickname, imagen, fecha, pass);
+
             iu.altaArtista(ar);
         }
 
