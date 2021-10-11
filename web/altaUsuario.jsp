@@ -136,8 +136,9 @@
             <div class="col-md-12">
                 <div class="card">
 
-                    <form action="AltaUsuariosBackEnd" enctype="multipart/form-data" class="box" name="fAltaUsuario" id="fAltaUsuario" method="POST">
-                        <p>Tipo Usuario:
+                    <!--<form action="AltaUsuariosBackEnd" class="box" name="fAltaUsuario" id="fAltaUsuario" method="POST" enctype="multipart/form-data">-->
+                    <form action="AltaUsuariosBackEnd" class="box" name="fAltaUsuario" method="POST" enctype="multipart/form-data">    
+                    <p>Tipo Usuario:
                             <input type="radio" name="us" value="e" id="use" onclick="sesp()"> Espectador
                             <input type="radio" name="us" value="a" id="usa" onclick="sart()"> Artista
                         </p>
@@ -174,7 +175,7 @@
                         <textarea name="descripcion" id="tfDescripcion"  style="display:none; margin: 0 auto;">
                         </textarea>
                         <p>Imagen: </p>
-                        <input type="file" name="imagen" id="imagen"/>
+                        <input type="file" name="imagen" id="imagen">
                         <p><input type="checkbox" name="subir"  value="ON" id="subir"><label for suir>Subir Archivo</label>
 
 

@@ -104,7 +104,7 @@
                     <div id="div_file">
                         <p id="texto">Seleccionar Imagen</p>
                         <input type="file" name="upfile" id="upfile" style="background-color: #191919; color: white;border: 2px solid #3498db; padding: 10px 10px; outline: none; color: white; border-radius: 24px; transition: 0.25s">
-                        <p><input type="checkbox" name="subir"  value="ON" id="subir"><label for suir>Subir Archivo</label>
+                        <p><input type="checkbox" name="subir"  value="ON" id="subir"><label for subir>Subir Archivo</label>
                     </div>
                     <input type="submit" name="ingresar" value="Ingresar" id="ingresar">
                 </form>

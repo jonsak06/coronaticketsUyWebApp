@@ -10,6 +10,7 @@
  */
 import java.awt.Image;
 import java.io.File;
+import java.io.DataInputStream;
 import java.io.FileOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,7 +44,7 @@ import root.interfaces.iUsuarios;
  * @author Tecnologo
  */
 @WebServlet(urlPatterns = {"/AltaUsuariosBackEnd"})
-@MultipartConfig()
+@MultipartConfig
 public class AltaUsuariosBackEnd extends HttpServlet {
 
     /**
@@ -83,7 +84,7 @@ public class AltaUsuariosBackEnd extends HttpServlet {
 
             if (request.getParameter("subir") != null) {
                 Part archivo = request.getPart("imagen"); //llamada al parámetro foto de mi formulario.
-                String context = "/home/" + System.getProperty("user.name") + "/coronaticketsUyWebApp/web/IMAGENES_USUARIOS"; //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
+                String context = "/home/"+ System.getProperty("user.name")+"/coronaticketsUyWebApp/web/IMAGENES_USUARIOS"; //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
 
                 String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString();
 
@@ -123,7 +124,7 @@ public class AltaUsuariosBackEnd extends HttpServlet {
             long id = 0;
             DtArtista ar = null;
             if (request.getParameter("subir") != null) {
-                Part archivo = request.getPart("upfile"); //llamada al parámetro foto de mi formulario.
+                Part archivo = request.getPart("imagen"); //llamada al parámetro foto de mi formulario.
                 String context = "/home/" + System.getProperty("user.name") + "/coronaticketsUyWebApp/web/IMAGENES_USUARIOS"; //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
 
                 String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString();
@@ -133,7 +134,7 @@ public class AltaUsuariosBackEnd extends HttpServlet {
                 imagen = "IMAGENES_USUARIOS" + File.separator + nickname.replaceAll("\\s+", "") + foto;
                 //AQUI SE DEBERIA HABER SUBIDO LA IMAGEN
             }
-            ar = new DtArtista(linkWeb, biografia, descripcion, id, nombre, apellido, correo, nickname, imagen, fecha, pass);
+          ar = new DtArtista(linkWeb, biografia, descripcion, id, nombre, apellido, correo, nickname, imagen, fecha, pass);
 
             iu.altaArtista(ar);
         }

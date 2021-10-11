@@ -58,14 +58,14 @@ public class crearPaquete extends HttpServlet {
             ip.confirmarAltaPaquete(nombre, descripcion, java.sql.Date.valueOf(fechaInicio), java.sql.Date.valueOf(fechaFin), descuento);
             
             //subida de imagen
-            String path = "/var/www/img/paquetes/";
+            String path = "/home/" + System.getProperty("user.name") + "/coronaticketsUyWebApp/web/IMAGENES_PAQUETES/";
             Part imgPart = request.getPart("imagen");
             if(imgPart.getSize() != 0) { //control de que haya un archivo en el input
                 String imgName = nombre+"_imagen";
                 for(Part part : request.getParts()) {
                     part.write(path + imgName);
                 }
-                ip.agregarImagenPaquete(nombre, path+imgName);
+                ip.agregarImagenPaquete(nombre, "IMAGENES_PAQUETES/"+imgName);
             }
             
             request.setAttribute("creado", true);// agrego atributo para mostrar alerta de paquete creado con js

@@ -6,6 +6,7 @@
 package root.controladores;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import root.datatypes.DtEspectaculo;
@@ -54,7 +55,12 @@ public class CtrlPaquetes implements iPaquetes {
     
     @Override
     public List<String> listarEspectaculosNoIncluidos(String nombrePaquete, String nombrePlataforma) {
-        List<String> nomEsps = ManEspectaculo.getNombres(nombrePlataforma);
+//        List<String> nomEsps = ManEspectaculo.getNombres(nombrePlataforma);
+        List<DtEspectaculo> esps = ManPlataformas.getEspectaculos(nombrePlataforma);
+        List<String> nomEsps = new ArrayList<String>();
+        for(DtEspectaculo e:esps){
+            nomEsps.add(e.getNombre());
+        }
         PaqueteDeEspectaculos p = mp.getPaquete(nombrePaquete);
         return p.filtrarEspectaculosNoIncluidos(nomEsps, nombrePlataforma);
     }

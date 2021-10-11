@@ -197,14 +197,19 @@ public class PaqueteDeEspectaculos implements Serializable {
     }
     
     public List<String> filtrarEspectaculosNoIncluidos(List<String> nomEsps, String nombrePlataforma) {
-        for(Espectaculo e: this.espectaculos){
-//        this.espectaculos.forEach(e -> {
-            if(nomEsps.contains(e.getNombre())) {
-                nomEsps.remove(e.getNombre());
-            }
-//        });
+        
+        List<String> result = new ArrayList<String>();
+        List<String> espDelPaq = new ArrayList<String>();
+        for(Espectaculo e : this.espectaculos){
+            espDelPaq.add(e.getNombre());
         }
-        return nomEsps;
+        for(String i : nomEsps){
+            if(espDelPaq.contains(i)==false){
+                result.add(i);
+            }
+        }
+//        return nomEsps;
+return result;
     }
     
     public List<String> getNombresEspectaculos() {

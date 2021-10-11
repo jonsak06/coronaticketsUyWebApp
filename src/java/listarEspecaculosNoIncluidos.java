@@ -41,8 +41,13 @@ public class listarEspecaculosNoIncluidos extends HttpServlet {
             String plataforma = request.getParameter("plataforma");
             iPaquetes ip = Fabrica.getCtrlPaquetes();
             IEspectaculos ie = Fabrica.getCtrlEspectaculos();
+//            List<DtEspectaculo> esp = ie.listarEspectaculos(plataforma);
+//            List<String> esps = new ArrayList<String>();
+//            for(DtEspectaculo i: esp ){
+//            esps.add(i.getNombre());
+//            }
             List<String> esps = ip.listarEspectaculosNoIncluidos(paquete, plataforma);
-            List<String> espsAceptados = new ArrayList();
+            List<String> espsAceptados = new ArrayList<String>();
             List<DtEspectaculo> aceptados = ie.listarAceptados();
             for(DtEspectaculo e : aceptados) {
                 if(esps.contains(e.getNombre())) {
