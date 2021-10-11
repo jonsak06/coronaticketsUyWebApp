@@ -411,6 +411,7 @@ public class ManEspectaculo {
             List<Funcion> funciones = e.getFunciones();
             for (Funcion i : funciones) {
                 DtFuncion esteDt = new DtFuncion(i.getId(), i.getNombre(), i.getHoraInicio(), i.getFechaRegistro(), i.getFecha());
+                esteDt.setImagen(i.getImagen());
                 lDtf.add(esteDt);
             }
             em.close();

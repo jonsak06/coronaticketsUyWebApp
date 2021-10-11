@@ -608,6 +608,7 @@ Author     : tecnologo
                                                                 if (sfun.equals(f.getNombre())) {
                                                                     out.print("<img src='" + f.getImagen() + "' alt='imagen de la funcion'>");
                                                                     out.print("<h5>" + f.getNombre() + "</h5>");
+                                                                    out.print("<p>" +f.getImagen() + "</p>");
                                                                     out.print("<p>" + f.getFecha().toString() + "</p>");
                                                                     out.print("<p>" + f.getFechaDeRegistro().toString() + "</p>");
                                                                     out.print("<p>" + f.getHoraInicio().toString() + "</p>");

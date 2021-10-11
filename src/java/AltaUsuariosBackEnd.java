@@ -82,14 +82,14 @@ public class AltaUsuariosBackEnd extends HttpServlet {
             DtEspectador es = null;
 
             if (request.getParameter("subir") != null) {
-                Part archivo = request.getPart("upfile"); //llamada al parámetro foto de mi formulario.
+                Part archivo = request.getPart("imagen"); //llamada al parámetro foto de mi formulario.
                 String context = "/home/" + System.getProperty("user.name") + "/coronaticketsUyWebApp/web/IMAGENES_USUARIOS"; //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
 
                 String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString();
 
                 archivo.write(context + File.separator + nickname.replaceAll("\\s+", "") + foto); // Escribimos el archivo al disco duro del servidor.
 
-                imagen = "IMAGENES_ESPECTACULOS" + File.separator + nickname.replaceAll("\\s+", "") + foto;
+                imagen = "IMAGENES_USUARIOS" + File.separator + nickname.replaceAll("\\s+", "") + foto;
                 //AQUI SE DEBERIA HABER SUBIDO LA IMAGEN
             }
             es = new DtEspectador(canjeables, id, nombre, apellido, correo, nickname, imagen, fecha, pass);
@@ -130,7 +130,7 @@ public class AltaUsuariosBackEnd extends HttpServlet {
 
                 archivo.write(context + File.separator + nickname.replaceAll("\\s+", "") + foto); // Escribimos el archivo al disco duro del servidor.
 
-                imagen = "IMAGENES_ESPECTACULOS" + File.separator + nickname.replaceAll("\\s+", "") + foto;
+                imagen = "IMAGENES_USUARIOS" + File.separator + nickname.replaceAll("\\s+", "") + foto;
                 //AQUI SE DEBERIA HABER SUBIDO LA IMAGEN
             }
             ar = new DtArtista(linkWeb, biografia, descripcion, id, nombre, apellido, correo, nickname, imagen, fecha, pass);

@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Paths;
+import java.io.FileOutputStream;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +32,7 @@ import root.interfaces.iUsuarios;
  * @author osiris
  */
 @WebServlet(urlPatterns = {"/AltaFuncionBackEnd"})
+@MultipartConfig()
 public class AltaFuncionBackEnd extends HttpServlet {
 
     /**
@@ -49,7 +52,7 @@ public class AltaFuncionBackEnd extends HttpServlet {
 
         String nombreEspec = request.getParameter("espectaculos");
         String nombre = request.getParameter("nombre");
-        long id = 0L;
+        long id = 0;
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date parsed = null;
@@ -86,14 +89,14 @@ public class AltaFuncionBackEnd extends HttpServlet {
         java.sql.Date fechaA = new java.sql.Date(parsed.getTime());
         String imagen = "silueta.jpg";
         if (request.getParameter("subir") != null) {
-            Part archivo = request.getPart("upfile"); //llamada al parámetro foto de mi formulario.
+            Part archivo = request.getPart("Imagen"); //llamada al parámetro foto de mi formulario.
             String context = "/home/" + System.getProperty("user.name") + "/coronaticketsUyWebApp/web/IMAGENES_FUNCIONES"; //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
 
             String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString();
 
-            archivo.write(context + File.separator + nombre.replaceAll("\\s+", "") + foto); // Escribimos el archivo al disco duro del servidor.
+            archivo.write((context + File.separator + nombre + foto).replaceAll("\\s+", "")); // Escribimos el archivo al disco duro del servidor.
 
-            imagen = "IMAGENES_ESPECTACULOS" + File.separator + nombre.replaceAll("\\s+", "") + foto;
+            imagen = (("IMAGENES_FUNCIONES" + File.separator + nombre + foto).replaceAll("\\s+", ""));
             //AQUI SE DEBERIA HABER SUBIDO LA IMAGEN
         }
 
@@ -101,10 +104,7 @@ public class AltaFuncionBackEnd extends HttpServlet {
         fun.setImagen(imagen);
         Fabrica.getCtrlEspectaculos().crearFuncion(nombreEspec, fun, listaCon);
 
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
