@@ -1,0 +1,932 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package root.guis;
+
+import java.awt.Image;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.table.TableCellRenderer;
+import root.datatypes.DtArtista;
+import root.datatypes.DtEspectaculo;
+import root.datatypes.DtEspectador;
+import root.datatypes.DtFuncion;
+import root.datatypes.DtPaqueteDeEspectaculos;
+import root.datatypes.DtRegistro;
+import root.fabrica.Fabrica;
+
+/**
+ *
+ * @author tecnologo
+ */
+public class ListarUsuario extends javax.swing.JFrame {
+    private List<DtArtista> artistas=new ArrayList<DtArtista>();
+    private List<DtEspectador> espectadores=new ArrayList<DtEspectador>();
+    private List<DtEspectaculo> espectaculos=new ArrayList<DtEspectaculo>();
+    List<DtRegistro> registros=new ArrayList<DtRegistro>();
+    List<DtFuncion> funciones=new ArrayList<DtFuncion>();
+                            
+    String ruta="";
+    
+    /** Creates new form ListarArtistas */
+    public ListarUsuario() {
+        initComponents();
+        ruta="silueta.jpg";
+        List<String> lU=new ArrayList<String>();
+        Image mImagen = new ImageIcon(ruta).getImage();
+        ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(lImagen.getWidth(), lImagen.getHeight(), Image.SCALE_SMOOTH));
+        lImagen.setIcon(mIcono);
+        artistas=Fabrica.getCrlUsuarios().getArtistas();
+        espectadores=Fabrica.getCrlUsuarios().getEspectadores();
+        lU.add("Seleccione Usuario");
+        for(int i=0; i<artistas.size(); i++)
+        {
+            lU.add(artistas.get(i).getNickname());
+        }
+        
+        for(int i=0; i<espectadores.size(); i++)
+        {
+            lU.add(espectadores.get(i).getNickname());
+        }
+        this.cbUsuario.setModel(new DefaultComboBoxModel(lU.toArray()));
+        tUsuario.setVisible(false);
+        tEspectador.setVisible(false);
+        tArtista.setVisible(false);
+        tBariable.setVisible(false);
+        cbBariable.setVisible(false);
+        tBariable2.setVisible(false);
+        tBariable3.setVisible(false);
+        lBariable.setVisible(false);
+        String matrisX[][] = new String [0][1];
+        tEspectador.setModel(new javax.swing.table.DefaultTableModel(
+             matrisX,
+             new String [] {
+                 "Esta tabla solo tendra datos si seleccionas un usuario de tipo espectador"
+             }
+         ) {
+             boolean[] canEdit = new boolean [] {
+                 false
+             };
+
+             public boolean isCellEditable(int rowIndex, int columnIndex) {
+                 return canEdit [columnIndex];
+             }
+         });
+        tArtista.setModel(new javax.swing.table.DefaultTableModel(
+             matrisX,
+             new String [] {
+                 "Esta tabla solo tendra datos si seleccionas un usuario de tipo artista"
+             }
+         ) {
+             boolean[] canEdit = new boolean [] {
+                 false
+             };
+
+             public boolean isCellEditable(int rowIndex, int columnIndex) {
+                 return canEdit [columnIndex];
+             }
+         });
+        tBariable2.setModel(new javax.swing.table.DefaultTableModel(
+             matrisX,
+             new String [] {
+                 "Esta tabla solo tendra datos si seleccionas un artista"
+             }
+         ) {
+             boolean[] canEdit = new boolean [] {
+                 false
+             };
+
+             public boolean isCellEditable(int rowIndex, int columnIndex) {
+                 return canEdit [columnIndex];
+             }
+         });
+        tBariable3.setModel(new javax.swing.table.DefaultTableModel(
+             matrisX,
+             new String [] {
+                 "Esta tabla solo tendra datos si seleccionas un artista"
+             }
+         ) {
+             boolean[] canEdit = new boolean [] {
+                 false
+             };
+
+             public boolean isCellEditable(int rowIndex, int columnIndex) {
+                 return canEdit [columnIndex];
+             }
+         });
+        tBariable.setModel(new javax.swing.table.DefaultTableModel(
+             matrisX,
+             new String [] {
+                 "Esta tabla tendra datos de Espectaculos o Funciones dependiendo si seleccionas un artista o un espectador"
+             }
+         ) {
+             boolean[] canEdit = new boolean [] {
+                 false
+             };
+
+             public boolean isCellEditable(int rowIndex, int columnIndex) {
+                 return canEdit [columnIndex];
+             }
+         });
+    }
+
+    /** This method is called from within the constructor to
+     * initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is
+     * always regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tUsuario = new javax.swing.JTable();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tBariable = new javax.swing.JTable();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        tBariable2 = new javax.swing.JTable();
+        btCancelar = new javax.swing.JButton();
+        lImagen = new javax.swing.JLabel();
+        cbUsuario = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tArtista = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tEspectador = new javax.swing.JTable();
+        cbBariable = new javax.swing.JComboBox<>();
+        lBariable = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tBariable3 = new javax.swing.JTable();
+        descripcion = new javax.swing.JLabel();
+        descripcion2 = new javax.swing.JLabel();
+        url = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        tUsuario.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Nombre", "Apellido", "Nickname", "Correo Electonico", "Fecha de Nacimiento"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tUsuarioMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tUsuario);
+
+        tBariable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Nombre", "Descripcion", "Esp Max", "Esp Min", "Costo", "URL", "Fecha de Registro"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tBariable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tBariableMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(tBariable);
+
+        tBariable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Nombre", "Descripcion", "Inicio", "Fin", "Descuento"
+            }
+        ));
+        jScrollPane8.setViewportView(tBariable2);
+
+        btCancelar.setText("Cancelar");
+        btCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCancelarActionPerformed(evt);
+            }
+        });
+
+        cbUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbUsuario.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbUsuarioItemStateChanged(evt);
+            }
+        });
+
+        jLabel1.setText("Seleccione Usuario");
+
+        jLabel2.setText("Usuario");
+
+        tArtista.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Link web", "Biografia", "Descripcion"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tArtista);
+
+        tEspectador.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Cangeables"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tEspectador);
+
+        cbBariable.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbBariable.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbBariableItemStateChanged(evt);
+            }
+        });
+
+        lBariable.setText("Seleccione");
+
+        tBariable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tBariable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tBariable3MouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(tBariable3);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jScrollPane3))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(364, 364, 364)
+                            .addComponent(jLabel2))
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jScrollPane5))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(146, 146, 146)
+                            .addComponent(lBariable)
+                            .addGap(84, 84, 84)
+                            .addComponent(cbBariable, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(388, 388, 388)
+                        .addComponent(btCancelar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 833, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(descripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(descripcion2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(url, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE))
+                .addGap(79, 79, 79))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 833, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbBariable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lBariable))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(url, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(descripcion2, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                        .addGap(42, 42, 42)))
+                .addGap(28, 28, 28)
+                .addComponent(btCancelar)
+                .addContainerGap())
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void tUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tUsuarioMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_tUsuarioMouseClicked
+
+    private void tBariableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tBariableMouseClicked
+        // TODO add your handling code here:
+        int i = this.tBariable.getSelectedRow();
+        this.descripcion.setText("<html>"+"Descripcion: "+this.tBariable.getValueAt(i,1).toString()+"</html>");
+        this.url.setText("<html>"+"URL: "+this.tBariable.getValueAt(i,5).toString()+"</html>");
+
+    }//GEN-LAST:event_tBariableMouseClicked
+
+    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
+        // TODO add your handling code here:
+        Principal ventanaPrincipal = new Principal();
+        ventanaPrincipal.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btCancelarActionPerformed
+
+    private void cbUsuarioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbUsuarioItemStateChanged
+        // TODO add your handling code here:
+        if(!"Seleccione Usuario".equals(cbUsuario.getSelectedItem().toString()))
+        {         
+            lBariable.setVisible(true);
+            for(int i=0; i<artistas.size(); i++)
+            {
+                if(artistas.get(i).getNickname().equals(cbUsuario.getSelectedItem().toString()))
+                {
+                    tUsuario.setVisible(true);
+                    tArtista.setVisible(true);
+                    cbBariable.setVisible(true);
+                    tEspectador.setVisible(false);
+                    tBariable.setVisible(false);
+                    tBariable2.setVisible(false);
+                    tBariable3.setVisible(false);
+                    String matris[][] = new String [1][5];
+                    String matrisA[][] = new String [1][3];
+                    matris [0][0]=artistas.get(i).getNombre();
+                    matris [0][1]=artistas.get(i).getApellido();
+                    matris [0][2]=artistas.get(i).getNickname();
+                    matris [0][3]=artistas.get(i).getCorreo();
+                    matris [0][4]=artistas.get(i).getFechaNacimiento().toString();
+                    matrisA [0][0]=artistas.get(i).getLinkWeb();
+                    matrisA [0][1]=artistas.get(i).getBiografia();
+                    matrisA [0][2]=artistas.get(i).getDescripcion();
+
+                    tUsuario.setModel(new javax.swing.table.DefaultTableModel(
+                        matris,
+                        new String [] {
+                            "Nombre", "Apellido", "Nickname", "Correo Electonico", "Fecha de Nacimiento"
+                        }
+                    ) {
+                        boolean[] canEdit = new boolean [] {
+                            false, false, false, false, false
+                        };
+
+                        public boolean isCellEditable(int rowIndex, int columnIndex) {
+                            return canEdit [columnIndex];
+                        }
+                    });
+                    tArtista.setModel(new javax.swing.table.DefaultTableModel(
+                        matrisA,
+                        new String [] {
+                            "Link web", "Biografia", "Descripcion"
+                        }
+                    ) {
+                        boolean[] canEdit = new boolean [] {
+                            false, false, false,
+                        };
+
+                        public boolean isCellEditable(int rowIndex, int columnIndex) {
+                            return canEdit [columnIndex];
+                        }
+                    });
+                    
+
+                    if(artistas.get(i).getImagen()!="PATH")
+                    {
+                        if(artistas.get(i).getImagen()!="")
+                        {
+                            Image mImagen = new ImageIcon(artistas.get(i).getImagen()).getImage();
+                            ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(lImagen.getWidth(), lImagen.getHeight(), Image.SCALE_SMOOTH));
+                            lImagen.setIcon(mIcono);
+                        }
+                        else
+                        {
+                            ruta="silueta.jpg";
+                            Image mImagen = new ImageIcon(ruta).getImage();
+                            ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(lImagen.getWidth(), lImagen.getHeight(), Image.SCALE_SMOOTH));
+                            lImagen.setIcon(mIcono);
+                        }
+                    }
+                    else
+                    {
+                        ruta="silueta.jpg";
+                        Image mImagen = new ImageIcon(ruta).getImage();
+                        ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(lImagen.getWidth(), lImagen.getHeight(), Image.SCALE_SMOOTH));
+                        lImagen.setIcon(mIcono);
+
+                    }
+
+
+                    
+                    
+
+                    espectaculos=Fabrica.getCrlUsuarios().listarEspectaculosDeArtista(artistas.get(i).getNickname());
+                    List<String> lE=new ArrayList<String>();
+                    lE.add("Seleccione");
+                    for(int u=0; u<espectaculos.size(); u++)
+                    {
+                        lE.add(espectaculos.get(u).getNombre());
+                    }
+                    this.cbBariable.setModel(new DefaultComboBoxModel(lE.toArray()));
+                    lBariable.setText("Seleccione espectaculo");
+                    String matrisX[][] = new String [0][1];
+                    tEspectador.setModel(new javax.swing.table.DefaultTableModel(
+                         matrisX,
+                         new String [] {
+                             "Esta tabla solo tendra datos si seleccionas un usuario de tipo espectador"
+                         }
+                     ) {
+                         boolean[] canEdit = new boolean [] {
+                             false
+                         };
+
+                         public boolean isCellEditable(int rowIndex, int columnIndex) {
+                             return canEdit [columnIndex];
+                         }
+                     });
+                    tBariable2.setModel(new javax.swing.table.DefaultTableModel(
+                         matrisX,
+                         new String [] {
+                             "Esta tabla solo tendra datos si seleccionas un artista"
+                         }
+                     ) {
+                         boolean[] canEdit = new boolean [] {
+                             false
+                         };
+
+                         public boolean isCellEditable(int rowIndex, int columnIndex) {
+                             return canEdit [columnIndex];
+                         }
+                     });
+                    tBariable3.setModel(new javax.swing.table.DefaultTableModel(
+                         matrisX,
+                         new String [] {
+                             "Esta tabla solo tendra datos si seleccionas un artista"
+                         }
+                     ) {
+                         boolean[] canEdit = new boolean [] {
+                             false
+                         };
+
+                         public boolean isCellEditable(int rowIndex, int columnIndex) {
+                             return canEdit [columnIndex];
+                         }
+                     });
+                    tBariable.setModel(new javax.swing.table.DefaultTableModel(
+                         matrisX,
+                         new String [] {
+                             "Esta tabla tendra datos de Espectaculos o Funciones dependiendo si seleccionas un artista o un espectador"
+                         }
+                     ) {
+                         boolean[] canEdit = new boolean [] {
+                             false
+                         };
+
+                         public boolean isCellEditable(int rowIndex, int columnIndex) {
+                             return canEdit [columnIndex];
+                         }
+                     });
+                }
+            }
+
+            for(int i=0; i<espectadores.size(); i++)
+            {
+                if(espectadores.get(i).getNickname()==cbUsuario.getSelectedItem().toString())
+                {
+                    if(espectadores.get(i).getNickname()==cbUsuario.getSelectedItem().toString())
+                    {
+                       tUsuario.setVisible(true);
+                       cbBariable.setVisible(true);
+                       tEspectador.setVisible(true);
+                       tArtista.setVisible(false);
+                       tBariable.setVisible(false);
+                       tBariable2.setVisible(false);
+                       tBariable3.setVisible(false);
+                       String matris[][] = new String [1][5];
+                       String matrisE[][] = new String [1][1];
+                       matris [0][0]=espectadores.get(i).getNombre();
+                       matris [0][1]=espectadores.get(i).getApellido();
+                       matris [0][2]=espectadores.get(i).getNickname();
+                       matris [0][3]=espectadores.get(i).getCorreo();
+                       matris [0][4]=espectadores.get(i).getFechaNacimiento().toString();
+                       matrisE [0][0]=Integer.toString(espectadores.get(i).getCanjeables());
+
+                       tUsuario.setModel(new javax.swing.table.DefaultTableModel(
+                           matris,
+                           new String [] {
+                               "Nombre", "Apellido", "Nickname", "Correo Electonico", "Fecha de Nacimiento"
+                           }
+                       ) {
+                           boolean[] canEdit = new boolean [] {
+                               false, false, false, false, false
+                           };
+
+                           public boolean isCellEditable(int rowIndex, int columnIndex) {
+                               return canEdit [columnIndex];
+                           }
+                       });
+                       tEspectador.setModel(new javax.swing.table.DefaultTableModel(
+                           matrisE,
+                           new String [] {
+                               "Canjeables"
+                           }
+                       ) {
+                           boolean[] canEdit = new boolean [] {
+                               false
+                           };
+
+                           public boolean isCellEditable(int rowIndex, int columnIndex) {
+                               return canEdit [columnIndex];
+                           }
+                       });
+
+                        if(espectadores.get(i).getImagen()!="PATH")
+                        {
+                            if(espectadores.get(i).getImagen()!="")
+                            {
+                                Image mImagen = new ImageIcon(espectadores.get(i).getImagen()).getImage();
+                                ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(lImagen.getWidth(), lImagen.getHeight(), Image.SCALE_SMOOTH));
+                                lImagen.setIcon(mIcono);
+                            }
+                            else
+                            {
+                                ruta="silueta.jpg";
+                                Image mImagen = new ImageIcon(ruta).getImage();
+                                ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(lImagen.getWidth(), lImagen.getHeight(), Image.SCALE_SMOOTH));
+                                lImagen.setIcon(mIcono);
+                            }
+                        }
+                        else
+                        {
+                            ruta="silueta.jpg";
+                            Image mImagen = new ImageIcon(ruta).getImage();
+                            ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(lImagen.getWidth(), lImagen.getHeight(), Image.SCALE_SMOOTH));
+                            lImagen.setIcon(mIcono);
+
+                        }
+
+
+                       registros=Fabrica.getCrlUsuarios().getRegistros(espectadores.get(i).getNickname());
+                       funciones=Fabrica.getCrlUsuarios().getFuncionesRegistros(espectadores.get(i).getNickname());
+
+                       List<String> lF=new ArrayList<String>();
+                       lF.add("Seleccione");
+                       for(int u=0; u<funciones.size(); u++)
+                       {
+                           lF.add(funciones.get(u).getNombre());
+                       }
+                       this.cbBariable.setModel(new DefaultComboBoxModel(lF.toArray()));
+                       lBariable.setText("Seleccione funcion");
+                       String matrisX[][] = new String [0][1];
+                       tArtista.setModel(new javax.swing.table.DefaultTableModel(
+                            matrisX,
+                            new String [] {
+                                "Esta tabla solo tendra datos si seleccionas un usuario de tipo artista"
+                            }
+                        ) {
+                            boolean[] canEdit = new boolean [] {
+                                false
+                            };
+
+                            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                                return canEdit [columnIndex];
+                            }
+                        });
+                       tBariable2.setModel(new javax.swing.table.DefaultTableModel(
+                            matrisX,
+                            new String [] {
+                                "Esta tabla solo tendra datos si seleccionas un artista"
+                            }
+                        ) {
+                            boolean[] canEdit = new boolean [] {
+                                false
+                            };
+
+                            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                                return canEdit [columnIndex];
+                            }
+                        });
+                       tBariable3.setModel(new javax.swing.table.DefaultTableModel(
+                            matrisX,
+                            new String [] {
+                                "Esta tabla solo tendra datos si seleccionas un artista"
+                            }
+                        ) {
+                            boolean[] canEdit = new boolean [] {
+                                false
+                            };
+
+                            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                                return canEdit [columnIndex];
+                            }
+                        });
+                       
+                   }   
+                }
+            }
+        }
+        
+    }//GEN-LAST:event_cbUsuarioItemStateChanged
+
+    private void cbBariableItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbBariableItemStateChanged
+        // TODO add your handling code here:
+        if(cbBariable.getSelectedItem().toString()!="Seleccione")
+        {
+            if(lBariable.getText()=="Seleccione funcion")
+            {
+                for(int i=0;i<funciones.size();i++)
+                {
+                    if(funciones.get(i).getNombre()==cbBariable.getSelectedItem().toString())
+                    {
+                       
+                       tBariable2.setVisible(false);
+                       tBariable3.setVisible(false);
+                       tBariable.setVisible(true);
+                       String matris[][] = new String [1][5];
+                       matris [0][0]=funciones.get(i).getNombre();
+                       matris [0][1]=funciones.get(i).getHoraInicio().toString(); 
+                       matris [0][2]=registros.get(i).getEstado().toString();
+                       matris [0][3]=Float.toString(registros.get(i).getCosto());
+                       matris [0][4]=registros.get(i).getFecha().toString();
+
+
+                       tBariable.setModel(new javax.swing.table.DefaultTableModel(
+                           matris,
+                           new String [] {
+                               "Nombre de la funcion", "Hora de inicio", "Estado del registro", "Costo del registro", "Fecha en el cual te registraste a la funcion"
+                           }
+                       ) {
+                           boolean[] canEdit = new boolean [] {
+                               false, false, false, false, false
+                           };
+
+                           public boolean isCellEditable(int rowIndex, int columnIndex) {
+                               return canEdit [columnIndex];
+                           }
+                       });
+                      
+                    }
+                }
+
+            }else
+            {
+                for(int i=0;i<espectaculos.size();i++)
+                {
+                    if(espectaculos.get(i).getNombre()==cbBariable.getSelectedItem().toString())
+                    {
+
+                       tBariable.setVisible(true);
+                       tBariable2.setVisible(true);
+                       tBariable3.setVisible(true);
+                       String matris[][] = new String [1][7];
+                       matris [i][0]=espectaculos.get(i).getNombre();
+                       matris [i][1]="<html>"+espectaculos.get(i).getDescripcion()+"</html>";
+                       matris [i][2]=Integer.toString(espectaculos.get(i).getCantidadMaximaEspectadores());
+                       matris [i][3]=Integer.toString(espectaculos.get(i).getCantidadMinimaEspectadores());
+                       matris [i][4]=Float.toString(espectaculos.get(i).getCosto());
+                       matris [i][5]=espectaculos.get(i).getUrl();
+                       matris [i][6]=espectaculos.get(i).getFechaDeRegistro().toString();
+
+                       tBariable.setModel(new javax.swing.table.DefaultTableModel(
+                           matris,
+                           new String [] {
+                               "Nombre", "Descripcion", "Esp Max", "Esp Min", "Costo", "URL", "Fecha de Registro"
+                           }
+                       ) {
+                           boolean[] canEdit = new boolean [] {
+                               false, false, false, false, false, false, false
+                           };
+
+                           public boolean isCellEditable(int rowIndex, int columnIndex) {
+                               return canEdit [columnIndex];
+                           }
+                       });
+                       
+                        List<DtPaqueteDeEspectaculos> paquetes=Fabrica.getCrlUsuarios().listarPaquetesEspectaculosDeArtista("", espectaculos.get(i).getNombre());
+                        List<DtFuncion> funciones=Fabrica.getCrlUsuarios().listarFuncionesEspectaculosDeArtista("", espectaculos.get(i).getNombre());
+                        String matrisP[][] = new String [paquetes.size()][5];
+                        String matrisF[][] = new String [funciones.size()][2];
+
+                        for(int u=0; u<funciones.size(); u++)
+                        {
+
+                            matrisF [u][0]=funciones.get(u).getNombre();
+                            matrisF [u][1]=funciones.get(u).getHoraInicio().toString();
+
+                        }
+
+                        tBariable2.setModel(new javax.swing.table.DefaultTableModel(
+                            matrisF,
+                            new String [] {
+                                "Nombre ", "Fecha y hora"
+                            }
+                        ){
+                            boolean[] canEdit = new boolean [] {
+                                false, false
+                            };
+
+                            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                                return canEdit [columnIndex];
+                            }
+                        });
+
+                        for(int y=0; y<paquetes.size(); y++)
+                        {
+
+                            matrisP [y][0]=paquetes.get(y).getNombre();
+                            matrisP [y][1]=paquetes.get(y).getDescripcion();
+                            matrisP [y][2]=paquetes.get(y).getFechaInicio().toString();
+                            matrisP [y][3]=paquetes.get(y).getFechaFin().toString();
+                            matrisP [y][4]=Float.toString(paquetes.get(y).getDescuento());
+                        }
+
+                        tBariable3.setModel(new javax.swing.table.DefaultTableModel(
+                            matrisP,
+                            new String [] {
+                                "Nombre", "Descripcion", "Inicio", "Fin", "Descuento"
+                            }
+                        ){
+                            boolean[] canEdit = new boolean [] {
+                                false, false, false, false, false, 
+                            };
+
+                            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                                return canEdit [columnIndex];
+                            }
+                        });
+
+                    }
+                }
+
+            }
+        }
+    }//GEN-LAST:event_cbBariableItemStateChanged
+
+    private void tBariable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tBariable3MouseClicked
+        // TODO add your handling code here:
+        int i = this.tBariable3.getSelectedRow();
+        this.descripcion2.setText("<html>"+"Descripcion: "+this.tBariable3.getValueAt(i,1).toString()+"</html>");
+    }//GEN-LAST:event_tBariable3MouseClicked
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(ListarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(ListarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(ListarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(ListarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ListarUsuario().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btCancelar;
+    private javax.swing.JComboBox<String> cbBariable;
+    private javax.swing.JComboBox<String> cbUsuario;
+    private javax.swing.JLabel descripcion;
+    private javax.swing.JLabel descripcion2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JLabel lBariable;
+    private javax.swing.JLabel lImagen;
+    private javax.swing.JTable tArtista;
+    private javax.swing.JTable tBariable;
+    private javax.swing.JTable tBariable2;
+    private javax.swing.JTable tBariable3;
+    private javax.swing.JTable tEspectador;
+    private javax.swing.JTable tUsuario;
+    private javax.swing.JLabel url;
+    // End of variables declaration//GEN-END:variables
+
+}

@@ -1,0 +1,12 @@
+/////INSTALACION DEL AMBIENTE
+1. Asegurese de tener un servicio MySQL corriendo en el localhost:3306 
+2. crear una base de datos con el nombre labTaque con el comando create database labTaque;
+3. Crear un usuario con permisos en esa base de datos con el nombre grupo1 y contraseña grupo12021 con los comandos
+CREATE USER 'grupo1'@'localhost' identified by 'grupo12021';
+GRANT ALL PRIVILEGES ON labTaque.* TO 'grupo1'@'localhost';
+FLUSH PRIVILEGES;
+
+
+///INSTALACION DEL PROGRAMA
+1. Descomprima en archivo CentralServer.zip
+2. Dirijase al directorio desde linea de comandos y ejecute java -jar coronaTicketsUY_centralServer1.0.jar
