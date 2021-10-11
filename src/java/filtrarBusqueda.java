@@ -6,6 +6,7 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -48,28 +49,42 @@ public class filtrarBusqueda extends HttpServlet {
             List<DtPaqueteDeEspectaculos> dvPaqsFiltrados = new ArrayList();
             List<String> paqsFiltrados = new ArrayList();
             
-            if(filtro.equals("Anio (descendente)")) {
-//                Boolean agregado = false;
-//                for(DtEspectaculo e : dvEsps) {
-//                    agregado = false;
-//                    if(dvEspsFiltrados.isEmpty()) {
-//                        dvEspsFiltrados.add(e);
-//                    } else {
-//                        for(int i=0; i<dvEspsFiltrados.size();++i) {
-//                            if(e.getFechaDeRegistro().getTime() > dvEspsFiltrados.get(i).getFechaDeRegistro().getTime()) {
-//                                dvEspsFiltrados.add(i-1,e);
-//                                agregado = true;
-//                            }
-//                        } 
-//                        if(agregado == false) {
-//                            dvEspsFiltrados.add(e);
-//                        }
-//                    }       
-//                }
-//                for(DtEspectaculo e : dvEspsFiltrados) {
-//                    espsFiltrados.add(e.getNombre());
-//                }
+            
+            if (filtro.equals("Anio (descendente)")) {
+
+                dvEsps.sort(new Comparator<DtEspectaculo>() {
+
+                    @Override
+                    public int compare(DtEspectaculo a, DtEspectaculo b) {
+                        if (a.getFechaDeRegistro().getTime() <= b.getFechaDeRegistro().getTime()) {
+                            return 1;
+                        } else {
+                            return -1;
+                        }
+                    }
+
+                });
+                for (DtEspectaculo e : dvEsps) {
+                    espsFiltrados.add(e.getNombre());
+                }
+
+                dvPaqs.sort(new Comparator<DtPaqueteDeEspectaculos>() {
+
+                    @Override
+                    public int compare(DtPaqueteDeEspectaculos a, DtPaqueteDeEspectaculos b) {
+                        if (a.getFechaAlta().getTime() <= b.getFechaAlta().getTime()) {
+                            return 1;
+                        } else {
+                            return -1;
+                        }
+                    }
+
+                });
+                for (DtPaqueteDeEspectaculos e : dvPaqs) {
+                    paqsFiltrados.add(e.getNombre());
+                }
                 contexto.setAttribute("espectaculos", espsFiltrados);
+                contexto.setAttribute("paquetes", paqsFiltrados);
                 
                 contexto.getRequestDispatcher("/busquedaEspYPaq.jsp").forward(request, response);
             } else if(filtro.equals("Plataforma")) {

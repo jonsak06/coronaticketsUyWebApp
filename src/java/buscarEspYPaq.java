@@ -62,12 +62,6 @@ public class buscarEspYPaq extends HttpServlet {
                 paqsFiltrados.add(p.getNombre());
             }
             
-            for(String p : paqs) {
-                if(p.toLowerCase().contains(busqueda.toLowerCase())) {
-                    paqsFiltrados.add(p);
-                }
-            }
-            
             contexto.setAttribute("dvPaqs", dvPaqs);
             
             
