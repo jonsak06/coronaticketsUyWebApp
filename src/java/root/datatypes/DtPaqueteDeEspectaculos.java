@@ -6,6 +6,7 @@
 package root.datatypes;
 
 import java.sql.Date;
+import java.util.List;
 
 /**
  *
@@ -20,6 +21,7 @@ public class DtPaqueteDeEspectaculos {
     private float descuento;
     private Date fechaAlta;
     private String imagen;
+    private List<String> categorias;
     
     public DtPaqueteDeEspectaculos(){}
     
@@ -50,6 +52,18 @@ public class DtPaqueteDeEspectaculos {
         this.descuento = descuento;
         this.fechaAlta = fechaAlta;
         this.imagen = imagen;
+    }
+    
+    public DtPaqueteDeEspectaculos(Long id, String nombre, String descripcion, Date fechaInicio, Date fechaFin, float descuento, Date fechaAlta, String imagen, List<String> categorias) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.descuento = descuento;
+        this.fechaAlta = fechaAlta;
+        this.imagen = imagen;
+        this.categorias = categorias;
     }
 
     public Long getId() {
@@ -82,6 +96,10 @@ public class DtPaqueteDeEspectaculos {
     
     public String getImagen() {
         return imagen;
+    }
+    
+    public List<String> getCategorias() {
+        return categorias;
     }
     
     

@@ -192,7 +192,15 @@ public class PaqueteDeEspectaculos implements Serializable {
     
     public DtPaqueteDeEspectaculos getMyDt()
     {
-        DtPaqueteDeEspectaculos dt = new DtPaqueteDeEspectaculos(this.id, this.nombre, this.descripcion, this.fechaInicio, this.fechaFin, this.descuento, this.fechaAlta, this.imagen);
+        List<String> categorias = new ArrayList();
+        for(Espectaculo e : espectaculos) {
+            for(Categoria c : e.getCategoria()) {
+                if(!categorias.contains(c.getNombre())) {
+                    categorias.add(c.getNombre());
+                }
+            }
+        }
+        DtPaqueteDeEspectaculos dt = new DtPaqueteDeEspectaculos(this.id, this.nombre, this.descripcion, this.fechaInicio, this.fechaFin, this.descuento, this.fechaAlta, this.imagen, categorias);
         return dt;
     }
     

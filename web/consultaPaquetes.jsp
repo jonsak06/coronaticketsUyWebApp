@@ -77,8 +77,16 @@
                     out.print("<ul class='list-group list-group-flush'>");
                     out.print("<li class='list-group-item'>Fecha de inicio: "+dvPaq.getFechaInicio().toString()+"</li>");
                     out.print("<li class='list-group-item'>Fecha de fin: "+dvPaq.getFechaFin().toString()+"</li>");
+                    if(!dvPaq.getCategorias().isEmpty()) {
+                        out.print("<li class='list-group-item'>Categorias: ");
+                        out.print("<ul>");
+                        for(String c : dvPaq.getCategorias()) {
+                            out.print("<li>"+c+"</li>");
+                        }
+                        out.print("</ul>");
+                        out.print("</li>");
+                    }
                     out.print("<li class='list-group-item'>");
-                    
                     out.print("<form action='consultarEsp2'>");
                     out.print("<select name='espectaculo' class='custom-select selectEsp' id='inputGroupSelect04'>");
                     out.print("<option selected>Espectaculos...</option>");
