@@ -245,9 +245,9 @@
                             if (plat != "Seleccione..." && plat != null) {
                                 for (DtPlataforma p : listaDePlat) {
                                     if (plat.equals(p.getNombre())) {
-                                        out.print("<h3>" + p.getNombre() + "</h3>");
-                                        out.print("<p>" + p.getUrl() + "</p>");
-                                        out.print("<p>" + p.getDescripcion() + "</p>");
+                                        out.print("<h3> Nombre:" + p.getNombre() + "</h3>");
+                                        out.print("<p> URL:" + p.getUrl() + "</p>");
+                                        out.print("<p> Descripcion:" + p.getDescripcion() + "</p>");
                                         
                                         List<DtEspectaculo> esps = Fabrica.getCtrlEspectaculos().listarEspectaculos(p.getNombre());
                                         
@@ -300,14 +300,14 @@
                                                 for (DtEspectaculo e : esps) {
                                                     if (esp.equals(e.getNombre())) {
                                                         out.print("<img src='" + e.getImagen() + "' alt='imagen del espectaculo'>");
-                                                        out.print("<h4" + e.getNombre() + "</h4>");
-                                                        out.print("<p>" + e.getDescripcion() + "</p>");
-                                                        out.print("<p>" + e.getDuracion() + "</p>");
-                                                        out.print("<p>" + e.getCantidadMaximaEspectadores() + "</p>");
-                                                        out.print("<p>" + e.getCantidadMinimaEspectadores() + "</p>");
-                                                        out.print("<p>" + e.getUrl() + "</p>");
-                                                        out.print("<p>" + e.getCosto() + "</p>");
-                                                        out.print("<p>" + e.getFechaDeRegistro() + "</p>");
+                                                        out.print("<h4> Nombre: " + e.getNombre() + "</h4>");
+                                                        out.print("<p> Descripcion: " + e.getDescripcion() + "</p>");
+                                                        out.print("<p> Duracion: " + e.getDuracion() + "</p>");
+                                                        out.print("<p> Cantidad Maxima de Espectadores: " + e.getCantidadMaximaEspectadores() + "</p>");
+                                                        out.print("<p> Cantidad Minima de Espectadores: " + e.getCantidadMinimaEspectadores() + "</p>");
+                                                        out.print("<p> URL: " + e.getUrl() + "</p>");
+                                                        out.print("<p> Costo: " + e.getCosto() + "</p>");
+                                                        out.print("<p> Fecha de registro: " + e.getFechaDeRegistro() + "</p>");
                                                         //////////////////////////////////////////////////
         
                                                         List<DtFuncion> fun = Fabrica.getCtrlEspectaculos().listarTodasLasFunciones(contexto.getAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo").toString());
@@ -360,10 +360,10 @@
                                                                 for (DtFuncion f : fun) {
                                                                     if (sfun.equals(f.getNombre())) {
                                                                         out.print("<img src='" + f.getImagen() + "' alt='imagen de la funcion'>");
-                                                                        out.print("<h5>" + f.getNombre() + "</h5>");
-                                                                        out.print("<p>" + f.getFecha().toString() + "</p>");
-                                                                        out.print("<p>" + f.getFechaDeRegistro().toString() + "</p>");
-                                                                        out.print("<p>" + f.getHoraInicio().toString() + "</p>");
+                                                                        out.print("<h5> Nombre: " + f.getNombre() + "</h5>");
+                                                                        out.print("<p> Fecha: " + f.getFecha().toString() + "</p>");
+                                                                        out.print("<p> Fecha de registro: " + f.getFechaDeRegistro().toString() + "</p>");
+                                                                        out.print("<p> Hora de inicio:" + f.getHoraInicio().toString() + "</p>");
                                                                         
                                                                     }
                                                                 }
@@ -432,13 +432,13 @@
                                                                         DtPaqueteDeEspectaculos instanciaP = Fabrica.getCtrlPaquetes().mostrarInfoPaquete(paq);
                                                                         out.print("<img src='" + instanciaP.getImagen() + "' alt='imagen del espectaculo'>");
                                                                         
-                                                                        out.print("<h5>" + instanciaP.getNombre() + "</h5>");
-                                                                        out.print("<p>" + instanciaP.getDescripcion() + "</p>");
-                                                                        out.print("<p>" + instanciaP.getDescuento() + "</p>");
+                                                                        out.print("<h5> Nombre: " + instanciaP.getNombre() + "</h5>");
+                                                                        out.print("<p> Descripcion: " + instanciaP.getDescripcion() + "</p>");
+                                                                        out.print("<p> Descuento: " + instanciaP.getDescuento() + "</p>");
                                                                         
-                                                                        out.print("<p>" + instanciaP.getFechaInicio().toString() + "</p>");
-                                                                        out.print("<p>" + instanciaP.getFechaFin().toString() + "</p>");
-                                                                        out.print("<p>" + instanciaP.getFechaAlta().toString() + "</p>");
+                                                                        out.print("<p> Fecha de inicio: " + instanciaP.getFechaInicio().toString() + "</p>");
+                                                                        out.print("<p> Fecha de fin: " + instanciaP.getFechaFin().toString() + "</p>");
+                                                                        out.print("<p> Fecha de alta: " + instanciaP.getFechaAlta().toString() + "</p>");
                                                                         
                                                                     }
                                                                 }
@@ -580,14 +580,14 @@
                                                 for (DtEspectaculo e : esps) {
                                                     if (esp.equals(e.getNombre())) {
                                                         out.print("<img src='" + e.getImagen() + "' alt='imagen del espectaculo'>");
-                                                        out.print("<h4" + e.getNombre() + "</h4>");
-                                                        out.print("<p>" + e.getDescripcion() + "</p>");
-                                                        out.print("<p>" + e.getDuracion() + "</p>");
-                                                        out.print("<p>" + e.getCantidadMaximaEspectadores() + "</p>");
-                                                        out.print("<p>" + e.getCantidadMinimaEspectadores() + "</p>");
-                                                        out.print("<p>" + e.getUrl() + "</p>");
-                                                        out.print("<p>" + e.getCosto() + "</p>");
-                                                        out.print("<p>" + e.getFechaDeRegistro() + "</p>");
+                                                        out.print("<h4> Nombre: " + e.getNombre() + "</h4>");
+                                                        out.print("<p> Descripcion: " + e.getDescripcion() + "</p>");
+                                                        out.print("<p> Duracion: " + e.getDuracion() + "</p>");
+                                                        out.print("<p> Cantidad maxima de espectadores: " + e.getCantidadMaximaEspectadores() + "</p>");
+                                                        out.print("<p> Cantidad minima de espectadores: " + e.getCantidadMinimaEspectadores() + "</p>");
+                                                        out.print("<p> URL: " + e.getUrl() + "</p>");
+                                                        out.print("<p> Costo: " + e.getCosto() + "</p>");
+                                                        out.print("<p> Fecha de registro: " + e.getFechaDeRegistro() + "</p>");
                                                         //////////////////////////////////////////////////
         
                                                         List<DtFuncion> fun = Fabrica.getCtrlEspectaculos().listarTodasLasFunciones(contexto.getAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo").toString());
@@ -640,10 +640,10 @@
                                                                 for (DtFuncion f : fun) {
                                                                     if (sfun.equals(f.getNombre())) {
                                                                         out.print("<img src='" + f.getImagen() + "' alt='imagen de la funcion'>");
-                                                                        out.print("<h5>" + f.getNombre() + "</h5>");
-                                                                        out.print("<p>" + f.getFecha().toString() + "</p>");
-                                                                        out.print("<p>" + f.getFechaDeRegistro().toString() + "</p>");
-                                                                        out.print("<p>" + f.getHoraInicio().toString() + "</p>");
+                                                                        out.print("<h5> Nombre: " + f.getNombre() + "</h5>");
+                                                                        out.print("<p> Fecha: " + f.getFecha().toString() + "</p>");
+                                                                        out.print("<p> Fecha de registro: " + f.getFechaDeRegistro().toString() + "</p>");
+                                                                        out.print("<p> Hora de inicio: " + f.getHoraInicio().toString() + "</p>");
                                                                         
                                                                     }
                                                                 }
@@ -712,13 +712,13 @@
                                                                         DtPaqueteDeEspectaculos instanciaP = Fabrica.getCtrlPaquetes().mostrarInfoPaquete(paq);
                                                                         out.print("<img src='" + instanciaP.getImagen() + "' alt='imagen del espectaculo'>");
                                                                         
-                                                                        out.print("<h5>" + instanciaP.getNombre() + "</h5>");
-                                                                        out.print("<p>" + instanciaP.getDescripcion() + "</p>");
+                                                                        out.print("<h5> Nombre: " + instanciaP.getNombre() + "</h5>");
+                                                                        out.print("<p> Descripcion: " + instanciaP.getDescripcion() + "</p>");
                                                                         out.print("<p>" + instanciaP.getDescuento() + "</p>");
                                                                         
-                                                                        out.print("<p>" + instanciaP.getFechaInicio().toString() + "</p>");
-                                                                        out.print("<p>" + instanciaP.getFechaFin().toString() + "</p>");
-                                                                        out.print("<p>" + instanciaP.getFechaAlta().toString() + "</p>");
+                                                                        out.print("<p> Fecha de inicio: " + instanciaP.getFechaInicio().toString() + "</p>");
+                                                                        out.print("<p> Fecha de fin: " + instanciaP.getFechaFin().toString() + "</p>");
+                                                                        out.print("<p> Fecha de alta: " + instanciaP.getFechaAlta().toString() + "</p>");
                                                                         
                                                                     }
                                                                 }

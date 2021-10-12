@@ -190,6 +190,7 @@ Author     : tecnologo
         %>
         <form action="consultarUsuariosBackEnd" class="container">
             <div class="box">
+                <h1>Consultar usuario</h1>
                 <select name="usuario" class="custom-select" id="inputGroupSelect04">
 
                     <%

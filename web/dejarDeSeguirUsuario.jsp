@@ -18,6 +18,12 @@
 
         
         <link rel="stylesheet" href="headerStyles.css">
+        <script>
+                if (${dejadoSUsu == true}) {
+                alert("El usuario se dejo de seguir");
+            }
+                
+        </script>
         <style>
 
 
@@ -184,6 +190,7 @@
     <body>
         <%@include file="header.jsp" %>
         <form action="dejarDeSeguirUsuarioBackEnd" class="box">
+            <h1>Dejar de seguir usuario</h1>
             <select name="seguido">
                 <%
                     ServletContext contexto = getServletContext();

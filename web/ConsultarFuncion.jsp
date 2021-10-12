@@ -189,6 +189,7 @@
 
             out.print("<div class=\"box\">");
             out.println("<form action=\"ConsultarFuncionBackEnd\">");
+            out.println("<h1>Consultar Funcion</h1>");
             out.println("</br>");
             out.println("<h6>Seleccione tipo de cosulta</h6>");
             out.println("<select name=\"tipoConsulta\">");
