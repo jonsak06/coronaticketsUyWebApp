@@ -124,10 +124,10 @@ public class filtrarBusqueda extends HttpServlet {
                     if(e.getCategorias().contains("Solistas")) {
                         solistas.add(e.getNombre());
                     } 
-                    if(e.getCategorias().contains("Rock en Inglés")) {
+                    if(e.getCategorias().contains("Rock en Ingles")) {
                         rockIngles.add(e.getNombre());
                     } 
-                    if(e.getCategorias().contains("Música Tropical")) {
+                    if(e.getCategorias().contains("Musica Tropical")) {
                         tropical.add(e.getNombre());
                     } 
                 }
