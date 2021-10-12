@@ -191,6 +191,7 @@
             <%
                     out.println("<form action=\"ConsultarEspectaculoBackEnd\">");
                     out.println("</br>");
+                    out.println("<h1>Consultar Espectaculos</h1>");
                     out.println("<h6>Seleccione tipo de cosulta</h6>");
                     out.println("<select name=\"tipoConsulta\">");
                     out.println("<option>Seleccione...</option>");

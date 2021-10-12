@@ -131,13 +131,14 @@
             String jsonUsC = gson.toJson(lUsC);
         %>
         <%@include file="header.jsp" %>
-
+        
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
 
                     <!--<form action="AltaUsuariosBackEnd" class="box" name="fAltaUsuario" id="fAltaUsuario" method="POST" enctype="multipart/form-data">-->
-                    <form action="AltaUsuariosBackEnd" class="box" name="fAltaUsuario" method="POST" enctype="multipart/form-data">    
+                    <form action="AltaUsuariosBackEnd" class="box" name="fAltaUsuario" method="POST" enctype="multipart/form-data">   
+                        <h1>Alta de usuario</h1>
                     <p>Tipo Usuario:
                             <input type="radio" name="us" value="e" id="use" onclick="sesp()"> Espectador
                             <input type="radio" name="us" value="a" id="usa" onclick="sart()"> Artista

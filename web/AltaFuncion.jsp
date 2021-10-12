@@ -136,7 +136,7 @@
 
         </script>
         <form action="AltaFuncionBackEnd" enctype="multipart/form-data" name="fAltadeFuncion" id="" class="box" method="POST">
-
+            <h1>Alta de funcion</h1>
             <select id="Plataformas" onchange="linkPlataformas()">
                 <%        ServletContext contexto = getServletContext();
 
