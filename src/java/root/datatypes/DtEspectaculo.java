@@ -25,6 +25,52 @@ public class DtEspectaculo {
     private String imagen;
     private String plataforma;
     private List<String> categorias;
+    private String estado;
+    private float valoracionPromedio;
+    private String video;
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public float getValoracionPromedio() {
+        return valoracionPromedio;
+    }
+
+    public void setValoracionPromedio(float valoracionPromedio) {
+        this.valoracionPromedio = valoracionPromedio;
+    }
+
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
+    }
+
+    public DtEspectaculo(Long id, String nombre, String descripcion, int duracion, int cantidadMaximaEspectadores, int cantidadMinimaEspectadores, String url, float costo, Date fechaDeRegistro, String imagen, String plataforma, List<String> categorias, String estado, float valoracionPromedio, String video, String nombreArtista) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.duracion = duracion;
+        this.cantidadMaximaEspectadores = cantidadMaximaEspectadores;
+        this.cantidadMinimaEspectadores = cantidadMinimaEspectadores;
+        this.url = url;
+        this.costo = costo;
+        this.fechaDeRegistro = fechaDeRegistro;
+        this.imagen = imagen;
+        this.plataforma = plataforma;
+        this.categorias = categorias;
+        this.estado = estado;
+        this.valoracionPromedio = valoracionPromedio;
+        this.video = video;
+        this.nombreArtista = nombreArtista;
+    }
     
 
     public DtEspectaculo(){}

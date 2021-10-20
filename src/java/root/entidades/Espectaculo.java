@@ -161,6 +161,72 @@ public class Espectaculo implements Serializable {
         this.fechaDeRegistro = f;
     }
     
+    @Column(name = "VALORACIONPROMEDIO")
+    private float valoracionPromedio;
+
+    public float getValoracionPromedio() {
+        return valoracionPromedio;
+    }
+    
+    public void setValoracionPromedio(float valoracionPromedio) {
+        this.valoracionPromedio = valoracionPromedio;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setCantidadMaximaEspectadores(int cantidadMaximaEspectadores) {
+        this.cantidadMaximaEspectadores = cantidadMaximaEspectadores;
+    }
+
+    public void setCantidadMinimaEspectadores(int cantidadMinimaEspectadores) {
+        this.cantidadMinimaEspectadores = cantidadMinimaEspectadores;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setFechaDeRegistro(Date fechaDeRegistro) {
+        this.fechaDeRegistro = fechaDeRegistro;
+    }
+
+    
+    
+    @Column(name = "VIDEO")
+    private String video;
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public int getCantidadMaximaEspectadores() {
+        return cantidadMaximaEspectadores;
+    }
+
+    public int getCantidadMinimaEspectadores() {
+        return cantidadMinimaEspectadores;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public Date getFechaDeRegistro() {
+        return fechaDeRegistro;
+    }
+
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
+    }
+    
+    
+    
     @ManyToMany
     private List<Categoria> categoria;
 
@@ -192,6 +258,16 @@ public class Espectaculo implements Serializable {
     this.funciones.add(i+1, f);
     }
     
+    @OneToMany(mappedBy = "espectaculo")
+    private List<Valoracion> valoraciones;
+    public List<Valoracion> getValoraciones(){
+        return this.valoraciones;
+    }
+    public void addValoracion(Valoracion v){
+    int i = this.valoraciones.size();
+    this.valoraciones.add(i+1, v);
+    }
+    
     @ManyToMany//(mappedBy = "espectaculos")
     private List<PaqueteDeEspectaculos> paquetes;
     public List<PaqueteDeEspectaculos> getPaquetes(){
@@ -217,7 +293,30 @@ public class Espectaculo implements Serializable {
         this.artista = artista;
     }
     
+    @OneToOne(mappedBy = "espectaculo")
+    private Sorteo sorteo;
+
+    public Sorteo getSorteo() {
+        return sorteo;
+    }
+
+    public void setSorteo(Sorteo sorteo) {
+        this.sorteo = sorteo;
+    }
     
+    
+    @ManyToMany//(mappedBy = "espectaculos")
+    private List<Espectador> espectadoresFaboritos;
+    public List<Espectador> getEspectadoresFaboritos(){
+        return this.espectadoresFaboritos;
+    }
+    public void addFaborito(Espectador s){
+        this.espectadoresFaboritos.add(s);
+    }
+    
+    public void setFaboritos(List<Espectador> espectadoresFaboritos) {
+        this.espectadoresFaboritos = espectadoresFaboritos;
+    }
 
     @Override
     public int hashCode() {
@@ -256,7 +355,12 @@ public class Espectaculo implements Serializable {
             categorias.add(c.getNombre());
         }
         dt.setCategorias(categorias);
+        dt.setEstado(this.estado.toString());
+        dt.setVideo(this.video);
+        dt.setValoracionPromedio(this.valoracionPromedio);
         return dt;
+        
+        
     }
 
    
