@@ -59,6 +59,7 @@ public class ManEspectaculo {
         Espectaculo nuevoEspectaculo = new Espectaculo(espectaculo.getNombre(), espectaculo.getDescripcion(), espectaculo.getDuracion(), espectaculo.getCantidadMaximaEspectadores(), espectaculo.getCantidadMinimaEspectadores(), espectaculo.getUrl(), espectaculo.getCosto(), espectaculo.getFechaDeRegistro(), estaPlataforma, esteArtista);
         nuevoEspectaculo.setEstado(EstadoEspectaculo.INGRESADO);
         nuevoEspectaculo.setImagen(pathImagen);
+        nuevoEspectaculo.setVideo(espectaculo.getVideo());
 
         em.getTransaction().commit();
         em.getTransaction().begin();

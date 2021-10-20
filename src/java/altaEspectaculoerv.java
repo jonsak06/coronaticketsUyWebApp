@@ -72,6 +72,11 @@ public class altaEspectaculoerv extends HttpServlet {
 
             long o = 0;
                 DtEspectaculo esp = new DtEspectaculo(o,request.getParameter("nombreEsp"),request.getParameter("descripcion"),Integer.parseInt(request.getParameter("duracion")),Integer.parseInt(request.getParameter("cantMax")),Integer.parseInt(request.getParameter("cantMin")),request.getParameter("url"),Float.parseFloat(request.getParameter("costo")), (java.sql.Date) date);
+            if(request.getParameter("video")!=null){
+                esp.setVideo(request.getParameter("video"));
+            }else{
+                esp.setVideo("NOVIDEO");
+            }
                 //  AQUI LOS PASOS PARA SUBIR LA IMAGEN DESDE LA MAQUINA DEL USUARIO
                 String fotoName ="";
                 if(request.getParameter("subir")!=null){

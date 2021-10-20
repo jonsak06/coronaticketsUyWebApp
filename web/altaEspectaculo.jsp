@@ -101,6 +101,7 @@
                         j++;
                     }
                     %>
+                    <input type="text" name="video" placeholder="URL de video" id="video">
                     <div id="div_file">
                         <p id="texto">Seleccionar Imagen</p>
                         <input type="file" name="upfile" id="upfile" style="background-color: #191919; color: white;border: 2px solid #3498db; padding: 10px 10px; outline: none; color: white; border-radius: 24px; transition: 0.25s">
@@ -132,6 +133,11 @@
                 if(url.value.toString().includes(" ") || url.value.toString().includes(".")==false){
                     e.preventDefault();
                     alert("URL inválida");
+                }
+                const video = document.getElementById("video");
+                if(url.value.toString().includes(" ") || url.value.toString().includes(".")==false){
+                    e.preventDefault();
+                    alert("URL de video inválida");
                 }
               });
         </script>
