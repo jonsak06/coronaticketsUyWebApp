@@ -80,7 +80,7 @@ Author     : tecnologo
                 font-size: 30px;
 
             }
-            
+
             .box h5 {
                 color: white;
                 text-transform: uppercase;
@@ -543,6 +543,10 @@ Author     : tecnologo
                                         for (int i = 0; i < lEspectac.size(); i++) {
                                             if (sesp.equals(lEspectac.get(i).getNombre())) {
                                                 out.print("<img src='" + lEspectac.get(i).getImagen() + "' alt='imagen del espectaculo'>");
+                                                if (lEspectac.get(i).getVideo() != null) {
+                                                    String[] parts = lEspectac.get(i).getVideo().split("v=");
+                                                    out.print("<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/" + parts[1] + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>" + "</iframe>");
+                                                }
                                                 out.print("<h4> Nombre: " + lEspectac.get(i).getNombre() + "</h4>");
                                                 out.print("<p> Descripcion:" + lEspectac.get(i).getDescripcion() + "</p>");
                                                 out.print("<p> Duracion:" + lEspectac.get(i).getDuracion() + "</p>");
@@ -609,7 +613,7 @@ Author     : tecnologo
                                                                 if (sfun.equals(f.getNombre())) {
                                                                     out.print("<img src='" + f.getImagen() + "' alt='imagen de la funcion'>");
                                                                     out.print("<h5>" + f.getNombre() + "</h5>");
-                                                                    out.print("<p>" +f.getImagen() + "</p>");
+                                                                    out.print("<p>" + f.getImagen() + "</p>");
                                                                     out.print("<p>" + f.getFecha().toString() + "</p>");
                                                                     out.print("<p>" + f.getFechaDeRegistro().toString() + "</p>");
                                                                     out.print("<p>" + f.getHoraInicio().toString() + "</p>");
@@ -1047,20 +1051,20 @@ Author     : tecnologo
         </div>  
     </div>
 
-        
-        <script>
-        function validar_email( email ) 
-{
-    var regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    return regex.test(email) ? true : false;
-}
-        
-        
-        
-        </script>
-        
-        
-        
+
+    <script>
+        function validar_email(email)
+        {
+            var regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            return regex.test(email) ? true : false;
+        }
+
+
+
+    </script>
+
+
+
     <script>
         const usus = document.getElementById("inputGroupSelect04");
         const botonConsultarUsu = document.querySelector(".btn-outline-secondary");
@@ -1071,8 +1075,8 @@ Author     : tecnologo
                 botonConsultarUsu.disabled = false;
             }
         });
-        
-        
+
+
     </script>
 
     <script>

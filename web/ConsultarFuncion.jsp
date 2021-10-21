@@ -303,6 +303,10 @@
                                                 if (esp.equals(e.getNombre())) {
 
                                                     out.print("<img src='" + e.getImagen() + "' alt='imagen de espectaculo'>");
+                                                    if (e.getVideo() != null) {
+                                                        String[] parts = e.getVideo().split("v=");
+                                                        out.print("<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/" + parts[1] + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>" + "</iframe>");
+                                                    }
                                                     out.print("<h3> Nombre:" + e.getNombre() + "</h3>");
 
                                                     out.print("<p> Descripcion:" + e.getDescripcion() + "</p>");
@@ -448,11 +452,7 @@
 
                         }
                     }
-                    
-                    
-                    
-                    
-                    
+
                 } else if (contexto.getAttribute("tipoDeConsultaFunciones").toString().equals("Categorias")) {
                     out.print("<form action=\"ConsultarFuncionBackEnd\">");
                     out.print("</br>");
@@ -550,8 +550,11 @@
                                                 if (esp.equals(e.getNombre())) {
 
                                                     out.print("<img src='" + e.getImagen() + "' alt='imagen de espectaculo'>");
+                                                    if (e.getVideo() != null) {
+                                                        String[] parts = e.getVideo().split("v=");
+                                                        out.print("<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/" + parts[1] + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>" + "</iframe>");
+                                                    }
                                                     out.print("<h3> Nombre:" + e.getNombre() + "</h3>");
-
                                                     out.print("<p> Descripcion:" + e.getDescripcion() + "</p>");
                                                     out.print("<p> Duracion:" + e.getDuracion() + "</p>");
                                                     out.print("<p> Cantidad maxima espectadores:" + e.getCantidadMaximaEspectadores() + "</p>");

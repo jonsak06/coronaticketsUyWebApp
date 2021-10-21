@@ -27,25 +27,28 @@
     <body>
         <%@include file="header.jsp"%>
         <div class="container infoEspectaculo">
-            <% 
-                DtEspectaculo dvEsp = (DtEspectaculo) request.getAttribute("dvEsp");
+            <%                DtEspectaculo dvEsp = (DtEspectaculo) request.getAttribute("dvEsp");
                 out.print("<div class='card' style='width: 18rem;'>");
-                    out.print("<img src='"+dvEsp.getImagen()+"' class='card-img-top' alt='imagen del paquete'>");
-                    out.print("<div class='card-body'>");
-                    out.print("<h5 class='card-title'>"+dvEsp.getNombre()+"</h5>");
-                    out.print("<p class='card-text'>"+dvEsp.getDescripcion()+"</p>");
-                    out.print("</div>");
-                    out.print("<ul class='list-group list-group-flush'>");
-                    out.print("<li class='list-group-item'>Duracion: "+dvEsp.getDuracion()+"</li>");
-                    out.print("<li class='list-group-item'>Minimo espectadores: "+dvEsp.getCantidadMinimaEspectadores()+"</li>");
-                    out.print("<li class='list-group-item'>Maximo espectadores: "+dvEsp.getCantidadMaximaEspectadores()+"</li>");
-                    out.print("<li class='list-group-item'>URL: "+dvEsp.getUrl()+"</li>");
-                    out.print("<li class='list-group-item'>Artista: "+dvEsp.getNombreArtista()+"</li>");
-                    out.print("<li class='list-group-item'>Costo: "+dvEsp.getCosto()+"</li>");
+                out.print("<img src='" + dvEsp.getImagen() + "' class='card-img-top' alt='imagen del paquete'>");
+                if (dvEsp.getVideo() != null) {
+                    String[] parts = dvEsp.getVideo().split("v=");
+                    out.print("<iframe width=\"280\" height=\"158\" src=\"https://www.youtube.com/embed/" + parts[1] + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>" + "</iframe>");
+                }
+                out.print("<div class='card-body'>");
+                out.print("<h5 class='card-title'>" + dvEsp.getNombre() + "</h5>");
+                out.print("<p class='card-text'>" + dvEsp.getDescripcion() + "</p>");
                 out.print("</div>");
-        %>
+                out.print("<ul class='list-group list-group-flush'>");
+                out.print("<li class='list-group-item'>Duracion: " + dvEsp.getDuracion() + "</li>");
+                out.print("<li class='list-group-item'>Minimo espectadores: " + dvEsp.getCantidadMinimaEspectadores() + "</li>");
+                out.print("<li class='list-group-item'>Maximo espectadores: " + dvEsp.getCantidadMaximaEspectadores() + "</li>");
+                out.print("<li class='list-group-item'>URL: " + dvEsp.getUrl() + "</li>");
+                out.print("<li class='list-group-item'>Artista: " + dvEsp.getNombreArtista() + "</li>");
+                out.print("<li class='list-group-item'>Costo: " + dvEsp.getCosto() + "</li>");
+                out.print("</div>");
+            %>
         </div>
-        
+
         <%@include file="headerScript.jsp"%>
     </body>
 </html>
