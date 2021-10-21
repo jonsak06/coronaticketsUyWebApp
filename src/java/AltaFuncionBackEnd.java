@@ -81,6 +81,8 @@ public class AltaFuncionBackEnd extends HttpServlet {
                 listaCon.add(i.getNickname());
             }
         }
+        
+        
         parsed = null;
         try {
             parsed = sdf.parse(request.getParameter("fechaA"));

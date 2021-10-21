@@ -978,9 +978,7 @@ public class ManejadorUsuarios {
         TypedQuery<Espectador> consulta = em.createNamedQuery("EspectadorporNick", Espectador.class);
         consulta.setParameter("nickname", nickname);
         Espectador esteMen = consulta.getSingleResult();
-        em.getTransaction().commit();
-        em.close();
-        emf.close();
+        
         boolean yaIngresado =false;
         for (Registro r : esteMen.getRegistros()) {
             if (r.getEstado() == EstadoRegistro.USADO) {
@@ -991,6 +989,10 @@ public class ManejadorUsuarios {
             }
 
         }
+        em.persist(esteMen);
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
     }
     
     public static void quitarEspectaculoFavorito(String nickname, String nombre) {//3ra
@@ -1000,16 +1002,18 @@ public class ManejadorUsuarios {
         TypedQuery<Espectador> consulta = em.createNamedQuery("EspectadorporNick", Espectador.class);
         consulta.setParameter("nickname", nickname);
         Espectador esteMen = consulta.getSingleResult();
-        em.getTransaction().commit();
-        em.close();
-        emf.close();
-        for (Espectaculo r : esteMen.getFaboritos()) {
-            if(r.getNombre().equals(nombre))
+        List<Espectaculo> aux=esteMen.getFaboritos();
+        for (int i=0; i<aux.size(); i++) {
+            if(aux.get(i).getNombre().equals(nombre))
             {
-                esteMen.getFaboritos().remove(r);
+                esteMen.getFaboritos().remove(i);
             }
 
         }
+        em.persist(esteMen);
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
     }
     
 }
