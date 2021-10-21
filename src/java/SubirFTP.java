@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
  * @author julio
  */
 public class SubirFTP {
-    
+    //git
     public static boolean subir(String ruta, String nombreArchivo) throws FileNotFoundException{
     
         File file = new File(ruta);

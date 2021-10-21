@@ -28,7 +28,7 @@ public class FtpUtil {
 	            String filePath, String filename, InputStream input) {  
 	        boolean result = false;  
 	        FTPClient ftp = new FTPClient();  
-//	        ftp.setControlEncoding("UTF-8");
+//	        ftp.setControlEncoding("UTF-8");//git
 	        try {  
 	            int reply;  
 	             ftp.connect (host, puerto); // Conectarse al servidor FTP  
