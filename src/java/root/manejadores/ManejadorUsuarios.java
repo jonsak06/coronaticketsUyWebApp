@@ -523,6 +523,7 @@ public class ManejadorUsuarios {
         Espectador vp = lista.getSingleResult();
         vp.setApellido(es.getApellido());
         vp.setNombre(es.getNombre());
+        vp.setImagen(es.getImagen());
         vp.setCorreo(es.getCorreo());
         vp.setPasswd(es.getPass());
         em.persist(vp);
