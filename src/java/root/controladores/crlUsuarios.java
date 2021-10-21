@@ -222,4 +222,19 @@ public class crlUsuarios implements iUsuarios
      public List<DtUsuario> getUsuariosQueTeSiguenEs(String nickname){
          return ManejadorUsuarios.getUsuariosQueTeSiguenEs(nickname);
      }
+     //3ra
+     public List<DtEspectaculo> getEspectaculosALosQueElEspectadorFueAUnaFuncion(String nickname)//3ra
+     {
+         return ManejadorUsuarios.getEspectaculosALosQueElEspectadorFueAUnaFuncion(nickname);
+     }
+     public List<DtEspectaculo> getEspectaculosFaboritos(String nickname){//3ra
+          return ManejadorUsuarios.getEspectaculosFaboritos(nickname);
+     }
+     public void addEspectaculoFavorito(String nickname, String nombre)//3ra
+     {
+         ManejadorUsuarios.addEspectaculoFavorito(nickname, nombre);
+     }
+     public void quitarEspectaculoFavorito(String nickname, String nombre){//3ra
+         ManejadorUsuarios.quitarEspectaculoFavorito(nickname, nombre);
+     }
 }

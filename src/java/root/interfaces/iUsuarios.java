@@ -66,4 +66,10 @@ public interface iUsuarios {
      public void comprarPaquete(String nickname, String nombrePaq);
      public List<DtUsuario> getUsuariosQueTeSiguenAr(String nickname);
      public List<DtUsuario> getUsuariosQueTeSiguenEs(String nickname);
+     
+     
+     public List<DtEspectaculo> getEspectaculosALosQueElEspectadorFueAUnaFuncion(String nickname);//3ra
+     public List<DtEspectaculo> getEspectaculosFaboritos(String nickname);//3ra
+     public void addEspectaculoFavorito(String nickname, String nombre);//3ra
+     public void quitarEspectaculoFavorito(String nickname, String nombre);//3ra
 }
