@@ -85,13 +85,15 @@ public class ModificarUsuariosBackEnd extends HttpServlet {
             String imagen = "silueta.jpg";
             if (request.getParameter("subir") != null) {
                 Part archivo = request.getPart("imagen"); //llamada al parámetro foto de mi formulario.
-                String context = "/home/" + System.getProperty("user.name") + "/coronaticketsUyWebApp/web/IMAGENES_USUARIOS"; //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
+                String context = request.getServletContext().getRealPath(""); //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
 
-                String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString();
+//                String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString();
 
-                archivo.write(context + File.separator + nickname.replaceAll("\\s+", "") + foto); // Escribimos el archivo al disco duro del servidor.
+                archivo.write(context + File.separator + nickname.replaceAll("\\s+", "")+".jpg"); // Escribimos el archivo al disco duro del servidor.
 
-                imagen = "IMAGENES_USUARIOS" + File.separator + nickname.replaceAll("\\s+", "") + foto;
+                imagen =context  + nickname.replaceAll("\\s+", "")+".jpg";
+                SubirFTP.subir(context  + nickname.replaceAll("\\s+", "")+".jpg",nickname.replaceAll("\\s+", "")+".jpg");
+                imagen = "http://raspberrypijulio.ddns.net/ImagenesLab/"+nickname.replaceAll("\\s+", "")+".jpg";
                 //AQUI SE DEBERIA HABER SUBIDO LA IMAGEN
             }
             long id = 0;
@@ -135,13 +137,14 @@ public class ModificarUsuariosBackEnd extends HttpServlet {
             String imagen = "silueta.jpg";
             if (request.getParameter("subir") != null) {
                 Part archivo = request.getPart("imagen"); //llamada al parámetro foto de mi formulario.
-                String context = "/home/" + System.getProperty("user.name") + "/coronaticketsUyWebApp/web/IMAGENES_USUARIOS"; //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
+                String context = request.getServletContext().getRealPath(""); //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
 
-                String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString();
 
-                archivo.write(context + File.separator + nickname.replaceAll("\\s+", "") + foto); // Escribimos el archivo al disco duro del servidor.
+                archivo.write(context + File.separator + nickname.replaceAll("\\s+", "")+".jpg"); // Escribimos el archivo al disco duro del servidor.
 
-                imagen = "IMAGENES_USUARIOS" + File.separator + nickname.replaceAll("\\s+", "") + foto;
+                imagen =context  + nickname.replaceAll("\\s+", "")+".jpg";
+                SubirFTP.subir(context  + nickname.replaceAll("\\s+", "")+".jpg",nickname.replaceAll("\\s+", "")+".jpg");
+                imagen = "http://raspberrypijulio.ddns.net/ImagenesLab/"+nickname.replaceAll("\\s+", "")+".jpg";
                 //AQUI SE DEBERIA HABER SUBIDO LA IMAGEN
             }
             long id = 0;

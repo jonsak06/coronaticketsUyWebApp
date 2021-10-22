@@ -81,14 +81,22 @@ public class altaEspectaculoerv extends HttpServlet {
                 String fotoName ="";
                 if(request.getParameter("subir")!=null){
                 Part archivo = request.getPart("upfile"); //llamada al parámetro foto de mi formulario.
-                String context = "/home/"+System.getProperty("user.name")+"/coronaticketsUyWebApp/web/IMAGENES_ESPECTACULOS"; //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
+//                String context = "/home/"+System.getProperty("user.name")+"/coronaticketsUyWebApp/web/IMAGENES_ESPECTACULOS"; //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
+//
+//                String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString(); 
+//
+//
+//                archivo.write(context + File.separator+esp.getNombre().replaceAll("\\s+","") + foto); // Escribimos el archivo al disco duro del servidor.
+//
+//                fotoName = "IMAGENES_ESPECTACULOS" + File.separator+esp.getNombre().replaceAll("\\s+","") + foto;
+                String context = request.getServletContext().getRealPath(""); //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
 
-                String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString(); 
 
+                archivo.write(context + File.separator + esp.getNombre().replaceAll("\\s+", "")+".jpg"); // Escribimos el archivo al disco duro del servidor.
 
-                archivo.write(context + File.separator+esp.getNombre().replaceAll("\\s+","") + foto); // Escribimos el archivo al disco duro del servidor.
-
-                fotoName = "IMAGENES_ESPECTACULOS" + File.separator+esp.getNombre().replaceAll("\\s+","") + foto;
+                fotoName =context  + esp.getNombre().replaceAll("\\s+", "")+".jpg";
+                SubirFTP.subir(context  + esp.getNombre().replaceAll("\\s+", "")+".jpg",esp.getNombre().replaceAll("\\s+", "")+".jpg");
+                fotoName = "http://raspberrypijulio.ddns.net/ImagenesLab/"+esp.getNombre().replaceAll("\\s+", "")+".jpg";
                 //AQUI SE DEBERIA HABER SUBIDO LA IMAGEN
                 }
                 ie.altaEspectaculo(request.getParameter("plataforma"), contexto.getAttribute("nickname").toString(), catDelEsp, esp, fotoName);
