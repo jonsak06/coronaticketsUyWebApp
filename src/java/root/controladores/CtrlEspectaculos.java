@@ -118,4 +118,7 @@ public class CtrlEspectaculos implements IEspectaculos {
     public List<DtEspectaculo> listarAceptados() {
         return ManEspectaculo.listarAceptados();
     }
+    public void calcularValoracion(String nombreEspectaculo){//3ra
+        ManEspectaculo.calcularValoracion(nombreEspectaculo);
+    }
 }

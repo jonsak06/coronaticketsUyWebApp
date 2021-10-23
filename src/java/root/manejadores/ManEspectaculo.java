@@ -449,5 +449,17 @@ public class ManEspectaculo {
         }
         return dvEsps;
     }
+    
+    public static void calcularValoracion(String nombreEspectaculo) {//3ra
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        Espectaculo e = em.createNamedQuery("Espectaculo.findByNombre", Espectaculo.class).setParameter("nombre", nombreEspectaculo).getSingleResult();
+        em.getTransaction().begin();
+        e.calcularValoracion();
+        em.persist(e);
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+    }
 
 }

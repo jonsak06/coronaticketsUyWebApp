@@ -5,6 +5,7 @@
  */
 package root.interfaces;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import root.datatypes.DtArtista;
@@ -15,6 +16,7 @@ import root.datatypes.DtPaqueteDeEspectaculos;
 import root.datatypes.DtPlataforma;
 import root.datatypes.DtRegistro;
 import root.datatypes.DtUsuario;
+import root.datatypes.DtValoracion;
 import root.entidades.Registro;
 
 /**
@@ -72,4 +74,9 @@ public interface iUsuarios {
      public List<DtEspectaculo> getEspectaculosFaboritos(String nickname);//3ra
      public void addEspectaculoFavorito(String nickname, String nombre);//3ra
      public void quitarEspectaculoFavorito(String nickname, String nombre);//3ra
+     
+     
+    public void valorarEspectaculo(String nickname, String nombre, int valor, Date fecha);//3ra
+    public List<DtValoracion> getValoracionesAEspectaculos(String nickname);//3ra
+    public List<DtEspectaculo> getEspectaculosValorados(String nickname);//3ra
 }

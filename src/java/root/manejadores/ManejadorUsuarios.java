@@ -20,6 +20,7 @@ import root.entidades.Artista;
 import root.datatypes.DtArtista;
 import root.datatypes.DtPaqueteDeEspectaculos;
 import root.datatypes.DtUsuario;
+import root.datatypes.DtValoracion;
 import root.entidades.Compra;
 import root.entidades.Espectaculo;
 import root.entidades.Espectador;
@@ -28,6 +29,7 @@ import root.entidades.Funcion;
 import root.entidades.PaqueteDeEspectaculos;
 import root.entidades.Registro;
 import root.entidades.Usuario;
+import root.entidades.Valoracion;
 
 /**
  *
@@ -212,12 +214,12 @@ public class ManejadorUsuarios {
             aux.add(i.getNickname());
         }
         for (DtArtista i : lAr) {
-            if (!aux.contains(i.getNickname()) && i.getNickname().equals(nickname)==false) {
+            if (!aux.contains(i.getNickname()) && i.getNickname().equals(nickname) == false) {
                 lDtU.add(i);
             }
         }
         for (DtEspectador i : lEs) {
-            if (!aux.contains(i.getNickname())&& i.getNickname().equals(nickname)==false) {
+            if (!aux.contains(i.getNickname()) && i.getNickname().equals(nickname) == false) {
                 lDtU.add(i);
             }
         }
@@ -246,12 +248,12 @@ public class ManejadorUsuarios {
             aux.add(i.getNickname());
         }
         for (DtArtista i : lAr) {
-            if (!aux.contains(i.getNickname())&& i.getNickname().equals(nickname)==false) {
+            if (!aux.contains(i.getNickname()) && i.getNickname().equals(nickname) == false) {
                 lDtU.add(i);
             }
         }
         for (DtEspectador i : lEs) {
-            if (!aux.contains(i.getNickname())&& i.getNickname().equals(nickname)==false) {
+            if (!aux.contains(i.getNickname()) && i.getNickname().equals(nickname) == false) {
                 lDtU.add(i);
             }
         }
@@ -338,8 +340,8 @@ public class ManejadorUsuarios {
         emf.close();
 
     }
-    
-        public static void dejarDeSeguirUsuarioEs(String nickname, String seguido) {
+
+    public static void dejarDeSeguirUsuarioEs(String nickname, String seguido) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -378,8 +380,8 @@ public class ManejadorUsuarios {
         emf.close();
 
     }
-        
-           public static void dejarDeSeguirUsuarioAr(String nickname, String seguido) {
+
+    public static void dejarDeSeguirUsuarioAr(String nickname, String seguido) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -418,7 +420,7 @@ public class ManejadorUsuarios {
         emf.close();
 
     }
-        
+
     public static boolean existeEspectador(String nickname) {
         boolean us = false;
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
@@ -834,8 +836,8 @@ public class ManejadorUsuarios {
         }
         return result;
     }
-    
-    public static List<DtPaqueteDeEspectaculos> getPaquetesDelUsuario(String nickname){
+
+    public static List<DtPaqueteDeEspectaculos> getPaquetesDelUsuario(String nickname) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
         EntityManager em = emf.createEntityManager();
         Espectador estemen = em.createNamedQuery("EspectadorporNick", Espectador.class).setParameter("nickname", nickname).getSingleResult();
@@ -843,32 +845,28 @@ public class ManejadorUsuarios {
         emf.close();
         List<DtPaqueteDeEspectaculos> resultado = new ArrayList<DtPaqueteDeEspectaculos>();
         List<Compra> compras = estemen.getCompras();
-        for(Compra i:compras){
+        for (Compra i : compras) {
             resultado.add(i.getPaquete().getMyDt());
         }
         return resultado;
     }
-    
-    public static void comprarPaquete(String nickname, String nombrePaq){
+
+    public static void comprarPaquete(String nickname, String nombrePaq) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Espectador estemen = em.createNamedQuery("EspectadorporNick",Espectador.class).setParameter("nickname", nickname).getSingleResult();
-        PaqueteDeEspectaculos paq = em.createNamedQuery("PaqueteByName",PaqueteDeEspectaculos.class).setParameter("nombre", nombrePaq).getSingleResult();
+        Espectador estemen = em.createNamedQuery("EspectadorporNick", Espectador.class).setParameter("nickname", nickname).getSingleResult();
+        PaqueteDeEspectaculos paq = em.createNamedQuery("PaqueteByName", PaqueteDeEspectaculos.class).setParameter("nombre", nombrePaq).getSingleResult();
         long fecha = new java.util.Date().getTime();
         java.sql.Date date = new java.sql.Date(fecha);
-        Compra compra = new Compra(paq, date,estemen);
+        Compra compra = new Compra(paq, date, estemen);
         em.persist(compra);
         em.getTransaction().commit();
-        
-        
+
         em.close();
         emf.close();
     }
-    
-    
-    
-    
+
     public static List<DtUsuario> getUsuariosQueTeSiguenAr(String nickname) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
         EntityManager em = emf.createEntityManager();
@@ -927,6 +925,7 @@ public class ManejadorUsuarios {
         }
         return dtA;
     }
+
     ///////////////3ra
     public static List<DtEspectaculo> getEspectaculosALosQueElEspectadorFueAUnaFuncion(String nickname) {//3ra
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
@@ -942,7 +941,7 @@ public class ManejadorUsuarios {
         List<String> listaNombres = new ArrayList<String>();
         for (Registro r : esteMen.getRegistros()) {
             if (r.getEstado() == EstadoRegistro.USADO) {
-                if(!listaNombres.contains(r.getFuncion().getEspectaculo().getNombre())){
+                if (!listaNombres.contains(r.getFuncion().getEspectaculo().getNombre())) {
                     lista.add(r.getFuncion().getEspectaculo().getMyDt());
                     listaNombres.add(r.getFuncion().getEspectaculo().getNombre());
                 }
@@ -951,7 +950,7 @@ public class ManejadorUsuarios {
         }
         return lista;
     }
-    
+
     public static List<DtEspectaculo> getEspectaculosFaboritos(String nickname) {//3ra
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
         EntityManager em = emf.createEntityManager();
@@ -963,14 +962,14 @@ public class ManejadorUsuarios {
         em.close();
         emf.close();
         List<DtEspectaculo> lista = new ArrayList<DtEspectaculo>();
-        
+
         for (Espectaculo r : esteMen.getFaboritos()) {
             lista.add(r.getMyDt());
 
         }
         return lista;
     }
-    
+
     public static void addEspectaculoFavorito(String nickname, String nombre) {//3ra
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
         EntityManager em = emf.createEntityManager();
@@ -978,13 +977,13 @@ public class ManejadorUsuarios {
         TypedQuery<Espectador> consulta = em.createNamedQuery("EspectadorporNick", Espectador.class);
         consulta.setParameter("nickname", nickname);
         Espectador esteMen = consulta.getSingleResult();
-        
-        boolean yaIngresado =false;
+
+        boolean yaIngresado = false;
         for (Registro r : esteMen.getRegistros()) {
             if (r.getEstado() == EstadoRegistro.USADO) {
-                if(yaIngresado==false && r.getFuncion().getEspectaculo().getNombre().equals(nombre)){
+                if (yaIngresado == false && r.getFuncion().getEspectaculo().getNombre().equals(nombre)) {
                     esteMen.addFaborito(r.getFuncion().getEspectaculo());
-                    yaIngresado =true;
+                    yaIngresado = true;
                 }
             }
 
@@ -994,7 +993,7 @@ public class ManejadorUsuarios {
         em.close();
         emf.close();
     }
-    
+
     public static void quitarEspectaculoFavorito(String nickname, String nombre) {//3ra
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
         EntityManager em = emf.createEntityManager();
@@ -1002,10 +1001,9 @@ public class ManejadorUsuarios {
         TypedQuery<Espectador> consulta = em.createNamedQuery("EspectadorporNick", Espectador.class);
         consulta.setParameter("nickname", nickname);
         Espectador esteMen = consulta.getSingleResult();
-        List<Espectaculo> aux=esteMen.getFaboritos();
-        for (int i=0; i<aux.size(); i++) {
-            if(aux.get(i).getNombre().equals(nombre))
-            {
+        List<Espectaculo> aux = esteMen.getFaboritos();
+        for (int i = 0; i < aux.size(); i++) {
+            if (aux.get(i).getNombre().equals(nombre)) {
                 esteMen.getFaboritos().remove(i);
             }
 
@@ -1015,7 +1013,59 @@ public class ManejadorUsuarios {
         em.close();
         emf.close();
     }
-    
+
+    public static List<DtEspectaculo> getEspectaculosValorados(String nickname) {//3ra
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<Espectador> consulta = em.createNamedQuery("EspectadorporNick", Espectador.class);
+        consulta.setParameter("nickname", nickname);
+        Espectador esteMen = consulta.getSingleResult();
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+        List<DtEspectaculo> lista = new ArrayList<DtEspectaculo>();
+        List<String> listaNombres = new ArrayList<String>();
+        for (Valoracion v : esteMen.getValoraciones()) {
+            lista.add(v.getEspectaculo().getMyDt());
+
+        }
+        return lista;
+    }
+
+    public static List<DtValoracion> getValoracionesAEspectaculos(String nickname) {//3ra
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<Espectador> consulta = em.createNamedQuery("EspectadorporNick", Espectador.class);
+        consulta.setParameter("nickname", nickname);
+        Espectador esteMen = consulta.getSingleResult();
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+        List<DtValoracion> lista = new ArrayList<DtValoracion>();
+        for (Valoracion v : esteMen.getValoraciones()) {
+            lista.add(v.getMyDt());
+        }
+        return lista;
+    }
+
+    public static void valorarEspectaculo(String nickname, String nombre, int valor, Date fecha) {//3ra
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<Espectador> consulta = em.createNamedQuery("EspectadorporNick", Espectador.class);
+        consulta.setParameter("nickname", nickname);
+        Espectador esteMen = consulta.getSingleResult();
+        TypedQuery<Espectaculo> consulta2 = em.createNamedQuery("Espectaculo.findByNombre", Espectaculo.class);
+        consulta2.setParameter("nombre", nombre);
+        Espectaculo e = consulta2.getSingleResult();    
+        Valoracion estaValoracion = new Valoracion(fecha, valor, esteMen, e);
+        em.persist(estaValoracion);
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+    }
 }
 
 //    

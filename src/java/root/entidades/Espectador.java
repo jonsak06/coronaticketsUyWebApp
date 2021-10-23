@@ -164,8 +164,7 @@ public class Espectador extends Usuario {
     }
 
     public void addValoracion(Valoracion v){
-        int i = this.valoraciones.size();
-        this.valoraciones.add(i+1,v);
+        this.valoraciones.add(v);
     }
     
     @ManyToMany//(mappedBy = "espectaculos")

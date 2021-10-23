@@ -42,4 +42,5 @@ public interface IEspectaculos {
     public List<DtFuncion> listarTodasLasFunciones(String nombreEsp);
     public List<DtEspectaculo> listarTodosLosEspectaculos();
     public List<DtEspectaculo> listarAceptados();
+    public void calcularValoracion(String nombreEspectaculo);//3ra
 }
