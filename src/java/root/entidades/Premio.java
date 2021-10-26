@@ -60,6 +60,16 @@ public class Premio implements Serializable {
     
     @Column(name = "NOMBRE")
     private String nombre;
+
+    public Premio() {
+    }
+
+    public Premio(String nombre, String descripcion, Sorteo sorteo, Espectador espectador) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.sorteo = sorteo;
+        this.espectador = espectador;
+    }
     
     
     @Column(name = "DESCRIPCION")

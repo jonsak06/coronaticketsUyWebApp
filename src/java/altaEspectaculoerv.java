@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Integer.parseInt;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Date;
@@ -48,39 +49,39 @@ public class altaEspectaculoerv extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-            IEspectaculos ie = Fabrica.getCtrlEspectaculos();
-            if(ie.existeEspectaculo(request.getParameter("nombreEsp"))){
+        IEspectaculos ie = Fabrica.getCtrlEspectaculos();
+        if (ie.existeEspectaculo(request.getParameter("nombreEsp"))) {
             ServletContext contexto = getServletContext();
             RequestDispatcher dispatcher = contexto.getRequestDispatcher("/yaExisteEspectaculo.jsp");
             dispatcher.forward(request, response);
-            }else{
+        } else {
             ServletContext contexto = getServletContext();
             List<String> categorias = ie.listarCategorias();
             List<String> catDelEsp = new ArrayList<String>();
             int i = 1;
-            while(i<=categorias.size()){
-                if(request.getParameter(i+"")!=null){
-                    catDelEsp.add(categorias.get(i-1));
+            while (i <= categorias.size()) {
+                if (request.getParameter(i + "") != null) {
+                    catDelEsp.add(categorias.get(i - 1));
                 }
                 i++;
             }
-            if(catDelEsp.size()==0){
-            RequestDispatcher dispatcher = contexto.getRequestDispatcher("/catNoSeleccionadas.jsp");
-            dispatcher.forward(request, response);
-            }else{
-            java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+            if (catDelEsp.size() == 0) {
+                RequestDispatcher dispatcher = contexto.getRequestDispatcher("/catNoSeleccionadas.jsp");
+                dispatcher.forward(request, response);
+            } else {
+                java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 
-            long o = 0;
-                DtEspectaculo esp = new DtEspectaculo(o,request.getParameter("nombreEsp"),request.getParameter("descripcion"),Integer.parseInt(request.getParameter("duracion")),Integer.parseInt(request.getParameter("cantMax")),Integer.parseInt(request.getParameter("cantMin")),request.getParameter("url"),Float.parseFloat(request.getParameter("costo")), (java.sql.Date) date);
-            if(request.getParameter("video")!=null){
-                esp.setVideo(request.getParameter("video"));
-            }else{
-                esp.setVideo("NOVIDEO");
-            }
+                long o = 0;
+                DtEspectaculo esp = new DtEspectaculo(o, request.getParameter("nombreEsp"), request.getParameter("descripcion"), Integer.parseInt(request.getParameter("duracion")), Integer.parseInt(request.getParameter("cantMax")), Integer.parseInt(request.getParameter("cantMin")), request.getParameter("url"), Float.parseFloat(request.getParameter("costo")), (java.sql.Date) date);
+                if (request.getParameter("video") != null) {
+                    esp.setVideo(request.getParameter("video"));
+                } else {
+                    esp.setVideo("NOVIDEO");
+                }
                 //  AQUI LOS PASOS PARA SUBIR LA IMAGEN DESDE LA MAQUINA DEL USUARIO
-                String fotoName ="";
-                if(request.getParameter("subir")!=null){
-                Part archivo = request.getPart("upfile"); //llamada al parámetro foto de mi formulario.
+                String fotoName = "";
+                if (request.getParameter("subir") != null) {
+                    Part archivo = request.getPart("upfile"); //llamada al parámetro foto de mi formulario.
 //                String context = "/home/"+System.getProperty("user.name")+"/coronaticketsUyWebApp/web/IMAGENES_ESPECTACULOS"; //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
 //
 //                String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString(); 
@@ -89,22 +90,28 @@ public class altaEspectaculoerv extends HttpServlet {
 //                archivo.write(context + File.separator+esp.getNombre().replaceAll("\\s+","") + foto); // Escribimos el archivo al disco duro del servidor.
 //
 //                fotoName = "IMAGENES_ESPECTACULOS" + File.separator+esp.getNombre().replaceAll("\\s+","") + foto;
-                String context = request.getServletContext().getRealPath(""); //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
+                    String context = request.getServletContext().getRealPath(""); //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
 
+                    archivo.write(context + File.separator + esp.getNombre().replaceAll("\\s+", "") + ".jpg"); // Escribimos el archivo al disco duro del servidor.
 
-                archivo.write(context + File.separator + esp.getNombre().replaceAll("\\s+", "")+".jpg"); // Escribimos el archivo al disco duro del servidor.
-
-                fotoName =context  + esp.getNombre().replaceAll("\\s+", "")+".jpg";
-                SubirFTP.subir(context  + esp.getNombre().replaceAll("\\s+", "")+".jpg",esp.getNombre().replaceAll("\\s+", "")+".jpg");
-                fotoName = "http://raspberrypijulio.ddns.net/ImagenesLab/"+esp.getNombre().replaceAll("\\s+", "")+".jpg";
-                //AQUI SE DEBERIA HABER SUBIDO LA IMAGEN
+                    fotoName = context + esp.getNombre().replaceAll("\\s+", "") + ".jpg";
+                    SubirFTP.subir(context + esp.getNombre().replaceAll("\\s+", "") + ".jpg", esp.getNombre().replaceAll("\\s+", "") + ".jpg");
+                    fotoName = "http://raspberrypijulio.ddns.net/ImagenesLab/" + esp.getNombre().replaceAll("\\s+", "") + ".jpg";
+                    //AQUI SE DEBERIA HABER SUBIDO LA IMAGEN
                 }
-                ie.altaEspectaculo(request.getParameter("plataforma"), contexto.getAttribute("nickname").toString(), catDelEsp, esp, fotoName);
+                int numeroPremios = 0;
+                String descripcionPremio = "No hay premio";
+                if (request.getParameter("premio") != null && request.getParameter("descripcionDelPremio") != null) {
+                    numeroPremios = parseInt(request.getParameter("numeroDePremiosPorFuncion"));
+                    descripcionPremio = request.getParameter("descripcionDelPremio");
+
+                }
+                ie.altaEspectaculo(request.getParameter("plataforma"), contexto.getAttribute("nickname").toString(), catDelEsp, esp, fotoName, descripcionPremio, numeroPremios);
 
                 RequestDispatcher dispatcher = contexto.getRequestDispatcher("/espectaculoIngresado.jsp");
-            dispatcher.forward(request, response);
+                dispatcher.forward(request, response);
             }
-            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

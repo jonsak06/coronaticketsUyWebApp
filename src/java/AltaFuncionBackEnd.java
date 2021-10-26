@@ -50,8 +50,8 @@ public class AltaFuncionBackEnd extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         ServletContext contexto = getServletContext();
-
-        String nombreEspec = request.getParameter("espectaculos");
+        String nombrePlat = request.getParameter("plataforma");
+        String nombreEspec = request.getParameter(nombrePlat);
         String nombre = request.getParameter("nombre");
         long id = 0;
 

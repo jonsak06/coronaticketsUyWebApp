@@ -243,4 +243,8 @@ public class crlUsuarios implements iUsuarios {
     public List<DtEspectaculo> getEspectaculosValorados(String nickname) {//3ra
         return ManejadorUsuarios.getEspectaculosValorados(nickname);
     }
+    
+    public void crearSorteo(String nickname, String nombreF){//3ra
+         ManejadorUsuarios.crearSorteo(nickname, nombreF);
+    }
 }

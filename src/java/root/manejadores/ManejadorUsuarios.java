@@ -19,6 +19,8 @@ import javax.persistence.*;
 import root.entidades.Artista;
 import root.datatypes.DtArtista;
 import root.datatypes.DtPaqueteDeEspectaculos;
+import root.datatypes.DtPremio;
+import root.datatypes.DtSorteo;
 import root.datatypes.DtUsuario;
 import root.datatypes.DtValoracion;
 import root.entidades.Compra;
@@ -27,7 +29,9 @@ import root.entidades.Espectador;
 import root.entidades.EstadoRegistro;
 import root.entidades.Funcion;
 import root.entidades.PaqueteDeEspectaculos;
+import root.entidades.Premio;
 import root.entidades.Registro;
+import root.entidades.Sorteo;
 import root.entidades.Usuario;
 import root.entidades.Valoracion;
 
@@ -1059,13 +1063,65 @@ public class ManejadorUsuarios {
         Espectador esteMen = consulta.getSingleResult();
         TypedQuery<Espectaculo> consulta2 = em.createNamedQuery("Espectaculo.findByNombre", Espectaculo.class);
         consulta2.setParameter("nombre", nombre);
-        Espectaculo e = consulta2.getSingleResult();    
+        Espectaculo e = consulta2.getSingleResult();
         Valoracion estaValoracion = new Valoracion(fecha, valor, esteMen, e);
         em.persist(estaValoracion);
         em.getTransaction().commit();
         em.close();
         emf.close();
     }
+
+    public static void crearSorteo(String nickname, String nombreF) {//3ra
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<Artista> consulta = em.createNamedQuery("ArtistaporNick", Artista.class);
+        consulta.setParameter("nickname", nickname);
+        Artista a = consulta.getSingleResult();
+
+        TypedQuery<Funcion> consultaF = em.createNamedQuery("Funcion.findByNombre", Funcion.class);
+        consultaF.setParameter("nombre", nombreF);
+        Funcion f = consultaF.getSingleResult();
+
+        String descripcionP = f.getEspectaculo().getDescripcionDelPremio();
+        int numeroDePremios = f.getEspectaculo().getNumeroDePremiosPorFuncion();
+        List<Registro> listaReg = f.getRegistros();
+        List<Espectador> listaEsp = new ArrayList<Espectador>();
+        for (Registro r : listaReg) {
+            listaEsp.add(r.getEspectador());
+        }
+        List<Registro> listaRegGanadores = new ArrayList<Registro>();
+        for (int i = 0; i < numeroDePremios; i++) {
+            if (listaReg.size() > 0) {
+                int nuemeroGanador = (int) (Math.random() * listaReg.size());
+                listaRegGanadores.add(listaReg.get(nuemeroGanador));
+                listaReg.remove(nuemeroGanador);
+            }
+        }
+        String nombreSorteo = "Sorteo de: " + f.getNombre();
+        Date fecha = new Date(1, 1, 1);
+        Sorteo nuevoSorteo = new Sorteo(nombreSorteo, fecha, a, listaEsp, f);
+        em.persist(nuevoSorteo);
+
+        for (Registro r : listaRegGanadores) {
+            String nombrePremio = "Premio de: " + r.getEspectador().getNickname() + " en la funcion: " + f.getNombre();
+            String descripcion = f.getEspectaculo().getDescripcionDelPremio();
+            TypedQuery<Espectador> consultaEs = em.createNamedQuery("EspectadorporNick", Espectador.class);
+            consultaEs.setParameter("nickname", r.getEspectador().getNickname());
+            Espectador es = consultaEs.getSingleResult();
+            Premio nuevoPremio = new Premio(nombrePremio, descripcion, nuevoSorteo, es);
+            em.persist(nuevoPremio);
+            
+        }
+        
+        em.getTransaction().commit();
+
+        em.close();
+        emf.close();
+    }
+    
+    
+    
 }
 
 //    

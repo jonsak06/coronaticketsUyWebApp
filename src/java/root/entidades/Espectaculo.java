@@ -206,7 +206,37 @@ public class Espectaculo implements Serializable {
     public void setFechaDeRegistro(Date fechaDeRegistro) {
         this.fechaDeRegistro = fechaDeRegistro;
     }
+    
+    @Column(name = "NUMERODEPREMIOSPORFUNCION")
+    private int numeroDePremiosPorFuncion;
 
+    public int getNumeroDePremiosPorFuncion() {
+        return numeroDePremiosPorFuncion;
+    }
+
+    public void setNumeroDePremiosPorFuncion(int numeroDePremiosPorFuncion) {
+        this.numeroDePremiosPorFuncion = numeroDePremiosPorFuncion;
+    }
+    
+
+    public void setEspectadoresFaboritos(List<Espectador> espectadoresFaboritos) {
+        this.espectadoresFaboritos = espectadoresFaboritos;
+    }
+    
+    
+    
+    @Column(name = "DESCRIPCIONDELPREMIO")
+    private String descripcionDelPremio;
+
+    public void setDescripcionDelPremio(String descripcionDelPremio) {
+        this.descripcionDelPremio = descripcionDelPremio;
+    }
+
+    public String getDescripcionDelPremio() {
+        return descripcionDelPremio;
+    }
+    
+    
     @Column(name = "VIDEO")
     private String video;
 
@@ -313,16 +343,7 @@ public class Espectaculo implements Serializable {
         this.artista = artista;
     }
 
-    @OneToOne(mappedBy = "espectaculo")
-    private Sorteo sorteo;
-
-    public Sorteo getSorteo() {
-        return sorteo;
-    }
-
-    public void setSorteo(Sorteo sorteo) {
-        this.sorteo = sorteo;
-    }
+   
 
     @ManyToMany//(mappedBy = "espectaculos")
     private List<Espectador> espectadoresFaboritos;

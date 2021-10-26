@@ -187,6 +187,17 @@ public class Funcion implements Serializable {
         return "presentacion.Funcion[ id=" + id + " ]";
     }
     
+     @OneToOne(mappedBy = "funcion")
+    private Sorteo sorteo;
+
+    public Sorteo getSorteo() {
+        return sorteo;
+    }
+
+    public void setSorteo(Sorteo sorteo) {
+        this.sorteo = sorteo;
+    }
+    
     public DtFuncion getMyDt()
     {
         DtFuncion dt = new DtFuncion(this.id, this.nombre, this.horaInicio, this.fechaDeRegistro, this.fecha);

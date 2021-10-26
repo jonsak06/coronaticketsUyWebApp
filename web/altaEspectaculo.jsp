@@ -101,6 +101,23 @@
                         j++;
                     }
                     %>
+                    
+                    <textarea name="descripcionDelPremio" style="background-color: #191919; color: white;border: 2px solid #3498db; padding: 10px 10px; outline: none; color: white; border-radius: 24px; transition: 0.25s" rows="4" cols="30" placeholder="Descripcion del Premio"></textarea>
+                    
+                    <input type="number" style="    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 10px 10px;
+    width: 250px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s" step="1" min="1" name="numeroDePremiosPorFuncion" placeholder="Numero de premios por funcion" id="numeroDePremiosPorFuncion" >
+                     <p><input type="checkbox" name="premio"  value="ON" id="subir"><label for subir>Tener premio</label>
+                    
                     <input type="text" name="video" placeholder="URL de video" id="video">
                     <div id="div_file">
                         <p id="texto">Seleccionar Imagen</p>

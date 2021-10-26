@@ -101,14 +101,14 @@ public class Sorteo implements Serializable {
     }
     
     @OneToOne
-    private Espectaculo espectaculo;
+    private Funcion funcion;
 
-    public Espectaculo getEspectaculo() {
-        return espectaculo;
+    public Funcion getFuncion() {
+        return funcion;
     }
 
-    public void setEspectaculo(Espectaculo espectaculo) {
-        this.espectaculo = espectaculo;
+    public void setFuncion(Funcion funcion) {
+        this.funcion = funcion;
     }
 
     
@@ -123,6 +123,17 @@ public class Sorteo implements Serializable {
     public void addPremio(Premio p){
         int i = this.premios.size();
         this.premios.add(i+1,p);
+    }
+
+    public Sorteo() {
+    }
+
+    public Sorteo(String nombre, Date fecha, Artista artista, List<Espectador> espectadores, Funcion funcion) {
+        this.nombre = nombre;
+        this.fecha = fecha;
+        this.artista = artista;
+        this.espectadores = espectadores;
+        this.funcion = funcion;
     }
     
     public DtSorteo getMyDt()

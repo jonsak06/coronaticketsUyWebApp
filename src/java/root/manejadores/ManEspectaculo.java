@@ -12,7 +12,9 @@ import root.datatypes.DtEspectaculo;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -21,6 +23,7 @@ import javax.persistence.TypedQuery;
 import root.entidades.Artista;
 import root.entidades.Compra;
 import root.datatypes.DtArtista;
+import root.datatypes.DtEspectador;
 import root.entidades.Categoria;
 import root.entidades.Espectaculo;
 import root.entidades.Espectador;
@@ -29,6 +32,7 @@ import root.entidades.EstadoRegistro;
 import root.entidades.Funcion;
 import root.entidades.PaqueteDeEspectaculos;
 import root.entidades.Plataforma;
+import root.entidades.Premio;
 import root.entidades.Registro;
 
 /**
@@ -43,7 +47,7 @@ public class ManEspectaculo {
      * @param artista
      * @param espectaculo
      */
-    public static void altaEspectaculo(String plataforma, String artista, List<String> categorias, DtEspectaculo espectaculo, String pathImagen) {
+    public static void altaEspectaculo(String plataforma, String artista, List<String> categorias, DtEspectaculo espectaculo, String pathImagen, String descripcionDeLosPremios, int numerodePremios) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -60,7 +64,8 @@ public class ManEspectaculo {
         nuevoEspectaculo.setEstado(EstadoEspectaculo.INGRESADO);
         nuevoEspectaculo.setImagen(pathImagen);
         nuevoEspectaculo.setVideo(espectaculo.getVideo());
-
+        nuevoEspectaculo.setDescripcionDelPremio(espectaculo.getDescripcionDelPremio());
+        nuevoEspectaculo.setNumeroDePremiosPorFuncion(espectaculo.getNumeroDePremios());
         em.getTransaction().commit();
         em.getTransaction().begin();
         List<Categoria> categoriasDelEsp = new ArrayList<Categoria>();
@@ -70,6 +75,8 @@ public class ManEspectaculo {
             categoriasDelEsp.add(consulta.getSingleResult());
         }
         nuevoEspectaculo.setCategoria(categoriasDelEsp);
+        nuevoEspectaculo.setDescripcionDelPremio(descripcionDeLosPremios);
+        nuevoEspectaculo.setNumeroDePremiosPorFuncion(numerodePremios);
         em.persist(nuevoEspectaculo);
         em.getTransaction().commit();
         em.getTransaction().begin();
@@ -422,20 +429,20 @@ public class ManEspectaculo {
             return null;
         }
     }
-    
+
     public static List<DtEspectaculo> listarEspectaculos() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
         EntityManager em = emf.createEntityManager();
-        List<Espectaculo> esps = em.createNamedQuery("Espectaculo.findAll",Espectaculo.class).getResultList();
+        List<Espectaculo> esps = em.createNamedQuery("Espectaculo.findAll", Espectaculo.class).getResultList();
         List<DtEspectaculo> dvEsps = new ArrayList();
-        for(Espectaculo e : esps) {
+        for (Espectaculo e : esps) {
             dvEsps.add(e.getMyDt());
         }
         em.close();
         emf.close();
         return dvEsps;
     }
-    
+
     public static List<DtEspectaculo> listarAceptados() {
         List<DtEspectaculo> dvEsps = new ArrayList<DtEspectaculo>();
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
@@ -449,7 +456,7 @@ public class ManEspectaculo {
         }
         return dvEsps;
     }
-    
+
     public static void calcularValoracion(String nombreEspectaculo) {//3ra
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
         EntityManager em = emf.createEntityManager();
@@ -460,6 +467,77 @@ public class ManEspectaculo {
         em.getTransaction().commit();
         em.close();
         emf.close();
+    }
+
+    public static List<DtFuncion> listarFuncionesConSorteos(String nombreEsp) {//3ra
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<Espectaculo> consulta = em.createNamedQuery("Espectaculo.findByNombre", Espectaculo.class);
+        consulta.setParameter("nombre", nombreEsp);
+        Espectaculo e = consulta.getSingleResult();
+        if (e.getEstado() == EstadoEspectaculo.ACEPTADO) {
+            List<DtFuncion> lDtf = new ArrayList<DtFuncion>();
+            List<Funcion> funciones = e.getFunciones();
+            java.sql.Date f = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+            for (Funcion i : funciones) {
+                        DtFuncion esteDt = new DtFuncion(i.getId(), i.getNombre(), i.getHoraInicio(), i.getFechaRegistro(), i.getFecha());
+                        lDtf.add(esteDt);
+                    
+                
+            }
+            em.close();
+            emf.close();
+            return lDtf;
+        } else {
+            return null;
+        }
+    }
+
+    public static List<DtFuncion> listarFuncionesQuePuedenTenerSorteo(String nombreEsp) {//3ra
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<Espectaculo> consulta = em.createNamedQuery("Espectaculo.findByNombre", Espectaculo.class);
+        consulta.setParameter("nombre", nombreEsp);
+        Espectaculo e = consulta.getSingleResult();
+        if (e.getEstado() == EstadoEspectaculo.ACEPTADO) {
+            List<DtFuncion> lDtf = new ArrayList<DtFuncion>();
+            List<Funcion> funciones = e.getFunciones();
+            java.sql.Date f = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+            for (Funcion i : funciones) {
+                if (i.getFecha().after(f)) {
+                    if (e.getDescripcionDelPremio() != null && i.getSorteo() == null) {
+                        if (e.getDescripcionDelPremio() != "No hay premio") {
+                            DtFuncion esteDt = new DtFuncion(i.getId(), i.getNombre(), i.getHoraInicio(), i.getFechaRegistro(), i.getFecha());
+                            lDtf.add(esteDt);
+                        }
+                    }
+                }
+            }
+            em.close();
+            emf.close();
+            return lDtf;
+        } else {
+            return null;
+        }
+    }
+
+    public static List<DtEspectador> listarGanadores(String nombreFun) {//3ra
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<Funcion> consulta = em.createNamedQuery("Funcion.findByNombre", Funcion.class);
+        consulta.setParameter("nombre", nombreFun);
+        Funcion f = consulta.getSingleResult();
+        List<DtEspectador> esp = new ArrayList<DtEspectador>();
+        for (Premio p : f.getSorteo().getPremios()) {
+            esp.add(p.getEspectador().getMyDt());
+        }
+        em.close();
+        emf.close();
+        return esp;
+
     }
 
 }

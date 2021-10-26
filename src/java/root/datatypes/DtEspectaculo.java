@@ -28,6 +28,24 @@ public class DtEspectaculo {
     private String estado;
     private float valoracionPromedio;
     private String video;
+    private String descripcionDelPremio;
+    private int numeroDePremios;
+
+    public String getDescripcionDelPremio() {
+        return descripcionDelPremio;
+    }
+
+    public void setDescripcionDelPremio(String descripcionDelPremio) {
+        this.descripcionDelPremio = descripcionDelPremio;
+    }
+
+    public int getNumeroDePremios() {
+        return numeroDePremios;
+    }
+
+    public void setNumeroDePremios(int numeroDePremios) {
+        this.numeroDePremios = numeroDePremios;
+    }
 
     public String getEstado() {
         return estado;

@@ -79,4 +79,6 @@ public interface iUsuarios {
     public void valorarEspectaculo(String nickname, String nombre, int valor, Date fecha);//3ra
     public List<DtValoracion> getValoracionesAEspectaculos(String nickname);//3ra
     public List<DtEspectaculo> getEspectaculosValorados(String nickname);//3ra
+    
+    public void crearSorteo(String nickname, String nombreF);
 }
