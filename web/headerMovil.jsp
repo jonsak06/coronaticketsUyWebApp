@@ -13,7 +13,7 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">Consultar espectaculos</a>
+            <a class="nav-link" href="consultarEspectaculo.jsp">Consultar espectaculos</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="ConsultarFuncion.jsp">Consultar funciones</a>

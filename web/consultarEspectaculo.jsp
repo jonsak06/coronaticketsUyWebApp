@@ -184,12 +184,43 @@
             .forgot {
                 text-decoration: underline
             }
+            
+            #headerMovil {
+                display: none;
+            }
+            
+            @media (max-width: 1000px) {
+                #headerDesktop {
+                    display: none;
+                }
+                #headerMovil {
+                    display: block;
+                }
+                .box {
+                    position:relative;
+                    top: 0;
+                    left: 0;
+                    width: auto;
+                    margin-top: 30px;
+                }
+                body {
+                    background: #191919;
+                }
+                .box h3 {
+                    font-size: 15px;
+                }
+            }
 
 
         </style>
     </head>
     <body>
-        <%@include file="header.jsp"%>
+        <div id="headerDesktop">
+            <%@include file="header.jsp"%>
+        </div>
+        <div id="headerMovil">
+            <%@include file="headerMovil.jsp"%>
+        </div>
         <%ServletContext contexto = getServletContext();%>
         <div class="box">
 

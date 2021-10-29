@@ -205,6 +205,9 @@
                 body {
                     background: #191919;
                 }
+                .box h3 {
+                    font-size: 30px;
+                }
             }
 
 
