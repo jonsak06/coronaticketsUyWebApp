@@ -209,7 +209,7 @@
                     background: #2d2d2d;
                 }
                 .box h3 {
-                    font-size: 15px;
+                    font-size: 30px;
                 }
             }
 
