@@ -75,7 +75,6 @@
             const botonHamburguesa = document.getElementById("hamburguesa");
             const linkToHome = document.getElementById("home");
             botonHamburguesa.classList.add("hide");
-            linkToHome.href = "#";
         </script>
     </body>
 </html>

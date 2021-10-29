@@ -16,7 +16,7 @@
             <a class="nav-link" href="#">Consultar espectaculos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Consultar funciones</a>
+            <a class="nav-link" href="ConsultarFuncion.jsp">Consultar funciones</a>
           </li>
           <li class="nav-item">
               <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalLogout">Cerrar sesion</a> 
