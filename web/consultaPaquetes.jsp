@@ -14,6 +14,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <%
+        iRegistrosAcceso ir = Fabrica.getCtrlRegistrosAcceso();
+        long moment = new java.util.Date().getTime();
+        DtRegistroAcceso r = new DtRegistroAcceso(0,java.net.InetAddress.getLocalHost().getHostAddress(),request.getHeader("User-Agent"),request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()+"/"+request.getServletPath().substring(request.getServletPath().lastIndexOf("/") +1),moment);
+        ir.ingresarRegistro(r);
+        %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Consulta de paquetes</title>
 

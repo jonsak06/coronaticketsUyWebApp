@@ -7,11 +7,13 @@ package root.fabrica;
 
 import root.controladores.CtrlEspectaculos;
 import root.controladores.CtrlPaquetes;
+import root.controladores.CtrlRegistrosAccesos;
 import root.controladores.DatosDePruebaCtrl;
 import root.interfaces.IEspectaculos;
 import root.controladores.crlUsuarios;
 import root.interfaces.iDatosDePrueba;
 import root.interfaces.iPaquetes;
+import root.interfaces.iRegistrosAcceso;
 import root.interfaces.iUsuarios;
 
 /**
@@ -41,6 +43,11 @@ public class Fabrica {
     public static iPaquetes getCtrlPaquetes(){
         iPaquetes cp = CtrlPaquetes.getInstance();
         return cp;
+    }
+    
+    public static iRegistrosAcceso getCtrlRegistrosAcceso(){
+    iRegistrosAcceso ir = new CtrlRegistrosAccesos();
+    return ir;
     }
     
 }
