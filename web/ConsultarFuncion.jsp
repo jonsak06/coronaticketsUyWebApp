@@ -181,7 +181,35 @@
                 margin: 20px auto;
             }
             .forgot {
-                text-decoration: underline
+                text-decoration: underline;
+            }
+            
+            #headerMovil {
+                display: none;
+            }
+            
+            @media (max-width: 1000px) {
+                #headerDesktop {
+                    display: none;
+                }
+                #headerMovil {
+                    display: block;
+                }
+                .box {
+                    position:relative;
+                    top: 0;
+                    left: 0;
+                    width: auto;
+                    margin-top: 30px;
+                    background: #2d2d2d;
+                    color: gray !important;
+                }
+                body {
+                    background: #2d2d2d;
+                }
+                .box h3 {
+                    font-size: 30px;
+                }
             }
 
 
@@ -189,7 +217,12 @@
 
     </head>
     <body>
-        <%@include file="header.jsp"%>
+        <div id="headerDesktop">
+            <%@include file="header.jsp"%>
+        </div>
+        <div id="headerMovil">
+            <%@include file="headerMovil.jsp"%>
+        </div>
         <%ServletContext contexto = getServletContext();
 
             out.print("<div class=\"box\">");
@@ -708,7 +741,7 @@
 
         %>
 
-
+        <%@include file="headerScript.jsp"%>
         <script>   const paqs = document.getElementById("inputGroupSelect04");
             const botonConsultarPaq = document.querySelector(".btn-outline-secondary");
             paqs.addEventListener("change", e => {

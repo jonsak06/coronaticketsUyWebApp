@@ -23,6 +23,10 @@
         
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
         <style>
+            body {
+                background: #2d2d2d;
+                color: white;
+            }
             .container {
                 margin-top: 50px; 
                 width: 80%;
@@ -36,6 +40,20 @@
             }
             button {
                 width: 100%;
+            }
+            .btn {
+                background-color: #444D55;
+                border-color: #444D55;
+            }
+            .btn:hover,
+            .btn:active,
+            .btn:focus {
+                background-color: #6c757d;
+                border-color: #6c757d;
+            }
+            .form-check-input:checked {
+                background-color: #444D55;
+                border-color: #444D55;
             }
         </style>
         
@@ -75,7 +93,6 @@
             const botonHamburguesa = document.getElementById("hamburguesa");
             const linkToHome = document.getElementById("home");
             botonHamburguesa.classList.add("hide");
-            linkToHome.href = "#";
         </script>
     </body>
 </html>
