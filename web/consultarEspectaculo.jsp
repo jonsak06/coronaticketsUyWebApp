@@ -202,9 +202,11 @@
                     left: 0;
                     width: auto;
                     margin-top: 30px;
+                    background: #2d2d2d;
+                    color: gray !important;
                 }
                 body {
-                    background: #191919;
+                    background: #2d2d2d;
                 }
                 .box h3 {
                     font-size: 15px;
