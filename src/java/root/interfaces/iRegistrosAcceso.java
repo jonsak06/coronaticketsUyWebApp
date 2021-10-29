@@ -4,6 +4,7 @@
  */
 package root.interfaces;
 
+import java.util.List;
 import root.datatypes.DtRegistroAcceso;
 
 /**
@@ -12,4 +13,5 @@ import root.datatypes.DtRegistroAcceso;
  */
 public interface iRegistrosAcceso {
     public void ingresarRegistro(DtRegistroAcceso r);
+    public List<DtRegistroAcceso> getRegistrosAcceso();
 }

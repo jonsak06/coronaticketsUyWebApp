@@ -4,6 +4,8 @@
     Author     : julio
 --%>
 
+<%@page import="root.datatypes.DtRegistroAcceso"%>
+<%@page import="root.interfaces.iRegistrosAcceso"%>
 <%@page import="root.datatypes.DtPlataforma"%>
 <%@page import="java.util.List"%>
 <%@page import="root.interfaces.IEspectaculos"%>

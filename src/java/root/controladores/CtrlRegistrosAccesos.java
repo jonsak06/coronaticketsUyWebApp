@@ -4,6 +4,7 @@
  */
 package root.controladores;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -49,5 +50,21 @@ public class CtrlRegistrosAccesos  implements iRegistrosAcceso {
                 em.persist(nuevoRegistro);
                 em.getTransaction().commit();
         }
+        em.close();
+        emf.close();
+    }
+    
+    public List<DtRegistroAcceso> getRegistrosAcceso(){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        List<RegistroAcceso> result = em.createNamedQuery("RegistroAcceso.findAll",RegistroAcceso.class).getResultList();
+        List<DtRegistroAcceso> resultado = new ArrayList<DtRegistroAcceso>();
+        for(RegistroAcceso r: result){
+            DtRegistroAcceso reg = new DtRegistroAcceso(r.getCounter(),r.getIpCliente(),r.getNavCliente(),r.getUrlSitio(), r.getMoment());
+            resultado.add(reg);
+        }
+        em.close();
+        emf.close();
+        return resultado;
     }
 }
