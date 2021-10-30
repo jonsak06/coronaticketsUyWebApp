@@ -15,7 +15,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <%
+        iRegistrosAcceso ir = Fabrica.getCtrlRegistrosAcceso();
+        long moment = new java.util.Date().getTime();
+        DtRegistroAcceso r = new DtRegistroAcceso(0,java.net.InetAddress.getLocalHost().getHostAddress(),request.getHeader("User-Agent"),request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()+"/"+request.getServletPath().substring(request.getServletPath().lastIndexOf("/") +1),moment);
+        ir.ingresarRegistro(r);
+        %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
@@ -179,12 +184,45 @@
             .forgot {
                 text-decoration: underline
             }
+            
+            #headerMovil {
+                display: none;
+            }
+            
+            @media (max-width: 1000px) {
+                #headerDesktop {
+                    display: none;
+                }
+                #headerMovil {
+                    display: block;
+                }
+                .box {
+                    position:relative;
+                    top: 0;
+                    left: 0;
+                    width: auto;
+                    margin-top: 30px;
+                    background: #2d2d2d;
+                    color: gray !important;
+                }
+                body {
+                    background: #2d2d2d;
+                }
+                .box h3 {
+                    font-size: 30px;
+                }
+            }
 
 
         </style>
     </head>
     <body>
-        <%@include file="header.jsp"%>
+        <div id="headerDesktop">
+            <%@include file="header.jsp"%>
+        </div>
+        <div id="headerMovil">
+            <%@include file="headerMovil.jsp"%>
+        </div>
         <%ServletContext contexto = getServletContext();%>
         <div class="box">
 
