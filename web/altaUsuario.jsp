@@ -14,6 +14,35 @@
 <!DOCTYPE html>
 <html>
     <head>
+                <script src="http://code.jquery.com/jquery-latest.js">
+
+</script>
+<script>
+	$(document).ready(function() {
+		$('#nickname').focusout(function(event) {
+			var nombreVar = $('#nickname').val();
+			// Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
+			$.post('NicknameDisponible', {
+				nombre : nombreVar
+			}, function(responseText) {
+				$('#mensaje').html(responseText);
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function() {
+		$('#correo').focusout(function(event) {
+			var nombreVar = $('#correo').val();
+			// Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
+			$.post('CorreoRegistrado', {
+				nombre : nombreVar
+			}, function(responseText) {
+				$('#mensaje2').html(responseText);
+			});
+		});
+	});
+</script>
         <%
         iRegistrosAcceso ir = Fabrica.getCtrlRegistrosAcceso();
         long moment = new java.util.Date().getTime();
@@ -157,10 +186,12 @@
                         <input type="text" name="apellido" value="" id="apellido"  required/>
 
                         <p>Nickname:</p>
-                        <input type="text" name="nickname" value="" id="nickname" required/>
+                        <input type="text" name="nickname" value="" id="nickname" required/><div id="mensaje"></div>
+                        
 
                         <p>Correo:</p>
                         <input type="text" name="correo" value="" id="correo" required/>
+                        <div id="mensaje2"></div>
 
                         <p>Contraseña:</p>
                         <input type="password" name="contrasenia" id="contrasenia" value="" required/>
