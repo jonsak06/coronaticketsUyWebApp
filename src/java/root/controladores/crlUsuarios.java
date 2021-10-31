@@ -14,6 +14,7 @@ import root.datatypes.DtEspectador;
 import root.datatypes.DtFuncion;
 import root.datatypes.DtPaqueteDeEspectaculos;
 import root.datatypes.DtPlataforma;
+import root.datatypes.DtPremio;
 import root.datatypes.DtRegistro;
 import root.datatypes.DtUsuario;
 import root.datatypes.DtValoracion;
@@ -246,5 +247,13 @@ public class crlUsuarios implements iUsuarios {
     
     public void crearSorteo(String nickname, String nombreF){//3ra
          ManejadorUsuarios.crearSorteo(nickname, nombreF);
+    }
+    
+    public List<DtPremio> getPremiosDelEspectador(String nickname){
+        return ManejadorUsuarios.getPremiosDelEspectador(nickname);
+    }
+    
+    public List<DtEspectaculo> listarEspectaculosFinalizadosDeArtista(String nickname){//3ra
+        return ManejadorUsuarios.listarEspectaculosFinalizadosDeArtista(nickname);
     }
 }

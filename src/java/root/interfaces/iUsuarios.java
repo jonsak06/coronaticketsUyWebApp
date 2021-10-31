@@ -14,6 +14,7 @@ import root.datatypes.DtEspectador;
 import root.datatypes.DtFuncion;
 import root.datatypes.DtPaqueteDeEspectaculos;
 import root.datatypes.DtPlataforma;
+import root.datatypes.DtPremio;
 import root.datatypes.DtRegistro;
 import root.datatypes.DtUsuario;
 import root.datatypes.DtValoracion;
@@ -80,5 +81,9 @@ public interface iUsuarios {
     public List<DtValoracion> getValoracionesAEspectaculos(String nickname);//3ra
     public List<DtEspectaculo> getEspectaculosValorados(String nickname);//3ra
     
-    public void crearSorteo(String nickname, String nombreF);
+    public void crearSorteo(String nickname, String nombreF);//3ra
+    
+    public List<DtPremio> getPremiosDelEspectador(String nickname);//3ra
+    
+    public List<DtEspectaculo> listarEspectaculosFinalizadosDeArtista(String nickname);//3ra
 }

@@ -26,6 +26,7 @@ import root.datatypes.DtValoracion;
 import root.entidades.Compra;
 import root.entidades.Espectaculo;
 import root.entidades.Espectador;
+import root.entidades.EstadoEspectaculo;
 import root.entidades.EstadoRegistro;
 import root.entidades.Funcion;
 import root.entidades.PaqueteDeEspectaculos;
@@ -1111,17 +1112,52 @@ public class ManejadorUsuarios {
             Espectador es = consultaEs.getSingleResult();
             Premio nuevoPremio = new Premio(nombrePremio, descripcion, nuevoSorteo, es);
             em.persist(nuevoPremio);
-            
+
         }
-        
+
         em.getTransaction().commit();
 
         em.close();
         emf.close();
     }
-    
-    
-    
+
+    public static List<DtPremio> getPremiosDelEspectador(String nickname) {//3ra
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<Espectador> consulta = em.createNamedQuery("EspectadorporNick", Espectador.class);
+        consulta.setParameter("nickname", nickname);
+        Espectador esteMen = consulta.getSingleResult();
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+        List<DtPremio> lista = new ArrayList<DtPremio>();
+        for (Premio p : esteMen.getPremios()) {
+            lista.add(p.getMyDt());
+        }
+        return lista;
+    }
+
+    public static List<DtEspectaculo> listarEspectaculosFinalizadosDeArtista(String nickname) {//3ra
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<Artista> consulta = em.createNamedQuery("ArtistaporNick", Artista.class);
+        consulta.setParameter("nickname", nickname);
+        Artista a = consulta.getSingleResult();
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+        List<DtEspectaculo> lista = new ArrayList<DtEspectaculo>();
+        for (int i = 0; i < a.getEspectaculos().size(); i++) {
+            if (a.getEspectaculos().get(i).getEstado() == EstadoEspectaculo.FINALIZADO) {
+                lista.add(a.getEspectaculos().get(i).getMyDt());
+            }
+
+        }
+        return lista;
+    }
+
 }
 
 //    

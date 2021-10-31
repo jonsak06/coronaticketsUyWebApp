@@ -24,6 +24,7 @@ import root.entidades.Artista;
 import root.entidades.Compra;
 import root.datatypes.DtArtista;
 import root.datatypes.DtEspectador;
+import root.datatypes.DtValoracion;
 import root.entidades.Categoria;
 import root.entidades.Espectaculo;
 import root.entidades.Espectador;
@@ -34,6 +35,7 @@ import root.entidades.PaqueteDeEspectaculos;
 import root.entidades.Plataforma;
 import root.entidades.Premio;
 import root.entidades.Registro;
+import root.entidades.Valoracion;
 
 /**
  *
@@ -506,14 +508,13 @@ public class ManEspectaculo {
             List<Funcion> funciones = e.getFunciones();
             java.sql.Date f = new java.sql.Date(Calendar.getInstance().getTime().getTime());
             for (Funcion i : funciones) {
-                if (i.getFecha().after(f)) {
                     if (e.getDescripcionDelPremio() != null && i.getSorteo() == null) {
                         if (e.getDescripcionDelPremio() != "No hay premio") {
                             DtFuncion esteDt = new DtFuncion(i.getId(), i.getNombre(), i.getHoraInicio(), i.getFechaRegistro(), i.getFecha());
                             lDtf.add(esteDt);
                         }
                     }
-                }
+                
             }
             em.close();
             emf.close();
@@ -539,5 +540,37 @@ public class ManEspectaculo {
         return esp;
 
     }
+    
+    public static void finalizarEspectaculo(String nombre) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<Espectaculo> consulta = em.createNamedQuery("Espectaculo.findByNombre", Espectaculo.class);
+        consulta.setParameter("nombre", nombre);
+        Espectaculo e = consulta.getSingleResult();
+        e.setEstado(EstadoEspectaculo.FINALIZADO);
+        em.persist(e);
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+    }
+    
+    
+     public static List<DtValoracion> getValoraciones(String nombreEsp) {//3ra
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<Espectaculo> consulta = em.createNamedQuery("Espectaculo.findByNombre", Espectaculo.class);
+        consulta.setParameter("nombre", nombreEsp);
+        Espectaculo e = consulta.getSingleResult();
+        em.close();
+        emf.close();
+        List<DtValoracion> val = new ArrayList<DtValoracion>();
+        for (Valoracion v : e.getValoraciones()) {
+            val.add(v.getMyDt());
+        }
+        
+        return val;
 
+    }
 }

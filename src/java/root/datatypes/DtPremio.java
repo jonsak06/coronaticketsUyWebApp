@@ -31,5 +31,19 @@ public class DtPremio {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+    
+    
     
 }

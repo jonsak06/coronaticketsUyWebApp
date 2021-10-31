@@ -10,16 +10,16 @@
 <%@page import="root.interfaces.*"%>
 <%@page import="root.datatypes.*"%>
 <%@page import="root.fabrica.Fabrica"%>
-
+<%@page import="com.google.gson.Gson"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <%
-        iRegistrosAcceso ir = Fabrica.getCtrlRegistrosAcceso();
-        long moment = new java.util.Date().getTime();
-        DtRegistroAcceso r = new DtRegistroAcceso(0,java.net.InetAddress.getLocalHost().getHostAddress(),request.getHeader("User-Agent"),request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()+"/"+request.getServletPath().substring(request.getServletPath().lastIndexOf("/") +1),moment);
-        ir.ingresarRegistro(r);
+            iRegistrosAcceso ir = Fabrica.getCtrlRegistrosAcceso();
+            long moment = new java.util.Date().getTime();
+            DtRegistroAcceso r = new DtRegistroAcceso(0, java.net.InetAddress.getLocalHost().getHostAddress(), request.getHeader("User-Agent"), request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/" + request.getServletPath().substring(request.getServletPath().lastIndexOf("/") + 1), moment);
+            ir.ingresarRegistro(r);
         %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
@@ -184,11 +184,11 @@
             .forgot {
                 text-decoration: underline
             }
-            
+
             #headerMovil {
                 display: none;
             }
-            
+
             @media (max-width: 1000px) {
                 #headerDesktop {
                     display: none;
@@ -227,6 +227,12 @@
         <div class="box">
 
             <%
+                int unaEstrella = 0;
+                int dosEstrellas = 0;
+                int tresEstrellas = 0;
+                int cuatroEstrellas = 0;
+                int cincoEstrellas = 0;
+
                 out.println("<form action=\"ConsultarEspectaculoBackEnd\">");
                 out.println("</br>");
                 out.println("<h1>Consultar Espectaculos</h1>");
@@ -339,13 +345,13 @@
                                                 for (DtEspectaculo e : esps) {
                                                     if (esp.equals(e.getNombre())) {
                                                         out.print("<img src='" + e.getImagen() + "' alt='imagen del espectaculo'>");
-                                                        
+
                                                         if (e.getVideo() != null) {
                                                             String[] parts = e.getVideo().split("v=");
                                                             out.print("pene");
                                                             out.print("<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/" + parts[1] + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>" + "</iframe>");
                                                         }
-                                                       
+
                                                         out.print("<h4> Nombre: " + e.getNombre() + "</h4>");
                                                         out.print("<p> Descripcion: " + e.getDescripcion() + "</p>");
                                                         out.print("<p> Duracion: " + e.getDuracion() + "</p>");
@@ -354,8 +360,42 @@
                                                         out.print("<p> URL: " + e.getUrl() + "</p>");
                                                         out.print("<p> Costo: " + e.getCosto() + "</p>");
                                                         out.print("<p> Fecha de registro: " + e.getFechaDeRegistro() + "</p>");
-                                                        //////////////////////////////////////////////////
 
+                                                        List<DtValoracion> val = Fabrica.getCtrlEspectaculos().getValoraciones(e.getNombre());
+                                                        for (DtValoracion v : val) {
+                                                            if (v.getValor() == 1) {
+                                                                unaEstrella++;
+                                                            }
+                                                            if (v.getValor() == 2) {
+                                                                dosEstrellas++;
+                                                            }
+                                                            if (v.getValor() == 3) {
+                                                                tresEstrellas++;
+                                                            }
+                                                            if (v.getValor() == 4) {
+                                                                cuatroEstrellas++;
+                                                            }
+                                                            if (v.getValor() == 5) {
+                                                                cincoEstrellas++;
+                                                            }
+                                                        }
+                                                        Gson gson = new Gson();
+                                                        String jsonUnaEstrella = gson.toJson(unaEstrella);
+                                                        String jsonDosEstrellas = gson.toJson(dosEstrellas);
+                                                        String jsonTresEstrellas = gson.toJson(tresEstrellas);
+                                                        String jsonCuatroEstrellas = gson.toJson(cuatroEstrellas);
+                                                        String jsonCincoEstrellas = gson.toJson(cincoEstrellas);
+                                                        out.print("<p> 1= " + jsonUnaEstrella + "</p>");
+                                                        out.print("<p> 2= " + jsonDosEstrellas + "</p>");
+                                                        out.print("<p> 3= " + jsonTresEstrellas + "</p>");
+                                                        out.print("<p> 4= " + jsonCuatroEstrellas + "</p>");
+                                                        out.print("<p> 5= " + jsonCincoEstrellas + "</p>");
+                                                        
+                                                        
+
+                                            out.print("<div id=\"grafica\"></div>");            
+          
+                                                        //////////////////////////////////////////////////
                                                         List<DtFuncion> fun = Fabrica.getCtrlEspectaculos().listarTodasLasFunciones(contexto.getAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo").toString());
                                                         out.print("<form action=\"ConsultarEspectaculoBackEnd\">");
                                                         out.print("</br>");
@@ -844,6 +884,8 @@
             });
 
         </script> 
+
+
         <%@include file="headerScript.jsp"%>
     </body>
 

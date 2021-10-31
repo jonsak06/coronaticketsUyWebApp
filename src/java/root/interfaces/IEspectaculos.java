@@ -11,6 +11,7 @@ import root.datatypes.DtEspectaculo;
 import root.datatypes.DtEspectador;
 import root.datatypes.DtFuncion;
 import root.datatypes.DtPlataforma;
+import root.datatypes.DtValoracion;
 import root.entidades.EstadoEspectaculo;
 
 /**
@@ -47,4 +48,6 @@ public interface IEspectaculos {
     public List<DtEspectador> listarGanadores(String nombreFun);//3ra
     public List<DtFuncion> listarFuncionesQuePuedenTenerSorteo(String nombreEsp);//3ra
     public List<DtFuncion> listarFuncionesConSorteos(String nombreEsp);//3ra
+    public void finalizarEspectaculo(String nombre);//3ra
+    public List<DtValoracion> getValoraciones(String nombreEsp);//3ra
 }

@@ -13,6 +13,7 @@ import root.datatypes.DtEspectaculo;
 import root.datatypes.DtEspectador;
 import root.datatypes.DtFuncion;
 import root.datatypes.DtPlataforma;
+import root.datatypes.DtValoracion;
 import root.entidades.EstadoEspectaculo;
 import root.interfaces.IEspectaculos;
 import root.manejadores.ManEspectaculo;
@@ -132,4 +133,11 @@ public class CtrlEspectaculos implements IEspectaculos {
     public List<DtFuncion> listarFuncionesConSorteos(String nombreEsp){//3ra
         return ManEspectaculo.listarFuncionesConSorteos(nombreEsp);
     }
+    public void finalizarEspectaculo(String nombre){
+        ManEspectaculo.finalizarEspectaculo(nombre);
+    }
+    
+     public List<DtValoracion> getValoraciones(String nombreEsp){//3ra
+         return ManEspectaculo.getValoraciones(nombreEsp);
+     }
 }
