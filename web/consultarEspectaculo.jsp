@@ -201,15 +201,17 @@
                     top: 0;
                     left: 0;
                     width: auto;
-                    margin-top: 30px;
+                    margin-top: 0;
+                    padding: 20px;
                     background: #2d2d2d;
                     color: gray !important;
                 }
                 body {
                     background: #2d2d2d;
                 }
-                .box h3 {
-                    font-size: 30px;
+                .box h3,
+                .box h4 {
+                    font-size: 22px;
                 }
             }
 
@@ -476,7 +478,7 @@
                                                                 for (String paq : paqs) {
                                                                     if (spaq.equals(paq)) {
                                                                         DtPaqueteDeEspectaculos instanciaP = Fabrica.getCtrlPaquetes().mostrarInfoPaquete(paq);
-                                                                        out.print("<img src='" + instanciaP.getImagen() + "' alt='imagen del espectaculo'>");
+                                                                        out.print("<img src='" + instanciaP.getImagen() + "' alt='imagen del paquete'>");
 
                                                                         out.print("<h5> Nombre: " + instanciaP.getNombre() + "</h5>");
                                                                         out.print("<p> Descripcion: " + instanciaP.getDescripcion() + "</p>");
@@ -748,11 +750,11 @@
                                                                 for (String paq : paqs) {
                                                                     if (spaq.equals(paq)) {
                                                                         DtPaqueteDeEspectaculos instanciaP = Fabrica.getCtrlPaquetes().mostrarInfoPaquete(paq);
-                                                                        out.print("<img src='" + instanciaP.getImagen() + "' alt='imagen del espectaculo'>");
+                                                                        out.print("<img src='" + instanciaP.getImagen() + "' alt='imagen del paquete'>");
 
                                                                         out.print("<h5> Nombre: " + instanciaP.getNombre() + "</h5>");
                                                                         out.print("<p> Descripcion: " + instanciaP.getDescripcion() + "</p>");
-                                                                        out.print("<p>" + instanciaP.getDescuento() + "</p>");
+                                                                        out.print("<p> Descuento: " + instanciaP.getDescuento() + "</p>");
 
                                                                         out.print("<p> Fecha de inicio: " + instanciaP.getFechaInicio().toString() + "</p>");
                                                                         out.print("<p> Fecha de fin: " + instanciaP.getFechaFin().toString() + "</p>");

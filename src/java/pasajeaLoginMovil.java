@@ -13,13 +13,15 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import root.fabrica.Fabrica;
+import root.interfaces.iUsuarios;
 
 /**
  *
  * @author julio
  */
-@WebServlet(urlPatterns = {"/CerrarSesion"})
-public class CerrarSesion extends HttpServlet {
+@WebServlet(urlPatterns = {"/pasajeaLoginMovil"})
+public class pasajeaLoginMovil extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,23 +35,39 @@ public class CerrarSesion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-                ServletContext contexto = getServletContext();
-        contexto.setAttribute("tipoUsuario", null);
-        contexto.setAttribute("nickname", null);
- 
-        Cookie[] cookies = request.getCookies();
-        for(int i = 0; i < cookies.length; i++)
-        { 
-            Cookie c = cookies[i];
-            if (c.getName().equals("userid"))
-            {
-                c.setMaxAge(0); //al setear la vida de la cookie en 0 hace que se elimine
-            }
+        try ( PrintWriter out = response.getWriter()) {
+            response.setContentType("text/html;charset=UTF-8");
+            iUsuarios iu = Fabrica.getCrlUsuarios();
+            ServletContext contexto = getServletContext();
+            String nick = request.getParameter("nick");
+            String pass = request.getParameter("pass");
+            if (!iu.existeUsuario(nick)) {
+                contexto.setAttribute("loginCorrecto", false);
+                contexto.getRequestDispatcher("/indexMovil.jsp").forward(request, response);
+            } else if (iu.existeEspectador(nick)) {
+                if (iu.getDatosEspectador(nick).getPass().equals(pass)) {
+
+                    contexto.setAttribute("tipoUsuario", "Espectador");
+                    contexto.setAttribute("nickname", nick);
+                    if(request.getParameter("recordarme") != null)
+                    {
+                        Cookie c = new Cookie("userid", request.getParameter("nick"));
+                        c.setMaxAge(24*60*60); //vida de la cookie en segundos
+                        response.addCookie(c);
+                    }
+                    contexto.setAttribute("loginCorrecto", true);
+                    contexto.getRequestDispatcher("/indexMovil.jsp").forward(request, response);
+
+                } else {
+                    contexto.setAttribute("loginCorrecto", false);
+                    contexto.getRequestDispatcher("/indexMovil.jsp").forward(request, response);
+                }
+            } else {
+                contexto.setAttribute("loginCorrecto", false);
+                contexto.getRequestDispatcher("/indexMovil.jsp").forward(request, response);
+            } 
         }
-        RequestDispatcher dispatcher = contexto.getRequestDispatcher("/index.jsp");
-        dispatcher.forward(request, response);
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
