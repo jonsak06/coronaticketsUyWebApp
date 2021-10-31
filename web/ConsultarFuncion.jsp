@@ -200,15 +200,17 @@
                     top: 0;
                     left: 0;
                     width: auto;
-                    margin-top: 30px;
+                    margin-top: 15px;
+                    padding: 20px;
                     background: #2d2d2d;
                     color: gray !important;
                 }
                 body {
                     background: #2d2d2d;
                 }
-                .box h3 {
-                    font-size: 30px;
+                .box h3,
+                .box h4 {
+                    font-size: 22px;
                 }
             }
 
