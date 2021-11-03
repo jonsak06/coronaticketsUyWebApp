@@ -21,7 +21,7 @@ public class DtSorteo {
         this.fechaLong = fecha.getTime();
         this.id = id;
     }
-    public Date getFechaLong() {
+    public Date getFecha() {
         return new Date(fechaLong);
     }
     
