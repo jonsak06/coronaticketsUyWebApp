@@ -40,7 +40,7 @@ public class Valoracion implements Serializable {
     }
 
     public Valoracion(Date fecha, int valor, Espectador espectador, Espectaculo espectaculo) {
-        this.fecha = fecha;
+        
         this.valor = valor;
         this.espectador = espectador;
         this.espectaculo = espectaculo;
@@ -66,22 +66,13 @@ public class Valoracion implements Serializable {
         return "root.entidades.Valoracion[ id=" + id + " ]";
     }
     
-    @Column(name = "FECHA")
-    Date fecha;
     
     @Column(name = "VALOR")
     int valor;
 
-    public Date getFecha() {
-        return fecha;
-    }
 
     public int getValor() {
         return valor;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
     }
 
     public void setValor(int valor) {
@@ -111,7 +102,7 @@ public class Valoracion implements Serializable {
     
     public DtValoracion getMyDt()
     {
-        DtValoracion dt = new DtValoracion(this.id, this.fecha, this.valor, this.espectador.getNickname(), this.espectaculo.getNombre());
+        DtValoracion dt = new DtValoracion(this.id, this.valor, this.espectador.getNickname(), this.espectaculo.getNombre());
         return dt;
     }
     

@@ -14,6 +14,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-core.min.js"></script>
     <head>
         <%
             iRegistrosAcceso ir = Fabrica.getCtrlRegistrosAcceso();
@@ -175,8 +176,21 @@
             .box input[type="submit"]:hover {
                 background: #2ecc71
             }
-
-            .box img{
+            
+            .grafica{
+                width: 130px;
+                margin: auto;
+                text-align: left;
+            }
+            
+            .grafica img{
+                margin: 0px;
+            }
+            
+            
+            
+            
+            .imgPrincipal{
                 height: 300px;
                 width: 300px;
                 margin: 20px auto;
@@ -234,6 +248,12 @@
                 int tresEstrellas = 0;
                 int cuatroEstrellas = 0;
                 int cincoEstrellas = 0;
+                Gson gson = new Gson();
+                String jsonUnaEstrella = gson.toJson(unaEstrella);
+                String jsonDosEstrellas = gson.toJson(dosEstrellas);
+                String jsonTresEstrellas = gson.toJson(tresEstrellas);
+                String jsonCuatroEstrellas = gson.toJson(cuatroEstrellas);
+                String jsonCincoEstrellas = gson.toJson(cincoEstrellas);
 
                 out.println("<form action=\"ConsultarEspectaculoBackEnd\">");
                 out.println("</br>");
@@ -346,7 +366,7 @@
                                             if (esp != "Seleccione..." && esp != null) {
                                                 for (DtEspectaculo e : esps) {
                                                     if (esp.equals(e.getNombre())) {
-                                                        out.print("<img src='" + e.getImagen() + "' alt='imagen del espectaculo'>");
+                                                        out.print("<img class=\"imgPrincipal\" src='" + e.getImagen() + "' alt='imagen del espectaculo'>");
 
                                                         if (e.getVideo() != null) {
                                                             String[] parts = e.getVideo().split("v=");
@@ -381,22 +401,138 @@
                                                                 cincoEstrellas++;
                                                             }
                                                         }
-                                                        Gson gson = new Gson();
-                                                        String jsonUnaEstrella = gson.toJson(unaEstrella);
-                                                        String jsonDosEstrellas = gson.toJson(dosEstrellas);
-                                                        String jsonTresEstrellas = gson.toJson(tresEstrellas);
-                                                        String jsonCuatroEstrellas = gson.toJson(cuatroEstrellas);
-                                                        String jsonCincoEstrellas = gson.toJson(cincoEstrellas);
-                                                        out.print("<p> 1= " + jsonUnaEstrella + "</p>");
-                                                        out.print("<p> 2= " + jsonDosEstrellas + "</p>");
-                                                        out.print("<p> 3= " + jsonTresEstrellas + "</p>");
-                                                        out.print("<p> 4= " + jsonCuatroEstrellas + "</p>");
-                                                        out.print("<p> 5= " + jsonCincoEstrellas + "</p>");
-                                                        
-                                                        
 
-                                            out.print("<div id=\"grafica\"></div>");            
-          
+                                                        jsonUnaEstrella = gson.toJson(unaEstrella);
+                                                        jsonDosEstrellas = gson.toJson(dosEstrellas);
+                                                        jsonTresEstrellas = gson.toJson(tresEstrellas);
+                                                        jsonCuatroEstrellas = gson.toJson(cuatroEstrellas);
+                                                        jsonCincoEstrellas = gson.toJson(cincoEstrellas);
+                                                        out.print("<div class=\"grafica\">");
+                                                        if (100 / val.size() * unaEstrella < 6) {
+                                                            out.print("<img src=\"GRAFICAS/1Estrella0p.png\">");
+                                                        } else if (100 / val.size() * unaEstrella < 16) {
+                                                            out.print("<img src=\"GRAFICAS/1Estrella10p.png\">");
+                                                        } else if (100 / val.size() * unaEstrella < 26) {
+                                                            out.print("<img src=\"GRAFICAS/1Estrella20p.png\">");
+                                                        } else if (100 / val.size() * unaEstrella < 36) {
+                                                            out.print("<img src=\"GRAFICAS/1Estrella30p.png\">");
+                                                        } else if (100 / val.size() * unaEstrella < 46) {
+                                                            out.print("<img src=\"GRAFICAS/1Estrella40p.png\">");
+                                                        } else if (100 / val.size() * unaEstrella < 56) {
+                                                            out.print("<img src=\"GRAFICAS/1Estrella50p.png\">");
+                                                        } else if (100 / val.size() * unaEstrella < 66) {
+                                                            out.print("<img src=\"GRAFICAS/1Estrella60p.png\">");
+                                                        } else if (100 / val.size() * unaEstrella < 76) {
+                                                            out.print("<img src=\"GRAFICAS/1Estrella70p.png\">");
+                                                        } else if (100 / val.size() * unaEstrella < 86) {
+                                                            out.print("<img src=\"GRAFICAS/1Estrella80p.png\">");
+                                                        } else if (100 / val.size() * unaEstrella < 96) {
+                                                            out.print("<img src=\"GRAFICAS/1Estrella90p.png\">");
+                                                        } else {
+                                                            out.print("<img src=\"GRAFICAS/1Estrella100p.png\">");
+                                                        }
+                                                        out.print("</br>");
+
+                                                        if (100 / val.size() * dosEstrellas < 6) {
+                                                            out.print("<img src=\"GRAFICAS/2Estrella0p.png\">");
+                                                        } else if (100 / val.size() * dosEstrellas < 16) {
+                                                            out.print("<img src=\"GRAFICAS/2Estrella10p.png\">");
+                                                        } else if (100 / val.size() * dosEstrellas < 26) {
+                                                            out.print("<img src=\"GRAFICAS/2Estrella20p.png\">");
+                                                        } else if (100 / val.size() * dosEstrellas < 36) {
+                                                            out.print("<img src=\"GRAFICAS/2Estrella30p.png\">");
+                                                        } else if (100 / val.size() * dosEstrellas < 46) {
+                                                            out.print("<img src=\"GRAFICAS/2Estrella40p.png\">");
+                                                        } else if (100 / val.size() * dosEstrellas < 56) {
+                                                            out.print("<img src=\"GRAFICAS/2Estrella50p.png\">");
+                                                        } else if (100 / val.size() * dosEstrellas < 66) {
+                                                            out.print("<img src=\"GRAFICAS/2Estrella60p.png\">");
+                                                        } else if (100 / val.size() * dosEstrellas < 76) {
+                                                            out.print("<img src=\"GRAFICAS/2Estrella70p.png\">");
+                                                        } else if (100 / val.size() * dosEstrellas < 86) {
+                                                            out.print("<img src=\"GRAFICAS/2Estrella80p.png\">");
+                                                        } else if (100 / val.size() * dosEstrellas < 96) {
+                                                            out.print("<img src=\"GRAFICAS/2Estrella90p.png\">");
+                                                        } else {
+                                                            out.print("<img src=\"GRAFICAS/2Estrella100p.png\">");
+                                                        }
+                                                        out.print("</br>");
+                                                        if (100 / val.size() * tresEstrellas < 6) {
+                                                            out.print("<img src=\"GRAFICAS/3Estrella0p.png\">");
+                                                        } else if (100 / val.size() * tresEstrellas < 16) {
+                                                            out.print("<img src=\"GRAFICAS/3Estrella10p.png\">");
+                                                        } else if (100 / val.size() * tresEstrellas < 26) {
+                                                            out.print("<img src=\"GRAFICAS/3Estrella20p.png\">");
+                                                        } else if (100 / val.size() * tresEstrellas < 36) {
+                                                            out.print("<img src=\"GRAFICAS/3Estrella30p.png\">");
+                                                        } else if (100 / val.size() * tresEstrellas < 46) {
+                                                            out.print("<img src=\"GRAFICAS/3Estrella40p.png\">");
+                                                        } else if (100 / val.size() * tresEstrellas < 56) {
+                                                            out.print("<img src=\"GRAFICAS/3Estrella50p.png\">");
+                                                        } else if (100 / val.size() * tresEstrellas < 66) {
+                                                            out.print("<img src=\"GRAFICAS/3Estrella60p.png\">");
+                                                        } else if (100 / val.size() * tresEstrellas < 76) {
+                                                            out.print("<img src=\"GRAFICAS/3Estrella70p.png\">");
+                                                        } else if (100 / val.size() * tresEstrellas < 86) {
+                                                            out.print("<img src=\"GRAFICAS/3Estrella80p.png\">");
+                                                        } else if (100 / val.size() * tresEstrellas < 96) {
+                                                            out.print("<img src=\"GRAFICAS/3Estrella90p.png\">");
+                                                        } else {
+                                                            out.print("<img src=\"GRAFICAS/3Estrella100p.png\">");
+                                                        }
+                                                        out.print("</br>");
+                                                        if (100 / val.size() * cuatroEstrellas < 6) {
+                                                            out.print("<img src=\"GRAFICAS/4Estrella0p.png\">");
+                                                        } else if (100 / val.size() * cuatroEstrellas < 16) {
+                                                            out.print("<img src=\"GRAFICAS/4Estrella10p.png\">");
+                                                        } else if (100 / val.size() * cuatroEstrellas < 26) {
+                                                            out.print("<img src=\"GRAFICAS/4Estrella20p.png\">");
+                                                        } else if (100 / val.size() * cuatroEstrellas < 36) {
+                                                            out.print("<img src=\"GRAFICAS/4Estrella30p.png\">");
+                                                        } else if (100 / val.size() * cuatroEstrellas < 46) {
+                                                            out.print("<img src=\"GRAFICAS/4Estrella40p.png\">");
+                                                        } else if (100 / val.size() * cuatroEstrellas < 56) {
+                                                            out.print("<img src=\"GRAFICAS/4Estrella50p.png\">");
+                                                        } else if (100 / val.size() * cuatroEstrellas < 66) {
+                                                            out.print("<img src=\"GRAFICAS/4Estrella60p.png\">");
+                                                        } else if (100 / val.size() * cuatroEstrellas < 76) {
+                                                            out.print("<img src=\"GRAFICAS/4Estrella70p.png\">");
+                                                        } else if (100 / val.size() * cuatroEstrellas < 86) {
+                                                            out.print("<img src=\"GRAFICAS/4Estrella80p.png\">");
+                                                        } else if (100 / val.size() * cuatroEstrellas < 96) {
+                                                            out.print("<img src=\"GRAFICAS/4Estrella90p.png\">");
+                                                        } else {
+                                                            out.print("<img src=\"GRAFICAS/4Estrella100p.png\">");
+                                                        }
+                                                        
+                                                        
+                                                        out.print("</br>");
+                                                        if (100 / val.size() * cincoEstrellas < 6) {
+                                                            out.print("<img src=\"GRAFICAS/5Estrella0p.png\">");
+                                                        } else if (100 / val.size() * cincoEstrellas < 16) {
+                                                            out.print("<img src=\"GRAFICAS/5Estrella10p.png\">");
+                                                        } else if (100 / val.size() * cincoEstrellas < 26) {
+                                                            out.print("<img src=\"GRAFICAS/5Estrella20p.png\">");
+                                                        } else if (100 / val.size() * cincoEstrellas < 36) {
+                                                            out.print("<img src=\"GRAFICAS/5Estrella30p.png\">");
+                                                        } else if (100 / val.size() * cincoEstrellas < 46) {
+                                                            out.print("<img src=\"GRAFICAS/5Estrella40p.png\">");
+                                                        } else if (100 / val.size() * cincoEstrellas < 56) {
+                                                            out.print("<img src=\"GRAFICAS/5Estrella50p.png\">");
+                                                        } else if (100 / val.size() * cincoEstrellas < 66) {
+                                                            out.print("<img src=\"GRAFICAS/5Estrella60p.png\">");
+                                                        } else if (100 / val.size() * cincoEstrellas < 76) {
+                                                            out.print("<img src=\"GRAFICAS/5Estrella70p.png\">");
+                                                        } else if (100 / val.size() * cincoEstrellas < 86) {
+                                                            out.print("<img src=\"GRAFICAS/5Estrella80p.png\">");
+                                                        } else if (100 / val.size() * cincoEstrellas < 96) {
+                                                            out.print("<img src=\"GRAFICAS/5Estrella90p.png\">");
+                                                        } else {
+                                                            out.print("<img src=\"GRAFICAS/5Estrella100p.png\">");
+                                                        }
+                                                        
+                                                        out.print("</div>");
+                                                        
                                                         //////////////////////////////////////////////////
                                                         List<DtFuncion> fun = Fabrica.getCtrlEspectaculos().listarTodasLasFunciones(contexto.getAttribute("EspectaculoSeleccionadpEnConsultarEspectaculo").toString());
                                                         out.print("<form action=\"ConsultarEspectaculoBackEnd\">");
@@ -447,7 +583,7 @@
                                                             if (sfun != "Funciones..." && sfun != null) {
                                                                 for (DtFuncion f : fun) {
                                                                     if (sfun.equals(f.getNombre())) {
-                                                                        out.print("<img src='" + f.getImagen() + "' alt='imagen de la funcion'>");
+                                                                        out.print("<img class=\"imgPrincipal\" src='" + f.getImagen() + "' alt='imagen de la funcion'>");
                                                                         out.print("<h5> Nombre: " + f.getNombre() + "</h5>");
                                                                         out.print("<p> Fecha: " + f.getFecha().toString() + "</p>");
                                                                         out.print("<p> Fecha de registro: " + f.getFechaDeRegistro().toString() + "</p>");
@@ -518,7 +654,7 @@
                                                                 for (String paq : paqs) {
                                                                     if (spaq.equals(paq)) {
                                                                         DtPaqueteDeEspectaculos instanciaP = Fabrica.getCtrlPaquetes().mostrarInfoPaquete(paq);
-                                                                        out.print("<img src='" + instanciaP.getImagen() + "' alt='imagen del paquete'>");
+                                                                        out.print("<img class=\"imgPrincipal\" src='" + instanciaP.getImagen() + "' alt='imagen del paquete'>");
 
                                                                         out.print("<h5> Nombre: " + instanciaP.getNombre() + "</h5>");
                                                                         out.print("<p> Descripcion: " + instanciaP.getDescripcion() + "</p>");
@@ -655,7 +791,7 @@
                                             if (esp != "Seleccione..." && esp != null) {
                                                 for (DtEspectaculo e : esps) {
                                                     if (esp.equals(e.getNombre())) {
-                                                        out.print("<img src='" + e.getImagen() + "' alt='imagen del espectaculo'>");
+                                                        out.print("<img class=\"imgPrincipal\" src='" + e.getImagen() + "' alt='imagen del espectaculo'>");
                                                         if (e.getVideo() != null) {
                                                             String[] parts = e.getVideo().split("v=");
                                                             out.print("<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/" + parts[1] + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>" + "</iframe>");
@@ -719,7 +855,7 @@
                                                             if (sfun != "Funciones..." && sfun != null) {
                                                                 for (DtFuncion f : fun) {
                                                                     if (sfun.equals(f.getNombre())) {
-                                                                        out.print("<img src='" + f.getImagen() + "' alt='imagen de la funcion'>");
+                                                                        out.print("<img class=\"imgPrincipal\" src='" + f.getImagen() + "' alt='imagen de la funcion'>");
                                                                         out.print("<h5> Nombre: " + f.getNombre() + "</h5>");
                                                                         out.print("<p> Fecha: " + f.getFecha().toString() + "</p>");
                                                                         out.print("<p> Fecha de registro: " + f.getFechaDeRegistro().toString() + "</p>");
@@ -790,7 +926,7 @@
                                                                 for (String paq : paqs) {
                                                                     if (spaq.equals(paq)) {
                                                                         DtPaqueteDeEspectaculos instanciaP = Fabrica.getCtrlPaquetes().mostrarInfoPaquete(paq);
-                                                                        out.print("<img src='" + instanciaP.getImagen() + "' alt='imagen del paquete'>");
+                                                                        out.print("<img class=\"imgPrincipal\" src='" + instanciaP.getImagen() + "' alt='imagen del paquete'>");
 
                                                                         out.print("<h5> Nombre: " + instanciaP.getNombre() + "</h5>");
                                                                         out.print("<p> Descripcion: " + instanciaP.getDescripcion() + "</p>");
@@ -887,7 +1023,34 @@
 
         </script> 
 
+        <script>
+            const jsonUnaEstrella = <%=jsonUnaEstrella%>;
+            const jsonDosEstrellas = <%=jsonDosEstrellas%>;
+            const jsonTresEstrellas = <%=jsonTresEstrellas%>;
+            const jsonCuatroEstrellas = <%=jsonCuatroEstrellas%>;
+            const jsonCincoEstrellas = <%=jsonCincoEstrellas%>;
 
+            // create data
+            var data = [
+                ["uno", parseInt(jsonUnaEstrella)],
+                ["dos", parseInt(jsonDosEstrellas],
+                        ["tres", parseInt(jsonTresEstrellas)],
+                ["cuatro", parseInt(jsonCuatroEstrellas)],
+                ["cinco", parseInt(jsonCincoEstrellas)]
+            ];
+
+// create a chart
+            chart = anychart.bar();
+
+// create a bar series and set the data
+            var series = chart.bar(data);
+
+// set the container id
+            chart.container("grafica");
+
+// initiate drawing the chart
+            chart.draw();
+        </script>
         <%@include file="headerScript.jsp"%>
     </body>
 

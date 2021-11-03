@@ -13,15 +13,19 @@ import java.sql.Date;
  */
 public class DtSorteo {
     private String nombre;
-    private Date fecha;
     private Long id;
+    private Long fechaLong;
 
     public DtSorteo(String nombre, Date fecha, Long id) {
         this.nombre = nombre;
-        this.fecha = fecha;
+        this.fechaLong = fecha.getTime();
         this.id = id;
     }
-
+    public Date getFechaLong() {
+        return new Date(fechaLong);
+    }
+    
+    
     public Long getId() {
         return id;
     }
@@ -35,16 +39,12 @@ public class DtSorteo {
         return nombre;
     }
 
-    public Date getFecha() {
-        return fecha;
-    }
+    
+
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
     
 }
