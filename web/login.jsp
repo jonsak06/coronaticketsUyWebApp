@@ -23,7 +23,7 @@
 			var nombreVar = $('#nick').val();
 			// Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
 			$.post('NicknameExiste', {
-				nombre : nombreVar
+				nick : nombreVar
 			}, function(responseText) {
 				$('#mensaje').html(responseText);
 			});
