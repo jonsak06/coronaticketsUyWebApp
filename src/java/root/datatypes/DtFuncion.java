@@ -16,7 +16,7 @@ import java.util.List;
 public class DtFuncion {
     private Long id;
     private String nombre;
-    private Timestamp horaInicio;
+    private long horaInicio;
     private long fechaDeRegistro;
     private long fecha;
     private String imagen;
@@ -26,7 +26,7 @@ public class DtFuncion {
     public DtFuncion(Long id, String nombre, Timestamp horaInicio, Date fechaDeRegistro, Date fecha) {
         this.id = id;
         this.nombre = nombre;
-        this.horaInicio = horaInicio;
+        this.horaInicio = horaInicio.getTime();
         this.fechaDeRegistro = fechaDeRegistro.getTime();
         this.fecha = fecha.getTime();
     }
@@ -51,7 +51,8 @@ public class DtFuncion {
     }
 
     public Timestamp getHoraInicio() {
-        return horaInicio;
+        java.sql.Timestamp hora = new java.sql.Timestamp(horaInicio);
+        return hora;
     }
 
     public Date getFechaDeRegistro() {
