@@ -13,12 +13,12 @@ import java.sql.Date;
  */
 public class DtCompra {
     private Long id;
-    private Date fecha;
+    private long fecha;
 
     public DtCompra(){}
     public DtCompra(Long id, Date fecha) {
         this.id = id;
-        this.fecha = fecha;
+        this.fecha = fecha.getTime();
     }
 
     public Long getId() {
@@ -26,7 +26,8 @@ public class DtCompra {
     }
 
     public Date getFecha() {
-        return fecha;
+        java.sql.Date date = new java.sql.Date(fecha);
+        return date;
     }
     
 }

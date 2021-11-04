@@ -21,7 +21,7 @@ public class DtEspectaculo {
     private int cantidadMinimaEspectadores;
     private String url;
     private float costo;
-    private Date fechaDeRegistro;
+    private long fechaDeRegistro;
     private String imagen;
     private String plataforma;
     private List<String> categorias;
@@ -80,7 +80,7 @@ public class DtEspectaculo {
         this.cantidadMinimaEspectadores = cantidadMinimaEspectadores;
         this.url = url;
         this.costo = costo;
-        this.fechaDeRegistro = fechaDeRegistro;
+        this.fechaDeRegistro = fechaDeRegistro.getTime();
         this.imagen = imagen;
         this.plataforma = plataforma;
         this.categorias = categorias;
@@ -101,7 +101,7 @@ public class DtEspectaculo {
         this.cantidadMinimaEspectadores = cantidadMinimaEspectadores;
         this.url = url;
         this.costo = costo;
-        this.fechaDeRegistro = fechaDeRegistro;
+        this.fechaDeRegistro = fechaDeRegistro.getTime();
     }
 
     public DtEspectaculo(Long id, String nombre, String descripcion, int duracion, int cantidadMaximaEspectadores, int cantidadMinimaEspectadores, String url, float costo, Date fechaDeRegistro, String imagen) {
@@ -113,7 +113,7 @@ public class DtEspectaculo {
         this.cantidadMinimaEspectadores = cantidadMinimaEspectadores;
         this.url = url;
         this.costo = costo;
-        this.fechaDeRegistro = fechaDeRegistro;
+        this.fechaDeRegistro = fechaDeRegistro.getTime();
         this.imagen = imagen;
     }
 
@@ -140,7 +140,7 @@ public class DtEspectaculo {
         this.cantidadMinimaEspectadores = cantidadMinimaEspectadores;
         this.url = url;
         this.costo = costo;
-        this.fechaDeRegistro = fechaDeRegistro;
+        this.fechaDeRegistro = fechaDeRegistro.getTime();
         this.imagen = imagen;
         this.nombreArtista = nombreArtista;
     }
@@ -195,7 +195,8 @@ public class DtEspectaculo {
     }
 
     public Date getFechaDeRegistro() {
-        return fechaDeRegistro;
+        java.sql.Date fecha = new java.sql.Date(fechaDeRegistro);
+        return fecha;
     }
     
     public String getPlataforma() {
