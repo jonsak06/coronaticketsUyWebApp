@@ -22,12 +22,110 @@
         DtRegistroAcceso r = new DtRegistroAcceso(0,java.net.InetAddress.getLocalHost().getHostAddress(),request.getHeader("User-Agent"),request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()+"/"+request.getServletPath().substring(request.getServletPath().lastIndexOf("/") +1),moment);
         ir.ingresarRegistro(r);
         %>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/htm<link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>l; charset=UTF-8">
         <title>JSP Page</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
         <link rel="stylesheet" href="headerStyles.css">
+        <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <style>
+@import url('https://fonts.googleapis.com/css?family=Montserrat:600&display=swap');
 
+.content{
+  margin: auto;
+  display: flex;
+  border: 2px solid #eae2e1;
+  height: 70px;
+  width: 350px;
+  cursor: pointer;
+}
+.content.heart-active{
+  border-color: #f9b9c4;
+  background: #fbd0d8;
+}
+.heart{
+  display: flex;
+  position: relative;
+
+  background: url("img.png") no-repeat;
+
+  background-size: 2900%;
+  height: 100px;
+  width: 100px;
+  top: -23px;
+}
+.text{
+ display: flex;
+  font-size: 15px;
+  margin-left: -5px;
+  color: grey;
+  font-family: 'Montserrat',sans-serif;
+  margin-top: 12px;
+  
+}
+
+.text.heart-active{
+  color: #000;
+}
+.heart.heart-active{
+  animation: animate .8s steps(28) 1;
+  background-position: right;
+}
+
+.contentA{
+  margin: auto;
+  display: flex;
+  border: 2px solid #eae2e1;
+  height: 70px;
+  width: 350px;
+  cursor: pointer;
+  border-color: #f9b9c4;
+  background: #fbd0d8;
+}
+.contentA.heart-active{
+  border-color: none;
+  background: none;
+}
+.heartA{
+  display: flex;
+  position: relative;
+
+  background: url("img.png") no-repeat;
+
+  background-size: 2900%;
+  height: 100px;
+  width: 100px;
+  top: -23px;
+}
+.textA{
+ display: flex;
+  font-size: 15px;
+  margin-left: -5px;
+  color: grey;
+  font-family: 'Montserrat',sans-serif;
+  margin-top: 12px;
+  
+}
+
+.textA.heart-active{
+  color: #000;
+}
+.heartA.heart-active{
+  animation: animate .8s steps(28) 1;
+  background-position: right;
+}
+
+
+
+@keyframes animate {
+  0%{
+    background-position: left;
+  }
+  100%{
+    background-position: right;
+  }
+}
 
             body {
                 margin: 0;
@@ -224,13 +322,28 @@
                     out.print("<p> Fecha de registro: " + e.getFechaDeRegistro() + "</p>");
                     if (nombresEspsFab.contains(e.getNombre())) {
 
-                        out.print("<label><input type=\"checkbox\" value=\"none\" name=\""+e.getNombre()+"\" checked> <img src=\"corazonLleno.png\"/></label><br>");
-                        
+//                        out.print("<label><input type=\"checkbox\" value=\"none\" name=\""+e.getNombre()+"\" checked> <img src=\"corazonLleno.png\"/></label><br><br>");
+                       
+                            out.print("<div class=\"contentA\">");
+                            out.print("<span class=\"heartA\"></span>");
+                            out.print("<span class=\"textA\">"+ e.getNombre()+"</span>");
+                            out.print("</div>");
+                            
+      
+        
+           
+      
+    
                         
 
                     } else {
-                        out.print("<label><input type=\"checkbox\" value=\"none\" name=\""+e.getNombre()+"\" > <img src=\"corazonVacio.png\"/></label><br>");
+//                        out.print("<label><input type=\"checkbox\" value=\"none\" name=\""+e.getNombre()+"\" > <img src=\"corazonVacio.png\"/></label><br>");
                         
+                            out.print("<div class=\"content\">");
+                            out.print("<span class=\"heart\"></span>");
+                            out.print("<span class=\"text\">"+ e.getNombre()+"</span>");
+                            out.print("</div>");
+                            
                     }
                     
 
@@ -241,6 +354,45 @@
             %>
         </div>
 
+        <script>
+      $(document).ready(function(){
+         //empieza la parte manual del estado desactivado
+        $('.content').click(function(){
+//       if(var1 === true)
+//          {var1 = false;}
+//        else{var1 = true; }
+
+       
+          $(this).toggleClass("heart-active");
+          
+          $('.text',this).toggleClass("heart-active");
+          $('.heart',this).toggleClass("heart-active");
+         var texto = $('.text',this).text();
+          $.post('addEspectaculoFaboritoBackEnd', {
+				nombre : texto
+			});
+        });
+        //empieza la parte automatica del estado activado
+        $(this).toggleClass("heart-active");
+          $('.conentA',this).toggleClass("heart-active");
+          $('.textA',this).toggleClass("heart-active");
+          $('.heartA',this).toggleClass("heart-active");
+          //empieza la parte manual del estado activado
+        $('.contentA').click(function(){
+          $(this).toggleClass("heart-active");
+          
+          $('.textA',this).toggleClass("heart-active");
+          $('.heartA',this).toggleClass("heart-active");
+         var texto = $('.textA',this).text();
+          $.post('addEspectaculoFaboritoBackEnd', {
+				nombre : texto
+			});
+        });
+        
+        
+      });
+    </script>
+        
         <script>
             const jsonNombresEspsFab = <%=jsonNombresEspsFab%>;
             const jsonNombresEspsNoFab = <%=jsonNombresEspsNoFab%>;

@@ -46,6 +46,7 @@ public class addEspectaculoFaboritoBackEnd extends HttpServlet {
             List<DtEspectaculo> listaEspFav = Fabrica.getCrlUsuarios().getEspectaculosFaboritos(contexto.getAttribute("nickname").toString());
             List<String> nombresEspNoFav = new ArrayList<String>();
             List<String> nombresEspFav = new ArrayList<String>();
+            String nomEspec = request.getParameter("nombre");
             for (DtEspectaculo e : listaEspFav) {
                 nombresEspFav.add(e.getNombre());
             }
@@ -56,14 +57,14 @@ public class addEspectaculoFaboritoBackEnd extends HttpServlet {
             }
             for(String e:nombresEspNoFav)
             {
-                if((request.getParameter(e) != null))
+                if(e.equals(nomEspec))
                 {
                     Fabrica.getCrlUsuarios().addEspectaculoFavorito(contexto.getAttribute("nickname").toString(), e);
                 }
             }
             for(String e:nombresEspFav)
             {
-                if((request.getParameter(e) == null))
+                if(e.equals(nomEspec))
                 {
                     Fabrica.getCrlUsuarios().quitarEspectaculoFavorito(contexto.getAttribute("nickname").toString(), e);
                 }
