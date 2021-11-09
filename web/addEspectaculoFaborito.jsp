@@ -368,6 +368,7 @@
           $('.text',this).toggleClass("heart-active");
           $('.heart',this).toggleClass("heart-active");
          var texto = $('.text',this).text();
+         alert(texto);
           $.post('addEspectaculoFaboritoBackEnd', {
 				nombre : texto
 			});

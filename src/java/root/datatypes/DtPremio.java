@@ -13,6 +13,35 @@ public class DtPremio {
     private Long id;
     private String nombre;
     private String descripcion;
+    private Long fechaSorteo;
+    private String nombreEspectaculo;
+    private String nombreFuncion;
+
+    public Long getFechaSorteo() {
+        return fechaSorteo;
+    }
+
+    public void setFechaSorteo(Long fechaSorteo) {
+        this.fechaSorteo = fechaSorteo;
+    }
+
+    public String getNombreEspectaculo() {
+        return nombreEspectaculo;
+    }
+
+    public void setNombreEspectaculo(String nombreEspectaculo) {
+        this.nombreEspectaculo = nombreEspectaculo;
+    }
+
+    public String getNombreFuncion() {
+        return nombreFuncion;
+    }
+
+    public void setNombreFuncion(String nombreFuncion) {
+        this.nombreFuncion = nombreFuncion;
+    }
+    
+    
 
     public DtPremio(Long id, String nombre, String descripcion) {
         this.id = id;

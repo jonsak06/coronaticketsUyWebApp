@@ -18,10 +18,224 @@
         DtRegistroAcceso r = new DtRegistroAcceso(0,java.net.InetAddress.getLocalHost().getHostAddress(),request.getHeader("User-Agent"),request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()+"/"+request.getServletPath().substring(request.getServletPath().lastIndexOf("/") +1),moment);
         ir.ingresarRegistro(r);
         %>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <link rel="stylesheet" href="headerStyles.css">
+        <style>
+
+
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: sans-serif;
+                background: linear-gradient(to right, #b92b27, #1565c0)
+            }
+
+            .card {
+                margin-bottom: 10px;
+                border: none
+            }
+
+            .box {
+                width: 500px;
+                padding: 40px;
+                position: absolute;
+                top: 25%;
+                left: 25%;
+                background: #191919;
+                ;
+                text-align: center;
+                transition: 0.25s;
+                margin-top: 100px
+            }
+
+            .box input[type="text"],
+            .box input[type="password"] {
+                border: 0;
+                background: none;
+                display: block;
+                margin: 20px auto;
+                text-align: center;
+                border: 2px solid #3498db;
+                padding: 10px 10px;
+                width: 250px;
+                outline: none;
+                color: white;
+                border-radius: 24px;
+                transition: 0.25s
+            }
+
+
+            .box h1 {
+                color: white;
+                text-transform: uppercase;
+            }
+
+            .box h3 {
+                color: white;
+                text-transform: uppercase;
+                font-size: 40px;
+
+            }
+            .box h4 {
+                color: white;
+                text-transform: uppercase;
+                font-size: 30px;
+
+            }
+
+            .box h5 {
+                color: white;
+                text-transform: uppercase;
+                font-size: 22px;
+
+            }
+            .box h6 {
+                color: white;
+                text-transform: uppercase;
+
+            }
+
+            .box input[type="text"]:focus,
+            .box input[type="password"]:focus {
+                width: 200px;
+                border-color: #2ecc71
+            }
+
+            .box select:focus {
+                width: 200px;
+                border-color: #2ecc71
+            }
+
+            .box select {
+                border: 0;
+                background: none;
+                display: block;
+                margin: 20px auto;
+                text-align: center;
+                border: 2px solid #3498db;
+                padding: 10px 10px;
+                width: 250px;
+                outline: none;
+                color: white;
+                border-radius: 24px;
+                transition: 0.25s
+            }
+
+            .box li {
+                color: white;
+                font-weight: 250
+            }
+
+            .box p{
+                color: white;
+                font-weight: 250
+            }
+
+
+            .box input[type="submit"] {
+                border: 0;
+                background: none;
+                display: block;
+                margin: 20px auto;
+                text-align: center;
+                border: 2px solid #2ecc71;
+                padding: 14px 40px;
+                outline: none;
+                color: white;
+                border-radius: 24px;
+                transition: 0.25s;
+                cursor: pointer
+            }
+
+            .box button {
+                border: 0;
+                background: none;
+                display: block;
+                margin: 20px auto;
+                text-align: center;
+                border: 2px solid #2ecc71;
+                padding: 14px 40px;
+                outline: none;
+                color: white;
+                border-radius: 24px;
+                transition: 0.25s;
+                cursor: pointer
+            }
+
+            .box option {
+                background: black;
+                color: white;
+            }
+
+            .box input[type="submit"]:hover {
+                background: #2ecc71
+            }
+
+            .grafica{
+                width: 130px;
+                margin: auto;
+                text-align: left;
+            }
+
+            .grafica img{
+                margin: 0px;
+            }
+
+
+
+
+            .imgPrincipal{
+                height: 300px;
+                width: 300px;
+                margin: 20px auto;
+            }
+            .forgot {
+                text-decoration: underline
+            }
+
+            #headerMovil {
+                display: none;
+            }
+
+            @media (max-width: 1000px) {
+                #headerDesktop {
+                    display: none;
+                }
+                #headerMovil {
+                    display: block;
+                }
+                .box {
+                    position:relative;
+                    top: 0;
+                    left: 0;
+                    width: auto;
+                    margin-top: 0;
+                    padding: 20px;
+                    background: #2d2d2d;
+                    color: gray !important;
+                }
+                body {
+                    background: #2d2d2d;
+                }
+                .box h3,
+                .box h4 {
+                    font-size: 22px;
+                }
+            }
+
+
+        </style>
     </head>
     <body>
+        <div id="headerDesktop">
+            <%@include file="header.jsp"%>
+        </div>
+        <div id="headerMovil">
+            <%@include file="headerMovil.jsp"%>
+        </div>
+        <div class="box">
         <%ServletContext contexto = getServletContext();%>
         <%
 
@@ -105,6 +319,7 @@
                             List<DtFuncion> funQueTienenSorteo = Fabrica.getCtrlEspectaculos().listarFuncionesQuePuedenTenerSorteo(contexto.getAttribute("EspectaculoSeleccionadoEnSorteos").toString());
                             List<String> nombreFunQueTienenSorteo = new ArrayList<String>();
                             for (DtFuncion f : funQuePuedenTenerSorteo) {
+                            out.print("<h5> Nombre: " + f.getNombre() + "</h5>");
                                 nombreFunQueTienenSorteo.add(f.getNombre());
                             }
 
@@ -157,12 +372,19 @@
                                 if (sfun != "Funciones..." && sfun != null) {
                                     for (DtFuncion f : fun) {
                                         if (sfun.equals(f.getNombre())) {
-                                            out.print("<img src='" + f.getImagen() + "' alt='imagen de la funcion'>");
+                                            
                                             out.print("<h5> Nombre: " + f.getNombre() + "</h5>");
                                             out.print("<p> Fecha: " + f.getFecha().toString() + "</p>");
                                             out.print("<p> Fecha de registro: " + f.getFechaDeRegistro().toString() + "</p>");
                                             out.print("<p> Hora de inicio:" + f.getHoraInicio().toString() + "</p>");
                                             
+                                            
+                                            if (nombreFunQuePuedenTenerSorteo.contains(f.getNombre())) {
+                                                out.print("<form action=\"SorteosBackEnd\">");
+                                                out.print("<button class='btn btn-outline-secondaryf' type='submit' >Crear sorteo</button>");
+
+                                                out.print("</form>");
+                                            } else if (nombreFunQueTienenSorteo.contains(f.getNombre())) {
                                             List<DtEspectador> lEsp = Fabrica.getCtrlEspectaculos().listarGanadores(f.getNombre());
                                                
                                                  for (DtEspectador es : lEsp) {
@@ -171,14 +393,7 @@
                                                     out.print("<p>Apellido:" + es.getApellido() + "</p>");
                                                     out.print("<p>Correo:" + es.getCorreo() + "</p>");
 
-                                                }
-                                            if (nombreFunQuePuedenTenerSorteo.contains(f.getNombre())) {
-                                                out.print("<form action=\"SorteosBackEnd\">");
-                                                out.print("<button class='btn btn-outline-secondaryf' type='submit' >Crear sorteo</button>");
-
-                                                out.print("</form>");
-                                            } else if (nombreFunQueTienenSorteo.contains(f.getNombre())) {
-                                                
+                                                }    
 
                                             } else {
                                                 out.print("<p>Esta funcion no puede tener sorteo </p>");
@@ -195,7 +410,8 @@
 
 
         %>
-    </body>
+    </div>
+        </body>
     <script>   const esps = document.getElementById("inputGroupSelect04e");
         const botonConsultarEsps = document.querySelector(".btn-outline-secondarye");
         esps.addEventListener("change", e => {

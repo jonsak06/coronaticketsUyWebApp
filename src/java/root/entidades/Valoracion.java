@@ -39,7 +39,7 @@ public class Valoracion implements Serializable {
         return hash;
     }
 
-    public Valoracion(Date fecha, int valor, Espectador espectador, Espectaculo espectaculo) {
+    public Valoracion(int valor, Espectador espectador, Espectaculo espectaculo) {
         
         this.valor = valor;
         this.espectador = espectador;

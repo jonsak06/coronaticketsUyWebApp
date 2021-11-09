@@ -23,6 +23,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.util.Calendar;
 
 /**
  *
@@ -45,31 +46,21 @@ public class valorarEspectaculoBackEnd extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
 
-            ServletContext contexto = getServletContext();
-
-            List<DtEspectaculo> listaEsp = Fabrica.getCrlUsuarios().getEspectaculosALosQueElEspectadorFueAUnaFuncion(contexto.getAttribute("nickname").toString());
-            List<DtEspectaculo> listaEspVal = Fabrica.getCrlUsuarios().getEspectaculosValorados(contexto.getAttribute("nickname").toString());
-            List<String> nombresEspNoVal = new ArrayList<String>();
-            List<String> nombresEspVal = new ArrayList<String>();
-            for (DtEspectaculo e : listaEspVal) {
-                nombresEspVal.add(e.getNombre());
-            }
-            for (DtEspectaculo e : listaEsp) {
-                if (!nombresEspVal.contains(e.getNombre())) {
-                    nombresEspNoVal.add(e.getNombre());
+           ServletContext contexto = getServletContext();
+if (request.getParameter("espectaculo") != null) {
+                if (!request.getParameter("espectaculo").equals("Espectaculos...")) {
+                    contexto.setAttribute("EspectaculoSeleccionadpEnConsultarValorar", request.getParameter("espectaculo"));
+                   
                 }
-            }
-            for (String e : nombresEspNoVal) {
-                if ((request.getParameter(e) != null)) {
-                    if (request.getParameter(e) != "") {
-                        java.sql.Date fecha = new java.sql.Date(1, 1, 1);
-                        int valor = parseInt(request.getParameter(e));
-                        Fabrica.getCrlUsuarios().valorarEspectaculo(contexto.getAttribute("nickname").toString(), e, valor, fecha);
-                        Fabrica.getCtrlEspectaculos().calcularValoracion(e);
-                    }
-                }
-            }
-            RequestDispatcher dispatcher = contexto.getRequestDispatcher("/valorarEspectaculo.jsp");
+            }else{
+            String nomEspec = request.getParameter("nombre");
+            int valor = parseInt(request.getParameter("val"));
+            String nickname = contexto.getAttribute("nickname").toString();
+            java.sql.Date ahorita = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+            Fabrica.getCrlUsuarios().valorarEspectaculo(nickname, nomEspec, valor, ahorita);
+            
+}
+RequestDispatcher dispatcher = contexto.getRequestDispatcher("/valorarEspectaculo.jsp");
             dispatcher.forward(request, response);
         }
     }

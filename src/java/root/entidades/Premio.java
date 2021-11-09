@@ -112,6 +112,9 @@ public class Premio implements Serializable {
     public DtPremio getMyDt()
     {
         DtPremio dt = new DtPremio(this.id, this.nombre, this.descripcion);
+        dt.setNombreEspectaculo(this.sorteo.getFuncion().getEspectaculo().getNombre());
+        dt.setFechaSorteo(this.sorteo.fecha.getTime());
+        dt.setNombreFuncion(this.sorteo.getFuncion().getNombre());
         return dt;
     }
 }
