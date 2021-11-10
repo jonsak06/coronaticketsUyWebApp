@@ -128,7 +128,7 @@ public class AltaUsuariosBackEnd extends HttpServlet {
             if (request.getParameter("subir") != null) {
                 Part archivo = request.getPart("imagen"); //llamada al parámetro foto de mi formulario.
                 String context = request.getServletContext().getRealPath(""); //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
-
+                
 //                String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString();
 
                 archivo.write(context + File.separator + nickname.replaceAll("\\s+", "")+".jpg"); // Escribimos el archivo al disco duro del servidor.

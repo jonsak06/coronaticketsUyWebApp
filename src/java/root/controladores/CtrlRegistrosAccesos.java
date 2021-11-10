@@ -20,38 +20,38 @@ import root.interfaces.iRegistrosAcceso;
 public class CtrlRegistrosAccesos  implements iRegistrosAcceso {
     public CtrlRegistrosAccesos(){}
     public void ingresarRegistro(DtRegistroAcceso r) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
-        EntityManager em = emf.createEntityManager();
-        List<RegistroAcceso> registros = em.createNamedQuery("RegistroAcceso.findAll",RegistroAcceso.class).getResultList();
-        if(registros.size()!=0){
-            long mom = new java.util.Date().getTime();
-            if(registros.size()==10000 /*|| (mom- registros.get(0).getMoment())>=30*24*60*60*1000*/){
-            em.getTransaction().begin();
-            for(RegistroAcceso reg: registros){
-            em.remove(reg);
-            }
-            em.getTransaction().commit();
-                em.getTransaction().begin();
-                RegistroAcceso nuevoRegistro = new RegistroAcceso(r);
-                nuevoRegistro.setCounter(1);
-                em.persist(nuevoRegistro);
-                em.getTransaction().commit();
-            }else{
-                em.getTransaction().begin();
-                RegistroAcceso nuevoRegistro = new RegistroAcceso(r);
-                nuevoRegistro.setCounter(registros.size()+1);
-                em.persist(nuevoRegistro);
-                em.getTransaction().commit();
-            }
-        }else{
-                em.getTransaction().begin();
-                RegistroAcceso nuevoRegistro = new RegistroAcceso(r);
-                nuevoRegistro.setCounter(1);
-                em.persist(nuevoRegistro);
-                em.getTransaction().commit();
-        }
-        em.close();
-        emf.close();
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCIA");
+//        EntityManager em = emf.createEntityManager();
+//        List<RegistroAcceso> registros = em.createNamedQuery("RegistroAcceso.findAll",RegistroAcceso.class).getResultList();
+//        if(registros.size()!=0){
+//            long mom = new java.util.Date().getTime();
+//            if(registros.size()==10000 /*|| (mom- registros.get(0).getMoment())>=30*24*60*60*1000*/){
+//            em.getTransaction().begin();
+//            for(RegistroAcceso reg: registros){
+//            em.remove(reg);
+//            }
+//            em.getTransaction().commit();
+//                em.getTransaction().begin();
+//                RegistroAcceso nuevoRegistro = new RegistroAcceso(r);
+//                nuevoRegistro.setCounter(1);
+//                em.persist(nuevoRegistro);
+//                em.getTransaction().commit();
+//            }else{
+//                em.getTransaction().begin();
+//                RegistroAcceso nuevoRegistro = new RegistroAcceso(r);
+//                nuevoRegistro.setCounter(registros.size()+1);
+//                em.persist(nuevoRegistro);
+//                em.getTransaction().commit();
+//            }
+//        }else{
+//                em.getTransaction().begin();
+//                RegistroAcceso nuevoRegistro = new RegistroAcceso(r);
+//                nuevoRegistro.setCounter(1);
+//                em.persist(nuevoRegistro);
+//                em.getTransaction().commit();
+//        }
+//        em.close();
+//        emf.close();
     }
     
     public List<DtRegistroAcceso> getRegistrosAcceso(){

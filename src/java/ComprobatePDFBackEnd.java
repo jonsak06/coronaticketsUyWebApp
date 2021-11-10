@@ -24,6 +24,8 @@ import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.BaseColor;
 import java.awt.Desktop;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 
 /**
  *
@@ -51,11 +53,12 @@ public class ComprobatePDFBackEnd extends HttpServlet {
             String nombreEspectaculo = request.getParameter("nombreEspectaculo");
             String NombreFuncion = request.getParameter("NombreFuncion");
             String fecha = request.getParameter("fecha");
-
             Document documento = new Document();
-
+            ServletContext contexto = getServletContext();
+             String context = request.getServletContext().getRealPath(""); 
+             contexto.setAttribute("realPath", context+nombrePremio.replaceAll("\\s+", "")+".pdf");
 // Se crea el OutputStream para el fichero donde queremos dejar el pdf.
-            FileOutputStream ficheroPdf = new FileOutputStream("/home/tecnologo/coronaticketsUyWebApp/web/"+nombrePremio.replaceAll("\\s+", "")+".pdf");
+            FileOutputStream ficheroPdf = new FileOutputStream(context+nombrePremio.replaceAll("\\s+", "")+".pdf");
 
 // Se asocia el documento al OutputStream y se indica que el espaciado entre
 // lineas sera de 20. Esta llamada debe hacerse antes de abrir el documento
@@ -67,6 +70,11 @@ public class ComprobatePDFBackEnd extends HttpServlet {
             documento.add(new Paragraph("Comprobante del premio " + nombrePremio + " que es:" + descripcion + " y se sorteo de la funcion" + NombreFuncion + " del espectaculo " + nombreEspectaculo + " en la fecha" + fecha + ""));
 
             documento.close();
+            
+        RequestDispatcher dispatcher = contexto.getRequestDispatcher("/verPremiosEspecrador.jsp");
+        dispatcher.forward(request, response);
+            
+            
             
         }catch(IOException ex){
             

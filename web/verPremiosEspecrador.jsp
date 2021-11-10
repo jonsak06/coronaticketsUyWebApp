@@ -9,11 +9,13 @@
 <%@page import="root.datatypes.*"%>
 <%@page import="root.fabrica.Fabrica"%>
 <%@page import="java.sql.Date"%>
+<%@page import="com.google.gson.Gson"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-            <%
+        <%
             iRegistrosAcceso ir = Fabrica.getCtrlRegistrosAcceso();
             long moment = new java.util.Date().getTime();
             DtRegistroAcceso r = new DtRegistroAcceso(0, java.net.InetAddress.getLocalHost().getHostAddress(), request.getHeader("User-Agent"), request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/" + request.getServletPath().substring(request.getServletPath().lastIndexOf("/") + 1), moment);
@@ -295,6 +297,12 @@
             <%ServletContext contexto = getServletContext();%>
             <%
 
+               String context = "";
+               if(contexto.getAttribute("realPath")!=null){
+                    context=contexto.getAttribute("realPath").toString();
+                }
+                Gson gson = new Gson();
+            String contextGson = gson.toJson(context);
                 List<DtPremio> lpre = Fabrica.getCrlUsuarios().getPremiosDelEspectador(contexto.getAttribute("nickname").toString());
                 DtPremio auxiliar = null;
                 List<DtPremio> lpreOrdenado = new ArrayList<DtPremio>();
@@ -312,7 +320,7 @@
                         }
                     }
                 }
-                lpre=lpreOrdenado;
+                lpre = lpreOrdenado;
 
                 for (DtPremio p : lpre) {
                     out.print("<p>" + p.getNombre() + "</p>");
@@ -337,13 +345,21 @@
             %>
         </div >
         <script>
-
+            const contextGson = <%=contextGson%>;
+            if(contextGson!=""){
+                alert(contextGson);
+                window.open(contextGson);
+            }
+            </script>
+            <script>
+            
             $(document).ready(function () {
                 //empieza la parte manual del estado desactivado
                 $('.form').click(function () {
 //       if(var1 === true)
 //          {var1 = false;}
 //        else{var1 = true; }
+
                     var nombrePremio = $('.nombrePremio', this).text();
 
                     var descripcion = $('.descripcion', this).text();
@@ -357,12 +373,9 @@
                         NombreFuncion: NombreFuncion,
                         fecha: fecha
                     });
-
+                    location.reload();
                     alert(nombrePremio);
-
-                    var archivo = "/coronaticketsUyWebApp/" + nombrePremio.replace(/\s+/g, '') + ".pdf";
-                    alert(archivo);
-                    window.open(archivo);
+                    
                 });
             });
 
