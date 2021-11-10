@@ -21,6 +21,12 @@
     const agregarEspAPaq = document.getElementById("agregarEspAPaq");
     const consultaPaquete = document.getElementById("consultaPaquete");
     const compraPaquete = document.getElementById("compraPaquete");
+    
+    const Sorteos = document.getElementById("Sorteos");
+    const addEspectaculoFaborito = document.getElementById("addEspectaculoFaborito");
+    const verPremiosEspecrador = document.getElementById("verPremiosEspecrador");
+    const valorarEspectaculo = document.getElementById("valorarEspectaculo");
+    
     const altaUsuario = document.getElementById("altaUsuario");//boton
     const login = document.getElementById("login");//boton
     const logout = document.getElementById("logout");//boton
@@ -31,14 +37,19 @@
         registroAFuncion.classList.add("hide");
         compraPaquete.classList.add("hide");
         login.classList.add("hide");
+        addEspectaculoFaborito.classList.add("hide");
+        verPremiosEspecrador.classList.add("hide");
+        valorarEspectaculo.classList.add("hide");
     } else if(tipoUsuario === "Espectador") {
         altaUsuario.classList.add("hide");
         altaEspectaculo.classList.add("hide");
         altaFuncion.classList.add("hide");
         crearPaquete.classList.add("hide");
         agregarEspAPaq.classList.add("hide");
+        Sorteos.classList.add("hide");
         login.classList.add("hide");
     } else if(tipoUsuario === "Visitante") {
+        Sorteos.classList.add("hide");
         modificarUsuario.classList.add("hide");
         altaEspectaculo.classList.add("hide");
         altaFuncion.classList.add("hide");
@@ -49,6 +60,9 @@
         seguirUsuario.classList.add("hide");
         dejarSeguirUsuario.classList.add("hide");
         logout.classList.add("hide");
+        addEspectaculoFaborito.classList.add("hide");
+        verPremiosEspecrador.classList.add("hide");
+        valorarEspectaculo.classList.add("hide");
         separador.classList.add("hide");
     }
     

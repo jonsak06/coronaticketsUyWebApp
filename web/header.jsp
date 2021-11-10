@@ -42,6 +42,12 @@
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" id="altaEspectaculo" href="altaEspectaculo.jsp">Alta de espectaculo</a></li>
                     <li><a class="dropdown-item" id="consultaEspectaculo" href="consultarEspectaculo.jsp">Consulta de espectaculo</a></li>
+                    
+                    <li><a class="dropdown-item" id="Sorteos" href="Sorteos.jsp">Crear sorteo</a></li>
+                    <li><a class="dropdown-item" id="addEspectaculoFaborito" href="addEspectaculoFaborito.jsp">Añadir espectaculo como faborito</a></li>
+                    <li><a class="dropdown-item" id="verPremiosEspecrador" href="verPremiosEspecrador.jsp">Ver premios</a></li>
+                    <li><a class="dropdown-item" id="valorarEspectaculo" href="valorarEspectaculo.jsp">Valorar espectaculo</a></li>
+                    
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" id="altaFuncion" href="AltaFuncion.jsp">Alta de funcion</a></li>
                     <li><a class="dropdown-item" id="consultaFuncion" href="ConsultarFuncion.jsp">Consulta de funcion</a></li>
