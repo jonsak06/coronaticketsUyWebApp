@@ -4,7 +4,7 @@
     Author     : julio
 --%>
 
-<%@page import="root.entidades.EstadoRegistro"%>
+
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="root.interfaces.*"%>

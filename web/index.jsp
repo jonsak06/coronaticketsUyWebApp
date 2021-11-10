@@ -13,10 +13,6 @@
 <%@page import="root.interfaces.iUsuarios"%>
 <%@page import="javax.servlet.ServletContext"%>
 <%@page import="java.util.List"%>
-<%@page import="root.entidades.Espectador"%>
-<%@page import="javax.persistence.*"%>
-<%@page import="javax.persistence.Persistence"%>
-<%@page import="javax.persistence.EntityManagerFactory"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

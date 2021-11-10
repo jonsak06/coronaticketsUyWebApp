@@ -343,10 +343,18 @@
                                                 if (esp.equals(e.getNombre())) {
 
                                                     out.print("<img src='" + e.getImagen() + "' alt='imagen de espectaculo'>");
-                                                    if (e.getVideo() != null) {
-                                                        String[] parts = e.getVideo().split("v=");
-                                                        out.print("<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/" + parts[1] + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>" + "</iframe>");
-                                                    }
+                                                           if (e.getVideo() != null) {
+                                                            if(e.getVideo().contains("v=")){
+                                                            if (!e.getVideo().contains(" ")) {
+                                                                if (e.getVideo() != "") {
+                                                                    if (e.getVideo() != "NOVIDEO") {
+                                                                        String[] parts = e.getVideo().split("v=");
+                                                                        out.print("<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/" + parts[1] + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>" + "</iframe>");
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        }
                                                     out.print("<h3> Nombre:" + e.getNombre() + "</h3>");
 
                                                     out.print("<p> Descripcion:" + e.getDescripcion() + "</p>");
@@ -398,7 +406,7 @@
                                                     out.print("</li>");
                                                     out.print("</ul>");
 
-                                                    out.print("<button class='btn btn-outline-secondaryf' type='submit' disabled>Consultar</button>");
+                                                    out.print("<button class='btn btn-outline-secondaryf' type='submit'>Consultar</button>");
 
                                                     out.print("</form>");
 
@@ -590,10 +598,18 @@
                                                 if (esp.equals(e.getNombre())) {
 
                                                     out.print("<img src='" + e.getImagen() + "' alt='imagen de espectaculo'>");
-                                                    if (e.getVideo() != null) {
-                                                        String[] parts = e.getVideo().split("v=");
-                                                        out.print("<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/" + parts[1] + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>" + "</iframe>");
-                                                    }
+                                                        if (e.getVideo() != null) {
+                                                            if(e.getVideo().contains("v=")){
+                                                            if (!e.getVideo().contains(" ")) {
+                                                                if (e.getVideo() != "") {
+                                                                    if (e.getVideo() != "NOVIDEO") {
+                                                                        String[] parts = e.getVideo().split("v=");
+                                                                        out.print("<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/" + parts[1] + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>" + "</iframe>");
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        }
                                                     out.print("<h3> Nombre:" + e.getNombre() + "</h3>");
                                                     out.print("<p> Descripcion:" + e.getDescripcion() + "</p>");
                                                     out.print("<p> Duracion:" + e.getDuracion() + "</p>");
@@ -644,7 +660,7 @@
                                                     out.print("</li>");
                                                     out.print("</ul>");
 
-                                                    out.print("<button class='btn btn-outline-secondaryf' type='submit' disabled>Consultar</button>");
+                                                    out.print("<button class='btn btn-outline-secondaryf' type='submit'>Consultar</button>");
 
                                                     out.print("</form>");
 

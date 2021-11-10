@@ -4,9 +4,9 @@
     Author     : julio
 --%>
 
-<%@page import="root.datatypes.DtRegistroAcceso"%>
+<%@page import="webservices.DtRegistroAcceso"%>
 <%@page import="root.interfaces.iRegistrosAcceso"%>
-<%@page import="root.datatypes.DtPlataforma"%>
+<%@page import="webservices.DtPlataforma"%>
 <%@page import="java.util.List"%>
 <%@page import="root.interfaces.IEspectaculos"%>
 <%@page import="root.fabrica.Fabrica"%>

@@ -6,7 +6,6 @@
 
 <%@page import="root.datatypes.DtRegistroAcceso"%>
 <%@page import="root.interfaces.iRegistrosAcceso"%>
-<%@page import="root.entidades.Registro"%>
 <%@page import="root.datatypes.DtRegistro"%>
 <%@page import="java.util.List"%>
 <%@page import="root.fabrica.Fabrica"%>

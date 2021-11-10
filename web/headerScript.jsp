@@ -31,6 +31,9 @@
     const login = document.getElementById("login");//boton
     const logout = document.getElementById("logout");//boton
     const separador = document.getElementById("separador");//linea separadora en opciones de usuarios
+    const consultaEspectaculoFinalizado = document.getElementById("consultaEspectaculoFinalizado");
+    const FinalizarEspectaculo = document.getElementById("FinalizarEspectaculo");
+    
     
     if(tipoUsuario === "Artista") {
         altaUsuario.classList.add("hide");
@@ -48,6 +51,9 @@
         agregarEspAPaq.classList.add("hide");
         Sorteos.classList.add("hide");
         login.classList.add("hide");
+        consultaEspectaculoFinalizado.classList.add("hide");
+        FinalizarEspectaculo.classList.add("hide");
+
     } else if(tipoUsuario === "Visitante") {
         Sorteos.classList.add("hide");
         modificarUsuario.classList.add("hide");
@@ -64,6 +70,8 @@
         verPremiosEspecrador.classList.add("hide");
         valorarEspectaculo.classList.add("hide");
         separador.classList.add("hide");
+        consultaEspectaculoFinalizado.classList.add("hide");
+        FinalizarEspectaculo.classList.add("hide");
     }
     
 </script>

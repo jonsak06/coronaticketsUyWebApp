@@ -3,6 +3,7 @@
     Created on : 27 oct. 2021, 11:07:22
     Author     : tecnologo
 --%>
+<%@page import="java.util.Comparator"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="root.interfaces.*"%>
@@ -306,21 +307,33 @@
                 List<DtPremio> lpre = Fabrica.getCrlUsuarios().getPremiosDelEspectador(contexto.getAttribute("nickname").toString());
                 DtPremio auxiliar = null;
                 List<DtPremio> lpreOrdenado = new ArrayList<DtPremio>();
-                int i = 0;
-                while (lpre.size() > 0) {
-                    lpreOrdenado.add(lpre.get(i));
-                    auxiliar = lpre.get(i);
-                    lpre.remove(i);
-                    for (int j = 0; j < lpre.size(); j++) {
-                        if (lpreOrdenado.get(i).getFechaSorteo() < lpre.get(j).getFechaSorteo()) {
-                            auxiliar = lpreOrdenado.get(i);
-                            lpreOrdenado.remove(i);
-                            lpreOrdenado.add(lpre.get(j));
-                            lpre.add(auxiliar);
+//                int i = 0;
+//                while (lpre.size() > 0) {
+//                    lpreOrdenado.add(lpre.get(i));
+//                    auxiliar = lpre.get(i);
+//                    lpre.remove(i);
+//                    for (int j = 0; j < lpre.size(); j++) {
+//                        if (lpreOrdenado.get(i).getFechaSorteo() < lpre.get(j).getFechaSorteo()) {
+//                            auxiliar = lpreOrdenado.get(i);
+//                            lpreOrdenado.remove(i);
+//                            lpreOrdenado.add(lpre.get(j));
+//                            lpre.add(auxiliar);
+//                        }
+//                    }
+//                }
+                lpre.sort(new Comparator<DtPremio>() {
+
+                    @Override
+                    public int compare(DtPremio a, DtPremio b) {
+                        if (a.getFechaSorteo()<= b.getFechaSorteo()) {
+                            return 1;
+                        } else {
+                            return -1;
                         }
                     }
-                }
-                lpre = lpreOrdenado;
+
+                });
+//                lpre = lpreOrdenado;
 
                 for (DtPremio p : lpre) {
                     out.print("<p>" + p.getNombre() + "</p>");

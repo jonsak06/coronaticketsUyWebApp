@@ -1065,7 +1065,7 @@ public class ManejadorUsuarios {
         TypedQuery<Espectaculo> consulta2 = em.createNamedQuery("Espectaculo.findByNombre", Espectaculo.class);
         consulta2.setParameter("nombre", nombre);
         Espectaculo e = consulta2.getSingleResult();
-        Valoracion estaValoracion = new Valoracion(fecha, valor, esteMen, e);
+        Valoracion estaValoracion = new Valoracion(valor, esteMen, e);
         em.persist(estaValoracion);
         em.getTransaction().commit();
         em.close();

@@ -549,10 +549,18 @@ Author     : tecnologo
                                         for (int i = 0; i < lEspectac.size(); i++) {
                                             if (sesp.equals(lEspectac.get(i).getNombre())) {
                                                 out.print("<img src='" + lEspectac.get(i).getImagen() + "' alt='imagen del espectaculo'>");
-                                                if (lEspectac.get(i).getVideo() != null) {
-                                                    String[] parts = lEspectac.get(i).getVideo().split("v=");
-                                                    out.print("<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/" + parts[1] + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>" + "</iframe>");
-                                                }
+                                                           if (lEspectac.get(i).getVideo() != null) {
+                                                            if(lEspectac.get(i).getVideo().contains("v=")){
+                                                            if (!lEspectac.get(i).getVideo().contains(" ")) {
+                                                                if (lEspectac.get(i).getVideo() != "") {
+                                                                    if (lEspectac.get(i).getVideo() != "NOVIDEO") {
+                                                                        String[] parts = lEspectac.get(i).getVideo().split("v=");
+                                                                        out.print("<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/" + parts[1] + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>" + "</iframe>");
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        }
                                                 out.print("<h4> Nombre: " + lEspectac.get(i).getNombre() + "</h4>");
                                                 out.print("<p> Descripcion:" + lEspectac.get(i).getDescripcion() + "</p>");
                                                 out.print("<p> Duracion:" + lEspectac.get(i).getDuracion() + "</p>");

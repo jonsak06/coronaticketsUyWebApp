@@ -367,8 +367,9 @@
                                                 for (DtEspectaculo e : esps) {
                                                     if (esp.equals(e.getNombre())) {
                                                         out.print("<img class=\"imgPrincipal\" src='" + e.getImagen() + "' alt='imagen del espectaculo'>");
-
+//
                                                         if (e.getVideo() != null) {
+                                                            if(e.getVideo().contains("v=")){
                                                             if (!e.getVideo().contains(" ")) {
                                                                 if (e.getVideo() != "") {
                                                                     if (e.getVideo() != "NOVIDEO") {
@@ -377,6 +378,7 @@
                                                                     }
                                                                 }
                                                             }
+                                                        }
                                                         }
 
                                                         out.print("<h4> Nombre: " + e.getNombre() + "</h4>");
@@ -800,14 +802,16 @@
                                                     if (esp.equals(e.getNombre())) {
                                                         out.print("<img class=\"imgPrincipal\" src='" + e.getImagen() + "' alt='imagen del espectaculo'>");
                                                         if (e.getVideo() != null) {
-                                                            if (e.getVideo() != "NOVIDEO") {
+                                                            if(e.getVideo().contains("v=")){
+                                                            if (!e.getVideo().contains(" ")) {
                                                                 if (e.getVideo() != "") {
-                                                                    if (e.getVideo().contains(" ")) {
+                                                                    if (e.getVideo() != "NOVIDEO") {
                                                                         String[] parts = e.getVideo().split("v=");
                                                                         out.print("<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/" + parts[1] + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>" + "</iframe>");
                                                                     }
                                                                 }
                                                             }
+                                                        }
                                                         }
                                                         out.print("<h4> Nombre: " + e.getNombre() + "</h4>");
                                                         out.print("<p> Descripcion: " + e.getDescripcion() + "</p>");

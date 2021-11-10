@@ -348,7 +348,6 @@
                     
 
                 }
-                out.print("<input type=\"submit\" name=\"\" value=\"crear\" id=\"crear\">");
                 out.println("</form>");
 
             %>

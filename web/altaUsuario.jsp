@@ -7,7 +7,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="root.interfaces.*"%>
-<%@page import="root.datatypes.*"%>
+<%@page import="webservices.*"%>
 <%@page import="root.fabrica.Fabrica"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

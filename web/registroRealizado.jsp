@@ -41,7 +41,7 @@
                 DtFuncion funcion = ie.getDatosFuncion(contexto.getAttribute("funcion").toString());
                 out.println("<p class =\"text-muted \" >Funcion: "+contexto.getAttribute("funcion").toString()+"</p>");
                 out.println("<p class =\"text-muted \" >Espectaculo: "+contexto.getAttribute("espectaculo").toString()+"</p>");
-                out.println("<p class =\"text-muted \" >Fecha y hora: "+funcion.getHoraInicio()+"</p>");
+                out.println("<p class =\"text-muted \" >Fecha: "+funcion.getFecha()+"</p>");
                 out.println("<p class =\"text-muted \" >Costo: "+contexto.getAttribute("costo")+"</p>");
                 contexto.removeAttribute("funcion");
                 contexto.removeAttribute("espectaculo");

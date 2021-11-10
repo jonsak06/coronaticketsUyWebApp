@@ -71,7 +71,8 @@ public class AltaFuncionBackEnd extends HttpServlet {
         } catch (ParseException e1) {
             e1.printStackTrace();
         }
-        Timestamp time = new Timestamp(parsed.getTime());
+//        Timestamp time = new Timestamp(parsed.getTime());
+        java.sql.Timestamp time = new java.sql.Timestamp(fecha.getYear(),fecha.getMonth(),fecha.getDate(),parsed.getHours(),parsed.getMinutes(),0,0);
 
         List<DtArtista> listaArt = Fabrica.getCrlUsuarios().getArtistas();
         List<String> listaCon = new ArrayList();

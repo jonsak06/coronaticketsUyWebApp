@@ -498,8 +498,8 @@
             </script>
 
             <script>
-                const funs = document.getElementById("inputGroupSelect04f");
-                const botonConsultarFun = document.querySelector(".btn-outline-secondaryf");
+                const funs = document.getElementById("inputGroupSelect04e");
+                const botonConsultarFun = document.querySelector(".btn-outline-secondarye");
                 funs.addEventListener("change", e => {
                     if (e.target.value === "Seleccione...") {
                         botonConsultarFun.disabled = true;
