@@ -56,7 +56,7 @@ public class ComprobatePDFBackEnd extends HttpServlet {
             Document documento = new Document();
             ServletContext contexto = getServletContext();
              String context = request.getServletContext().getRealPath(""); 
-             contexto.setAttribute("realPath", context+nombrePremio.replaceAll("\\s+", "")+".pdf");
+             contexto.setAttribute("realPath", nombrePremio.replaceAll("\\s+", "")+".pdf");
 // Se crea el OutputStream para el fichero donde queremos dejar el pdf.
             FileOutputStream ficheroPdf = new FileOutputStream(context+nombrePremio.replaceAll("\\s+", "")+".pdf");
 

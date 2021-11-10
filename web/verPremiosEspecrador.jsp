@@ -329,15 +329,15 @@
                     out.print("<p>" + p.getNombreFuncion() + "</p>");
                     out.print("<p>" + (new Date(p.getFechaSorteo())).toString() + "</p>");
 
-                    out.print("<div class=\"form\">");
-                    out.print("<button type=\"button\">Generar PDF</button>");
-                    out.print("<span class=\"nombrePremio\" style=\"font-size:0px; float: left;\">" + p.getNombre() + "</span>");
-                    out.print("<span class=\"descripcion\" style=\"font-size:0px; float: left;\">" + p.getDescripcion() + "</span>");
-                    out.print("<span class=\"nombreEspectaculo\" style=\"font-size:0px; float: left;\">" + p.getNombreEspectaculo() + "</span>");
-                    out.print("<span class=\"NombreFuncion\" style=\"font-size:0px; float: left;\">" + p.getNombreFuncion() + "</span>");
-                    out.print("<span class=\"fecha\" style=\"font-size:0px; float: left;\">" + (new Date(p.getFechaSorteo())).toString() + "</span>");
-
-                    out.print("</div>");
+                    out.print("<form action=\"ComprobatePDFBackEnd\">");
+                    out.print("<button type=\"submit\">Generar PDF</button>");
+                    out.print("<input type=\"checkbox\" name=\"nombrePremio\" value=\"" + p.getNombre() + " \"checked > ");
+                    out.print("<input type=\"checkbox\" name=\"descripcion\" value=\""  + p.getDescripcion() + " \"checked > ");
+                    out.print("<input type=\"checkbox\" name=\"nombreEspectaculo\" value=\""+ p.getNombreEspectaculo() + " \" checked> ");
+                    out.print("<input type=\"checkbox\" name=\"NombreFuncion\" value=\"" + p.getNombreFuncion() + " \"checked > ");
+                    out.print("<input type=\"checkbox\" name=\"fecha\" value=\""  + (new Date(p.getFechaSorteo())).toString() +  " \"checked > ");
+                    
+                    out.print("</form>");
 
                 }
 
@@ -348,41 +348,9 @@
             const contextGson = <%=contextGson%>;
             if(contextGson!=""){
                 alert(contextGson);
-                window.open(contextGson);
+                window.open("/coronaticketsUyWebApp/"+contextGson);
             }
             </script>
-            <script>
-            
-            $(document).ready(function () {
-                //empieza la parte manual del estado desactivado
-                $('.form').click(function () {
-//       if(var1 === true)
-//          {var1 = false;}
-//        else{var1 = true; }
-
-                    var nombrePremio = $('.nombrePremio', this).text();
-
-                    var descripcion = $('.descripcion', this).text();
-                    var nombreEspectaculo = $('.nombreEspectaculo', this).text();
-                    var NombreFuncion = $('.NombreFuncion', this).text();
-                    var fecha = $('.fecha', this).text();
-                    $.post('ComprobatePDFBackEnd', {
-                        nombrePremio: nombrePremio,
-                        descripcion: descripcion,
-                        nombreEspectaculo: nombreEspectaculo,
-                        NombreFuncion: NombreFuncion,
-                        fecha: fecha
-                    });
-                    location.reload();
-                    alert(nombrePremio);
-                    
-                });
-            });
-
-
-
-
-        </script>
     </body>
 
 </html>
