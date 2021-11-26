@@ -7,13 +7,48 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="root.interfaces.*"%>
-<%@page import="root.datatypes.*"%>
+<%@page import="webservices.*"%>
 <%@page import="root.fabrica.Fabrica"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+                <script src="http://code.jquery.com/jquery-latest.js">
+
+</script>
+<script>
+	$(document).ready(function() {
+		$('#nickname').focusout(function(event) {
+			var nombreVar = $('#nickname').val();
+			// Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
+			$.post('NicknameDisponible', {
+				nombre : nombreVar
+			}, function(responseText) {
+				$('#mensaje').html(responseText);
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function() {
+		$('#correo').focusout(function(event) {
+			var nombreVar = $('#correo').val();
+			// Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
+			$.post('CorreoRegistrado', {
+				nombre : nombreVar
+			}, function(responseText) {
+				$('#mensaje2').html(responseText);
+			});
+		});
+	});
+</script>
+        <%
+        iRegistrosAcceso ir = Fabrica.getCtrlRegistrosAcceso();
+        long moment = new java.util.Date().getTime();
+        DtRegistroAcceso r = new DtRegistroAcceso(0,java.net.InetAddress.getLocalHost().getHostAddress(),request.getHeader("User-Agent"),request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()+"/"+request.getServletPath().substring(request.getServletPath().lastIndexOf("/") +1),moment);
+        ir.ingresarRegistro(r);
+        %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
@@ -131,13 +166,15 @@
             String jsonUsC = gson.toJson(lUsC);
         %>
         <%@include file="header.jsp" %>
-
+        
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
 
-                    <form action="AltaUsuariosBackEnd" enctype="multipart/form-data" class="box" name="fAltaUsuario" id="fAltaUsuario" method="POST">
-                        <p>Tipo Usuario:
+                    <!--<form action="AltaUsuariosBackEnd" class="box" name="fAltaUsuario" id="fAltaUsuario" method="POST" enctype="multipart/form-data">-->
+                    <form action="AltaUsuariosBackEnd" class="box" name="fAltaUsuario" method="POST" enctype="multipart/form-data">   
+                        <h1>Alta de usuario</h1>
+                    <p>Tipo Usuario:
                             <input type="radio" name="us" value="e" id="use" onclick="sesp()"> Espectador
                             <input type="radio" name="us" value="a" id="usa" onclick="sart()"> Artista
                         </p>
@@ -149,10 +186,12 @@
                         <input type="text" name="apellido" value="" id="apellido"  required/>
 
                         <p>Nickname:</p>
-                        <input type="text" name="nickname" value="" id="nickname" required/>
+                        <input type="text" name="nickname" value="" id="nickname" required/><div id="mensaje"></div>
+                        
 
                         <p>Correo:</p>
                         <input type="text" name="correo" value="" id="correo" required/>
+                        <div id="mensaje2"></div>
 
                         <p>Contraseña:</p>
                         <input type="password" name="contrasenia" id="contrasenia" value="" required/>
@@ -174,7 +213,7 @@
                         <textarea name="descripcion" id="tfDescripcion"  style="display:none; margin: 0 auto;">
                         </textarea>
                         <p>Imagen: </p>
-                        <input type="file" name="imagen" id="imagen"/>
+                        <input type="file" name="imagen" id="imagen">
                         <p><input type="checkbox" name="subir"  value="ON" id="subir"><label for suir>Subir Archivo</label>
 
 

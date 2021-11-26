@@ -50,7 +50,7 @@ public class DatosDePruebaCtrl implements iDatosDePrueba {
         vp.setDescripcion("Village   People   es   una   innovadora   formación   musical de   estilo   disco   de   finales   de   los   anios   70.   Fue   famosa tanto   por   sus   peculiares   disfraces,   como   por   sus canciones pegadizas, con letras sugerentes y llenas dedobles sentidos.");
         java.sql.Date fvp = new java.sql.Date(1977-1899,1-12,1-31);
         vp.setFechaNacimiento(fvp);
-        vp.setImagen("vpeople.jpg");
+        vp.setImagen("http://raspberrypijulio.ddns.net/ImagenesLab/vpeople.jpg");
         vp.setLinkWeb("www.officialvillagepeople.com");
         vp.setNickname("vpeople");
         vp.setNombre("Village");
@@ -64,7 +64,7 @@ public class DatosDePruebaCtrl implements iDatosDePrueba {
         dm.setDescripcion("Depeche   Mode   es   un   grupo   inglés   de   música electrónica   formado   en   Basildon,   Essex,   en   1980   por Vicent   Clarke   y   Andrew   John   Fletcher,   a   los   que   se unieron Martin Lee Gore y poco después David Gahan. Actualmente   se   le   considera   como   grupo   de   música alternativa.");
         java.sql.Date fdm = new java.sql.Date(1980-1899,6-12,14-31);
         dm.setFechaNacimiento(fdm);
-        dm.setImagen("dmode.jpg");
+        dm.setImagen("http://raspberrypijulio.ddns.net/ImagenesLab/dmode.jpg");
         dm.setLinkWeb("www.depechemode.com");
         dm.setNickname("dmode");
         dm.setNombre("Depeche");
@@ -88,7 +88,7 @@ public class DatosDePruebaCtrl implements iDatosDePrueba {
 "los límites de contenido de las letras de sus canciones");
         java.sql.Date fcl = new java.sql.Date(1953-1899,6-12,22-31);
         cl.setFechaNacimiento(fcl);
-        cl.setImagen("clouper.jpg");
+        cl.setImagen("http://raspberrypijulio.ddns.net/ImagenesLab/clouper.jpg");
         cl.setLinkWeb("cyndilauper.com");
         cl.setNickname("clouper");
         cl.setNombre("Cyndi");
@@ -105,7 +105,7 @@ public class DatosDePruebaCtrl implements iDatosDePrueba {
 "compositor estadounidense.");
         java.sql.Date fbs = new java.sql.Date(1949-1899,9-12,23-31);
         bs.setFechaNacimiento(fbs);
-        bs.setImagen("bruceTheBoss.jpg");
+        bs.setImagen("http://raspberrypijulio.ddns.net/ImagenesLab/bruceTheBoss.jpg");
         bs.setLinkWeb("brucespringsteen.net");
         bs.setNickname("bruceTheBoss");
         bs.setNombre("Bruce");
@@ -123,7 +123,7 @@ public class DatosDePruebaCtrl implements iDatosDePrueba {
 "baterista es Rafael Ugo).");
         java.sql.Date ftn = new java.sql.Date(1998-1899,1-12,1-31);
         tn.setFechaNacimiento(ftn);
-        tn.setImagen("tripleNelson.jpg");
+        tn.setImagen("http://raspberrypijulio.ddns.net/ImagenesLab/tripleNelson.jpg");
         tn.setLinkWeb("www.latriplenelson.uy");
         tn.setNickname("tripleNelson");
         tn.setNombre("La Triple");
@@ -142,7 +142,7 @@ public class DatosDePruebaCtrl implements iDatosDePrueba {
 "Vinia del Mar de febrero de 1994.");
         java.sql.Date fll = new java.sql.Date(1987-1899,2-12,14-31);
         ll.setFechaNacimiento(fll);
-        ll.setImagen("la_ley.jpg");
+        ll.setImagen("http://raspberrypijulio.ddns.net/ImagenesLab/la_ley.jpg");
         ll.setLinkWeb("www.lasleyesdenewton.com");
         ll.setNickname("la_ley");
         ll.setNombre("La");
@@ -158,7 +158,7 @@ public class DatosDePruebaCtrl implements iDatosDePrueba {
 "ha editado veinticuatro discos");
         java.sql.Date fpi = new java.sql.Date(1981-1899,8-12,13-31);
         pi.setFechaNacimiento(fpi);
-        pi.setImagen("lospimpi.jpg");
+        pi.setImagen("http://raspberrypijulio.ddns.net/ImagenesLab/lospimpi.jpg");
         pi.setLinkWeb("www.pimpinela.net");
         pi.setNickname("lospimpi");
         pi.setNombre("Pimpinela");
@@ -173,7 +173,7 @@ public class DatosDePruebaCtrl implements iDatosDePrueba {
 "Dyango es un cantante espaniol de música romántica.");
         java.sql.Date fdy = new java.sql.Date(1981-1899,8-12,13-31);
         dy.setFechaNacimiento(fdy);
-        dy.setImagen("dyangounchained.jpg");
+        dy.setImagen("http://raspberrypijulio.ddns.net/ImagenesLab/dyangounchained.jpg");
         dy.setLinkWeb(" ");
         dy.setNickname("dyangounchained");
         dy.setNombre("Dyango");
@@ -194,7 +194,7 @@ public class DatosDePruebaCtrl implements iDatosDePrueba {
 "músico brasilenio Luiz Caldas bajo el título «Fricote»");
         java.sql.Date fal = new java.sql.Date(1952-1899,7-12,17-31);
         al.setFechaNacimiento(fal);
-        al.setImagen("alcides.jpg");
+        al.setImagen("http://raspberrypijulio.ddns.net/ImagenesLab/alcides.jpg");
         al.setLinkWeb(" ");
         al.setNickname("alcides");
         al.setNombre("Alcides");
@@ -233,23 +233,23 @@ public class DatosDePruebaCtrl implements iDatosDePrueba {
         Espectador cb = new Espectador("cbochinche","Cacho","Bochinche","cbochinche@vera.com.uy",8,5,1937);
         em.persist(cb);
         el.setPasswd("lkj34df");
-        el.setImagen("silueta.jpg");
+        el.setImagen("http://raspberrypijulio.ddns.net/ImagenesLab/silueta.jpg");
         co.setPasswd("poke579");
-        co.setImagen("silueta.jpg");
+        co.setImagen("http://raspberrypijulio.ddns.net/ImagenesLab/silueta.jpg");
         ew.setPasswd("mkji648");
-        ew.setImagen(ew.getNickname()+".jpg");
+        ew.setImagen("http://raspberrypijulio.ddns.net/ImagenesLab/"+ew.getNickname()+".jpg");
         gh.setPasswd("fcku0123");
-        gh.setImagen(gh.getNickname()+".jpg");
+        gh.setImagen("http://raspberrypijulio.ddns.net/ImagenesLab/"+gh.getNickname()+".jpg");
         sp.setPasswd("vbmn4r");
-        sp.setImagen(sp.getNickname()+".jpg");
+        sp.setImagen("http://raspberrypijulio.ddns.net/ImagenesLab/"+sp.getNickname()+".jpg");
         ar.setPasswd("ncnl123");
-        ar.setImagen(ar.getNickname()+".jpg");
+        ar.setImagen("http://raspberrypijulio.ddns.net/ImagenesLab/"+ar.getNickname()+".jpg");
         ap.setPasswd("mny101");
-        ap.setImagen(ap.getNickname()+".jpg");
+        ap.setImagen("http://raspberrypijulio.ddns.net/ImagenesLab/"+ap.getNickname()+".jpg");
         ml.setPasswd("1o1vbm");
-        ml.setImagen("silueta.jpg");
+        ml.setImagen("http://raspberrypijulio.ddns.net/ImagenesLab/"+"silueta.jpg");
         cb.setPasswd("ultraton01");
-        cb.setImagen("silueta.jpg");
+        cb.setImagen("http://raspberrypijulio.ddns.net/ImagenesLab/"+"silueta.jpg");
         em.getTransaction().commit();
         ///////////////////////////////FIN DE LA CARGA DE ESPECTADORES/////////////////////////////////////
         

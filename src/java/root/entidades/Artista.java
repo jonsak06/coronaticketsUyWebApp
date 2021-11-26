@@ -73,6 +73,20 @@ public class Artista extends Usuario {
         this.funciones.add(i+1,f);
     }
     
+    @OneToMany(mappedBy = "artista")
+    private List<Sorteo> sorteos;
+
+    public List<Sorteo> getSorteos() {
+        return sorteos;
+    }
+
+    public void addSorteo(Sorteo s){
+        int i = this.sorteos.size();
+        this.sorteos.add(i+1,s);
+    }
+
+    
+    
     @Lob
     @Column(name = "DESCRIPCION")
     private String descripcion;

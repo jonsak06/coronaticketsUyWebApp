@@ -12,10 +12,22 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <%
+        iRegistrosAcceso ir = Fabrica.getCtrlRegistrosAcceso();
+        long moment = new java.util.Date().getTime();
+        DtRegistroAcceso r = new DtRegistroAcceso(0,java.net.InetAddress.getLocalHost().getHostAddress(),request.getHeader("User-Agent"),request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()+"/"+request.getServletPath().substring(request.getServletPath().lastIndexOf("/") +1),moment);
+        ir.ingresarRegistro(r);
+        %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
         <link rel="stylesheet" href="headerStyles.css">
+        <script>
+                if (${seguidoUsu == true}) {
+                alert("Usuario seguido");
+            }
+                
+        </script>
         <style>
 
 
@@ -178,15 +190,11 @@
 
 
         </style>
-        <script>
-            if (${seguidoUsu == true}) {
-                alert("Usuario seguido");
-            }
-        </script>
     </head>
     <body>
         <%@include file="header.jsp" %>
         <form action="seguirUsuarioBackEnd" class="box">
+            <h1>Seguir usuario</h1>
             <select name="seguido">
                 <%                   
                     ServletContext contexto = getServletContext();

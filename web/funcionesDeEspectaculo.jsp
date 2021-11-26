@@ -4,7 +4,7 @@
     Author     : julio
 --%>
 
-<%@page import="root.entidades.EstadoRegistro"%>
+
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="root.interfaces.*"%>
@@ -16,6 +16,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <%
+        iRegistrosAcceso ir = Fabrica.getCtrlRegistrosAcceso();
+        long moment = new java.util.Date().getTime();
+        DtRegistroAcceso r = new DtRegistroAcceso(0,java.net.InetAddress.getLocalHost().getHostAddress(),request.getHeader("User-Agent"),request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()+"/"+request.getServletPath().substring(request.getServletPath().lastIndexOf("/") +1),moment);
+        ir.ingresarRegistro(r);
+        %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Comprar Paquete</title>
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">

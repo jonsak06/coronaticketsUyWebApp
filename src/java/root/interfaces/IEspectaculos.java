@@ -8,8 +8,10 @@ package root.interfaces;
 import java.util.List;
 import root.datatypes.DtArtista;
 import root.datatypes.DtEspectaculo;
+import root.datatypes.DtEspectador;
 import root.datatypes.DtFuncion;
 import root.datatypes.DtPlataforma;
+import root.datatypes.DtValoracion;
 import root.entidades.EstadoEspectaculo;
 
 /**
@@ -30,7 +32,7 @@ public interface IEspectaculos {
     public boolean crearFuncion(String nombreEspectaculo, DtFuncion dtFuncion, List<String> artInvi);
     public boolean existeFuncion(String nombreFuncion);
     public List<DtArtista> getInvitados(String nombreFuncion);
-    void altaEspectaculo(String plataforma, String artista, List<String> categorias,DtEspectaculo espectaculo, String pathImagen);
+    void altaEspectaculo(String plataforma, String artista, List<String> categorias,DtEspectaculo espectaculo, String pathImagen, String descripcionDeLosPremios, int numerodePremios);
     public List<DtEspectaculo> listarRechazados();
     public List<DtEspectaculo> listarIngresados();
     public void aceptar_rechazarIngresado(String nombre, EstadoEspectaculo estado);
@@ -42,4 +44,10 @@ public interface IEspectaculos {
     public List<DtFuncion> listarTodasLasFunciones(String nombreEsp);
     public List<DtEspectaculo> listarTodosLosEspectaculos();
     public List<DtEspectaculo> listarAceptados();
+    public void calcularValoracion(String nombreEspectaculo);//3ra
+    public List<DtEspectador> listarGanadores(String nombreFun);//3ra
+    public List<DtFuncion> listarFuncionesQuePuedenTenerSorteo(String nombreEsp);//3ra
+    public List<DtFuncion> listarFuncionesConSorteos(String nombreEsp);//3ra
+    public void finalizarEspectaculo(String nombre);//3ra
+    public List<DtValoracion> getValoraciones(String nombreEsp);//3ra
 }

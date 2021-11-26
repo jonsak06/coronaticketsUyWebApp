@@ -15,6 +15,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <%
+        iRegistrosAcceso ir = Fabrica.getCtrlRegistrosAcceso();
+        long moment = new java.util.Date().getTime();
+        DtRegistroAcceso r = new DtRegistroAcceso(0,java.net.InetAddress.getLocalHost().getHostAddress(),request.getHeader("User-Agent"),request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()+"/"+request.getServletPath().substring(request.getServletPath().lastIndexOf("/") +1),moment);
+        ir.ingresarRegistro(r);
+        %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
@@ -106,6 +112,7 @@
             }
             Gson gson = new Gson();
             String jsonFun = gson.toJson(Existentes);
+            
         %>
         <script>
             if(${creadoFun == true}) {
@@ -126,7 +133,10 @@
                     var selected = aux.options[aux.selectedIndex].text;
                     alert(selected);
                     document.getElementById(selected).style.display = "block";
+                    
                     tus = 1;
+                    
+                    
                 }
             }
             
@@ -136,8 +146,8 @@
 
         </script>
         <form action="AltaFuncionBackEnd" enctype="multipart/form-data" name="fAltadeFuncion" id="" class="box" method="POST">
-
-            <select id="Plataformas" onchange="linkPlataformas()">
+            <h1>Alta de funcion</h1>
+            <select id="Plataformas" name="plataforma" onchange="linkPlataformas()">
                 <%        ServletContext contexto = getServletContext();
 
                     List<DtPlataforma> plat = Fabrica.getCtrlEspectaculos().listarPlataformas();
@@ -154,7 +164,7 @@
                 for (DtPlataforma i : plat) {
                     List<DtEspectaculo> pespectaculos = Fabrica.getCtrlEspectaculos().listarEspectaculos(i.getNombre());
                     List<DtEspectaculo> espec = Fabrica.getCrlUsuarios().listarEspectaculosDeArtista(contexto.getAttribute("nickname").toString());
-                    out.print("<select id=\""+i.getNombre()+"\" style=\"display:none;\" name=\"espectaculos\" class=\"espectaculos\"  onchange=\"sEspectaculo()\"> ");
+                    out.print("<select id=\""+i.getNombre()+"\" style=\"display:none;\" name=\""+i.getNombre()+"\" class=\"espectaculos\"  onchange=\"sEspectaculo()\"> ");
                     for (DtEspectaculo pe : pespectaculos) {
                         for (DtEspectaculo e : espec) {
                             if (e.getNombre().equals(pe.getNombre())) {

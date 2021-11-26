@@ -19,7 +19,7 @@ public abstract class DtUsuario
     private String correo;
     private String nickname;
     private String imagen;
-    private Date fechaNacimiento;
+    private long fechaNacimiento;
     private String pass;
 
     public DtUsuario(){}
@@ -30,7 +30,7 @@ public abstract class DtUsuario
         this.correo = correo;
         this.nickname = nickname;
         this.imagen = imagen;
-        this.fechaNacimiento = fechaNacimiento;
+        this.fechaNacimiento = fechaNacimiento.getTime();
         this.pass = pass;
     }
 
@@ -67,7 +67,8 @@ public abstract class DtUsuario
     }
 
     public Date getFechaNacimiento() {
-        return fechaNacimiento;
+        java.sql.Date fecha = new java.sql.Date(fechaNacimiento);
+        return fecha;
     }
 
     public DtUsuario getMyDt()

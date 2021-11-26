@@ -12,7 +12,7 @@ import root.entidades.EstadoRegistro;
  */
 public class DtRegistro {
     private Long id;
-    private Date fecha;
+    private long fecha;
     private float costo;
     private EstadoRegistro estado;
     
@@ -39,7 +39,7 @@ public class DtRegistro {
 
     public DtRegistro(Long id, Date fecha, float costo, EstadoRegistro estado) {
         this.id = id;
-        this.fecha = fecha;
+        this.fecha = fecha.getTime();
         this.costo = costo;
         this.estado = estado;
     }
@@ -49,7 +49,8 @@ public class DtRegistro {
     }
 
     public Date getFecha() {
-        return fecha;
+        java.sql.Date date = new java.sql.Date(fecha);
+        return date;
     }
 
     public float getCosto() {

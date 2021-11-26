@@ -4,7 +4,9 @@
     Author     : julio
 --%>
 
-<%@page import="root.datatypes.DtPlataforma"%>
+<%@page import="webservices.DtRegistroAcceso"%>
+<%@page import="root.interfaces.iRegistrosAcceso"%>
+<%@page import="webservices.DtPlataforma"%>
 <%@page import="java.util.List"%>
 <%@page import="root.interfaces.IEspectaculos"%>
 <%@page import="root.fabrica.Fabrica"%>
@@ -12,6 +14,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <%
+        iRegistrosAcceso ir = Fabrica.getCtrlRegistrosAcceso();
+        long moment = new java.util.Date().getTime();
+        DtRegistroAcceso r = new DtRegistroAcceso(0,java.net.InetAddress.getLocalHost().getHostAddress(),request.getHeader("User-Agent"),request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()+"/"+request.getServletPath().substring(request.getServletPath().lastIndexOf("/") +1),moment);
+        ir.ingresarRegistro(r);
+        %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Comprar Paquete</title>
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
@@ -101,10 +109,28 @@
                         j++;
                     }
                     %>
+                    
+                    <textarea name="descripcionDelPremio" style="background-color: #191919; color: white;border: 2px solid #3498db; padding: 10px 10px; outline: none; color: white; border-radius: 24px; transition: 0.25s" rows="4" cols="30" placeholder="Descripcion del Premio"></textarea>
+                    
+                    <input type="number" style="    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 10px 10px;
+    width: 250px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s" step="1" min="1" name="numeroDePremiosPorFuncion" placeholder="Numero de premios por funcion" id="numeroDePremiosPorFuncion" >
+                     <p><input type="checkbox" name="premio"  value="ON" id="subir"><label for subir>Tener premio</label>
+                    
+                    <input type="text" name="video" placeholder="URL de video" id="video">
                     <div id="div_file">
                         <p id="texto">Seleccionar Imagen</p>
                         <input type="file" name="upfile" id="upfile" style="background-color: #191919; color: white;border: 2px solid #3498db; padding: 10px 10px; outline: none; color: white; border-radius: 24px; transition: 0.25s">
-                        <p><input type="checkbox" name="subir"  value="ON" id="subir"><label for suir>Subir Archivo</label>
+                        <p><input type="checkbox" name="subir"  value="ON" id="subir"><label for subir>Subir Archivo</label>
                     </div>
                     <input type="submit" name="ingresar" value="Ingresar" id="ingresar">
                 </form>
@@ -132,6 +158,11 @@
                 if(url.value.toString().includes(" ") || url.value.toString().includes(".")==false){
                     e.preventDefault();
                     alert("URL inválida");
+                }
+                const video = document.getElementById("video");
+                if(url.value.toString().includes(" ") || url.value.toString().includes(".")==false){
+                    e.preventDefault();
+                    alert("URL de video inválida");
                 }
               });
         </script>

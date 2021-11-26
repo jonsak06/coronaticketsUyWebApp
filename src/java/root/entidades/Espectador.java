@@ -144,4 +144,49 @@ public class Espectador extends Usuario {
         return dt; 
     }
     
+    @OneToMany(mappedBy = "espectador")
+    private List<Premio> premios;
+
+    public List<Premio> getPremios() {
+        return premios;
+    }
+
+    public void addPremio(Premio p){
+        int i = this.premios.size();
+        this.premios.add(i+1,p);
+    }
+    
+    @OneToMany(mappedBy = "espectador")
+    private List<Valoracion> valoraciones;
+
+    public List<Valoracion> getValoraciones() {
+        return valoraciones;
+    }
+
+    public void addValoracion(Valoracion v){
+        this.valoraciones.add(v);
+    }
+    
+    @ManyToMany//(mappedBy = "espectaculos")
+    private List<Sorteo> sorteos;
+    public List<Sorteo> getSorteos(){
+        return this.sorteos;
+    }
+    public void addSorteo(Sorteo s){
+        this.sorteos.add(s);
+    }
+    
+    @ManyToMany//(mappedBy = "espectaculos")
+    private List<Espectaculo> faboritos;
+    public List<Espectaculo> getFaboritos(){
+        return this.faboritos;
+    }
+    public void addFaborito(Espectaculo s){
+        this.faboritos.add(s);
+    }
+    
+    public void setFaboritos(List<Espectaculo> faboritos) {
+        this.faboritos = faboritos;
+    }
+    
 }

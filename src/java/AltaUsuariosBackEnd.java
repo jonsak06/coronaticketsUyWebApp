@@ -10,6 +10,8 @@
  */
 import java.awt.Image;
 import java.io.File;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,20 +32,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
+import javax.servlet.http.Part;;
 import root.datatypes.DtArtista;
 import root.datatypes.DtEspectador;
 import root.fabrica.Fabrica;
 import root.interfaces.iUsuarios;
 
+//git
 /**
  *
  * @author Tecnologo
  */
 @WebServlet(urlPatterns = {"/AltaUsuariosBackEnd"})
-@MultipartConfig()
+@MultipartConfig
 public class AltaUsuariosBackEnd extends HttpServlet {
 
     /**
@@ -83,13 +84,15 @@ public class AltaUsuariosBackEnd extends HttpServlet {
 
             if (request.getParameter("subir") != null) {
                 Part archivo = request.getPart("imagen"); //llamada al parámetro foto de mi formulario.
-                String context = "/home/" + System.getProperty("user.name") + "/coronaticketsUyWebApp/web/IMAGENES_USUARIOS"; //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
+                String context = request.getServletContext().getRealPath(""); //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
 
-                String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString();
+//                String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString();
 
-                archivo.write(context + File.separator + nickname.replaceAll("\\s+", "") + foto); // Escribimos el archivo al disco duro del servidor.
+                archivo.write(context + File.separator + nickname.replaceAll("\\s+", "")+".jpg"); // Escribimos el archivo al disco duro del servidor.
 
-                imagen = "IMAGENES_USUARIOS" + File.separator + nickname.replaceAll("\\s+", "") + foto;
+                imagen =context  + nickname.replaceAll("\\s+", "")+".jpg";
+                SubirFTP.subir(context  + nickname.replaceAll("\\s+", "")+".jpg",nickname.replaceAll("\\s+", "")+".jpg");
+                imagen = "http://raspberrypijulio.ddns.net/ImagenesLab/"+nickname.replaceAll("\\s+", "")+".jpg";
                 //AQUI SE DEBERIA HABER SUBIDO LA IMAGEN
             }
             es = new DtEspectador(canjeables, id, nombre, apellido, correo, nickname, imagen, fecha, pass);
@@ -123,17 +126,19 @@ public class AltaUsuariosBackEnd extends HttpServlet {
             long id = 0;
             DtArtista ar = null;
             if (request.getParameter("subir") != null) {
-                Part archivo = request.getPart("upfile"); //llamada al parámetro foto de mi formulario.
-                String context = "/home/" + System.getProperty("user.name") + "/coronaticketsUyWebApp/web/IMAGENES_USUARIOS"; //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
+                Part archivo = request.getPart("imagen"); //llamada al parámetro foto de mi formulario.
+                String context = request.getServletContext().getRealPath(""); //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
+                
+//                String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString();
 
-                String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString();
+                archivo.write(context + File.separator + nickname.replaceAll("\\s+", "")+".jpg"); // Escribimos el archivo al disco duro del servidor.
 
-                archivo.write(context + File.separator + nickname.replaceAll("\\s+", "") + foto); // Escribimos el archivo al disco duro del servidor.
-
-                imagen = "IMAGENES_USUARIOS" + File.separator + nickname.replaceAll("\\s+", "") + foto;
+                imagen =context  + nickname.replaceAll("\\s+", "")+".jpg";
+                SubirFTP.subir(context  + nickname.replaceAll("\\s+", "")+".jpg",nickname.replaceAll("\\s+", "")+".jpg");
+                imagen = "http://raspberrypijulio.ddns.net/ImagenesLab/"+nickname.replaceAll("\\s+", "")+".jpg";
                 //AQUI SE DEBERIA HABER SUBIDO LA IMAGEN
             }
-            ar = new DtArtista(linkWeb, biografia, descripcion, id, nombre, apellido, correo, nickname, imagen, fecha, pass);
+          ar = new DtArtista(linkWeb, biografia, descripcion, id, nombre, apellido, correo, nickname, imagen, fecha, pass);
 
             iu.altaArtista(ar);
         }
@@ -142,8 +147,9 @@ public class AltaUsuariosBackEnd extends HttpServlet {
         request.setAttribute("creadoUs", true);
         RequestDispatcher dispatcher = contexto.getRequestDispatcher("/altaUsuario.jsp");
         dispatcher.forward(request, response);
-    }
+    
 
+}
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

@@ -50,8 +50,8 @@ public class AltaFuncionBackEnd extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         ServletContext contexto = getServletContext();
-
-        String nombreEspec = request.getParameter("espectaculos");
+        String nombrePlat = request.getParameter("plataforma");
+        String nombreEspec = request.getParameter(nombrePlat);
         String nombre = request.getParameter("nombre");
         long id = 0;
 
@@ -71,7 +71,8 @@ public class AltaFuncionBackEnd extends HttpServlet {
         } catch (ParseException e1) {
             e1.printStackTrace();
         }
-        Timestamp time = new Timestamp(parsed.getTime());
+//        Timestamp time = new Timestamp(parsed.getTime());
+        java.sql.Timestamp time = new java.sql.Timestamp(fecha.getYear(),fecha.getMonth(),fecha.getDate(),parsed.getHours(),parsed.getMinutes(),0,0);
 
         List<DtArtista> listaArt = Fabrica.getCrlUsuarios().getArtistas();
         List<String> listaCon = new ArrayList();
@@ -81,6 +82,8 @@ public class AltaFuncionBackEnd extends HttpServlet {
                 listaCon.add(i.getNickname());
             }
         }
+        
+        
         parsed = null;
         try {
             parsed = sdf.parse(request.getParameter("fechaA"));
@@ -91,13 +94,22 @@ public class AltaFuncionBackEnd extends HttpServlet {
         String imagen = "silueta.jpg";
         if (request.getParameter("subir") != null) {
             Part archivo = request.getPart("Imagen"); //llamada al parámetro foto de mi formulario.
-            String context = "/home/" + System.getProperty("user.name") + "/coronaticketsUyWebApp/web/IMAGENES_FUNCIONES"; //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
+//            String context = "/home/" + System.getProperty("user.name") + "/coronaticketsUyWebApp/web/IMAGENES_FUNCIONES"; //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
+//
+//            String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString();
+//
+//            archivo.write((context + File.separator + nombre + foto).replaceAll("\\s+", "")); // Escribimos el archivo al disco duro del servidor.
+//
+//            imagen = (("IMAGENES_FUNCIONES" + File.separator + nombre + foto).replaceAll("\\s+", ""));
+               String context = request.getServletContext().getRealPath(""); //img es la carpeta que he creado en mi proyecto, dentro de la carpeta Web Content.
 
-            String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString();
+//                String foto = Paths.get(archivo.getSubmittedFileName()).getFileName().toString();
 
-            archivo.write((context + File.separator + nombre + foto).replaceAll("\\s+", "")); // Escribimos el archivo al disco duro del servidor.
+                archivo.write(context + File.separator + nombre.replaceAll("\\s+", "")+".jpg"); // Escribimos el archivo al disco duro del servidor.
 
-            imagen = (("IMAGENES_FUNCIONES" + File.separator + nombre + foto).replaceAll("\\s+", ""));
+                imagen =context  + nombre.replaceAll("\\s+", "")+".jpg";
+                SubirFTP.subir(context  + nombre.replaceAll("\\s+", "")+".jpg",nombre.replaceAll("\\s+", "")+".jpg");
+                imagen = "http://raspberrypijulio.ddns.net/ImagenesLab/"+nombre.replaceAll("\\s+", "")+".jpg";
             //AQUI SE DEBERIA HABER SUBIDO LA IMAGEN
         }
 

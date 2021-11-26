@@ -21,10 +21,74 @@ public class DtEspectaculo {
     private int cantidadMinimaEspectadores;
     private String url;
     private float costo;
-    private Date fechaDeRegistro;
+    private long fechaDeRegistro;
     private String imagen;
     private String plataforma;
     private List<String> categorias;
+    private String estado;
+    private float valoracionPromedio;
+    private String video;
+    private String descripcionDelPremio;
+    private int numeroDePremios;
+
+    public String getDescripcionDelPremio() {
+        return descripcionDelPremio;
+    }
+
+    public void setDescripcionDelPremio(String descripcionDelPremio) {
+        this.descripcionDelPremio = descripcionDelPremio;
+    }
+
+    public int getNumeroDePremios() {
+        return numeroDePremios;
+    }
+
+    public void setNumeroDePremios(int numeroDePremios) {
+        this.numeroDePremios = numeroDePremios;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public float getValoracionPromedio() {
+        return valoracionPromedio;
+    }
+
+    public void setValoracionPromedio(float valoracionPromedio) {
+        this.valoracionPromedio = valoracionPromedio;
+    }
+
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
+    }
+
+    public DtEspectaculo(Long id, String nombre, String descripcion, int duracion, int cantidadMaximaEspectadores, int cantidadMinimaEspectadores, String url, float costo, Date fechaDeRegistro, String imagen, String plataforma, List<String> categorias, String estado, float valoracionPromedio, String video, String nombreArtista) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.duracion = duracion;
+        this.cantidadMaximaEspectadores = cantidadMaximaEspectadores;
+        this.cantidadMinimaEspectadores = cantidadMinimaEspectadores;
+        this.url = url;
+        this.costo = costo;
+        this.fechaDeRegistro = fechaDeRegistro.getTime();
+        this.imagen = imagen;
+        this.plataforma = plataforma;
+        this.categorias = categorias;
+        this.estado = estado;
+        this.valoracionPromedio = valoracionPromedio;
+        this.video = video;
+        this.nombreArtista = nombreArtista;
+    }
     
 
     public DtEspectaculo(){}
@@ -37,9 +101,24 @@ public class DtEspectaculo {
         this.cantidadMinimaEspectadores = cantidadMinimaEspectadores;
         this.url = url;
         this.costo = costo;
-        this.fechaDeRegistro = fechaDeRegistro;
+        this.fechaDeRegistro = fechaDeRegistro.getTime();
     }
 
+    public DtEspectaculo(Long id, String nombre, String descripcion, int duracion, int cantidadMaximaEspectadores, int cantidadMinimaEspectadores, String url, float costo, Date fechaDeRegistro, String imagen) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.duracion = duracion;
+        this.cantidadMaximaEspectadores = cantidadMaximaEspectadores;
+        this.cantidadMinimaEspectadores = cantidadMinimaEspectadores;
+        this.url = url;
+        this.costo = costo;
+        this.fechaDeRegistro = fechaDeRegistro.getTime();
+        this.imagen = imagen;
+    }
+
+    
+    
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
@@ -61,7 +140,7 @@ public class DtEspectaculo {
         this.cantidadMinimaEspectadores = cantidadMinimaEspectadores;
         this.url = url;
         this.costo = costo;
-        this.fechaDeRegistro = fechaDeRegistro;
+        this.fechaDeRegistro = fechaDeRegistro.getTime();
         this.imagen = imagen;
         this.nombreArtista = nombreArtista;
     }
@@ -116,7 +195,8 @@ public class DtEspectaculo {
     }
 
     public Date getFechaDeRegistro() {
-        return fechaDeRegistro;
+        java.sql.Date fecha = new java.sql.Date(fechaDeRegistro);
+        return fecha;
     }
     
     public String getPlataforma() {

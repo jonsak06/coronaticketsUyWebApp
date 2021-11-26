@@ -69,6 +69,12 @@ public class buscarEspYPaq extends HttpServlet {
             List<String> esps = new ArrayList();
             List<String> espsFiltrados = new ArrayList();
             
+            for(Iterator<DtEspectaculo> it = dvEsps.iterator(); it.hasNext();) {
+                if(it.next().getEstado().equals("FINALIZADO")) {
+                    it.remove();
+                }
+            }
+            
             for(DtEspectaculo e : dvEsps) {
                 esps.add(e.getNombre());
             }

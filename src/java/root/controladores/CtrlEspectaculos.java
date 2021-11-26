@@ -10,8 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import root.datatypes.DtArtista;
 import root.datatypes.DtEspectaculo;
+import root.datatypes.DtEspectador;
 import root.datatypes.DtFuncion;
 import root.datatypes.DtPlataforma;
+import root.datatypes.DtValoracion;
 import root.entidades.EstadoEspectaculo;
 import root.interfaces.IEspectaculos;
 import root.manejadores.ManEspectaculo;
@@ -73,8 +75,8 @@ public class CtrlEspectaculos implements IEspectaculos {
          return ManPlataformas.existeFuncion(nombreFuncion);
      }
      
-     public void altaEspectaculo(String plataforma, String artista, List<String> categorias,DtEspectaculo espectaculo, String pathImagen){
-        ManEspectaculo.altaEspectaculo(plataforma, artista, categorias,espectaculo, pathImagen);
+     public void altaEspectaculo(String plataforma, String artista, List<String> categorias,DtEspectaculo espectaculo, String pathImagen, String descripcionDeLosPremios, int numerodePremios){
+        ManEspectaculo.altaEspectaculo(plataforma, artista, categorias,espectaculo, pathImagen, descripcionDeLosPremios, numerodePremios);
      }
      
      public List<DtArtista> getInvitados(String nombreFuncion){
@@ -118,4 +120,24 @@ public class CtrlEspectaculos implements IEspectaculos {
     public List<DtEspectaculo> listarAceptados() {
         return ManEspectaculo.listarAceptados();
     }
+    public void calcularValoracion(String nombreEspectaculo){//3ra
+        ManEspectaculo.calcularValoracion(nombreEspectaculo);
+    }
+    
+    public List<DtEspectador> listarGanadores(String nombreFun){//3ra
+        return ManEspectaculo.listarGanadores(nombreFun);
+    }
+    public List<DtFuncion> listarFuncionesQuePuedenTenerSorteo(String nombreEsp){//3ra
+        return ManEspectaculo.listarFuncionesQuePuedenTenerSorteo(nombreEsp);
+    }
+    public List<DtFuncion> listarFuncionesConSorteos(String nombreEsp){//3ra
+        return ManEspectaculo.listarFuncionesConSorteos(nombreEsp);
+    }
+    public void finalizarEspectaculo(String nombre){
+        ManEspectaculo.finalizarEspectaculo(nombre);
+    }
+    
+     public List<DtValoracion> getValoraciones(String nombreEsp){//3ra
+         return ManEspectaculo.getValoraciones(nombreEsp);
+     }
 }

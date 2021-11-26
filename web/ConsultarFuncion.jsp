@@ -14,7 +14,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <%
+        iRegistrosAcceso ir = Fabrica.getCtrlRegistrosAcceso();
+        long moment = new java.util.Date().getTime();
+        DtRegistroAcceso r = new DtRegistroAcceso(0,java.net.InetAddress.getLocalHost().getHostAddress(),request.getHeader("User-Agent"),request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()+"/"+request.getServletPath().substring(request.getServletPath().lastIndexOf("/") +1),moment);
+        ir.ingresarRegistro(r);
+        %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
@@ -176,7 +181,37 @@
                 margin: 20px auto;
             }
             .forgot {
-                text-decoration: underline
+                text-decoration: underline;
+            }
+            
+            #headerMovil {
+                display: none;
+            }
+            
+            @media (max-width: 1000px) {
+                #headerDesktop {
+                    display: none;
+                }
+                #headerMovil {
+                    display: block;
+                }
+                .box {
+                    position:relative;
+                    top: 0;
+                    left: 0;
+                    width: auto;
+                    margin-top: 15px;
+                    padding: 20px;
+                    background: #2d2d2d;
+                    color: gray !important;
+                }
+                body {
+                    background: #2d2d2d;
+                }
+                .box h3,
+                .box h4 {
+                    font-size: 22px;
+                }
             }
 
 
@@ -184,11 +219,17 @@
 
     </head>
     <body>
-        <%@include file="header.jsp"%>
+        <div id="headerDesktop">
+            <%@include file="header.jsp"%>
+        </div>
+        <div id="headerMovil">
+            <%@include file="headerMovil.jsp"%>
+        </div>
         <%ServletContext contexto = getServletContext();
 
             out.print("<div class=\"box\">");
             out.println("<form action=\"ConsultarFuncionBackEnd\">");
+            out.println("<h1>Consultar Funcion</h1>");
             out.println("</br>");
             out.println("<h6>Seleccione tipo de cosulta</h6>");
             out.println("<select name=\"tipoConsulta\">");
@@ -302,6 +343,18 @@
                                                 if (esp.equals(e.getNombre())) {
 
                                                     out.print("<img src='" + e.getImagen() + "' alt='imagen de espectaculo'>");
+                                                           if (e.getVideo() != null) {
+                                                            if(e.getVideo().contains("v=")){
+                                                            if (!e.getVideo().contains(" ")) {
+                                                                if (e.getVideo() != "") {
+                                                                    if (e.getVideo() != "NOVIDEO") {
+                                                                        String[] parts = e.getVideo().split("v=");
+                                                                        out.print("<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/" + parts[1] + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>" + "</iframe>");
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        }
                                                     out.print("<h3> Nombre:" + e.getNombre() + "</h3>");
 
                                                     out.print("<p> Descripcion:" + e.getDescripcion() + "</p>");
@@ -353,7 +406,7 @@
                                                     out.print("</li>");
                                                     out.print("</ul>");
 
-                                                    out.print("<button class='btn btn-outline-secondaryf' type='submit' disabled>Consultar</button>");
+                                                    out.print("<button class='btn btn-outline-secondaryf' type='submit'>Consultar</button>");
 
                                                     out.print("</form>");
 
@@ -447,11 +500,7 @@
 
                         }
                     }
-                    
-                    
-                    
-                    
-                    
+
                 } else if (contexto.getAttribute("tipoDeConsultaFunciones").toString().equals("Categorias")) {
                     out.print("<form action=\"ConsultarFuncionBackEnd\">");
                     out.print("</br>");
@@ -549,8 +598,19 @@
                                                 if (esp.equals(e.getNombre())) {
 
                                                     out.print("<img src='" + e.getImagen() + "' alt='imagen de espectaculo'>");
+                                                        if (e.getVideo() != null) {
+                                                            if(e.getVideo().contains("v=")){
+                                                            if (!e.getVideo().contains(" ")) {
+                                                                if (e.getVideo() != "") {
+                                                                    if (e.getVideo() != "NOVIDEO") {
+                                                                        String[] parts = e.getVideo().split("v=");
+                                                                        out.print("<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/" + parts[1] + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen>" + "</iframe>");
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        }
                                                     out.print("<h3> Nombre:" + e.getNombre() + "</h3>");
-
                                                     out.print("<p> Descripcion:" + e.getDescripcion() + "</p>");
                                                     out.print("<p> Duracion:" + e.getDuracion() + "</p>");
                                                     out.print("<p> Cantidad maxima espectadores:" + e.getCantidadMaximaEspectadores() + "</p>");
@@ -600,7 +660,7 @@
                                                     out.print("</li>");
                                                     out.print("</ul>");
 
-                                                    out.print("<button class='btn btn-outline-secondaryf' type='submit' disabled>Consultar</button>");
+                                                    out.print("<button class='btn btn-outline-secondaryf' type='submit'>Consultar</button>");
 
                                                     out.print("</form>");
 
@@ -699,7 +759,7 @@
 
         %>
 
-
+        <%@include file="headerScript.jsp"%>
         <script>   const paqs = document.getElementById("inputGroupSelect04");
             const botonConsultarPaq = document.querySelector(".btn-outline-secondary");
             paqs.addEventListener("change", e => {

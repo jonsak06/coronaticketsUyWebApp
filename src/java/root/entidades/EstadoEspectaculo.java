@@ -11,6 +11,6 @@ package root.entidades;
  */
 public enum EstadoEspectaculo {
     
-    ACEPTADO, INGRESADO, RECHAZADO
+    ACEPTADO, INGRESADO, RECHAZADO, FINALIZADO
     
 }
